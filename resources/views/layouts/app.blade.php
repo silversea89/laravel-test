@@ -75,9 +75,16 @@
                             <a class="nav-link dropdown-toggle p-0" id="navbarDropdownMenuLink-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="https://www.cooperspetkitchen.co.nz/assets/themes/cpk-theme/img/dogs/golden_retriever.jpg" class="rounded-circle p-0" style="height:40px;width:40px">
                             </a>
-                            <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink-2" >
+                            <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink-2">
                                 <a class="dropdown-item" href="profile.html">個人資料</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}">{{ __('登出') }}</a>
+
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    {{ __('登出') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </div>
                         </li>
                     </ul>
