@@ -1,0 +1,28 @@
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+
+@media screen and (min-width: 995px) {
+    .sizechange H5 {
+        font-size: 20px;
+    }
+}
+
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+
+@media screen and (max-width: 996px) {
+    .sizechange H5 {
+        font-size: 17px;
+    }
+}
+
+html {
+    height: 100%;
+}
+
+div {
+    font-family: "Helvetica", "Arial", "LiHei Pro", "黑體-繁", "微軟正黑體", sans-serif;
+}
+
+nav {
+    font-family: "Helvetica", "Arial", "LiHei Pro", "黑體-繁", "微軟正黑體", sans-serif;
+}
