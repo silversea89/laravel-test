@@ -71,7 +71,7 @@
 
             </div>
             <div class="d-none d-md-block col-md-6 col-lg-6 col-xl-7 p-0" style="background-color:74D2E7;">
-                <img src="PNG/register.png" class="img-fluid pl-2">
+                <img src="img/register.png" class="img-fluid pl-2">
             </div>
         </center>
 
