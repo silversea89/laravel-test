@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="float-left form-group">
-                        <a href="/register.html">註冊帳號</a>
+                        <a href="{{ route('register') }}">註冊帳號</a>
                     </div>
                     <div class="float-right form-group">
                         <a href="#">忘記密碼</a>
