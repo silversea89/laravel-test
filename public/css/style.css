@@ -26,3 +26,31 @@ div {
 nav {
     font-family: "Helvetica", "Arial", "LiHei Pro", "黑體-繁", "微軟正黑體", sans-serif;
 }
+
+@media (min-width:768px) {
+    #test-lt {
+        padding-top: 15px;
+        border-bottom: 1px black solid;
+        border-right: 1px black solid;
+    }
+    #test-rt {
+        padding-top: 15px;
+        border-bottom: 1px black solid;
+    }
+    #test-lb {
+        border-right: 1px black solid;
+        padding-top: 15px;
+    }
+    #test-rb {
+        padding-top: 15px;
+    }
+    #test-r {
+        border-right: 1px black solid;
+    }
+}
+
+@media (max-width:767px) {
+    #test-bb {
+        border-bottom: 1px black solid;
+    }
+}
