@@ -1,6 +1,4 @@
-
 @extends('layouts.app')
-
 @section('content')
 
 <body style="background-color:FFFFFF;">
@@ -19,7 +17,7 @@
                             <h1>專為學生打造的<br><span style="color:white">校園委託平台</span></h1>
                         </div>
                         <div class=" bd-highlight">
-                            <a href="/login.html" class="btn btn-danger">開始體驗</a>
+                            <a href="{{ route('login') }}" class="btn btn-danger">開始體驗</a>
                         </div>
                     </div>
 

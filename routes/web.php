@@ -18,9 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/list', function () {
+    return view('list');
+});
 Auth::routes();
-
+Route::post('AddTask', 'TaskController@Add');
 //// Authentication Routes...
 //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 //Route::post('login', 'Auth\LoginController@login');
