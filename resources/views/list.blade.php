@@ -451,9 +451,9 @@
                 
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">                      
                   <label class="m-0">分類選擇</label>
-                  <select class="form-control">
-                    <option>食物飲料</option>
-                    <option>文具用品</option>                
+                  <select class="form-control" name="Classification">
+                    <option value="food">食物飲料</option>
+                    <option value="Stationery">文具用品</option>                
                   </select>
                 </div>
 
@@ -517,7 +517,7 @@
               <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group pb-2 pl-1 pr-1 m-0"> 
                   <label class="m-0">委託內容細節與補充</label>          
-                  <textarea rows="4" cols="50" class="form-control" placeholder="請輸入委託細節或注意事項(Ex:是否要袋子、餐具..)" name="content"></textarea>       
+                  <textarea rows="4" cols="50" class="form-control" placeholder="請輸入委託細節或注意事項(Ex:是否要袋子、餐具..)" name="Content"></textarea>       
                 </div>
               </div>
 
