@@ -445,7 +445,7 @@
         <div class="modal-content container">
           
           <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:white;">   
-            <form action="{{ route('AddTask') }}" method="POST">
+            <form action="{{ route('AddTasks') }}" method="POST">
             @csrf
               <div class="row">
                 

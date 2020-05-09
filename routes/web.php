@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,7 +23,7 @@ Route::get('/list', function () {
 });
 Auth::routes();
 
-Route::post('AddTask', 'TaskController@Add')->name("AddTask");
+Route::post('AddTasks', 'TaskController@Add')->name("AddTasks");
 //// Authentication Routes...
 //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 //Route::post('login', 'Auth\LoginController@login');
