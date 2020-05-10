@@ -36,24 +36,41 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">首頁<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">關於工具人</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">問題Q&A</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">聯絡我們</a>
-                        </li>
-
-
-                    </ul>
+                @if(\Request::is('/'))
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">首頁<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">關於工具人</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">問題Q&A</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">聯絡我們</a>
+                            </li>
+                        </ul>
+                @elseif(\Request::is('login')||\Request::is('register'))
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown"></div>
+                @else
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="list.html">所有委託列表<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="list_push.html">已提出的委託</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="list_ING.html">執行中的委託</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="list_collect.html">已收藏的委託</a>
+                            </li>
+                        </ul>
+                @endif
                     @guest
                     <div class="form-inline my-2 my-lg-0">
                         <a class="btn btn-outline-success my-2 my-sm-0 mr-2" href="{{ route('register') }}">{{ __('註冊') }}</a>
