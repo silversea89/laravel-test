@@ -24,7 +24,7 @@ class CreateTask extends Migration
             $table->string('BuyAddress');
             $table->string('MeetAddress');
             $table->integer('Pay');
-            $table->string('content');
+            $table->string('content')->nullable();;
             $table->timestamps();
         });
     }

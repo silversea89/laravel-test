@@ -459,7 +459,7 @@
 
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
                   <label class="m-0">購買物品</label>       
-                  <input type="text" class="form-control" placeholder="請在此輸入需要購買的物品" name="Stuff">              
+                  <input type="text" class="form-control" placeholder="請在此輸入需要購買的物品" name="Stuff" required>              
                 </div>
 
               </div>
@@ -468,7 +468,7 @@
                 
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">                      
                   <label class="m-0">日期</label>
-                  <input id="datepicker" readonly="true" width="100%" type="text" name="Date"/>
+                  <input id="datepicker" readonly="true" width="100%" type="text" name="Date" required/>
                   <script>
                       $('#datepicker').datepicker({
                           uiLibrary: 'bootstrap4',
@@ -480,7 +480,7 @@
 
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">                      
                   <label class="m-0">時間</label>
-                  <input id="timepicker" readonly="true" width="100%" type="text" name="Time"/>
+                  <input id="timepicker" readonly="true" width="100%" type="text" name="Time" required/>
                   <script>
                       $('#timepicker').timepicker({
                           uiLibrary: 'bootstrap4'
@@ -495,7 +495,7 @@
               <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group pb-2 pl-1 pr-1 m-0">
                   <label class="m-0">購買地點</label>       
-                  <input type="text" class="form-control" placeholder="請輸入購買地點(店名、地址)" name="BuyAddress"></input>
+                  <input type="text" class="form-control" placeholder="請輸入購買地點(店名、地址)" name="BuyAddress" required></input>
                 </div>  
               </div>
 
@@ -503,14 +503,14 @@
               <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group pb-2 pl-1 pr-1 m-0">
                   <label class="m-0">面交地點</label>            
-                  <input type="text" class="form-control" placeholder="請輸入面交地點(EX:資訊樓4樓、正門校門口)" name="MeetAddress"></input>       
+                  <input type="text" class="form-control" placeholder="請輸入面交地點(EX:資訊樓4樓、正門校門口)" name="MeetAddress" required></input>       
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group pb-2 pl-1 pr-1 m-0"> 
                   <label class="m-0">酬勞金額</label>            
-                  <input type="number" onkeyup="value=value.replace(/[^\d]/g,'') " class="form-control" placeholder="請輸入酬勞金額(新台幣)" name="Pay"></input>       
+                  <input type="number" onkeyup="value=value.replace(/[^\d]/g,'') " class="form-control" placeholder="請輸入酬勞金額(新台幣)" name="Pay" required></input>       
                 </div>
               </div>
 

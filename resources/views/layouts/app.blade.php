@@ -56,7 +56,7 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown"></div>
                 @else
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link active" href="list.html">所有委託列表<span class="sr-only">(current)</span></a>
                             </li>
