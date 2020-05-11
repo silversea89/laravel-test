@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Tasks;
+use App\Classification;
 
 class TaskController extends Controller
 {
@@ -28,5 +29,12 @@ class TaskController extends Controller
             'Pay' => $data['Pay'],
             'content' => $data['Content'],
         ]);
-    }     
+    }
+    
+    protected function showListForm(Request $request)
+    {
+        $classifications = Classification::all();
+        $tasks=Tasks::all();
+        return view('list')->with(["classifications"=>$classifications],["tasks"=>$tasks]);
+    }
 }

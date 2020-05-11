@@ -21,6 +21,8 @@ class CreateTask extends Migration
             $table->string('Stuff');
             $table->DATE('Date');
             $table->time('Time');
+            $table->DATE('DeadDate');
+            $table->time('DeadTime');
             $table->string('BuyAddress');
             $table->string('MeetAddress');
             $table->integer('Pay');

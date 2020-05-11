@@ -3,7 +3,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Classification;
+use App\task;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,9 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/list', function () {
-    return view('list');
-})->name('list');
+Route::get('list', 'TaskController@showListForm')->name("list");
 
 Route::get('/about', function () {
     return view('about');
