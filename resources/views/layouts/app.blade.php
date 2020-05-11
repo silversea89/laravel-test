@@ -36,20 +36,20 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                @if(\Request::is('/'))
+                @if(\Request::is('/')||\Request::is('about')||\Request::is('contact'))
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">首頁<span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="/">首頁<span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">關於工具人</a>
+                                <a class="nav-link" href="{{ route('about') }}">關於工具人</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">問題Q&A</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">聯絡我們</a>
+                                <a class="nav-link" href="{{ route('contact') }}">聯絡我們</a>
                             </li>
                         </ul>
                 @elseif(\Request::is('login')||\Request::is('register'))
@@ -93,7 +93,7 @@
                                 <img src="https://www.cooperspetkitchen.co.nz/assets/themes/cpk-theme/img/dogs/golden_retriever.jpg" class="rounded-circle p-0" style="height:40px;width:40px">
                             </a>
                             <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink-2">
-                                <a class="dropdown-item" href="profile.html">個人資料</a>
+                                <a class="dropdown-item" href="{{ route('profile') }}">個人資料</a>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                     {{ __('登出') }}

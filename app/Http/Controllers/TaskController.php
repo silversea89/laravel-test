@@ -11,7 +11,7 @@ class TaskController extends Controller
     protected function Add(Request $request)
     {
         $user = Auth::user();
-        $this->create(array_merge($request->all(), ['user_id' => $user->user_id]));
+        $this->create(array_merge($request->all(), ['student_id' => $user->student_id]));
         return Redirect('/list');
     }
 
@@ -19,7 +19,7 @@ class TaskController extends Controller
     {
         Tasks::create([
             'Classification' => $data['Classification'],
-            'user_id' => $data['user_id'],
+            'student_id' => $data['student_id'],
             'Stuff' => $data['Stuff'],
             'Date' => $data['Date'],
             'Time' => $data['Time'],

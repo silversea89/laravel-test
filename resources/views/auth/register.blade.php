@@ -14,24 +14,43 @@
                     @csrf
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group">
-                            <input id="name" type="text" class="form-control @error('LastName') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="姓氏" name="LastName" value="{{ old('LastName') }}" required autocomplete="LastName" autofocus>
-                            @error('LastName')
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="姓名" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 form-group pl-1">
+                            <select class="form-control" name="gender">
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                                <option value="3">其他</option>
+                            </select>
                         </div>
 
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group">
-                            <input id="name" type="text" class="form-control @error('LastName') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="名字" name="FirstName" value="{{ old('FirstName') }}" required autocomplete="FirstName" autofocus>
-                            @error('FirstName')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
 
                     </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group">
+                            <input id="name" type="text" class="form-control @error('LastName') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="學號" name="student_id" value="{{ old('student_id') }}" required autocomplete="student_id" autofocus>
+                            @error('student_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <input id="name" type="text" class="form-control @error('department') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="科系" name="department" value="{{ old('department') }}" autocomplete="tel" autofocus>
+                            @error('department')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+
 
                     <div class="form-group">
                         <input id="name" type="text" class="form-control @error('tel') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="電話號碼" name="tel" value="{{ old('tel') }}" autocomplete="tel" autofocus>

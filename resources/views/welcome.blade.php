@@ -17,7 +17,11 @@
                             <h1>專為學生打造的<br><span style="color:white">校園委託平台</span></h1>
                         </div>
                         <div class=" bd-highlight">
+                            @guest
                             <a href="{{ route('login') }}" class="btn btn-danger">開始體驗</a>
+                            @else
+                            <a href="{{ route('list') }}" class="btn btn-danger">開始體驗</a>
+                            @endguest
                         </div>
                     </div>
 
@@ -651,9 +655,11 @@
                             <h4 class="px-1">選擇你的委託</h4>
                             <h4 class="px-1">達成你的使命</h4>
                         </div>
-
-
-                        <div><a href="/login.html" class="btn btn-primary">尋找您的委託</a></div>
+                        @guest
+                        <div><a href="{{ route('login') }}" class="btn btn-primary">尋找您的委託</a></div>
+                        @else
+                        <div><a href="{{ route('list') }}" class="btn btn-primary">尋找您的委託</a></div>
+                        @endguest
                     </div>
 
 
@@ -663,7 +669,11 @@
                             <h4 class="px-1">送出你的委託</h4>
                             <h4 class="px-1">享受你的服務</h4>
                         </div>
-                        <div><a href="/login.html" class="btn btn-primary">建立您的委託</a></div>
+                        @guest
+                        <div><a href="{{ route('login') }}" class="btn btn-primary">提出您的委託</a></div>
+                        @else
+                        <div><a href="{{ route('list') }}" class="btn btn-primary">提出您的委託</a></div>
+                        @endguest
                     </div>
 
                 </div>
@@ -738,15 +748,15 @@
             <div class="row">
 
                 <div class="col-12 col-md-3">
-                    <h2><a href="/index.html">Toolman</a></h2>
+                    <h2><a href="/">Toolman</a></h2>
                 </div>
 
                 <div class="col-12 col-md-9 row">
                     <div class="col-6 col-md-4 ">
-                        <a href="/#"><span class="fa fa-angle-right" aria-hidden="true"></span> 首頁</a>
+                        <a href="/"><span class="fa fa-angle-right" aria-hidden="true"></span> 首頁</a>
                     </div>
                     <div class="col-6 col-md-4 ">
-                        <a href="#"><span class="fa fa-angle-right" aria-hidden="true"></span> 關於工具人</a>
+                        <a href="{{ route('about') }}"><span class="fa fa-angle-right" aria-hidden="true"></span> 關於工具人</a>
                     </div>
                     <div class="col-6 col-md-4 ">
                         <a href="#"><span class="fa fa-angle-right" aria-hidden="true"></span> 常見問題</a>
@@ -756,10 +766,18 @@
                     </div>
 
                     <div class="col-6 col-md-4 ">
-                        <a href="/login.html"><span class="fa fa-angle-right" aria-hidden="true"></span> 我要當工具人</a>
+                        @guest
+                        <a href="{{ route('login') }}"><span class="fa fa-angle-right" aria-hidden="true"></span> 我要當工具人</a>
+                        @else
+                        <a href="{{ route('list') }}"><span class="fa fa-angle-right" aria-hidden="true"></span> 我要當工具人</a>
+                        @endguest
                     </div>
                     <div class="col-6 col-md-4 ">
-                        <a href="/login.html"><span class="fa fa-angle-right" aria-hidden="true"></span> 我要當乾爹</a>
+                        @guest
+                        <a href="{{ route('login') }}"><span class="fa fa-angle-right" aria-hidden="true"></span>我要當乾爹</a>
+                        @else
+                        <a href="{{ route('list') }}"><span class="fa fa-angle-right" aria-hidden="true"></span>我要當乾爹</a>
+                        @endguest
                     </div>
                 </div>
 

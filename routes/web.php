@@ -18,9 +18,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/list', function () {
     return view('list');
-});
+})->name('list');
+
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
+
+Route::post('AddTasks', 'TaskController@Add')->name("AddTasks");
+
 Auth::routes();
 
 Route::post('AddTasks', 'TaskController@Add')->name("AddTasks");

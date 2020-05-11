@@ -16,8 +16,8 @@
                 <form method="POST" action="{{ route('login') }}">
                 @csrf
                     <div class="form-group">
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror border-top-0 border-right-0 border-left-0" aria-describedby="emailHelp" placeholder="電子郵件(帳號)" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                        @error('email')
+                        <input id="student_id" type="text" class="form-control @error('student_id') is-invalid @enderror border-top-0 border-right-0 border-left-0"  placeholder="帳號(學號)" name="student_id" value="{{ old('student_id') }}" required autocomplete="student_id" autofocus>
+                        @error('student_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -37,14 +37,11 @@
                     </div>
                     <div class="float-right form-group">
                         <a href="#">忘記密碼</a>
-                    </div>
-
-                    
+                    </div>        
                     <button type="submit" class="btn btn-primary btn-lg btn-block ">
                                     {{ __('登入') }}
                     </button>
                 </form>
-
             </div>
         </center>
     </div>

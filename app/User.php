@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_id','LastName','FirstName', 'tel','email', 'password',
+        'schoolname','student_id','department', 'name','gender', 'tel','email','password'
     ];
 
     /**
@@ -37,5 +37,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $primaryKey = 'email';
+    protected $primaryKey = 'student_id';
 }

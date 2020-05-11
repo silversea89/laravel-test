@@ -15,8 +15,8 @@ class CreateTask extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id('tasks_id');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->string('student_id');
+            $table->foreign('student_id')->references('student_id')->on('users');
             $table->string('Classification');
             $table->string('Stuff');
             $table->DATE('Date');
