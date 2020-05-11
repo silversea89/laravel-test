@@ -18,12 +18,14 @@ class TaskController extends Controller
 
     protected function create(array $data)
     {
+        $date = $data['Date'];
+        $time = $data['Time'];
+        $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
         Tasks::create([
             'Classification' => $data['Classification'],
             'student_id' => $data['student_id'],
             'Stuff' => $data['Stuff'],
-            'Date' => $data['Date'],
-            'Time' => $data['Time'],
+            'DateTime' => $combinedDT,
             'BuyAddress' => $data['BuyAddress'],
             'MeetAddress' => $data['MeetAddress'],
             'Pay' => $data['Pay'],
@@ -35,6 +37,6 @@ class TaskController extends Controller
     {
         $classifications = Classification::all();
         $tasks=Tasks::all();
-        return view('list')->with(["classifications"=>$classifications],["tasks"=>$tasks]);
+        return view('list')->with(["classifications" => $classifications, "tasks" => $tasks]);
     }
 }

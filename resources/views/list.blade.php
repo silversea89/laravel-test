@@ -84,18 +84,18 @@
 
               <h3>{{$i->Stuff}}</h3>
               <span class="badge badge-primary">代購物品</span>
-              <h5>購買地點：<p>50嵐</p>
+              <h5>購買地點：<p>{{$i->BuyAddress}}</p>
               </h5>
-              <h5>面交地點：<p>資訊4樓電梯前</p>
+              <h5>面交地點：<p>{{$i->MeetAddress}}</p>
               </h5>
-              <h5>面交時間：<p>2020/04/01 12:30</p>
+              <h5>面交時間：<p>{{$i->DateTime}}</p>
               </h5>
-              <h5>酬勞金額：<p>$50</p>
+              <h5>酬勞金額：<p>{{$i->Pay}}</p>
               </h5>
-              <h5>補充事項：<p>午餐好油膩，想喝一杯8冰綠，半糖去冰謝謝！</p>
+              <h5>補充事項：<p>{{$i->content}}</p>
               </h5>
               <p class="m-0">老闆:<a href="#">王小明</a></p>
-              <p class="m-0">發佈於2020/04/01 11:00</p>
+              <p class="m-0">發佈於{{$i->created_at}}</p>
               <p class="m-0">截止期限：2020/04/01 13:00</p>
               <button type="button" class="btn btn-primary my-3">接受委託</button>
             </div>

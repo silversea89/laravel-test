@@ -19,10 +19,7 @@ class CreateTask extends Migration
             $table->foreign('student_id')->references('student_id')->on('users');
             $table->string('Classification');
             $table->string('Stuff');
-            $table->DATE('Date');
-            $table->time('Time');
-            $table->DATE('DeadDate');
-            $table->time('DeadTime');
+            $table->dateTime('DateTime');
             $table->string('BuyAddress');
             $table->string('MeetAddress');
             $table->integer('Pay');
