@@ -84,6 +84,7 @@
 
               <h3>{{$i->Stuff}}</h3>
               <span class="badge badge-primary">代購物品</span>
+              <h5>購買物品和需求：<p>{{$i->content}}</p>
               <h5>購買地點：<p>{{$i->BuyAddress}}</p>
               </h5>
               <h5>面交地點：<p>{{$i->MeetAddress}}</p>
@@ -92,7 +93,7 @@
               </h5>
               <h5>酬勞金額：<p>{{$i->Pay}}</p>
               </h5>
-              <h5>補充事項：<p>{{$i->content}}</p>
+              
               </h5>
               <p class="m-0">老闆:<a href="#">王小明</a></p>
               <p class="m-0">發佈於{{$i->created_at}}</p>
@@ -104,10 +105,10 @@
         </div>
       </div>
     </div>
-
+    @endforeach
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:white;">
       <div class="row mr-0">
-
+        @foreach($tasks as $i)
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0">
 
           <div style="border:1px #DFDFDF solid;" data-toggle="modal" data-target=".content0">
@@ -122,7 +123,7 @@
 
                 <div class="pl-1">
 
-                  <p class="m-0">50嵐8冰綠一杯</p>
+                  <p class="m-0">{{$i->Stuff}}</p>
                   <p class="m-0">
                     <i class="fas fa-star" style="color:#FF9529"></i>
                     <i class="fas fa-star" style="color:#FF9529"></i>
@@ -131,8 +132,8 @@
                     <i class="far fa-star" style="color:#FF9529"></i>
                     3.5/5.0
                   </p>
-                  <p class="m-0">30$</p>
-
+                  <p class="m-0">{{$i->Pay}}</p>
+                  <i class="fas fa-heart pr-3" style="color:red;position:absolute;bottom:5px;right:5px" aria-hidden="true"></i>
                 </div>
 
               </div>
@@ -140,10 +141,10 @@
 
           </div>
         </div>
+        @endforeach
       </div>
       <br>
     </div>
-    @endforeach
 
   </div>
 
@@ -167,12 +168,17 @@
               </div>
 
               <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
-                <label class="m-0">購買物品</label>
-                <input type="text" class="form-control" placeholder="請在此輸入需要購買的物品" name="Stuff" required>
+                <label class="m-0">標題</label>
+                <input type="text" class="form-control" placeholder="請在此輸入委託標題" name="Stuff" required>
               </div>
 
             </div>
-
+            <div class="row">
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group pb-2 pl-1 pr-1 m-0">
+                <label class="m-0">購買物品(請詳細說明需求)</label>
+                <textarea rows="4" cols="50" class="form-control" placeholder="請輸入購買物品、委託細節或注意事項(Ex:是否要袋子、餐具..)" name="Content"></textarea>
+              </div>
+            </div>
             <div class="row">
 
               <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
@@ -222,14 +228,6 @@
                 <input type="number" onkeyup="value=value.replace(/[^\d]/g,'') " class="form-control" placeholder="請輸入酬勞金額(新台幣)" name="Pay" required></input>
               </div>
             </div>
-
-            <div class="row">
-              <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group pb-2 pl-1 pr-1 m-0">
-                <label class="m-0">委託內容細節與補充</label>
-                <textarea rows="4" cols="50" class="form-control" placeholder="請輸入委託細節或注意事項(Ex:是否要袋子、餐具..)" name="Content"></textarea>
-              </div>
-            </div>
-
             <div class="d-flex justify-content-center">
               <div class="col-8 col-sm-8 col-md-6 col-lg-3 col-xl-3 p-0">
                 <button class="btn btn-primary btn-block form-group" type="submit" class="btn btn-primary btn-block">提出委託</button>
