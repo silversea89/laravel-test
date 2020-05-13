@@ -8,7 +8,7 @@ use App\User;
 
 class ProfileController extends Controller
 {
-    protected function Name(Request $request)
+    protected function showpersonal(Request $request)
     {
         
     }
