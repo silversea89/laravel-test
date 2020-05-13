@@ -26,12 +26,12 @@
           <div class="row">
 
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 m-0">
-              <div class="float-left">種類選擇</div><br>
-              <select class="form-control">
-                <option>全部</option>
-                <option>食物飲料</option>
-                <option>文具用品</option>
-              </select>
+            <label class="m-0">分類選擇</label>
+                <select class="form-control" name="Classification">
+                  @foreach($classifications as $classification)
+                  <option value="{{$classification->ClassValue}}">{{$classification->ClassName}}</option>
+                  @endforeach
+                </select>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 m-0">
               <div class="float-left">排序</div><br>

@@ -6,6 +6,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Tasks;
 use App\Classification;
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -37,6 +38,13 @@ class TaskController extends Controller
     {
         $classifications = Classification::all();
         $tasks=Tasks::all();
+        return view('list')->with(["classifications" => $classifications, "tasks" => $tasks]);
+    }
+
+    protected function showfoodListForm(Request $request)
+    {
+        $classifications = Classification::all();
+        $tasks=DB::table('Tasks')->where('Classification', 'Food')->get();
         return view('list')->with(["classifications" => $classifications, "tasks" => $tasks]);
     }
 }

@@ -21,6 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('list', 'TaskController@showListForm')->name("list");
+Route::get('list', 'TaskController@showfoodListForm')->name("listfood");
 
 Route::get('/about', function () {
     return view('about');
