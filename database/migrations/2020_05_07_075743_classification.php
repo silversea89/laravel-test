@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class Classification extends Migration
@@ -17,6 +18,17 @@ class Classification extends Migration
             $table->String("ClassValue")->primary();
             $table->String("ClassName");
         });
+
+        DB::table('Classification')->insert([
+            [
+                "ClassValue" => "Food",
+                "ClassName" => "食物飲料"
+            ],
+            [
+                "ClassValue" => "Stationery",
+                "ClassName" => "文具用品"
+            ],
+        ]);
     }
 
     /**
