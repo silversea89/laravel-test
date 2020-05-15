@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -37,16 +38,17 @@ class TaskController extends Controller
     protected function showListForm(Request $request)
     {
         $classifications = Classification::all();
-        $tasks=DB::table('tasks')
-            ->leftJoin('users', 'student_id', '=', 'users.student_id')
+        $tasks = DB::table('tasks')
+            ->leftJoin('users', 'tasks.student_id', '=', 'users.student_id')
+            ->select('tasks.*', 'users.name')
             ->get();
         return view('list')->with(["classifications" => $classifications, "tasks" => $tasks]);
     }
 
-    protected function showfoodListForm(Request $request)
+    protected function showClassificationListForm(Request $request)
     {
         $classifications = Classification::all();
-        $tasks=DB::table('Tasks')->where('Classification', 'Food')->get();
+        $tasks = DB::table('Tasks')->where('Classification', 'Food')->get();
         return view('list')->with(["classifications" => $classifications, "tasks" => $tasks]);
     }
 }

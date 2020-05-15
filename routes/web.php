@@ -1,10 +1,12 @@
 <?php
+
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Classification;
 use App\task;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +23,7 @@ Route::get('/', function () {
 });
 
 Route::get('list', 'TaskController@showListForm')->name("list");
-Route::get('list', 'TaskController@showfoodListForm')->name("listfood");
+Route::get('list/classification', 'TaskController@showClassificationListForm')->name("listClassification");
 
 Route::get('/about', function () {
     return view('about');

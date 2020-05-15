@@ -6,6 +6,8 @@
   <script src="script.js">
   </script>
 
+  <h1>{{$tasks}}</h1>
+
   <div class="container pt-3 pb-0 pl-0 pr-0" style="background-color:white;">
 
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:white;">
@@ -95,7 +97,7 @@
               </h5>
 
               </h5>
-              <p class="m-0">老闆:<a href="#">{{$i->student_id}}</a></p>
+              <p class="m-0">老闆:<a href="#">{{$i->name}}</a></p>
               <p class="m-0">發佈於{{$i->created_at}}</p>
               <p class="m-0">截止期限：2020/04/01 13:00</p>
               <button type="button" class="btn btn-primary my-3">接受委託</button>
