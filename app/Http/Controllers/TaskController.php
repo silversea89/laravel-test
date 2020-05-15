@@ -25,7 +25,7 @@ class TaskController extends Controller
         Tasks::create([
             'Classification' => $data['Classification'],
             'student_id' => $data['student_id'],
-            'Stuff' => $data['Stuff'],
+            'Title' => $data['Title'],
             'DateTime' => $combinedDT,
             'BuyAddress' => $data['BuyAddress'],
             'MeetAddress' => $data['MeetAddress'],
@@ -33,11 +33,13 @@ class TaskController extends Controller
             'content' => $data['Content'],
         ]);
     }
-    
+
     protected function showListForm(Request $request)
     {
         $classifications = Classification::all();
-        $tasks=Tasks::all();
+        $tasks=DB::table('tasks')
+            ->leftJoin('users', 'student_id', '=', 'users.student_id')
+            ->get();
         return view('list')->with(["classifications" => $classifications, "tasks" => $tasks]);
     }
 

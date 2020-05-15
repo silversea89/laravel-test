@@ -5,8 +5,8 @@
 <body style="background-color:#FFFFFF;">
   <script src="script.js">
   </script>
-  <div class="container pt-3 pb-0 pl-0 pr-0" style="background-color:white;">
 
+  <div class="container pt-3 pb-0 pl-0 pr-0" style="background-color:white;">
 
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:white;">
 
@@ -82,7 +82,7 @@
 
               <button type="button" class="btn btn-danger" style="position: absolute; top: 5px;right: 5px;">檢舉</button>
 
-              <h3>{{$i->Stuff}}</h3>
+              <h3>{{$i->Title}}</h3>
               <span class="badge badge-primary">代購物品</span>
               <h5>購買物品和需求：<p>{{$i->content}}</p>
               <h5>購買地點：<p>{{$i->BuyAddress}}</p>
@@ -93,9 +93,9 @@
               </h5>
               <h5>酬勞金額：<p>{{$i->Pay}}$</p>
               </h5>
-              
+
               </h5>
-              <p class="m-0">老闆:<a href="#">王小明</a></p>
+              <p class="m-0">老闆:<a href="#">{{$i->student_id}}</a></p>
               <p class="m-0">發佈於{{$i->created_at}}</p>
               <p class="m-0">截止期限：2020/04/01 13:00</p>
               <button type="button" class="btn btn-primary my-3">接受委託</button>
@@ -123,7 +123,7 @@
 
                 <div class="pl-1">
 
-                  <p class="m-0">{{$i->Stuff}}</p>
+                  <p class="m-0">{{$i->Title}}</p>
                   <p class="m-0">
                     <i class="fas fa-star" style="color:#FF9529"></i>
                     <i class="fas fa-star" style="color:#FF9529"></i>
@@ -169,7 +169,7 @@
 
               <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
                 <label class="m-0">標題</label>
-                <input type="text" class="form-control" placeholder="請在此輸入委託標題" name="Stuff" required>
+                <input type="text" class="form-control" placeholder="請在此輸入委託標題" name="Title" required>
               </div>
 
             </div>
