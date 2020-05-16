@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -23,11 +22,15 @@ class TaskController extends Controller
         $date = $data['Date'];
         $time = $data['Time'];
         $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
+        $deaddate = $data['DeadDate'];
+        $deadtime = $data['DeadTime'];
+        $combinedDDT = date('Y-m-d H:i:s', strtotime("$deaddate $deadtime"));
         Tasks::create([
             'Classification' => $data['Classification'],
             'student_id' => $data['student_id'],
             'Title' => $data['Title'],
             'DateTime' => $combinedDT,
+            'DeadDateTime' => $combinedDDT,
             'BuyAddress' => $data['BuyAddress'],
             'MeetAddress' => $data['MeetAddress'],
             'Pay' => $data['Pay'],
@@ -37,18 +40,25 @@ class TaskController extends Controller
 
     protected function showListForm(Request $request)
     {
+
         $classifications = Classification::all();
-        $tasks = DB::table('tasks')
+        $tasks=DB::table('tasks')
             ->leftJoin('users', 'tasks.student_id', '=', 'users.student_id')
-            ->select('tasks.*', 'users.name')
             ->get();
         return view('list')->with(["classifications" => $classifications, "tasks" => $tasks]);
     }
 
-    protected function showClassificationListForm(Request $request)
+    protected function showSearchListForm(Request $request)
     {
         $classifications = Classification::all();
-        $tasks = DB::table('Tasks')->where('Classification', 'Food')->get();
+        $classification_target = Classification::where('ClassValue', $request->input('Classification'))->first();
+        error_log($classifications);
+
+        $tasks = DB::table('tasks')
+            ->join('users', 'tasks.student_id', '=', 'users.student_id')
+            ->where('Classification', $classification_target['ClassValue'])
+            ->select('tasks.*', 'users.name')
+            ->get();
         return view('list')->with(["classifications" => $classifications, "tasks" => $tasks]);
     }
 }

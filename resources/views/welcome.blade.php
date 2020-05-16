@@ -43,600 +43,92 @@
             <h1 class="m-0 ">最新委託</h1>
 
         </div>
+        @foreach($newesttasks as $i)
+            <div class="modal fade content{{$i->tasks_id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content container">
+                        <div class="row p-2 ">
+                            <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 pr-0 pl-0">
+                                <h3 class="far fa-times-circle"
+                                    style="color:white;position: absolute; top: 5px;left: 5px;border-radius:100%;box-shadow:0 0rem 0.5rem rgba(0, 0, 0, 1);"
+                                    data-toggle="modal" data-target=".content{{$i->tasks_id}}"></h3>
+                                <img src="img/food.jpg" class="img-fluid pr-0">
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-1">
 
+                                <button type="button" class="btn btn-danger"
+                                        style="position: absolute; top: 5px;right: 5px;">檢舉
+                                </button>
 
+                                <h3>{{$i->Title}}</h3>
+                                <span class="badge badge-primary">代購物品</span>
+                                <h5>購買物品和需求：<p>{{$i->content}}</p>
+                                    <h5>購買地點：<p>{{$i->BuyAddress}}</p>
+                                    </h5>
+                                    <h5>面交地點：<p>{{$i->MeetAddress}}</p>
+                                    </h5>
+                                    <h5>面交時間：<p>{{$i->DateTime}}</p>
+                                    </h5>
+                                    <h5>酬勞金額：<p>{{$i->Pay}}$</p>
+                                    </h5>
 
-        <div class="modal fade content0" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content container">
-                    <div class="row p-2 ">
-                        <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 pr-0 pl-0">
-                            <h3 class="far fa-times-circle" style="color:white;position: absolute; top: 5px;left: 5px;border-radius:100%;box-shadow:0 0rem 0.5rem rgba(0, 0, 0, 1);" data-toggle="modal" data-target=".content0"></h3>
-                            <img src="img/food.jpg" class="img-fluid pr-0">
+                                </h5>
+                                <p class="m-0">老闆:<a href="#">{{$i->name}}</a></p>
+                                <p class="m-0">發佈於{{$i->created_at}}</p>
+                                <p class="m-0">截止期限：{{$i->DeadDateTime}}</p>
+                                <button type="button" class="btn btn-primary my-3">接受委託</button>
+                            </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-1">
 
-                            <a href="/login.html" class="btn btn-danger" style="position: absolute; top: 5px;right: 5px;">檢舉</a>
-
-                            <h3>50嵐8冰綠一杯</h3>
-                            <span class="badge badge-primary">代購物品</span>
-                            <h5>委託內容：<p>午餐好油膩，想喝一杯8冰綠，半糖去冰謝謝！</p>
-                            </h5>
-                            <h5>購買地點：<p>50嵐</p>
-                            </h5>
-                            <h5>面交地點：<p>資訊4樓電梯前</p>
-                            </h5>
-                            <h5>面交時間：<p>2020/04/01 12:30</p>
-                            </h5>
-                            <h5>酬勞金額：<p>$50</p>
-                            </h5>
-                            <p class="m-0">老闆:<a href="#">王小明</a></p>
-                            <p class="m-0">發佈於2020/04/01 11:00</p>
-                            <p class="m-0">截止期限：2020/04/01 13:00</p>
-                            <a href="/login.html" class="btn btn-primary my-3">接受委託</a>
-
-                        </div>
                     </div>
-
                 </div>
             </div>
-        </div>
-
-
-        <div class="d-md-none d-block col-12 col-sm-12 px-0" style="background-color:white;">
-            <div class="mr-0 d-flex align-items-center" style="overflow-y:hidden;overflow-x:auto;white-space: nowrap;">
-
-
-                <div class="col-8 col-sm-8 mt-3 pl-0" style="display: inline-table;vertical-align: top;">
-
-                    <div style="border:1px #DFDFDF solid;" data-toggle="modal" data-target=".content0">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">50嵐8冰綠一杯</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-8 col-sm-8 mt-3 pl-0" style="display: inline-table;vertical-align: top;">
-
-                    <div style="border:1px #DFDFDF solid;">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">鍋燒牛肉意麵二碗</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-8 col-sm-8 mt-3 pl-0" style="display: inline-table;vertical-align: top;">
-
-                    <div style="border:1px #DFDFDF solid;">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">鍋燒牛肉意麵三碗</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-8 col-sm-8 mt-3 pl-0" style="display: inline-table;vertical-align: top;">
-
-                    <div style="border:1px #DFDFDF solid;">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">鍋燒牛肉意麵四碗</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-8 col-sm-8 mt-3 pl-0" style="display: inline-table;vertical-align: top;">
-
-                    <div style="border:1px #DFDFDF solid;">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">鍋燒牛肉意麵五碗</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-8 col-sm-8 mt-3 pl-0" style="display: inline-table;vertical-align: top;">
-
-                    <div style="border:1px #DFDFDF solid;">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">鍋燒牛肉意麵一碗</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-8 col-sm-8 mt-3 pl-0" style="display: inline-table;vertical-align: top;">
-
-                    <div style="border:1px #DFDFDF solid;">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">鍋燒牛肉意麵一碗</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-8 col-sm-8 mt-3 pl-0" style="display: inline-table;vertical-align: top;">
-
-                    <div style="border:1px #DFDFDF solid;">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">鍋燒牛肉意麵一碗</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-4 col-sm-4 mt-3 pl-0 " style="display: inline-table;vertical-align: top;">
-
-                    <a href="/login.html">
-                        <h1>more&nbsp;<p class="fas fa-arrow-right"></p>
-                        </h1>
-                    </a>
-
-                </div>
-            </div>
-            <br>
-        </div>
-
-
-
-        <div class="d-none d-md-block col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="background-color:white;">
+        @endforeach
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:white;">
             <div class="row mr-0">
+                @foreach($newesttasks as $i)
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0">
 
+                        <div style="border:1px #DFDFDF solid;" data-toggle="modal"
+                             data-target=".content{{$i->tasks_id}}">
 
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 mt-3 pr-0" style="">
+                            <div class="row pl-3">
 
-                    <div style="border:1px #DFDFDF solid;" data-toggle="modal" data-target=".content0">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">50嵐8冰綠一杯</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
+                                <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
+                                    <img src="img/food.jpg" class="img-fluid">
                                 </div>
 
-                            </div>
-                        </div>
+                                <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 ">
 
-                    </div>
-                </div>
+                                    <div class="pl-1">
 
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 mt-3 pr-0" style="">
-
-                    <div style="border:1px #DFDFDF solid;">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">鍋燒牛肉意麵二碗</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
+                                        <p class="m-0">{{$i->Title}}</p>
+                                        <p class="m-0">
+                                            <i class="fas fa-star" style="color:#FF9529"></i>
+                                            <i class="fas fa-star" style="color:#FF9529"></i>
+                                            <i class="fas fa-star" style="color:#FF9529"></i>
+                                            <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
+                                            <i class="far fa-star" style="color:#FF9529"></i>
+                                            3.5/5.0
+                                        </p>
+                                        <p class="m-0">{{$i->Pay}}$</p>
+                                        <i class="fas fa-heart pr-3"
+                                           style="color:red;position:absolute;bottom:5px;right:5px"
+                                           aria-hidden="true"></i>
+                                    </div>
 
                                 </div>
-
                             </div>
+
                         </div>
-
                     </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 mt-3 pr-0" style="">
-
-                    <div style="border:1px #DFDFDF solid;">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">鍋燒牛肉意麵三碗</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 mt-3 pr-0" style="">
-
-                    <div style="border:1px #DFDFDF solid;">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">鍋燒牛肉意麵四碗</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 mt-3 pr-0" style="">
-
-                    <div style="border:1px #DFDFDF solid;">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">鍋燒牛肉意麵五碗</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 mt-3 pr-0" style="">
-
-                    <div style="border:1px #DFDFDF solid;">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">鍋燒牛肉意麵一碗</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 mt-3 pr-0" style="">
-
-                    <div style="border:1px #DFDFDF solid;">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">鍋燒牛肉意麵一碗</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 mt-3 pr-0" style="">
-
-                    <div style="border:1px #DFDFDF solid;">
-
-                        <div class="row pl-3">
-
-                            <div class="col-12 col-sm-12 pl-0">
-                                <img src="img/food.jpg" class="img-fluid">
-                            </div>
-
-                            <div class="col-12 col-sm-12 pl-0 ">
-
-                                <div class="pl-1">
-
-                                    <p class="m-0">鍋燒牛肉意麵一碗</p>
-                                    <p class="m-0">
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                        3.5/5.0
-                                    </p>
-                                    <p class="m-0">30$</p>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
+                @endforeach
             </div>
             <br>
-
         </div>
+
+
+
 
 
         <div class="row ">
@@ -691,13 +183,13 @@
                     <div class="col-12 col-sm-12 col-md-6 pb-3 " id="test-lt">
                         <div id="test-bb">
                             <h4>會員人數</h4>
-                            <h4>1097</h4>
+                            <h4>{{$members_amount}}</h4>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 pb-3" id="test-rt">
                         <div id="test-bb">
                             <h4>委託總數量</h4>
-                            <h4>2076</h4>
+                            <h4>{{$task_amount}}</h4>
                         </div>
                     </div>
                 </div>
@@ -706,7 +198,7 @@
                     <div class="col-12 col-sm-12 col-md-6 pb-3" id="test-lb">
                         <div id="test-bb">
                             <h4>已完成委託</h4>
-                            <h4>1245</h4>
+                            <h4>{{$task_complete_amount}}</h4>
                         </div>
                     </div>
 
@@ -714,7 +206,7 @@
                     <div class="col-12 col-sm-12 col-md-6 pb-3" id="test-rb">
                         <div>
                             <h4>未完成委託</h4>
-                            <h4>831</h4>
+                            <h4>{{$task_notcomplete_amount}}</h4>
                         </div>
                     </div>
                 </div>

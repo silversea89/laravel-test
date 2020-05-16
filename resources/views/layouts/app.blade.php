@@ -9,14 +9,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width">
     <title>ToolMan</title>
-    
+
     <!-- Scripts -->
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js">
     </script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript">
 	</script>
-	
+
     <!-- Styles -->
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -58,16 +58,16 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" href="list.html">所有委託列表<span class="sr-only">(current)</span></a>
+                                <a class="nav-link active" href="list">所有委託列表<span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="list_push.html">已提出的委託</a>
+                                <a class="nav-link" href="list_push">已提出的委託</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="list_ING.html">執行中的委託</a>
+                                <a class="nav-link" href="list_ING">執行中的委託</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="list_collect.html">已收藏的委託</a>
+                                <a class="nav-link" href="list_collect">已收藏的委託</a>
                             </li>
                         </ul>
                 @endif

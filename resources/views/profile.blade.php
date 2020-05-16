@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <div class="container pt-2" style="background-color:white;">
-
     <h2 class="font-weight-bold mb-0">
         個人資料
     </h2>
 
     <div class="row">
+        @foreach($profile as $i)
         <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 ">
             <div class="row">
 
@@ -17,26 +17,25 @@
 
                     <div style="border-radius:20px;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);height:100%">
                         <h5 class="font-weight-bold mb-0 pl-2 pt-3">姓名</h5>
-                        <p class="font-weight-normal mb-2 pl-2">王小明</p>
+                        <p class="font-weight-normal mb-2 pl-2">{{$i->name}}</p>
 
                         <h5 class="font-weight-bold mb-0 pl-2">學號</h5>
-                        <p class="font-weight-normal mb-2 pl-2">1110534087</p>
+                        <p class="font-weight-normal mb-2 pl-2">{{$i->student_id}}</p>
 
                         <h5 class="font-weight-bold mb-0 pl-2">科系</h5>
-                        <p class="font-weight-normal mb-3 pl-2 ">資訊應用菁英班</p>
+                        <p class="font-weight-normal mb-3 pl-2 ">{{$i->department}}</p>
                     </div>
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 p-2">
                     <div style="border-radius:20px;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);">
                         <div class="row pt-3">
-
                             <div class="col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12 pr-0 ">
                                 <h5 class="font-weight-bold mb-0 pl-2 ">提出委託數</h5>
-                                <p class="font-weight-normal mb-2 pl-2">24</p>
+                                <p class="font-weight-normal mb-2 pl-2">{{$addrecord}}</p>
                             </div>
                             <div class="col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12 pr-0 ">
                                 <h5 class="font-weight-bold mb-0 pl-2">完成委託數</h5>
-                                <p class="font-weight-normal mb-2 pl-2">7</p>
+                                <p class="font-weight-normal mb-2 pl-2">{{$completerecord}}</p>
                             </div>
                             <div class="col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12 pr-0 ">
                                 <h5 class="font-weight-bold mb-0 pl-2">違規次數</h5>
@@ -48,7 +47,7 @@
             </div>
 
         </div>
-
+        @endforeach
         <br>
 
         <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 p-2">

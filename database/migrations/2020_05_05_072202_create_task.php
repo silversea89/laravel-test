@@ -16,13 +16,17 @@ class CreateTask extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id('tasks_id');
             $table->string('student_id');
+            $table->string('toolman_id')->nullable();
             $table->string('Classification');
             $table->string('Title');
             $table->dateTime('DateTime');
+            $table->dateTime('DeadDateTime');
             $table->string('BuyAddress');
             $table->string('MeetAddress');
             $table->integer('Pay');
-            $table->string('content')->nullable();;
+            $table->string('content')->nullable();
+            //Selectable,processing,complete,canceled
+            $table->string('Status')->default("Selectable");
             $table->timestamps();
         });
     }

@@ -18,9 +18,7 @@ use App\task;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@Welcome')->name("Welcome");
 
 Route::get('list', 'TaskController@showListForm')->name("list");
 Route::get('list/classification', 'TaskController@showClassificationListForm')->name("listClassification");
@@ -33,15 +31,11 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/profile', function () {
-    return view('profile');
-})->name('profile');
+Route::get('profile','ProfileController@showprofile')->name('profile');
 
 Route::post('AddTasks', 'TaskController@Add')->name("AddTasks");
 
 Auth::routes();
-
-Route::post('AddTasks', 'TaskController@Add')->name("AddTasks");
 //// Authentication Routes...
 //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 //Route::post('login', 'Auth\LoginController@login');
