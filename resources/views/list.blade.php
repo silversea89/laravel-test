@@ -102,9 +102,12 @@
 
                                 </h5>
                                 <p class="m-0">老闆:<a href="#">{{$i->name}}</a></p>
-                                <p class="m-0">發佈於{{$i->created_at}}</p>
+                                <p class="m-0">發佈於:{{$i->created_at}}</p>
                                 <p class="m-0">截止期限：{{$i->DeadDateTime}}</p>
-                                <button type="button" class="btn btn-primary my-3">接受委託</button>
+                                <form method="POST" action="{{ route('task.get') }}">
+                                    <input type="hidden" name="tasks_id" value="{{$i->tasks_id}}">
+                                    <button type="button" class="btn btn-primary my-3">接受委託</button>
+                                </form>
                             </div>
                         </div>
 
@@ -165,7 +168,7 @@
             <div class="modal-content container">
 
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:white;">
-                    <form action="{{ route('AddTasks') }}" method="POST">
+                    <form action="{{ route('task.add') }}" method="POST">
                         @csrf
                         <div class="row">
 

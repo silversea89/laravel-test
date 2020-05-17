@@ -55,11 +55,12 @@
                                 <img src="img/food.jpg" class="img-fluid pr-0">
                             </div>
                             <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-1">
-
+                                @guest
+                                @else
                                 <button type="button" class="btn btn-danger"
                                         style="position: absolute; top: 5px;right: 5px;">檢舉
                                 </button>
-
+                                @endguest
                                 <h3>{{$i->Title}}</h3>
                                 <span class="badge badge-primary">代購物品</span>
                                 <h5>購買物品和需求：<p>{{$i->content}}</p>
@@ -76,7 +77,10 @@
                                 <p class="m-0">老闆:<a href="#">{{$i->name}}</a></p>
                                 <p class="m-0">發佈於{{$i->created_at}}</p>
                                 <p class="m-0">截止期限：{{$i->DeadDateTime}}</p>
+                                @guest
+                                @else
                                 <button type="button" class="btn btn-primary my-3">接受委託</button>
+                                @endguest
                             </div>
                         </div>
 

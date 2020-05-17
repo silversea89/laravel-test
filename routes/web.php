@@ -22,6 +22,7 @@ Route::get('/', 'WelcomeController@Welcome')->name("Welcome");
 
 Route::get('list', 'TaskController@showListForm')->name("list");
 Route::get('list/search', 'TaskController@showSearchListForm')->name("list.search");
+Route::get('list/gettask', 'TaskController@gettask')->name("task.get");
 
 Route::get('/about', function () {
     return view('about');
@@ -33,7 +34,7 @@ Route::get('/contact', function () {
 
 Route::get('profile','ProfileController@showprofile')->name('profile');
 
-Route::post('AddTasks', 'TaskController@Add')->name("AddTasks");
+Route::post('AddTasks', 'TaskController@Add')->name("task.add");
 
 Auth::routes();
 //// Authentication Routes...

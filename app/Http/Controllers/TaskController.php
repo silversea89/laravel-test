@@ -69,4 +69,15 @@ class TaskController extends Controller
             ->get();
         return view('list')->with(["classifications" => $classifications, "tasks" => $tasks]);
     }
+    protected function gettask(Request $request)
+    {
+        $tasks_id= $request->tasks_id;
+        $tasks = tasks::find($tasks_id);
+        $user = Auth::user();
+        $student_id = $user->student_id;
+        if($tasks) {
+            $tasks->toolman_id = $student_id;
+            $tasks->save();
+        }
+    }
 }
