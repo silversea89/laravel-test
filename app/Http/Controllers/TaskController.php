@@ -52,11 +52,19 @@ class TaskController extends Controller
     {
         $classifications = Classification::all();
         $classification_target = Classification::where('ClassValue', $request->input('Classification'))->first();
-        error_log($classifications);
 
-        $tasks = DB::table('tasks')
+        if($request->input('keyword')!=null)
+            $search_keyword = $request->input('keyword');
+        else
+            $search_keyword = "%";
+        $sort_by = $request->input('sort_by');
+
+
+            $tasks = DB::table('tasks')
             ->join('users', 'tasks.student_id', '=', 'users.student_id')
             ->where('Classification', $classification_target['ClassValue'])
+            ->where('Title','LIKE', "%$search_keyword%")
+            ->orderBy($sort_by,'desc')
             ->select('tasks.*', 'users.name')
             ->get();
         return view('list')->with(["classifications" => $classifications, "tasks" => $tasks]);
