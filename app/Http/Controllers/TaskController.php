@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Status;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -71,13 +72,57 @@ class TaskController extends Controller
     }
     protected function gettask(Request $request)
     {
-        $tasks_id= $request->tasks_id;
-        $tasks = tasks::find($tasks_id);
+        $tasks_id = $request->tasks_id;
+        $tasks = Tasks::find($tasks_id);
         $user = Auth::user();
-        $student_id = $user->student_id;
-        if($tasks) {
-            $tasks->toolman_id = $student_id;
-            $tasks->save();
+
+        if ($tasks) {
+            $tasks->get_by_toolman($user);
         }
+
+        return redirect('list');
     }
+    protected function showListpush(Request $request)
+    {
+        $classifications = Classification::all();
+        $user = Auth::user();
+        $id=$user->student_id;
+        $tasksall=DB::table('tasks')
+            ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
+            ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
+            ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
+            ->where("tasks.student_id","=",$id)
+            ->select('tasks.*', 'host.name as hostname','toolman.name as toolmanname','status.StatusName')
+            ->get();
+        $tasksING=DB::table('tasks')
+            ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
+            ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
+            ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
+            ->where("tasks.student_id","=",$id)
+            ->where("tasks.Status","=","Processing")
+            ->select('tasks.*', 'host.name as hostname','toolman.name as toolmanname','status.StatusName')
+            ->get();
+        $tasksWaiting=DB::table('tasks')
+            ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
+            ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
+            ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
+            ->where("tasks.student_id","=",$id)
+            ->where("tasks.Status","=","Selectable")
+            ->select('tasks.*', 'host.name as hostname','toolman.name as toolmanname','status.StatusName')
+            ->get();
+        $tasksComplete=DB::table('tasks')
+            ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
+            ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
+            ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
+            ->where("tasks.student_id","=",$id)
+            ->where("tasks.Status","=","Complete")
+            ->select('tasks.*', 'host.name as hostname','toolman.name as toolmanname','status.StatusName')
+            ->get();
+        return view('list_push')->with(["classifications" => $classifications,
+            "tasksall" => $tasksall,
+            "tasksING"=>$tasksING,
+            "tasksWaiting"=>$tasksWaiting,
+            "tasksComplete"=>$tasksComplete]);
+    }
+
 }

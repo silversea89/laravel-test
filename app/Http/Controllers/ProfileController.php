@@ -21,6 +21,7 @@ class ProfileController extends Controller
             ->get();
         $taskaddrecord=DB::table('tasks')
             ->where('status','=','selectable')
+            ->where('student_id','=','$id')
             ->count();
         $taskcompleterecord=DB::table('tasks')
             ->where('status','=','complete')

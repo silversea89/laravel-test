@@ -1,23 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <body style="background-color:#74D2E7;height:100%">
+    <body style="background-color:#FFFFFF;">
     <script src="script.js">
     </script>
 
-
-    <div class="container pt-3 pb-0 pl-0 pr-0" style="background-color:white;height:100%">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:white;">
+    <div class="container pt-3 pb-0 pl-0 pr-0" style="background-color:white;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="background-color:white;">
 
             <div class="d-flex justify-content-between">
-                <h1 class="m-0">全部</h1>
-                <button class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button"
-                        aria-expanded="false" aria-controls="collapseExample">
+                <h1 class="m-0">提出的委託-全部</h1>
+                <button class="btn btn-primary"  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                     <i class="fas fa-filter"></i>
                 </button>
             </div>
-
 
             <div class="collapse" id="collapseExample">
 
@@ -65,98 +61,148 @@
 
             </div>
 
-
         </div>
 
-        <!--
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".content0">Extra large modal</button>
-          -->
-        @foreach($tasks as $i)
-            <div class="modal fade content{{$i->tasks_id}}" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content container">
-                        <div class="row p-2 ">
-                            <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 pr-0 pl-0">
-                                <h3 class="far fa-times-circle"
-                                    style="color:white;position: absolute; top: 5px;left: 5px;border-radius:100%;box-shadow:0 0rem 0.5rem rgba(0, 0, 0, 1);"
-                                    data-toggle="modal" data-target=".content{{$i->tasks_id}}"></h3>
-                                <img src="img/food.jpg" class="img-fluid pr-0">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 tab-content" style="background-color:white;">
+
+            <ul class="nav nav-pills mt-3" id="pills-tab" role="tablist">
+                <li class="nav-item col-3 pr-2 pr-md-3 pl-0" style="text-align:center;">
+                    <a class="nav-link btn btn-outline-primary active px-0" data-toggle="pill" href="#pills-all" role="tab" aria-selected="true">全部</a>
+                </li>
+                <li class="nav-item col-3 pr-2 pr-md-2 pl-2" style="text-align:center;">
+                    <a class="nav-link btn btn-outline-primary px-0" data-toggle="pill" href="#pills-waiting" role="tab" aria-selected="false">等待中</a>
+                </li>
+                <li class="nav-item col-3 pr-2 pr-md-2 pl-1" style="text-align:center;">
+                    <a class="nav-link btn btn-outline-primary px-0" data-toggle="pill" href="#pills-ing" role="tab" aria-selected="false">執行中</a>
+                </li>
+                <li class="nav-item col-3 pr-0 pl-2" style="text-align:center;">
+                    <a class="nav-link btn btn-outline-primary px-0" data-toggle="pill" href="#pills-fin" role="tab" aria-selected="false">已完成</a>
+                </li>
+            </ul>
+            <div class="tab-pane fade show active" id="pills-all"  >
+                <div class="row mr-0">
+                    @foreach($tasksall as $i)
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
+                        <a href="/list_id.html" style="text-decoration:none;color:black">
+                            <div style="border:1px #DFDFDF solid;"  data-toggle="modal" > <!--data-target=".content0"-->
+                                <div class="row pl-3" >
+                                    <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
+                                        <div class="" style="background-color:gray;position:absolute;top:0px;left:0px">
+                                            <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
+                                        </div>
+                                        <img src="{{asset('img/food.jpg')}}" class="img-fluid" >
+                                    </div>
+                                    <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 " >
+                                        <div class="pl-1" >
+                                            <p class="m-0">{{$i->Title}}</p>
+                                            <p class="m-0">
+                                                工具人：{{$i->toolmanname}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-1">
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
 
-                                <button type="button" class="btn btn-danger"
-                                        style="position: absolute; top: 5px;right: 5px;">檢舉
-                                </button>
+            </div>
 
-                                <h3>{{$i->Title}}</h3>
-                                <span class="badge badge-primary">代購物品</span>
-                                <h5>購買物品和需求：<p>{{$i->content}}</p>
-                                    <h5>購買地點：<p>{{$i->BuyAddress}}</p>
-                                    </h5>
-                                    <h5>面交地點：<p>{{$i->MeetAddress}}</p>
-                                    </h5>
-                                    <h5>面交時間：<p>{{$i->DateTime}}</p>
-                                    </h5>
-                                    <h5>酬勞金額：<p>{{$i->Pay}}$</p>
-                                    </h5>
-
-                                </h5>
-                                <p class="m-0">老闆:<a href="#">{{$i->name}}</a></p>
-                                <p class="m-0">發佈於:{{$i->created_at}}</p>
-                                <p class="m-0">截止期限：{{$i->DeadDateTime}}</p>
-                                <form method="POST" action="{{ route('task.get') }}">
-                                    @csrf
-                                    <input type="hidden" name="tasks_id" value="{{$i->tasks_id}}">
-                                    <button type="submit" class="btn btn-primary my-3">接受委託</button>
-                                </form>
+            <div class="tab-pane tab-pane fade" id="pills-ing"  >
+                <div class="row mr-0" id="pills-ing">
+                    @foreach($tasksING as $i)
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
+                        <div style="border:1px #DFDFDF solid;"  data-toggle="modal" data-target=".content0">
+                            <div class="row pl-3" >
+                                <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
+                                    <div class="" style="background-color:gray;position:absolute;top:0px;left:0px">
+                                        <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
+                                    </div>
+                                    <img src="{{asset('img/food.jpg')}}" class="img-fluid" >
+                                </div>
+                                <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 " >
+                                    <div class="pl-1" >
+                                        <p class="m-0">{{$i->Title}}</p>
+                                        <p class="m-0">
+                                            工具人：{{$i->toolmanname}}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
+                    @endforeach
                 </div>
             </div>
-        @endforeach
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:white;">
-            <div class="row mr-0">
-                @foreach($tasks as $i)
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0">
 
-                        <div style="border:1px #DFDFDF solid;" data-toggle="modal"
-                             data-target=".content{{$i->tasks_id}}">
+            <div class="tab-pane tab-pane fade" id="pills-waiting"  >
+                <div class="row mr-0" id="pills-waiting">
+                    @foreach($tasksWaiting as $i)
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
 
-                            <div class="row pl-3">
+                        <div style="border:1px #DFDFDF solid;">
+
+                            <div class="row pl-3" >
 
                                 <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
-                                    <img src="{{asset('img/food.jpg')}}" class="img-fluid">
+                                    <div class="" style="background-color:gray;position:absolute;top:0px;left:0px">
+                                        <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
+                                    </div>
+                                    <img src="{{asset('img/food.jpg')}}" class="img-fluid" >
                                 </div>
 
-                                <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 ">
+                                <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 " >
 
-                                    <div class="pl-1">
+                                    <div class="pl-1" >
 
                                         <p class="m-0">{{$i->Title}}</p>
                                         <p class="m-0">
-                                            <i class="fas fa-star" style="color:#FF9529"></i>
-                                            <i class="fas fa-star" style="color:#FF9529"></i>
-                                            <i class="fas fa-star" style="color:#FF9529"></i>
-                                            <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                            <i class="far fa-star" style="color:#FF9529"></i>
-                                            3.5/5.0
+                                            工具人：{{$i->toolmanname}}
                                         </p>
-                                        <p class="m-0">{{$i->Pay}}$</p>
-                                        <i class="fas fa-heart pr-3"
-                                           style="color:red;position:absolute;bottom:5px;right:5px"
-                                           aria-hidden="true"></i>
                                     </div>
-
                                 </div>
                             </div>
 
                         </div>
                     </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
-            <br>
+
+            <div class="tab-pane tab-pane fade" id="pills-fin"  >
+                <div class="row mr-0" id="pills-fin">
+                    @foreach($tasksComplete as $i)
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
+
+                        <div style="border:1px #DFDFDF solid;">
+
+                            <div class="row pl-3" >
+
+                                <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
+                                    <div class="" style="background-color:gray;position:absolute;top:0px;left:0px">
+                                        <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
+                                    </div>
+                                    <img src="{{asset('img/food.jpg')}}" class="img-fluid" >
+                                </div>
+
+                                <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 " >
+
+                                    <div class="pl-1" >
+
+                                        <p class="m-0">{{$i->Title}}</p>
+                                        <p class="m-0">
+                                            工具人：{{$i->toolmanname}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -282,19 +328,12 @@
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     </body>
 @endsection

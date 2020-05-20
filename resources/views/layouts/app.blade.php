@@ -61,7 +61,7 @@
                                 <a class="nav-link active" href="list">所有委託列表<span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="list_push">已提出的委託</a>
+                                <a class="nav-link" href="{{route('list.push')}}">已提出的委託</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="list_ING">執行中的委託</a>

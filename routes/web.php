@@ -21,8 +21,9 @@ use App\task;
 Route::get('/', 'WelcomeController@Welcome')->name("Welcome");
 
 Route::get('list', 'TaskController@showListForm')->name("list");
+Route::get('list_push', 'TaskController@showListpush')->name("list.push");
 Route::get('list/search', 'TaskController@showSearchListForm')->name("list.search");
-Route::get('list/gettask', 'TaskController@gettask')->name("task.get");
+Route::post('list/gettask', 'TaskController@gettask')->name("task.get");
 
 Route::get('/about', function () {
     return view('about');
