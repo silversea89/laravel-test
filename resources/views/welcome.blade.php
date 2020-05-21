@@ -18,9 +18,9 @@
                         </div>
                         <div class=" bd-highlight">
                             @guest
-                            <a href="{{ route('login') }}" class="btn btn-danger">開始體驗</a>
+                            <a href="{{ route('login') }}" class="golden-btn animate__animated animate__heartBeat infinite animate__repeat-2 animate__delay-1s">開始體驗</a>
                             @else
-                            <a href="{{ route('list') }}" class="btn btn-danger">開始體驗</a>
+                            <a href="{{ route('list') }}" class="golden-btn animate__animated animate__heartBeat infinite animate__repeat-2 animate__delay-1s">開始體驗</a>
                             @endguest
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-12 col-md-6 col-xl-7 p-0">
                     <!-- https://miro.medium.com/max/800/0*YoS7JWhSyxNlIfX-.png -->
-                    <img src="https://www.peoplemanagement.co.uk/Images/remote-working-graphic_tcm27-73183_w1228_n.jpg" class="img-fluid ">
+                    <img src="{{asset('img/home.png')}}" class="img-fluid ">
                 </div>
             </div>
         </div>
@@ -139,7 +139,7 @@
 
             <div class="col-12 col-md-6 order-12 order-md-0 p-0">
                 <!-- https://www.enisa.europa.eu/tips-for-cybersecurity-when-working-from-home/@@images/d707ed75-fa16-4add-9b38-054a4ac7dfcf.png -->
-                <img src="https://www.jobberman.com.gh/blog/wp-content/uploads/sites/9/2019/10/Project-Management-Tips-on-How-to-Motivate-Your-Remote-Team-1-1.png" class="img-fluid py-4">
+                <img src="{{asset('img/home1.png')}}" class="img-fluid py-4">
             </div>
             <div class="col-12 col-md-6 " style="display: flex; flex-direction: column;justify-content: center;text-align: center;">
 
@@ -218,7 +218,7 @@
             </div>
 
             <div class="col-12 col-md-6 col-xl-6 p-0">
-                <img src="https://www.enisa.europa.eu/tips-for-cybersecurity-when-working-from-home/@@@images/d707ed75-fa16-4add-9b38-054a4ac7dfcf.png" class="img-fluid ">
+                <img src="{{asset('img/home2.png')}}" class="img-fluid ">
             </div>
 
         </div>

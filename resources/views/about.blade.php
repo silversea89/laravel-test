@@ -14,7 +14,7 @@
 
         <div class="col-12 col-md-6 order-12 order-md-0 p-0">
             <!-- https://www.enisa.europa.eu/tips-for-cybersecurity-when-working-from-home/@@images/d707ed75-fa16-4add-9b38-054a4ac7dfcf.png -->
-            <img src="https://toolmanzihua.annie903318.repl.co/images/about1.jpg" class="img-fluid pt-4 pb-0">
+            <img src="{{asset('img/about1.png')}}" class="img-fluid pt-4 pb-0">
         </div>
         <div class="col-12 col-md-6 " style="display: flex; flex-direction: column;justify-content: center;text-align: left;">
 
@@ -37,7 +37,7 @@
         </div>
 
         <div class="col-12 col-md-6 col-xl-6 p-0">
-            <img src="https://toolmanzihua.annie903318.repl.co/images/about2.jpg" class="img-fluid ">
+            <img src="{{asset('img/about2.png')}}" class="img-fluid ">
         </div>
     </div>
 </div>

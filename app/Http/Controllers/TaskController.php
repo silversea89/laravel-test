@@ -126,6 +126,39 @@ class TaskController extends Controller
             "tasksWaiting"=>$tasksWaiting,
             "tasksComplete"=>$tasksComplete]);
     }
+    protected function showListING(Request $request)
+    {
+        $classifications = Classification::all();
+        $user = Auth::user();
+        $id=$user->student_id;
+        $tasksall=DB::table('tasks')
+            ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
+            ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
+            ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
+            ->where("tasks.toolman_id","=",$id)
+            ->select('tasks.*', 'host.name as hostname','toolman.name as toolmanname','status.StatusName')
+            ->get();
+        $tasksING=DB::table('tasks')
+            ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
+            ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
+            ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
+            ->where("tasks.toolman_id","=",$id)
+            ->where("tasks.Status","=","Processing")
+            ->select('tasks.*', 'host.name as hostname','toolman.name as toolmanname','status.StatusName')
+            ->get();
+        $tasksComplete=DB::table('tasks')
+            ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
+            ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
+            ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
+            ->where("tasks.toolman_id","=",$id)
+            ->where("tasks.Status","=","Complete")
+            ->select('tasks.*', 'host.name as hostname','toolman.name as toolmanname','status.StatusName')
+            ->get();
+        return view('list_ING')->with(["classifications" => $classifications,
+            "tasksall" => $tasksall,
+            "tasksING"=>$tasksING,
+            "tasksComplete"=>$tasksComplete]);
+    }
     protected function taskdetail(Request $request)
     {
         return view('list_id');

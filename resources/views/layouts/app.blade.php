@@ -64,7 +64,7 @@
                                 <a class="nav-link @if(Request::is('list_push'))active @endif" href="{{route('list.push')}}">已提出的委託</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @if(Request::is('list_ING'))active @endif" href="list_ING">執行中的委託</a>
+                                <a class="nav-link @if(Request::is('list_ING'))active @endif" href="{{route('list.ING')}}">已接受的委託</a>
                             </li>
 {{--                            <li class="nav-item">--}}
 {{--                                <a class="nav-link @if(Request::is('list'))active @endif" href="list_collect">已收藏的委託</a>--}}
