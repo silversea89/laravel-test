@@ -126,5 +126,8 @@ class TaskController extends Controller
             "tasksWaiting"=>$tasksWaiting,
             "tasksComplete"=>$tasksComplete]);
     }
-
+    protected function taskdetail(Request $request)
+    {
+        return view('list_id');
+    }
 }
