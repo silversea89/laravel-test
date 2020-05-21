@@ -14,7 +14,7 @@ class Tasks extends Model
     {
         $toolman_id = $user->student_id;
 
-        if ($this->toolman_id == null) {
+        if ($this->toolman_id == null && $this->student_id != $toolman_id) {
             $this->toolman_id = $toolman_id;
             $this->Status = "Processing";
             $this->save();

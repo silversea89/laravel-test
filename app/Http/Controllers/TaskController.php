@@ -18,6 +18,7 @@ class TaskController extends Controller
         return Redirect('/list');
     }
 
+    // TODO validator
     protected function create(array $data)
     {
         $date = $data['Date'];
@@ -39,12 +40,13 @@ class TaskController extends Controller
         ]);
     }
 
+//    TODO login required.
     protected function showListForm(Request $request)
     {
-
         $classifications = Classification::all();
         $tasks=DB::table('tasks')
             ->leftJoin('users', 'tasks.student_id', '=', 'users.student_id')
+            ->where('Status','=','Selectable')
             ->get();
         return view('list')->with(["classifications" => $classifications, "tasks" => $tasks]);
     }

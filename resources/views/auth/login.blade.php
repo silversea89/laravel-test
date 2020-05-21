@@ -36,8 +36,8 @@
                         <a href="{{ route('register') }}">註冊帳號</a>
                     </div>
                     <div class="float-right form-group">
-                        <a href="#">忘記密碼</a>
-                    </div>        
+                        <a href="{{ route('password.request') }}">忘記密碼</a>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block ">
                                     {{ __('登入') }}
                     </button>

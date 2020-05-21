@@ -58,17 +58,17 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" href="list">所有委託列表<span class="sr-only">(current)</span></a>
+                                <a class="nav-link @if(Request::is('list'))active @endif" href="list">所有委託列表<span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('list.push')}}">已提出的委託</a>
+                                <a class="nav-link @if(Request::is('list_push'))active @endif" href="{{route('list.push')}}">已提出的委託</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="list_ING">執行中的委託</a>
+                                <a class="nav-link @if(Request::is('list_ING'))active @endif" href="list_ING">執行中的委託</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="list_collect">已收藏的委託</a>
-                            </li>
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link @if(Request::is('list'))active @endif" href="list_collect">已收藏的委託</a>--}}
+{{--                            </li>--}}
                         </ul>
                 @endif
                     @guest

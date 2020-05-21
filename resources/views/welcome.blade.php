@@ -160,7 +160,7 @@
 
 
                     <div class="col-12 col-sm-12 col-md-6 py-4">
-                        <h1>乾爹</h1>
+                        <h1>雇主</h1>
                         <div class="row d-flex justify-content-center">
                             <h4 class="px-1">送出你的委託</h4>
                             <h4 class="px-1">享受你的服務</h4>
