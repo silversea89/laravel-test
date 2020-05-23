@@ -19,14 +19,13 @@ use App\task;
 */
 
 Route::get('/', 'WelcomeController@Welcome')->name("Welcome");
-
-Route::get('list', 'TaskController@showListForm')->name("list");
+Route::get('list', 'TaskController@showListForm')->name("list")->middleware('auth');
 Route::get('list_push', 'TaskController@showListpush')->name("list.push");
 Route::get('list_ING', 'TaskController@showListING')->name("list.ING");
 Route::get('list/search', 'TaskController@showSearchListForm')->name("list.search");
-Route::get('list_id', 'TaskController@taskdetail')->name("task.detail");
+Route::get('list_id/{tasks_id}', 'TaskController@taskdetail')->name("task.detail");
 Route::post('list/gettask', 'TaskController@gettask')->name("task.get");
-
+Route::post('list_id/{tasks_id}', 'TaskController@taskprogress')->name("taskprogress");
 Route::get('/about', function () {
     return view('about');
 })->name('about');

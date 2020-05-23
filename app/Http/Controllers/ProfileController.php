@@ -20,8 +20,7 @@ class ProfileController extends Controller
             ->where('student_id', '=', $id)
             ->get();
         $taskaddrecord=DB::table('tasks')
-            ->where('status','=','selectable')
-            ->where('student_id','=','$id')
+            ->where('student_id','=',$id)
             ->count();
         $taskcompleterecord=DB::table('tasks')
             ->where('status','=','complete')

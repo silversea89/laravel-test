@@ -104,11 +104,13 @@
                                 <p class="m-0">老闆:<a href="#">{{$i->name}}</a></p>
                                 <p class="m-0">發佈於:{{$i->created_at}}</p>
                                 <p class="m-0">截止期限：{{$i->DeadDateTime}}</p>
+                                @if($i->student_id!=$id)
                                 <form method="POST" action="{{ route('task.get') }}">
                                     @csrf
                                     <input type="hidden" name="tasks_id" value="{{$i->tasks_id}}">
                                     <button type="submit" class="btn btn-primary my-3">接受委託</button>
                                 </form>
+                                @endif
                             </div>
                         </div>
 
@@ -162,8 +164,8 @@
     </div>
 
     <p class="fas fa-plus-circle fa-4x m-0 "
-       style="background-color:white;position: fixed; bottom: 20px;right: 20px;border-radius:100%;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);"
-       type="button" data-toggle="modal" data-target=".add"></p>
+       style="background-color:white;position: fixed; bottom: 80px;right: 20px;border-radius:100%;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);"
+       data-toggle="modal" data-target=".add"></p>
     <div class="modal fade add" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content container">
@@ -286,6 +288,7 @@
             </div>
         </div>
     </div>
+    @endsection
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -297,4 +300,5 @@
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
     </body>
-@endsection
+
+

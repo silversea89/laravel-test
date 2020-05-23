@@ -26,11 +26,14 @@ class CreateTask extends Migration
             $table->string('BuyAddress');
             $table->string('MeetAddress');
             $table->integer('Pay');
-            $table->string('content')->nullable();
-            //Selectable,processing,complete,canceled
+            $table->string('content');
+            //Selectable,processing,complete
             $table->string('Status')->default("Selectable");
+            //go,back,arrive,complete
+            $table->string('Progress')->nullable();
             $table->timestamps();
         });
+
     }
 
     /**

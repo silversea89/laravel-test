@@ -19,7 +19,7 @@
 
     <!-- Styles -->
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 
@@ -36,7 +36,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                @if(\Request::is('/')||\Request::is('about')||\Request::is('contact'))
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="nav-item">
@@ -52,25 +51,7 @@
                                 <a class="nav-link" href="{{ route('contact') }}">聯絡我們</a>
                             </li>
                         </ul>
-                @elseif(\Request::is('login')||\Request::is('register'))
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown"></div>
-                @else
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link @if(Request::is('list'))active @endif" href="list">所有委託列表<span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link @if(Request::is('list_push'))active @endif" href="{{route('list.push')}}">已提出的委託</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link @if(Request::is('list_ING'))active @endif" href="{{route('list.ING')}}">已接受的委託</a>
-                            </li>
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link @if(Request::is('list'))active @endif" href="list_collect">已收藏的委託</a>--}}
-{{--                            </li>--}}
-                        </ul>
-                @endif
+
                     @guest
                     <div class="form-inline my-2 my-lg-0">
                         <a class="btn btn-outline-success my-2 my-sm-0 mr-2" href="{{ route('register') }}">{{ __('註冊') }}</a>
@@ -111,6 +92,45 @@
         </nav>
     </div>
     @yield('content')
-</body>
 
+</body>
+@if(\Request::is('/')||\Request::is('about')||\Request::is('contact')||\Request::is('login')||\Request::is('register'))
+
+@else
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-0" style="width:100%;position: fixed; bottom: 0px;right: 0px;">
+        <div class="container bg-dark">
+
+            <div class="row ml-0" style="width:100%">
+
+                <a class="col-3 col-sm-3" href="{{route('list')}}" style="text-decoration:none;color:black">
+                    <center>
+                        <i class="fas fa-clipboard-list" style="color:white"></i>
+                        <p class="m-0" style="color:white">所有</p>
+                    </center>
+                </a>
+
+                <a class="col-3 col-sm-3" href="{{route('list.push')}}" style="text-decoration:none;color:black">
+                    <center>
+                        <i class="fas fa-arrow-up" style="color:white"></i>
+                        <p class="m-0" style="color:white">已提出</p>
+                    </center>
+                </a>
+
+                <a class="col-3 col-sm-3" href="{{route('list.ING')}}" style="text-decoration:none;color:black">
+                    <center>
+                        <i class="fas fa-arrow-down" style="color:white"></i>
+                        <p class="m-0" style="color:white">已接受</p>
+                    </center>
+                </a>
+
+                <a class="col-3 col-sm-3" href="{{route('profile')}}" style="text-decoration:none;color:black">
+                    <center>
+                        <i class="fas fa-user" style="color:white"></i>
+                        <p class="m-0" style="color:white">我的</p>
+                    </center>
+                </a>
+            </div>
+        </div>
+    </nav>
+@endif
 </html>

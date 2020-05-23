@@ -28,10 +28,6 @@ class Classification extends Migration
                 "ClassValue" => "Stationery",
                 "ClassName" => "文具用品"
             ],
-            [
-                "ClassValue" => "Stationery",
-                "ClassName" => "文具用品"
-            ],
         ]);
     }
 

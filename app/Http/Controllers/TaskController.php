@@ -44,15 +44,19 @@ class TaskController extends Controller
     protected function showListForm(Request $request)
     {
         $classifications = Classification::all();
+        $user = Auth::user();
+        $id=$user->student_id;
         $tasks=DB::table('tasks')
             ->leftJoin('users', 'tasks.student_id', '=', 'users.student_id')
             ->where('Status','=','Selectable')
             ->get();
-        return view('list')->with(["classifications" => $classifications, "tasks" => $tasks]);
+        return view('list')->with(["classifications" => $classifications, "tasks" => $tasks,"id"=>$id]);
     }
 
     protected function showSearchListForm(Request $request)
     {
+        $user = Auth::user();
+        $id=$user->student_id;
         $classifications = Classification::all();
         $classification_target = Classification::where('ClassValue', $request->input('Classification'))->first();
 
@@ -70,7 +74,7 @@ class TaskController extends Controller
             ->orderBy($sort_by,'desc')
             ->select('tasks.*', 'users.name')
             ->get();
-        return view('list')->with(["classifications" => $classifications, "tasks" => $tasks]);
+        return view('list')->with(["classifications" => $classifications, "tasks" => $tasks,"id"=>$id]);
     }
     protected function gettask(Request $request)
     {
@@ -159,8 +163,44 @@ class TaskController extends Controller
             "tasksING"=>$tasksING,
             "tasksComplete"=>$tasksComplete]);
     }
-    protected function taskdetail(Request $request)
+    protected function taskdetail(Request $request, $tasks_id)
     {
-        return view('list_id');
+        $user = Auth::user();
+        $id=$user->student_id;
+        $tasks=DB::table('tasks')
+            ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
+            ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
+            ->where('tasks_id','=',$tasks_id)
+            ->select('tasks.*', 'host.name as hostname','toolman.name as toolmanname')
+            ->first();
+        return view('list_id')->with(["tasks" => $tasks,"id"=>$id]);
+    }
+    protected function taskprogress(Request $request, $tasks_id){
+        $progress_get = $request->Progress;
+        if($progress_get==null)
+            $progress_change = DB::table('tasks')
+                ->where('tasks_id','=',$tasks_id)
+                ->update(['Progress'=>'go']);
+        elseif($progress_get=="go")
+            $progress_change = DB::table('tasks')
+                ->where('tasks_id','=',$tasks_id)
+                ->update(['Progress'=>'back']);
+        elseif($progress_get=="back")
+            $progress_change = DB::table('tasks')
+                ->where('tasks_id','=',$tasks_id)
+                ->update(['Progress'=>'arrive']);
+        elseif($progress_get=="arrive")
+            $progress_change = DB::table('tasks')
+                ->where('tasks_id','=',$tasks_id)
+                ->update(['Progress'=>'complete']);
+        $user = Auth::user();
+        $id=$user->student_id;
+        $tasks=DB::table('tasks')
+            ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
+            ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
+            ->where('tasks_id','=',$tasks_id)
+            ->select('tasks.*', 'host.name as hostname','toolman.name as toolmanname')
+            ->first();
+        return view('list_id')->with(["tasks" => $tasks,"id"=>$id]);
     }
 }
