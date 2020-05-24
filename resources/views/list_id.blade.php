@@ -26,7 +26,11 @@
                     <div class="form-group">
                         <textarea class="form-control" id="" rows="5" placeholder="給個評論吧..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary my-0 mb-3">確認送出</button>
+                    <form method="post" action="{{ route('task.complete', $tasks->tasks_id) }}">
+                        @csrf
+                        <input type="hidden" name="tasks_id" value="{{$tasks->tasks_id}}">
+                        <button type="submit" class="btn btn-primary my-0 mb-3">確認送出</button>
+                    </form>
                 </center>
             </form>
 
@@ -44,14 +48,14 @@
             <div class="row  my-3">
                 <div class="col-1 col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
                 <center class="col col-sm-1 p-0">
-                    <h1 class="fas fa-circle m-0 text-success" ></h1>
+                    <h1 class="far fa-circle m-0 text-secondary" ></h1>
                     <h6>去程</h6>
                 </center>
                 <center class="col p-0">
-                    <h1 class="fas fa-arrow-right m-0 text-success"></h1>
+                    <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
                 </center>
                 <center class="col col-sm-1 p-0">
-                    <h1 class="fas fa-circle m-0 text-success"></h1>
+                    <h1 class="far fa-circle m-0 text-secondary"></h1>
                     <h6>回程</h6>
                 </center>
                 <center class="col p-0">
@@ -80,64 +84,59 @@
             @if($id==$tasks->toolman_id)
                 <div class="btn-group" style="position:absolute;top:0px;right:0px">
                     @if($tasks->Progress==null)
-                        <form method="POST" action="{{ route('taskprogress', $tasks->tasks_id) }}">
-                            @csrf
-                            <input type="hidden" name="Progress" value="{{$tasks->Progress}}">
-                            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target=".statusReport">
+                        <input type="hidden" name="Progress" value="{{$tasks->Progress}}">
+                        <button type="button" class="btn btn-primary"  data-toggle="modal" data-target=".statusReport">
                             開始執行
                         </button>
-                        </form>
                     @else
-                        <form method="POST" action="{{ route('taskprogress', $tasks->tasks_id) }}">
-                            @csrf
-                            <input type="hidden" name="Progress" value="{{$tasks->Progress}}">
-                            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target=".statusReport">
+                        <input type="hidden" name="Progress" value="{{$tasks->Progress}}">
+                        <button type="button" class="btn btn-primary"  data-toggle="modal" data-target=".statusReport">
                             下一階段
                         </button>
-                        </form>
                     @endif
-                <div class="dropdown-menu dropdown-menu-right">
-                    <form>
-                        <input type="text" name="status" value="go" style="display:none" />
-                        <button type="submit" class="dropdown-item">去程</button>
-                    </form>
-                    <div class="dropdown-divider"></div>
-                    <form>
-                        <input type="text" name="status" value="back" style="display:none" />
-                        <button type="submit" class="dropdown-item">回程</button>
-                    </form>
-                    <div class="dropdown-divider"></div>
-                    <form>
-                        <input type="text" name="status" value="wait" style="display:none" />
-                        <button type="submit" class="dropdown-item">抵達</button>
-                    </form>
-                </div>
+
             </div>
                 <div class="row  my-3">
                     <div class="col-1 col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
                     <center class="col col-sm-1 p-0">
+                        @if($tasks->Progress==null)
                         <h1 class="far fa-circle m-0 text-secondary"></h1>
+                        @else
+                        <h1 class="fas fa-circle m-0 text-success"></h1>
+                        @endif
                         <h6>去程</h6>
                     </center>
                     <center class="col p-0">
                         <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
                     </center>
                     <center class="col col-sm-1 p-0">
-                        <h1 class="far fa-circle m-0 text-secondary"></h1>
+                        @if($tasks->Progress==null||$tasks->Progress=="go")
+                            <h1 class="far fa-circle m-0 text-secondary"></h1>
+                        @else
+                            <h1 class="fas fa-circle m-0 text-success"></h1>
+                        @endif
                         <h6>回程</h6>
                     </center>
                     <center class="col p-0">
                         <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
                     </center>
                     <center class="col col-sm-1 p-0">
-                        <h1 class="far fa-circle m-0 text-secondary"></h1>
+                        @if($tasks->Progress==null||$tasks->Progress=="go"||$tasks->Progress=="back")
+                            <h1 class="far fa-circle m-0 text-secondary"></h1>
+                        @else
+                            <h1 class="fas fa-circle m-0 text-success"></h1>
+                        @endif
                         <h6>抵達</h6>
                     </center>
                     <center class="col p-0">
                         <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
                     </center>
                     <center class="col col-sm-1 p-0">
-                        <h1 class="far fa-circle m-0 text-secondary"></h1>
+                        @if($tasks->Progress!="complete")
+                            <h1 class="far fa-circle m-0 text-secondary"></h1>
+                        @else
+                            <h1 class="fas fa-circle m-0 text-success"></h1>
+                        @endif
                         <h6>結案</h6>
                     </center>
                     <div class="col-1 col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
@@ -186,7 +185,7 @@
             <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 pr-0 pl-0">
                 <img src="{{asset('img/food.jpg')}}" class="img-fluid pr-0" >
             </div>
-            <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-3 pt-md-0 px-3 pl-md-5">
+            <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-3 pt-md-0 pl-5 pr-3 pl-md-5">
             <h3>{{$tasks->Title}}</h3>
             <span class="badge badge-primary">代購物品</span>
             <h5>委託內容：<p>{{$tasks->content}}</p></h5>
@@ -196,7 +195,9 @@
             <h5>酬勞金額：<p>{{$tasks->Pay}}$</p></h5>
             <p class="m-0">老闆:<a href="#">{{$tasks->hostname}}</a></p>
             <p class="m-0">發佈於:{{$tasks->created_at}}</p>
-            <p class="m-0">截止期限：{{$tasks->DeadDateTime}}</p>
+                @if($tasks->toolman_id==null)
+            <p class="m-0">接單截止期限：{{$tasks->DeadDateTime}}</p>
+                @endif
 
             @if($tasks->toolman_id==null||$tasks->Progress!="complete")
 
@@ -213,21 +214,24 @@
         <div class="modal-content container">
             <form>
                 <center class="my-3">
-
                     <h1 class="fas fa-exclamation-triangle" style="color:orange"></h1>
-
-                    <h3>是否進入下一個流程？</h3>
+                    @if($tasks->Progress==null)
+                        <h3>是否要開始執行委託？</h3>
+                    @else
+                        <h3>是否進入下一個流程？</h3>
+                    @endif
                     <div class="row">
-
                         <div class="col-6 pl-3 pr-2">
-                            <button type="submit" class="btn btn-block btn-success">是</button>
+                            <form method="post" action="{{ route('taskprogress', $tasks->tasks_id) }}">
+                                @csrf
+                                <input type="hidden" name="Progress" value="{{$tasks->Progress}}">
+                                <button type="submit" class="btn btn-block btn-success">是</button>
+                            </form>
                         </div>
                         <div class="col-6 pl-2 pr-3">
                             <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target=".statusReport">否</button>
                         </div>
-
                     </div>
-
                 </center>
             </form>
 
