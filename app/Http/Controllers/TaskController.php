@@ -184,7 +184,7 @@ class TaskController extends Controller
     {
         $user = Auth::user();
         $id = $user->student_id;
-        $progress_get = $request->Progress;
+        $progress_get = $request->input(Progress);
         if ($progress_get == null) {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "go";
@@ -223,6 +223,7 @@ class TaskController extends Controller
             return view('list_push');
         }
         elseif($tasks->toolman_id==$id){
+
             return view('list_get');
         }
     }

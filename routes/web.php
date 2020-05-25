@@ -26,7 +26,7 @@ Route::get('list/search', 'TaskController@showSearchListForm')->name("list.searc
 Route::get('list_id/{tasks_id}', 'TaskController@taskdetail')->name("task.detail");
 Route::post('list/gettask', 'TaskController@gettask')->name("task.get");
 Route::post('list/taskcomplete', 'TaskController@taskcomplete')->name("task.complete");
-Route::post('list_id/{tasks_id}', 'TaskController@taskprogress')->name("taskprogress");
+Route::post('list_id/{re_tasks_id}', 'TaskController@taskprogress')->name("taskprogress");
 Route::get('/about', function () {
     return view('about');
 })->name('about');

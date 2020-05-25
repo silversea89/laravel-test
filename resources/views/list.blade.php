@@ -103,7 +103,7 @@
                                 </h5>
                                 <p class="m-0">老闆:<a href="#">{{$i->name}}</a></p>
                                 <p class="m-0">發佈於:{{$i->created_at}}</p>
-                                <p class="m-0">截止期限：{{$i->DeadDateTime}}</p>
+                                <p class="m-0">接單截止期限：{{$i->DeadDateTime}}</p>
                                 @if($i->student_id!=$id)
                                 <form method="POST" action="{{ route('task.get') }}">
                                     @csrf
@@ -201,7 +201,7 @@
                         <div class="row">
 
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
-                                <label class="m-0">日期</label>
+                                <label class="m-0">面交日期</label>
                                 <input id="datepicker" readonly="true" width="100%" type="text" name="Date" required/>
                                 <script>
                                     $('#datepicker').datepicker({
@@ -213,7 +213,7 @@
                             </div>
 
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
-                                <label class="m-0">時間</label>
+                                <label class="m-0">面交時間</label>
                                 <input id="timepicker" readonly="true" width="100%" type="text" name="Time" required/>
                                 <script>
                                     $('#timepicker').timepicker({
