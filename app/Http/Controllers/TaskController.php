@@ -219,26 +219,32 @@ class TaskController extends Controller
 
     protected function taskcomplete(Request $request, $tasks_id){
         $user = Auth::user();
-        $id = $user->student_id;
-        $tasks = DB::table('tasks')->where('tasks_id', '=', $tasks_id)->first();
+        $id=$user->student_id;
+        $this->evaluation_add(array_merge($request->all(), ['self_id' => $id],['tasks_id'=>$tasks_id]));
+        $tasks = DB::table('tasks')
+            ->where('tasks_id', '=', $tasks_id)
+            ->first();
         if($tasks->student_id==$id){
-            evaluation::create([
-                'Classification' => $data['Classification'],
-                'student_id' => $data['student_id'],
-                'Title' => $data['Title'],
-                'DateTime' => $combinedDT,
-                'DeadDateTime' => $combinedDDT,
-                'BuyAddress' => $data['BuyAddress'],
-                'MeetAddress' => $data['MeetAddress'],
-                'Pay' => $data['Pay'],
-                'content' => $data['Content'],
-            ]);
             return view('list_push');
         }
         elseif($tasks->toolman_id==$id){
             return view('list_get');
         }
     }
+    protected function evaluation_add(array $data){
 
+        $tasks = DB::table('tasks')
+            ->where('tasks_id', '=', $data['tasks_id'])
+            ->first();
+        evaluation::create([
+            'tasks_id' => $data['tasks_id'],
+            'host_id' => $tasks->student_id,
+            'toolman_id' => $tasks->toolman_id,
+            'toolman_evaluation' => $data['toolman_rate'],
+            'host_evaluation' => $data['host_rate'],
+            'toolman_comment' => $data['toolman_comment'],
+            'host_comment' => $data['host_comment'],
+        ]);
+    }
 
 }

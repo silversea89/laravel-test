@@ -13,21 +13,21 @@
                 <center>
                     <form method="post" action="{{ route('task.complete', $tasks->tasks_id) }}">
                         @csrf
-                    <div class="rate pl-0 mt-1">
-                        <input type="radio" id="star5" name="rate" value="5" />
-                        <label class="mr-2" for="star5" title="text"><i  class="fas fa-star" ></i></label>
-                        <input type="radio" id="star4" name="rate" value="4" />
-                        <label class="mr-2" for="star4" title="text"><i  class="fas fa-star" ></i></label>
-                        <input type="radio" id="star3" name="rate" value="3" checked="true"/>
-                        <label class="mr-2" for="star3" title="text"><i  class="fas fa-star" ></i></label>
-                        <input type="radio" id="star2" name="rate" value="2" />
-                        <label class="mr-2" for="star2" title="text"><i  class="fas fa-star" ></i></label>
-                        <input type="radio" id="star1" name="rate" value="1" />
-                        <label class="mr-2" for="star1" title="text"><i  class="fas fa-star" ></i></label>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="comment" class="form-control" id="" rows="5" placeholder="給個評論吧..."></textarea>
-                    </div>
+                        <div class="rate pl-0 mt-1">
+                            <input type="radio" id="star5" @if($id==$tasks->student_id) name="toolman_rate" @elseif($id==$tasks->toolman_id) @endif name="host_rate" value="5" />
+                            <label class="mr-2" for="star5" title="text"><i  class="fas fa-star" ></i></label>
+                            <input type="radio" id="star4" @if($id==$tasks->student_id) name="toolman_rate" @elseif($id==$tasks->toolman_id) @endif name="host_rate" value="4" />
+                            <label class="mr-2" for="star4" title="text"><i  class="fas fa-star" ></i></label>
+                            <input type="radio" id="star3" @if($id==$tasks->student_id) name="toolman_rate" @elseif($id==$tasks->toolman_id) @endif name="host_rate" value="3" />
+                            <label class="mr-2" for="star3" title="text"><i  class="fas fa-star" ></i></label>
+                            <input type="radio" id="star2" @if($id==$tasks->student_id) name="toolman_rate" @elseif($id==$tasks->toolman_id) @endif name="host_rate" value="2" />
+                            <label class="mr-2" for="star2" title="text"><i  class="fas fa-star" ></i></label>
+                            <input type="radio" id="star1" @if($id==$tasks->student_id) name="toolman_rate" @elseif($id==$tasks->toolman_id) @endif name="host_rate" value="1" />
+                            <label class="mr-2" for="star1" title="text"><i  class="fas fa-star" ></i></label>
+                        </div>
+                        <div class="form-group">
+                            <textarea @if($id==$tasks->student_id) name="toolman_comment" @elseif($id==$tasks->toolman_id) name="host_comment"@endif class="form-control" id="" rows="5" placeholder="給個評論吧..."></textarea>
+                        </div>
                         <button type="submit" class="btn btn-primary my-0 mb-3">確認送出</button>
                     </form>
                 </center>
@@ -85,6 +85,8 @@
                         <button type="button" class="btn btn-primary"  data-toggle="modal" data-target=".statusReport">
                             開始執行
                         </button>
+                    @elseif($tasks->Progress=="complete")
+
                     @else
                         <input type="hidden" name="Progress" value="{{$tasks->Progress}}">
                         <button type="button" class="btn btn-primary"  data-toggle="modal" data-target=".statusReport">
