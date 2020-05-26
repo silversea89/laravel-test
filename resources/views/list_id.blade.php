@@ -9,10 +9,9 @@
 <div class="modal fade content0" tabindex="-1" role="dialog" aria-hidden="true" >
     <div class="modal-dialog modal-md" style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
         <div class="modal-content container">
-            <form action="">
+            <form form method="post" action="{{ route('task.complete', $tasks->tasks_id) }}">
+                @csrf
                 <center>
-                    <form method="post" action="{{ route('task.complete', $tasks->tasks_id) }}">
-                        @csrf
                         <div class="rate pl-0 mt-1">
                             <input type="radio" id="star5" @if($id==$tasks->student_id) name="toolman_rate" @elseif($id==$tasks->toolman_id) @endif name="host_rate" value="5" />
                             <label class="mr-2" for="star5" title="text"><i  class="fas fa-star" ></i></label>
@@ -29,7 +28,6 @@
                             <textarea @if($id==$tasks->student_id) name="toolman_comment" @elseif($id==$tasks->toolman_id) name="host_comment"@endif class="form-control" id="" rows="5" placeholder="給個評論吧..."></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary my-0 mb-3">確認送出</button>
-                    </form>
                 </center>
             </form>
         </div>
@@ -285,6 +283,7 @@
                     <button type="button" class="btn btn-primary mt-2 mb-3"  data-toggle="modal" data-target=".content0">委託完成</button>
                 </div>
             @endif
+            </div>
         </div>
     </div>
 </div>
