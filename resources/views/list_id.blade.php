@@ -9,8 +9,10 @@
 <div class="modal fade content0" tabindex="-1" role="dialog" aria-hidden="true" >
     <div class="modal-dialog modal-md" style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
         <div class="modal-content container">
-            <form>
+            <form action="">
                 <center>
+                    <form method="post" action="{{ route('task.complete', $tasks->tasks_id) }}">
+                        @csrf
                     <div class="rate pl-0 mt-1">
                         <input type="radio" id="star5" name="rate" value="5" />
                         <label class="mr-2" for="star5" title="text"><i  class="fas fa-star" ></i></label>
@@ -24,11 +26,8 @@
                         <label class="mr-2" for="star1" title="text"><i  class="fas fa-star" ></i></label>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" id="" rows="5" placeholder="給個評論吧..."></textarea>
+                        <textarea name="comment" class="form-control" id="" rows="5" placeholder="給個評論吧..."></textarea>
                     </div>
-                    <form method="post" action="{{ route('task.complete', $tasks->tasks_id) }}">
-                        @csrf
-                        <input type="hidden" name="tasks_id" value="{{$tasks->tasks_id}}">
                         <button type="submit" class="btn btn-primary my-0 mb-3">確認送出</button>
                     </form>
                 </center>
@@ -38,7 +37,7 @@
 </div>
 
 <div class="container pt-3 pb-0 " style="background-color:white;">
-    <h1>進度:{{$tasks->Progress}}</h1>
+
     <div class="" style="position:relative;">
         <h3>委託編號：{{$tasks->tasks_id}}</h3>
         @if($tasks->toolman_id==null)
@@ -96,47 +95,76 @@
             </div>
                 <div class="row  my-3">
                     <div class="col-1 col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
-                    <center class="col col-sm-1 p-0">
-                        @if($tasks->Progress==null)
+                    @if($tasks->Progress==null)
+                        <center class="col col-sm-1 p-0">
                         <h1 class="far fa-circle m-0 text-secondary"></h1>
-                        @else
+                            <h6>去程</h6>
+                        </center>
+                        <center class="col p-0">
+                            <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
+                        </center>
+                    @else
+                        <center class="col col-sm-1 p-0">
                         <h1 class="fas fa-circle m-0 text-success"></h1>
-                        @endif
-                        <h6>去程</h6>
-                    </center>
-                    <center class="col p-0">
-                        <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
-                    </center>
-                    <center class="col col-sm-1 p-0">
-                        @if($tasks->Progress==null||$tasks->Progress=="go")
+                            <h6>去程</h6>
+                        </center>
+                        <center class="col p-0">
+                            <h1 class="fas fa-arrow-right m-0 text-success"></h1>
+                        </center>
+                    @endif
+
+
+                    @if($tasks->Progress==null||$tasks->Progress=="go")
+                        <center class="col col-sm-1 p-0">
                             <h1 class="far fa-circle m-0 text-secondary"></h1>
-                        @else
+                            <h6>回程</h6>
+                        </center>
+                        <center class="col p-0">
+                            <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
+                        </center>
+                    @else
+                        <center class="col col-sm-1 p-0">
                             <h1 class="fas fa-circle m-0 text-success"></h1>
-                        @endif
-                        <h6>回程</h6>
-                    </center>
-                    <center class="col p-0">
-                        <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
-                    </center>
-                    <center class="col col-sm-1 p-0">
-                        @if($tasks->Progress==null||$tasks->Progress=="go"||$tasks->Progress=="back")
+                            <h6>回程</h6>
+                        </center>
+                        <center class="col p-0">
+                            <h1 class="fas fa-arrow-right m-0 text-success"></h1>
+                        </center>
+                    @endif
+
+
+
+                    @if($tasks->Progress==null||$tasks->Progress=="go"||$tasks->Progress=="back")
+                        <center class="col col-sm-1 p-0">
                             <h1 class="far fa-circle m-0 text-secondary"></h1>
-                        @else
+                            <h6>抵達</h6>
+                        </center>
+                        <center class="col p-0">
+                            <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
+                        </center>
+                    @else
+                        <center class="col col-sm-1 p-0">
                             <h1 class="fas fa-circle m-0 text-success"></h1>
-                        @endif
-                        <h6>抵達</h6>
-                    </center>
-                    <center class="col p-0">
-                        <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
-                    </center>
-                    <center class="col col-sm-1 p-0">
+                            <h6>抵達</h6>
+                        </center>
+                        <center class="col p-0">
+                            <h1 class="fas fa-arrow-right m-0 text-success"></h1>
+                        </center>
+                    @endif
+
+
                         @if($tasks->Progress!="complete")
+                        <center class="col col-sm-1 p-0">
                             <h1 class="far fa-circle m-0 text-secondary"></h1>
-                        @else
+                            <h6>結案</h6>
+                        </center>
+                    @else
+                        <center class="col col-sm-1 p-0">
                             <h1 class="fas fa-circle m-0 text-success"></h1>
-                        @endif
-                        <h6>結案</h6>
-                    </center>
+                            <h6>結案</h6>
+                        </center>
+                    @endif
+
                     <div class="col-1 col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
                     <!--
                       background-color:blue
@@ -147,24 +175,75 @@
             @elseif($id==$tasks->student_id)
                 <div class="row  my-3">
                     <div class="col-1 col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
-                    <center class="col-2 col-sm-1 p-0">
-                        <h1 class="far fa-circle m-0"></h1>
-                        <h6>去程</h6>
-                    </center>
-                    <center class="col p-0">
-                        <h1 class="fas fa-arrow-right m-0"></h1>
-                    </center>
-                    <center class="col-2 col-sm-1 p-0">
-                        <h1 class="far fa-circle m-0"></h1>
-                        <h6>回程</h6>
-                    </center>
-                    <center class="col p-0">
-                        <h1 class="fas fa-arrow-right m-0"></h1>
-                    </center>
-                    <center class="col-2 col-sm-1 p-0">
-                        <h1 class="far fa-circle m-0"></h1>
-                        <h6>抵達</h6>
-                    </center>
+                    @if($tasks->Progress==null)
+                        <center class="col col-sm-1 p-0">
+                            <h1 class="far fa-circle m-0 text-secondary"></h1>
+                            <h6>去程</h6>
+                        </center>
+                        <center class="col p-0">
+                            <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
+                        </center>
+                    @else
+                        <center class="col col-sm-1 p-0">
+                            <h1 class="fas fa-circle m-0 text-success"></h1>
+                            <h6>去程</h6>
+                        </center>
+                        <center class="col p-0">
+                            <h1 class="fas fa-arrow-right m-0 text-success"></h1>
+                        </center>
+                    @endif
+
+
+                    @if($tasks->Progress==null||$tasks->Progress=="go")
+                        <center class="col col-sm-1 p-0">
+                            <h1 class="far fa-circle m-0 text-secondary"></h1>
+                            <h6>回程</h6>
+                        </center>
+                        <center class="col p-0">
+                            <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
+                        </center>
+                    @else
+                        <center class="col col-sm-1 p-0">
+                            <h1 class="fas fa-circle m-0 text-success"></h1>
+                            <h6>回程</h6>
+                        </center>
+                        <center class="col p-0">
+                            <h1 class="fas fa-arrow-right m-0 text-success"></h1>
+                        </center>
+                    @endif
+
+                    @if($tasks->Progress==null||$tasks->Progress=="go"||$tasks->Progress=="back")
+                        <center class="col col-sm-1 p-0">
+                            <h1 class="far fa-circle m-0 text-secondary"></h1>
+                            <h6>抵達</h6>
+                        </center>
+                        <center class="col p-0">
+                            <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
+                        </center>
+                    @else
+                        <center class="col col-sm-1 p-0">
+                            <h1 class="fas fa-circle m-0 text-success"></h1>
+                            <h6>抵達</h6>
+                        </center>
+                        <center class="col p-0">
+                            <h1 class="fas fa-arrow-right m-0 text-success"></h1>
+
+                        </center>
+                    @endif
+
+
+                    @if($tasks->Progress!="complete")
+                        <center class="col col-sm-1 p-0">
+                            <h1 class="far fa-circle m-0 text-secondary"></h1>
+                            <h6>結案</h6>
+                        </center>
+                    @else
+                        <center class="col col-sm-1 p-0">
+                            <h1 class="fas fa-circle m-0 text-success"></h1>
+                            <h6>結案</h6>
+                        </center>
+                    @endif
+
                     <div class="col-1 col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
                     <!--
                       background-color:blue
@@ -210,7 +289,8 @@
 <div class="modal fade statusReport" tabindex="-1" role="dialog" aria-hidden="true" >
     <div class="modal-dialog modal-md" style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
         <div class="modal-content container">
-            <form>
+            <form method="post" action="{{ route('taskprogress', $tasks->tasks_id) }}">
+                @csrf
                 <center class="my-3">
                     <h1 class="fas fa-exclamation-triangle" style="color:orange"></h1>
                     @if($tasks->Progress==null)
@@ -220,11 +300,8 @@
                     @endif
                     <div class="row">
                         <div class="col-6 pl-3 pr-2">
-                            <form method="post" action="{{ route('taskprogress', $tasks->tasks_id) }}">
-                                @csrf
                                 <input type="hidden" name="Progress" value="{{$tasks->Progress}}">
                                 <button type="submit" class="btn btn-block btn-success">是</button>
-                            </form>
                         </div>
                         <div class="col-6 pl-2 pr-3">
                             <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target=".statusReport">否</button>

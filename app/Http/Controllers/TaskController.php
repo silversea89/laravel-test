@@ -95,6 +95,7 @@ class TaskController extends Controller
         $classifications = Classification::all();
         $user = Auth::user();
         $id = $user->student_id;
+
         $tasksall = DB::table('tasks')
             ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
             ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
@@ -102,6 +103,7 @@ class TaskController extends Controller
             ->where("tasks.student_id", "=", $id)
             ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
+
         $tasksING = DB::table('tasks')
             ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
             ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
@@ -110,6 +112,7 @@ class TaskController extends Controller
             ->where("tasks.Status", "=", "Processing")
             ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
+
         $tasksWaiting = DB::table('tasks')
             ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
             ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
@@ -118,6 +121,7 @@ class TaskController extends Controller
             ->where("tasks.Status", "=", "Selectable")
             ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
+
         $tasksComplete = DB::table('tasks')
             ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
             ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
@@ -126,6 +130,7 @@ class TaskController extends Controller
             ->where("tasks.Status", "=", "Complete")
             ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
+
         return view('list_push')->with(["classifications" => $classifications,
             "tasksall" => $tasksall,
             "tasksING" => $tasksING,
@@ -184,7 +189,7 @@ class TaskController extends Controller
     {
         $user = Auth::user();
         $id = $user->student_id;
-        $progress_get = $request->input(Progress);
+        $progress_get = $request->input("Progress");
         if ($progress_get == null) {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "go";
@@ -200,6 +205,7 @@ class TaskController extends Controller
         } elseif ($progress_get == "arrive") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "complete";
+            $progress_change->Status = "Complete";
             $progress_change->save();
         }
         $tasks = DB::table('tasks')
@@ -215,16 +221,24 @@ class TaskController extends Controller
         $user = Auth::user();
         $id = $user->student_id;
         $tasks = DB::table('tasks')->where('tasks_id', '=', $tasks_id)->first();
-        $progress_change = Tasks::find($tasks_id);
-        $progress_change->Progress = "complete";
-        $progress_change->Status = "Complete";
-        $progress_change->save();
         if($tasks->student_id==$id){
+            evaluation::create([
+                'Classification' => $data['Classification'],
+                'student_id' => $data['student_id'],
+                'Title' => $data['Title'],
+                'DateTime' => $combinedDT,
+                'DeadDateTime' => $combinedDDT,
+                'BuyAddress' => $data['BuyAddress'],
+                'MeetAddress' => $data['MeetAddress'],
+                'Pay' => $data['Pay'],
+                'content' => $data['Content'],
+            ]);
             return view('list_push');
         }
         elseif($tasks->toolman_id==$id){
-
             return view('list_get');
         }
     }
+
+
 }
