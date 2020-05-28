@@ -9,8 +9,9 @@
 <div class="modal fade content0" tabindex="-1" role="dialog" aria-hidden="true" >
     <div class="modal-dialog modal-md" style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
         <div class="modal-content container">
-            <form form method="post" action="{{ route('task.complete', $tasks->tasks_id) }}">
+            <form method="post" action="{{ route('task.complete') }}">
                 @csrf
+                <input type="hidden" name="tasks_id" value={{$tasks->tasks_id}}>
                 <center>
                         <div class="rate pl-0 mt-1">
                             <input type="radio" id="star5" @if($id==$tasks->student_id) name="toolman_rate" @elseif($id==$tasks->toolman_id) @endif name="host_rate" value="5" />

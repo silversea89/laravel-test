@@ -9,7 +9,9 @@ class Tasks extends Model
     protected $fillable = [
         'Classification','student_id','Title', 'toolman_id','Status','DateTime','DeadDateTime','BuyAddress', 'MeetAddress', 'Pay', 'content',"Progress"
     ];
+
     protected $primaryKey = "tasks_id";
+
     public function get_by_toolman(User $user)
     {
         $toolman_id = $user->student_id;
