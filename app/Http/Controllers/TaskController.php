@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Evaluation;
 use App\Status;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
@@ -219,48 +217,34 @@ class TaskController extends Controller
         return view('list_id')->with(["tasks" => $tasks, "id" => $id]);
     }
 
-    protected function taskcomplete(Request $request)
-    {
+    protected function taskcomplete(Request $request, $tasks_id){
         $user = Auth::user();
-        $id = $user->student_id;
-
-        $this->evaluation_add(array_merge($request->all(), ['self_id' => $id]));
+        $id=$user->student_id;
+        $this->evaluation_add(array_merge($request->all(), ['self_id' => $id],['tasks_id'=>$tasks_id]));
         $tasks = DB::table('tasks')
-            ->where('tasks_id', '=', $request->input("tasks_id"))
+            ->where('tasks_id', '=', $tasks_id)
             ->first();
-        if ($tasks->student_id == $id) {
-            return redirect('list_push');
-        } elseif ($tasks->toolman_id == $id) {
-            return redirect('list_ING');
+        if($tasks->student_id==$id){
+            return view('list_push');
+        }
+        elseif($tasks->toolman_id==$id){
+            return view('list_get');
         }
     }
-
-    protected function evaluation_add(array $data)
-    {
+    protected function evaluation_add(array $data){
 
         $tasks = DB::table('tasks')
             ->where('tasks_id', '=', $data['tasks_id'])
             ->first();
-        $user = Auth::user();
-        $id = $user->student_id;
-
-        if ($tasks->student_id == $id) {
-            Evaluation::updateOrCreate([
-                'tasks_id' => $data['tasks_id'],
-                'host_id' => $tasks->student_id,
-                'toolman_id' => $tasks->toolman_id,
-                'toolman_evaluation' => $data['toolman_rate'],
-                'toolman_comment' => $data['toolman_comment'],
-            ]);
-        } elseif ($tasks->toolman_id == $id) {
-            Evaluation::updateOrCreate([
-                'tasks_id' => $data['tasks_id'],
-                'host_id' => $tasks->student_id,
-                'toolman_id' => $tasks->toolman_id,
-                'host_evaluation' => $data['host_rate'],
-                'host_comment' => $data['host_comment'],
-            ]);
-        }
+        evaluation::create([
+            'tasks_id' => $data['tasks_id'],
+            'host_id' => $tasks->student_id,
+            'toolman_id' => $tasks->toolman_id,
+            'toolman_evaluation' => $data['toolman_rate'],
+            'host_evaluation' => $data['host_rate'],
+            'toolman_comment' => $data['toolman_comment'],
+            'host_comment' => $data['host_comment'],
+        ]);
     }
 
 }

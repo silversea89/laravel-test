@@ -297,8 +297,10 @@
                     <h1 class="fas fa-exclamation-triangle" style="color:orange"></h1>
                     @if($tasks->Progress==null)
                         <h3>是否要開始執行委託？</h3>
+                    @elseif($tasks->Progress=="arrive")
+                        <h3>是否已與雇主交易完成？</h3>
                     @else
-                        <h3>是否進入下一個流程？</h3>
+                        <h3>是否進入下一階段？</h3>
                     @endif
                     <div class="row">
                         <div class="col-6 pl-3 pr-2">

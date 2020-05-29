@@ -13,8 +13,11 @@ class WelcomeController extends Controller
 
     protected function Welcome(Request $request)
     {
+        $user = Auth::user();
+        $id = $user->student_id;
         $newesttasks = DB::table('tasks')
             ->leftJoin('users', 'tasks.student_id', '=', 'users.student_id')
+            ->where('Status','=','Selectable')
             ->orderBy('tasks.created_at', 'desc')
             ->take(8)
             ->get();
@@ -34,6 +37,7 @@ class WelcomeController extends Controller
             "task_amount" => $task_amount,
             "task_complete_amount" => $task_complete_amount,
             "task_notcomplete_amount"=>$task_notcomplete_amount]);
+
     }
 
 }
