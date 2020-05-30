@@ -20,8 +20,8 @@ class EvaluationTable extends Migration
             $table->foreign('host_id')->references('student_id')->on('tasks');
             $table->string('toolman_id');
             $table->foreign('toolman_id')->references('toolman_id')->on('tasks');
-            $table->float('toolman_evaluation')->nullable();
-            $table->float('host_evaluation')->nullable();
+            $table->float('toolman_rate')->nullable();
+            $table->float('host_rate')->nullable();
             $table->string('toolman_comment')->nullable();
             $table->string('host_comment')->nullable();
 

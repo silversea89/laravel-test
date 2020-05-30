@@ -61,15 +61,6 @@
                     <h3 class="font-weight-bold pt-3 pb-0 mb-0">
                         信用評價與評論
                     </h3>
-                    <h5 class="font-weight-bold pt-0 pb-2">
-                        總平均:
-                        <i class="fas fa-star" style="color:#FF9529"></i>
-                        <i class="fas fa-star" style="color:#FF9529"></i>
-                        <i class="fas fa-star" style="color:#FF9529"></i>
-                        <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                        <i class="far fa-star" style="color:#FF9529"></i>
-                    </h5>
-
 
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab">
@@ -84,11 +75,14 @@
                         <div class="tab-pane fade show active" id="nav-tabHostRating">
                             <h5 class="font-weight-bold pt-2 pb-2">
                                 雇主評價:
-                                <i class="fas fa-star" style="color:#FF9529"></i>
-                                <i class="fas fa-star" style="color:#FF9529"></i>
-                                <i class="fas fa-star" style="color:#FF9529"></i>
-                                <i class="far fa-star" style="color:#FF9529"></i>
-                                <i class="far fa-star" style="color:#FF9529"></i>
+                                @foreach($host_AVGrate as $i)
+                                    @if($i=="0")
+                                        <i class="fas fa-star" style="color:#FF9529"></i>
+                                    @elseif($i=="0.5")
+                                        <i class="fas fa-star-half-alt" style="color:#FF9529" aria-hidden="true"></i>
+                                    @elseif($i=="0.5")
+                                        <i class="far fa-star" style="color:#FF9529"></i>
+                                    @endif
                             </h5>
                             @foreach($host_evaluation as $i)
                                 <div class="row pl-1 pb-3">
@@ -116,32 +110,35 @@
                         <div class="tab-pane fade" id="nav-tabToolManRating">
                             <h5 class="font-weight-bold pt-2 pb-2">
                                 工具人評價:
-                                <i class="fas fa-star" style="color:#FF9529"></i>
-                                <i class="fas fa-star" style="color:#FF9529"></i>
-                                <i class="fas fa-star" style="color:#FF9529"></i>
-                                <i class="fas fa-star" style="color:#FF9529"></i>
-                                <i class="fas fa-star" style="color:#FF9529"></i>
+                                @foreach($toolman_AVGrate as $i)
+                                    @if($i=="0")
+                                        <i class="fas fa-star" style="color:#FF9529"></i>
+                                    @elseif($i=="0.5")
+                                        <i class="fas fa-star-half-alt" style="color:#FF9529" aria-hidden="true"></i>
+                                    @elseif($i=="0.5")
+                                        <i class="far fa-star" style="color:#FF9529"></i>
+                                    @endif
                             </h5>
 
                             @foreach($toolman_evaluation as $i)
-                            <div class="row pl-1 pb-3">
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pr-1 pb-1 pl-0">
-                                    <div class="p-2" style="border-style: outset;border-width:3px;height:100%">
-                                        <p class="font-weight-bold mb-1">{{$i->Title}}</p>
-                                        <p class="mb-1">
-                                            {{$i->host_comment}}
-                                        </p>
-                                        <p class="mb-1">
-                                            @for ($k = 0; $k < $i->host_rate; $k++)
-                                                <i class="fas fa-star" style="color:#FF9529"></i>
-                                            @endfor
-                                            @for ($k = 0; $k < 5-$i->host_rate; $k++)
-                                                <i class="far fa-star" style="color:#FF9529"></i>
-                                            @endfor
-                                        </p>
+                                <div class="row pl-1 pb-3">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pr-1 pb-1 pl-0">
+                                        <div class="p-2" style="border-style: outset;border-width:3px;height:100%">
+                                            <p class="font-weight-bold mb-1">{{$i->Title}}</p>
+                                            <p class="mb-1">
+                                                {{$i->host_comment}}
+                                            </p>
+                                            <p class="mb-1">
+                                                @for ($k = 0; $k < $i->host_rate; $k++)
+                                                    <i class="fas fa-star" style="color:#FF9529"></i>
+                                                @endfor
+                                                @for ($k = 0; $k < 5-$i->host_rate; $k++)
+                                                    <i class="far fa-star" style="color:#FF9529"></i>
+                                                @endfor
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
 

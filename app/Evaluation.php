@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 class Evaluation extends Model
 {
     protected $fillable = [
-        'tasks_id','host_id','toolman_id', 'toolman_evaluation','host_evaluation','toolman_comment','host_comment'
+        'tasks_id','host_id','toolman_id', 'toolman_rate','host_rate','toolman_comment','host_comment'
     ];
 
     protected $primaryKey = ['tasks_id', 'host_id', 'toolman_id'];

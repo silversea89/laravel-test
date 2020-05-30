@@ -33,11 +33,45 @@ class ProfileController extends Controller
             ->where('toolman_id', '=', '$id')
             ->select('evaluation.*','tasks.Title')
             ->get();
+        $host_AVGrate=DB::table('evaluation')
+            ->where('host_id', '=', '$id')
+            ->avg('host_rate');
+        $toolman_AVGrate=DB::table('evaluation')
+            ->where('host_id', '=', '$id')
+            ->avg('toolman_rate');
+        $host_AVG_array = array();
+        $toolman_AVG_array = array();
+
+        while($host_AVGrate >= 1){
+            $host_AVGrate -= 1;
+            array_push($host_AVG_array, "1");
+            if($host_AVGrate>=0.3 && $host_AVGrate<=0.7){
+                array_push($host_AVG_array, "0.5");
+            }
+        }
+        while(count($host_AVG_array)<5){
+            array_push($host_AVG_array, "0");
+        }
+
+        while($toolman_AVGrate >= 1){
+            $toolman_AVGrate -= 1;
+            array_push($toolman_AVG_array, "1");
+            if($toolman_AVGrate>=0.3 && $toolman_AVGrate<=0.7){
+                array_push($toolman_AVG_array, "0.5");
+            }
+        }
+        while(count($toolman_AVG_array)<5){
+            array_push($toolman_AVG_array, "0");
+        }
+
+
         return view('profile')->with(["profile" => $profile,
             "addrecord"=>$taskaddrecord,
             "completerecord"=>$taskcompleterecord,
             "host_evaluation"=>$host_evaluation,
-            "toolman_evaluation"=>$toolman_evaluation]);
+            "toolman_evaluation"=>$toolman_evaluation,
+            "host_AVGrate"=>$host_AVG_array,
+            "toolman_AVGrate"=>$toolman_AVG_array]);
     }
 
 }
