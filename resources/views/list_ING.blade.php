@@ -171,8 +171,8 @@
     </div>
 
     <p class="fas fa-plus-circle fa-4x m-0 "
-       style="background-color:white;position: fixed; bottom: 20px;right: 20px;border-radius:100%;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);"
-       type="button" data-toggle="modal" data-target=".add"></p>
+       style="background-color:white;position: fixed; bottom: 80px;right: 20px;border-radius:100%;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);"
+       data-toggle="modal" data-target=".add"></p>
     <div class="modal fade add" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content container">
@@ -208,7 +208,7 @@
                         <div class="row">
 
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
-                                <label class="m-0">日期</label>
+                                <label class="m-0">面交日期</label>
                                 <input id="datepicker" readonly="true" width="100%" type="text" name="Date" required/>
                                 <script>
                                     $('#datepicker').datepicker({
@@ -220,7 +220,7 @@
                             </div>
 
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
-                                <label class="m-0">時間</label>
+                                <label class="m-0">面交時間</label>
                                 <input id="timepicker" readonly="true" width="100%" type="text" name="Time" required/>
                                 <script>
                                     $('#timepicker').timepicker({
@@ -291,6 +291,7 @@
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>

@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'department' => ['required', 'string', 'max:255'],
             'student_id' => ['required', 'string', 'max:255','unique:users'],
             'name' => ['required', 'string', 'max:255'],
-            'tel' => ['required', 'string', 'max:255','unique:users'],
+            'tel' => ['required', 'string', 'max:255','unique:users','regex:/(09)[0-9]{8}/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);

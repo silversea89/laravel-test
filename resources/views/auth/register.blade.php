@@ -33,7 +33,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group">
-                            <input id="name" type="text" class="form-control @error('LastName') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="學號" name="student_id" value="{{ old('student_id') }}" required autocomplete="student_id" autofocus>
+                            <input id="name" type="text" class="form-control @error('LastName') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="學號" name="student_id" value="{{ old('student_id') }}" oninput="value=value.replace(/[^\d]/g,'')" required autocomplete="student_id" autofocus>
                             @error('student_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -41,7 +41,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <input id="name" type="text" class="form-control @error('department') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="科系" name="department" value="{{ old('department') }}" autocomplete="tel" autofocus>
+                            <input id="name" type="text" class="form-control @error('department') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="科系" name="department" value="{{ old('department') }}" required autocomplete="tel" autofocus>
                             @error('department')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -53,7 +53,7 @@
 
 
                     <div class="form-group">
-                        <input id="name" type="text" class="form-control @error('tel') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="電話號碼" name="tel" value="{{ old('tel') }}" autocomplete="tel" autofocus>
+                        <input id="name" type="text" class="form-control @error('tel') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="電話號碼" name="tel" value="{{ old('tel') }}" oninput="value=value.replace(/[^\d]/g,'')" autocomplete="tel" autofocus>
                         @error('tel')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

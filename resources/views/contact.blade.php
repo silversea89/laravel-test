@@ -9,18 +9,19 @@
     <div class="row col-12 m-0 p-0">
         <div class="col-12 col-md-6 px-3 pr-md-2">
 
-            <form>
-                <input type="text" class="form-control mb-3" placeholder="使用者名稱">
-                <input type="email" class="form-control mb-3" aria-describedby="emailHelp" placeholder="信箱">
-                <input type="text" class="form-control mb-3" placeholder="標題">
-                <textarea class="form-control mb-3" placeholder="內容" rows="5"></textarea>
-                <button type="button" class="btn btn-primary btn-block">送出</button>
+            <form action="{{ route('AddContact') }}" method="POST">
+                @csrf
+                <input type="text" class="form-control mb-3" name="user" placeholder="使用者名稱">
+                <input type="email" class="form-control mb-3" name="email" aria-describedby="emailHelp" placeholder="信箱">
+                <input type="text" class="form-control mb-3" name="title" placeholder="標題">
+                <textarea class="form-control mb-3" name="content" placeholder="內容" rows="5"></textarea>
+                <button type="submit" class="btn btn-primary btn-block">送出</button>
             </form>
         </div>
         <div class="col-12 col-md-6 px-3 pl-md-1 mt-3 mt-md-0">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4360.835803455425!2d120.68111770318352!3d24.14963870410199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d68cf62e061%3A0x7091dd73273f6236!2z5ZyL56uL6Ie65Lit56eR5oqA5aSn5a24!5e0!3m2!1szh-TW!2stw!4v1585940620874!5m2!1szh-TW!2stw" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
         </div>
-        
+
         <div class="col-12" style="background-color:#74D2E7;">
         </div>
 

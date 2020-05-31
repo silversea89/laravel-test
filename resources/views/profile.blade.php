@@ -118,6 +118,7 @@
                                     @elseif($i=="0.5")
                                         <i class="far fa-star" style="color:#FF9529"></i>
                                     @endif
+                                @endforeach
                             </h5>
 
                             @foreach($toolman_evaluation as $i)

@@ -32,7 +32,8 @@ Route::post('list_id/{tasks_id}', 'TaskController@taskprogress')->name("taskprog
 //profile
 Route::post('profile/{id}', 'ProfileController@showprofile')->name("profile");
 
-
+//Contact
+Route::post('contact', 'ContactController@AddContact')->name("AddContact");
 Route::get('/about', function () {
     return view('about');
 })->name('about');
