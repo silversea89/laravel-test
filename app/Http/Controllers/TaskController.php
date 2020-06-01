@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Evaluation;
 use App\Status;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
@@ -29,12 +30,12 @@ class TaskController extends Controller
         $deadtime = $data['DeadTime'];
         $combinedDDT = date('Y-m-d H:i:s', strtotime("$deaddate $deadtime"));
 
-        $validatedData=$data->validate([
+        $validatedData=Validator::make($data,[
             'Classification' => ['required', 'string', 'max:255'],
             'student_id' => ['required', 'string', 'max:255'],
             'Title' => ['required', 'string', 'max:255'],
-            'DateTime' => ['required', 'date', 'max:255','after:today'],
-            'DeadDateTime' => ['required', 'date', 'max:255','after:today'],
+            'DateTime' => ['required', 'date', 'max:255',' after:yesterday '],
+            'DeadDateTime' => ['required', 'date', 'max:255'],
             'BuyAddress' => ['required', 'string', 'max:255'],
             'MeetAddress' => ['required', 'string', 'max:255'],
             'Pay' => ['required', 'int', 'max:255', 'confirmed'],
@@ -111,14 +112,6 @@ class TaskController extends Controller
         $user = Auth::user();
         $id = $user->student_id;
 
-        $tasksall = DB::table('tasks')
-            ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
-            ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
-            ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
-            ->where("tasks.student_id", "=", $id)
-            ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
-            ->get();
-
         $tasksING = DB::table('tasks')
             ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
             ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
@@ -147,7 +140,6 @@ class TaskController extends Controller
             ->get();
 
         return view('list_push')->with(["classifications" => $classifications,
-            "tasksall" => $tasksall,
             "tasksING" => $tasksING,
             "tasksWaiting" => $tasksWaiting,
             "tasksComplete" => $tasksComplete]);
@@ -158,13 +150,7 @@ class TaskController extends Controller
         $classifications = Classification::all();
         $user = Auth::user();
         $id = $user->student_id;
-        $tasksall = DB::table('tasks')
-            ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
-            ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
-            ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
-            ->where("tasks.toolman_id", "=", $id)
-            ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
-            ->get();
+
         $tasksING = DB::table('tasks')
             ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
             ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
@@ -182,7 +168,6 @@ class TaskController extends Controller
             ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
         return view('list_ING')->with(["classifications" => $classifications,
-            "tasksall" => $tasksall,
             "tasksING" => $tasksING,
             "tasksComplete" => $tasksComplete]);
     }
@@ -232,13 +217,18 @@ class TaskController extends Controller
         return view('list_id')->with(["tasks" => $tasks, "id" => $id]);
     }
 
-    protected function taskcomplete(Request $request, $tasks_id){
+    protected function taskcomplete(Request $request){
         $user = Auth::user();
         $id=$user->student_id;
-        $this->evaluation_add(array_merge($request->all(), ['self_id' => $id],['tasks_id'=>$tasks_id]));
+        $this->evaluation_add(array_merge($request->all(), ['self_id' => $id]));
         $tasks = DB::table('tasks')
-            ->where('tasks_id', '=', $tasks_id)
+            ->where('tasks_id', '=', $request->tasks_id)
             ->first();
+
+        $progress_change = Tasks::find($request->tasks_id);
+        $progress_change->Status = "Complete";
+        $progress_change->save();
+
         if($tasks->student_id==$id){
             return view('list_push');
         }
@@ -251,7 +241,7 @@ class TaskController extends Controller
         $tasks = DB::table('tasks')
             ->where('tasks_id', '=', $data['tasks_id'])
             ->first();
-        evaluation::create([
+        Evaluation::create([
             'tasks_id' => $data['tasks_id'],
             'host_id' => $tasks->student_id,
             'toolman_id' => $tasks->toolman_id,

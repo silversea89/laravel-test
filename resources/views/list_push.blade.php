@@ -21,7 +21,6 @@
                 <form class="card p-2" action="{{ route('list.search')}}" method="get">
 
                     <div class="row">
-
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 m-0">
                             <label class="m-0">分類選擇</label>
                             <select class="form-control" name="Classification">
@@ -66,50 +65,18 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 tab-content" style="background-color:white;">
 
             <ul class="nav nav-tabs mt-3" id="pills-tab" role="tablist">
-                <li class="nav-item col-3 pr-2 pr-md-3 pl-0" style="text-align:center;">
-                    <a class="nav-link active px-0" data-toggle="pill" href="#pills-all" role="tab" aria-selected="true">全部</a>
+                <li class="nav-item col-4 pr-2 pr-md-2 pl-1" style="text-align:center;">
+                    <a class="nav-link active px-0 " data-toggle="pill" href="#pills-ing" role="tab" aria-selected="true">執行中</a>
                 </li>
-                <li class="nav-item col-3 pr-2 pr-md-2 pl-1" style="text-align:center;">
-                    <a class="nav-link px-0" data-toggle="pill" href="#pills-ing" role="tab" aria-selected="false">執行中</a>
-                </li>
-                <li class="nav-item col-3 pr-2 pr-md-2 pl-2" style="text-align:center;">
+                <li class="nav-item col-4 pr-2 pr-md-2 pl-2" style="text-align:center;">
                     <a class="nav-link px-0" data-toggle="pill" href="#pills-waiting" role="tab" aria-selected="false">待處理</a>
                 </li>
-                <li class="nav-item col-3 pr-0 pl-2" style="text-align:center;">
+                <li class="nav-item col-4 pr-0 pl-2" style="text-align:center;">
                     <a class="nav-link px-0" data-toggle="pill" href="#pills-fin" role="tab" aria-selected="false">已完成</a>
                 </li>
             </ul>
-            <div class="tab-pane fade show active" id="pills-all"  >
-                <div class="row mr-0">
-                    @foreach($tasksall as $i)
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
-                        <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black">
-                            <div style="border:1px #DFDFDF solid;"  data-toggle="modal" > <!--data-target=".content0"-->
-                                <div class="row pl-3" >
-                                    <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
-                                        <div class="" style="background-color:gray;position:absolute;top:0px;left:0px">
-                                            <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
-                                        </div>
-                                        <img src="{{asset('img/food.jpg')}}" class="img-fluid" >
-                                    </div>
-                                    <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 " >
-                                        <div class="pl-1" >
-                                            <p class="m-0">{{$i->Title}}</p>
-                                            <p class="m-0">
-                                                工具人：{{$i->toolmanname}}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    @endforeach
-                </div>
 
-            </div>
-
-            <div class="tab-pane tab-pane fade" id="pills-ing"  >
+            <div class="tab-pane tab-pane fade show active" id="pills-ing"  >
                 <div class="row mr-0" id="pills-ing">
                     @foreach($tasksING as $i)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >

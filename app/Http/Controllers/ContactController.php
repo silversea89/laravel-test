@@ -20,6 +20,8 @@ class ContactController extends Controller
             'Title' => $request['title'],
             'content' => $request['content'],
         ]);
+
+        redirect("contact");
     }
 
 }
