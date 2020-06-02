@@ -241,15 +241,24 @@ class TaskController extends Controller
         $tasks = DB::table('tasks')
             ->where('tasks_id', '=', $data['tasks_id'])
             ->first();
-        Evaluation::create([
-            'tasks_id' => $data['tasks_id'],
-            'host_id' => $tasks->student_id,
-            'toolman_id' => $tasks->toolman_id,
-            'toolman_evaluation' => $data['toolman_rate'],
-            'host_evaluation' => $data['host_rate'],
-            'toolman_comment' => $data['toolman_comment'],
-            'host_comment' => $data['host_comment'],
-        ]);
+        if($data['self_id']==$tasks->student_id){
+            Evaluation::create([
+                'tasks_id' => $data['tasks_id'],
+                'host_id' => $tasks->student_id,
+                'toolman_id' => $tasks->toolman_id,
+                'toolman_rate' => $data['toolman_rate'],
+                'toolman_comment' => $data['toolman_comment'],
+            ]);
+        }
+        if($data['self_id']==$tasks->toolman_id){
+            Evaluation::create([
+                'tasks_id' => $data['tasks_id'],
+                'host_id' => $tasks->student_id,
+                'toolman_id' => $tasks->toolman_id,
+                'host_rate' => $data['host_rate'],
+                'host_comment' => $data['host_comment'],
+            ]);
+        }
     }
 
 }

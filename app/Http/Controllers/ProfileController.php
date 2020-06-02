@@ -11,33 +11,33 @@ use Illuminate\Support\Facades\DB;
 class ProfileController extends Controller
 {
 
-    protected function showprofile(Request $request, $id)
+    protected function showprofile(Request $request, $profile_id)
     {
         $profile=DB::table('users')
             ->select('users.*')
-            ->where('student_id', '=', $id)
+            ->where('student_id', '=', $profile_id)
             ->get();
         $taskaddrecord=DB::table('tasks')
-            ->where('student_id','=',$id)
+            ->where('student_id','=',$profile_id)
             ->count();
         $taskcompleterecord=DB::table('tasks')
             ->where('status','=','complete')
             ->count();
         $host_evaluation = DB::table('evaluation')
             ->join("tasks",'evaluation.tasks_id','=','tasks.tasks_id')
-            ->where('host_id', '=', '$id')
+            ->where('host_id', '=', $profile_id)
             ->select('evaluation.*','tasks.Title')
             ->get();
         $toolman_evaluation = DB::table('evaluation')
             ->join("tasks",'evaluation.tasks_id','=','tasks.tasks_id')
-            ->where('toolman_id', '=', '$id')
+            ->where('tasks.toolman_id', '=', $profile_id)
             ->select('evaluation.*','tasks.Title')
             ->get();
         $host_AVGrate=DB::table('evaluation')
-            ->where('host_id', '=', '$id')
+            ->where('host_id', '=', $profile_id)
             ->avg('host_rate');
         $toolman_AVGrate=DB::table('evaluation')
-            ->where('host_id', '=', '$id')
+            ->where('host_id', '=', $profile_id)
             ->avg('toolman_rate');
         $host_AVG_array = array();
         $toolman_AVG_array = array();

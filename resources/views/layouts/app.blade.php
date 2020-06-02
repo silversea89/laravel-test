@@ -102,26 +102,33 @@
 
                 <a class="col-3 col-sm-3" href="{{route('list')}}" style="text-decoration:none;color:black">
                     <center>
-                        <i class="fas fa-clipboard-list" @if(\Request::is('list'))style="color:#00FFFB"@else style="color:white"@endif></i>
-                        <p class="m-0" @if(\Request::is('list'))style="color:#00FFFB"@else style="color:white"@endif>所有</p>
+                        <i class="fas fa-clipboard-list" @if(\Request::is('list'))style="color:#00FFFB"
+                           @else style="color:white"@endif></i>
+                        <p class="m-0" @if(\Request::is('list'))style="color:#00FFFB" @else style="color:white"@endif>
+                            所有</p>
                     </center>
                 </a>
 
                 <a class="col-3 col-sm-3" href="{{route('list.push')}}" style="text-decoration:none;color:black">
                     <center>
-                        <i class="fas fa-arrow-up" @if(\Request::is('list_push'))style="color:#00FFFB"@else style="color:white"@endif></i>
-                        <p class="m-0" @if(\Request::is('list_push'))style="color:#00FFFB"@else style="color:white"@endif>已提出</p>
+                        <i class="fas fa-arrow-up" @if(\Request::is('list_push'))style="color:#00FFFB"
+                           @else style="color:white"@endif></i>
+                        <p class="m-0" @if(\Request::is('list_push'))style="color:#00FFFB"
+                           @else style="color:white"@endif>已提出</p>
                     </center>
                 </a>
 
                 <a class="col-3 col-sm-3" href="{{route('list.ING')}}" style="text-decoration:none;color:black">
                     <center>
-                        <i class="fas fa-arrow-down" @if(\Request::is('list_ING'))style="color:#00FFFB"@else style="color:white"@endif></i>
-                        <p class="m-0" @if(\Request::is('list_ING'))style="color:#00FFFB"@else style="color:white"@endif>已接受</p>
+                        <i class="fas fa-arrow-down" @if(\Request::is('list_ING'))style="color:#00FFFB"
+                           @else style="color:white"@endif></i>
+                        <p class="m-0" @if(\Request::is('list_ING'))style="color:#00FFFB"
+                           @else style="color:white"@endif>已接受</p>
                     </center>
                 </a>
 
-                <a class="col-3 col-sm-3" href="{{route('profile')}}" style="text-decoration:none;color:black">
+                <a class="col-3 col-sm-3" href="{{route('profile.id', Auth::user()->student_id)}}"
+                   style="text-decoration:none;color:black">
                     <center>
                         <i class="fas fa-user" style="color:white"></i>
                         <p class="m-0" style="color:white">我的</p>

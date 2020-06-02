@@ -30,7 +30,8 @@ Route::post('list/taskcomplete', 'TaskController@taskcomplete')->name("task.comp
 Route::post('list_id/{tasks_id}', 'TaskController@taskprogress')->name("taskprogress");
 
 //profile
-Route::post('profile/{id}', 'ProfileController@showprofile')->name("profile");
+Route::get('profile/{profile_id}', 'ProfileController@showprofile')->name("profile.id");
+//Route::get('bubu/{profile_id}', 'ProfileController@showprofile')->name("bububu");
 
 //Contact
 Route::post('contact', 'ContactController@AddContact')->name("AddContact");
@@ -42,7 +43,7 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('profile','ProfileController@showprofile')->name('profile');
+//Route::get('profile','ProfileController@showprofile')->name('profile');
 
 Route::post('AddTasks', 'TaskController@Add')->name("task.add");
 

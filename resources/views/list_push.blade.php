@@ -80,6 +80,7 @@
                 <div class="row mr-0" id="pills-ing">
                     @foreach($tasksING as $i)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
+                        <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black">
                         <div style="border:1px #DFDFDF solid;"  data-toggle="modal" data-target=".content0">
                             <div class="row pl-3" >
                                 <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
@@ -107,7 +108,7 @@
                 <div class="row mr-0" id="pills-waiting">
                     @foreach($tasksWaiting as $i)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
-
+                        <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black">
                         <div style="border:1px #DFDFDF solid;">
 
                             <div class="row pl-3" >
@@ -141,7 +142,7 @@
                 <div class="row mr-0" id="pills-fin">
                     @foreach($tasksComplete as $i)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
-
+                        <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black">
                         <div style="border:1px #DFDFDF solid;">
 
                             <div class="row pl-3" >

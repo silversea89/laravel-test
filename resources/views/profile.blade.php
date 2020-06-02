@@ -71,7 +71,7 @@
                         </div>
                     </nav>
                     <div class="tab-content">
-                        //host tab
+{{--                        host tab--}}
                         <div class="tab-pane fade show active" id="nav-tabHostRating">
                             <h5 class="font-weight-bold pt-2 pb-2">
                                 雇主評價:
@@ -80,9 +80,10 @@
                                         <i class="fas fa-star" style="color:#FF9529"></i>
                                     @elseif($i=="0.5")
                                         <i class="fas fa-star-half-alt" style="color:#FF9529" aria-hidden="true"></i>
-                                    @elseif($i=="0.5")
+                                    @else
                                         <i class="far fa-star" style="color:#FF9529"></i>
                                     @endif
+                                @endforeach
                             </h5>
                             @foreach($host_evaluation as $i)
                                 <div class="row pl-1 pb-3">
@@ -106,7 +107,7 @@
                             @endforeach
                         </div>
 
-                        //toolman tab
+{{--                        //toolman tab--}}
                         <div class="tab-pane fade" id="nav-tabToolManRating">
                             <h5 class="font-weight-bold pt-2 pb-2">
                                 工具人評價:

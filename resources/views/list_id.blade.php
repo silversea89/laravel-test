@@ -5,11 +5,10 @@
 <script src="script.js">
 </script>
 
-
 <div class="modal fade content0" tabindex="-1" role="dialog" aria-hidden="true" >
     <div class="modal-dialog modal-md" style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
         <div class="modal-content container">
-            <form method="post" action="{{ route('task.complete') }}">
+            <form method="post" action="{{ route('task.complete')}}">
                 @csrf
                 <input type="hidden" name="tasks_id" value={{$tasks->tasks_id}}>
                 <center>
@@ -271,7 +270,9 @@
             <h5>面交地點：<p>{{$tasks->MeetAddress}}</p></h5>
             <h5>面交時間：<p>{{$tasks->DateTime}}</p></h5>
             <h5>酬勞金額：<p>{{$tasks->Pay}}$</p></h5>
-            <p class="m-0">老闆:<a href="#">{{$tasks->hostname}}</a></p>
+            <p class="m-0">雇主:
+                <a href="{{ route('profile.id', $tasks->student_id) }}">{{$tasks->hostname}}</a>
+            </p>
             <p class="m-0">發佈於:{{$tasks->created_at}}</p>
                 @if($tasks->toolman_id==null)
             <p class="m-0">接單截止期限：{{$tasks->DeadDateTime}}</p>
