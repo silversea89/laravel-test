@@ -14,7 +14,7 @@ class EvaluationTable extends Migration
     public function up()
     {
         Schema::create('evaluation', function (Blueprint $table) {
-            $table->unsignedBigInteger('tasks_id');
+            $table->unsignedBigInteger('tasks_id')->primary()->unique();
             $table->foreign('tasks_id')->references('tasks_id')->on('tasks');
             $table->string('host_id');
             $table->foreign('host_id')->references('student_id')->on('tasks');

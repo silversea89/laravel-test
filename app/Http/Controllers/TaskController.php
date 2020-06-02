@@ -242,23 +242,45 @@ class TaskController extends Controller
             ->where('tasks_id', '=', $data['tasks_id'])
             ->first();
 
+        $existdata=Evaluation::where('tasks_id','=',$data['tasks_id'])->first();
+
         if($data['self_id']==$tasks->student_id){
-            Evaluation::updateOrCreate([
-                'tasks_id' => $data['tasks_id'],
-                'host_id' => $tasks->student_id,
-                'toolman_id' => $tasks->toolman_id,
-                'toolman_rate' => $data['toolman_rate'],
-                'toolman_comment' => $data['toolman_comment'],
-            ]);
+            if($existdata === null){
+                Evaluation::create([
+                    'tasks_id' => $data['tasks_id'],
+                    'host_id' => $tasks->student_id,
+                    'toolman_id' => $tasks->toolman_id,
+                    'toolman_rate' => $data['toolman_rate'],
+                    'toolman_comment' => $data['toolman_comment'],
+                ]);
+            }
+            else{
+                $putdata=Evaluation::find($data['tasks_id']);
+                $putdata->host_id=$tasks->student_id;
+                $putdata->toolman_id=$tasks->toolman_id;
+                $putdata->toolman_rate=$data['toolman_rate'];
+                $putdata->toolman_comment=$data['toolman_comment'];
+                $putdata->save();
+            }
         }
         if($data['self_id']==$tasks->toolman_id){
-            Evaluation::updateOrCreate([
-                'tasks_id' => $data['tasks_id'],
-                'host_id' => $tasks->student_id,
-                'toolman_id' => $tasks->toolman_id,
-                'host_rate' => $data['host_rate'],
-                'host_comment' => $data['host_comment'],
-            ]);
+            if($existdata === null){
+                Evaluation::create([
+                    'tasks_id' => $data['tasks_id'],
+                    'host_id' => $tasks->student_id,
+                    'toolman_id' => $tasks->toolman_id,
+                    'host_rate' => $data['host_rate'],
+                    'host_comment' => $data['host_comment'],
+                ]);
+            }
+            else{
+                $putdata=Evaluation::find($data['tasks_id']);
+                $putdata->host_id=$tasks->student_id;
+                $putdata->toolman_id=$tasks->toolman_id;
+                $putdata->host_rate=$data['host_rate'];
+                $putdata->host_comment=$data['host_comment'];
+                $putdata->save();
+            }
         }
     }
 
