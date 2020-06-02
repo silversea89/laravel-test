@@ -230,10 +230,10 @@ class TaskController extends Controller
         $progress_change->save();
 
         if($tasks->student_id==$id){
-            return view('list_push');
+            return redirect()->route('list.push');
         }
         elseif($tasks->toolman_id==$id){
-            return view('list_get');
+            return redirect()->route('list.ING');
         }
     }
     protected function evaluation_add(array $data){
@@ -241,8 +241,9 @@ class TaskController extends Controller
         $tasks = DB::table('tasks')
             ->where('tasks_id', '=', $data['tasks_id'])
             ->first();
+
         if($data['self_id']==$tasks->student_id){
-            Evaluation::create([
+            Evaluation::updateOrCreate([
                 'tasks_id' => $data['tasks_id'],
                 'host_id' => $tasks->student_id,
                 'toolman_id' => $tasks->toolman_id,
@@ -251,7 +252,7 @@ class TaskController extends Controller
             ]);
         }
         if($data['self_id']==$tasks->toolman_id){
-            Evaluation::create([
+            Evaluation::updateOrCreate([
                 'tasks_id' => $data['tasks_id'],
                 'host_id' => $tasks->student_id,
                 'toolman_id' => $tasks->toolman_id,

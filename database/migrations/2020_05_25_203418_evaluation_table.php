@@ -14,18 +14,16 @@ class EvaluationTable extends Migration
     public function up()
     {
         Schema::create('evaluation', function (Blueprint $table) {
-            $table->unsignedBigInteger('tasks_id')->unsigned();
+            $table->unsignedBigInteger('tasks_id');
             $table->foreign('tasks_id')->references('tasks_id')->on('tasks');
             $table->string('host_id');
             $table->foreign('host_id')->references('student_id')->on('tasks');
             $table->string('toolman_id');
             $table->foreign('toolman_id')->references('toolman_id')->on('tasks');
-            $table->float('toolman_rate')->nullable();
-            $table->float('host_rate')->nullable();
+            $table->integer('toolman_rate')->nullable();
+            $table->integer('host_rate')->nullable();
             $table->string('toolman_comment')->nullable();
             $table->string('host_comment')->nullable();
-
-            $table->primary(['tasks_id', 'host_id','toolman_id']);
         });
     }
 
