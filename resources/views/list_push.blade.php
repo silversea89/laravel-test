@@ -66,7 +66,7 @@
 
             <ul class="nav nav-tabs mt-3" id="pills-tab" role="tablist">
                 <li class="nav-item col-4 pr-2 pr-md-2 pl-1" style="text-align:center;">
-                    <a class="nav-link active px-0 " data-toggle="pill" href="#pills-ing" role="tab" aria-selected="true">執行中</a>
+                    <a class="nav-link px-0 " data-toggle="pill" href="#pills-ing" role="tab" aria-selected="true">執行中</a>
                 </li>
                 <li class="nav-item col-4 pr-2 pr-md-2 pl-2" style="text-align:center;">
                     <a class="nav-link px-0" data-toggle="pill" href="#pills-waiting" role="tab" aria-selected="false">待處理</a>
@@ -80,7 +80,7 @@
                 <div class="row mr-0" id="pills-ing">
                     @foreach($tasksING as $i)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
-                        <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black">
+                        <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black"></a>
                         <div style="border:1px #DFDFDF solid;"  data-toggle="modal" data-target=".content0">
                             <div class="row pl-3" >
                                 <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
@@ -108,7 +108,7 @@
                 <div class="row mr-0" id="pills-waiting">
                     @foreach($tasksWaiting as $i)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
-                        <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black">
+                        <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black"></a>
                         <div style="border:1px #DFDFDF solid;">
 
                             <div class="row pl-3" >
@@ -142,7 +142,7 @@
                 <div class="row mr-0" id="pills-fin">
                     @foreach($tasksComplete as $i)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
-                        <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black">
+                        <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black"></a>
                         <div style="border:1px #DFDFDF solid;">
 
                             <div class="row pl-3" >

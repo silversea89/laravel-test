@@ -66,7 +66,7 @@
 
             <ul class="nav nav-tabs mt-3" id="pills-tab" role="tablist">
                 <li class="nav-item col-6 pr-2 pr-md-2 pl-1" style="text-align:center;">
-                    <a class="nav-link px-0 active" data-toggle="pill" href="#pills-ing" role="tab" aria-selected="true">執行中</a>
+                    <a class="nav-link px-0 " data-toggle="pill" href="#pills-ing" role="tab" aria-selected="true">執行中</a>
                 </li>
                 <li class="nav-item col-6 pr-0 pl-2" style="text-align:center;">
                     <a class="nav-link px-0" data-toggle="pill" href="#pills-fin" role="tab" aria-selected="false">已完成</a>
@@ -74,11 +74,11 @@
             </ul>
 
 
-            <div class="tab-pane tab-pane fade active show" id="pills-ing"  >
+            <div class="tab-pane tab-pane fade" id="pills-ing"  >
                 <div class="row mr-0" id="pills-ing">
                     @foreach($tasksING as $i)
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
-                            <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black">
+                            <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black"></a>
                             <div style="border:1px #DFDFDF solid;"  data-toggle="modal" data-target=".content0">
                                 <div class="row pl-3" >
                                     <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
@@ -106,7 +106,7 @@
                 <div class="row mr-0" id="pills-fin">
                     @foreach($tasksComplete as $i)
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
-                            <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black">
+                            <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black"></a>
                             <div style="border:1px #DFDFDF solid;">
 
                                 <div class="row pl-3" >
@@ -268,5 +268,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
     </body>
 @endsection

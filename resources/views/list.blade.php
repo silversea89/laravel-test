@@ -105,11 +105,11 @@
                                 <p class="m-0">發佈於:{{$i->created_at}}</p>
                                 <p class="m-0">接單截止期限：{{$i->DeadDateTime}}</p>
                                 @if($i->student_id!=$id)
-                                <form method="POST" action="{{ route('task.get') }}">
-                                    @csrf
-                                    <input type="hidden" name="tasks_id" value="{{$i->tasks_id}}">
-                                    <button type="submit" class="btn btn-primary my-3">接受委託</button>
-                                </form>
+                                    <form method="POST" action="{{ route('task.get') }}">
+                                        @csrf
+                                        <input type="hidden" name="tasks_id" value="{{$i->tasks_id}}">
+                                        <button type="submit" class="btn btn-primary my-3">接受委託</button>
+                                    </form>
                                 @endif
                             </div>
                         </div>
@@ -138,12 +138,20 @@
 
                                         <p class="m-0">{{$i->Title}}</p>
                                         <p class="m-0">
-                                            <i class="fas fa-star" style="color:#FF9529"></i>
-                                            <i class="fas fa-star" style="color:#FF9529"></i>
-                                            <i class="fas fa-star" style="color:#FF9529"></i>
-                                            <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                            <i class="far fa-star" style="color:#FF9529"></i>
-                                            3.5/5.0
+                                            @foreach($host_AVGrate as $k)
+                                                @if($k=="0")
+                                                    <i class="far fa-star" style="color:#FF9529"></i>
+                                                @elseif($k=="0.5")
+                                                    <i class="fas fa-star-half-alt" style="color:#FF9529"
+                                                       aria-hidden="true"></i>
+                                                @elseif($k=="1")
+                                                    <i class="fas fa-star" style="color:#FF9529"></i>
+                                                @else
+                                                    <i class="fas fa-star" style="color:#FF9529"></i>
+                                                    {{$host_AVGrate[0]}}
+                                                @endif
+
+                                            @endforeach
                                         </p>
                                         <p class="m-0">{{$i->Pay}}$</p>
                                         <i class="fas fa-heart pr-3"

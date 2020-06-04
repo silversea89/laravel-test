@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Evaluation;
 use App\Status;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -62,11 +63,36 @@ class TaskController extends Controller
         $classifications = Classification::all();
         $user = Auth::user();
         $id = $user->student_id;
+        $host_AVG_array = array();
         $tasks = DB::table('tasks')
-            ->leftJoin('users', 'tasks.student_id', '=', 'users.student_id')
+            ->Join('users', 'tasks.student_id', '=', 'users.student_id')
             ->where('Status', '=', 'Selectable')
             ->get();
-        return view('list')->with(["classifications" => $classifications, "tasks" => $tasks, "id" => $id]);
+
+        $host_AVGrate=DB::table('users')
+            ->where('student_id', '=', $id)
+            ->select('host_rate')
+            ->first();
+
+        $host_AVGrate = get_object_vars($host_AVGrate)['host_rate'];
+
+        if($host_AVGrate!=null){
+
+            while($host_AVGrate >= 1){
+            $host_AVGrate -= 1;
+            array_push($host_AVG_array, 1);
+            if($host_AVGrate>=0.3 && $host_AVGrate<=0.7){
+                array_push($host_AVG_array, 0.5);
+            }
+            while(count($host_AVG_array)<5){
+                array_push($host_AVG_array, 0);
+            }}
+        }
+        else{
+            array_push($host_AVG_array, "尚無資料");
+        }
+
+        return view('list')->with(["classifications" => $classifications, "tasks" => $tasks, "host_AVGrate"=>$host_AVG_array,"id" => $id]);
     }
 
     protected function showSearchListForm(Request $request)
@@ -139,6 +165,7 @@ class TaskController extends Controller
             ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
 
+
         return view('list_push')->with(["classifications" => $classifications,
             "tasksING" => $tasksING,
             "tasksWaiting" => $tasksWaiting,
@@ -167,6 +194,7 @@ class TaskController extends Controller
             ->where("tasks.Status", "=", "Complete")
             ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
+
         return view('list_ING')->with(["classifications" => $classifications,
             "tasksING" => $tasksING,
             "tasksComplete" => $tasksComplete]);
@@ -176,13 +204,16 @@ class TaskController extends Controller
     {
         $user = Auth::user();
         $id = $user->student_id;
+        $evaluation = DB::table('evaluation')
+            ->where("evaluation.tasks_id","=",$tasks_id)
+            ->first();
         $tasks = DB::table('tasks')
             ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
             ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
             ->where('tasks_id', '=', $tasks_id)
             ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname')
             ->first();
-        return view('list_id')->with(["tasks" => $tasks, "id" => $id]);
+        return view('list_id')->with(["tasks" => $tasks, "id" => $id,"evaluation"=>$evaluation]);
     }
 
     protected function taskprogress(Request $request, $tasks_id)
@@ -209,8 +240,8 @@ class TaskController extends Controller
             $progress_change->save();
         }
         $tasks = DB::table('tasks')
-            ->leftJoin('users as host', 'tasks.student_id', '=', 'host.student_id')
-            ->leftJoin('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
+            ->Join('users as host', 'tasks.student_id', '=', 'host.student_id')
+            ->Join('users as toolman', 'tasks.toolman_id', '=', 'toolman.student_id')
             ->where('tasks_id', '=', $tasks_id)
             ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname')
             ->first();
@@ -248,16 +279,12 @@ class TaskController extends Controller
             if($existdata === null){
                 Evaluation::create([
                     'tasks_id' => $data['tasks_id'],
-                    'host_id' => $tasks->student_id,
-                    'toolman_id' => $tasks->toolman_id,
                     'toolman_rate' => $data['toolman_rate'],
                     'toolman_comment' => $data['toolman_comment'],
                 ]);
             }
             else{
                 $putdata=Evaluation::find($data['tasks_id']);
-                $putdata->host_id=$tasks->student_id;
-                $putdata->toolman_id=$tasks->toolman_id;
                 $putdata->toolman_rate=$data['toolman_rate'];
                 $putdata->toolman_comment=$data['toolman_comment'];
                 $putdata->save();
@@ -267,21 +294,35 @@ class TaskController extends Controller
             if($existdata === null){
                 Evaluation::create([
                     'tasks_id' => $data['tasks_id'],
-                    'host_id' => $tasks->student_id,
-                    'toolman_id' => $tasks->toolman_id,
                     'host_rate' => $data['host_rate'],
                     'host_comment' => $data['host_comment'],
                 ]);
             }
             else{
                 $putdata=Evaluation::find($data['tasks_id']);
-                $putdata->host_id=$tasks->student_id;
-                $putdata->toolman_id=$tasks->toolman_id;
                 $putdata->host_rate=$data['host_rate'];
                 $putdata->host_comment=$data['host_comment'];
                 $putdata->save();
             }
         }
-    }
 
+        $host_AVGrate=DB::table('evaluation')
+            ->join("tasks",'evaluation.tasks_id','=','tasks.tasks_id')
+            ->where('tasks.student_id', '=', $tasks->student_id)
+            ->avg('host_rate');
+        $toolman_AVGrate=DB::table('evaluation')
+            ->join("tasks",'evaluation.tasks_id','=','tasks.tasks_id')
+            ->where('tasks.toolman_id', '=', $tasks->toolman_id)
+            ->avg('toolman_rate');
+
+
+        $toolman_AVGrate_update = User::find($tasks->toolman_id);
+        $toolman_AVGrate_update->toolman_rate = $toolman_AVGrate;
+        $toolman_AVGrate_update->save();
+
+        $host_AVGrate_update = User::find($tasks->student_id);
+        $host_AVGrate_update->host_rate = $host_AVGrate;
+        $host_AVGrate_update->save();
+
+    }
 }

@@ -71,17 +71,19 @@
                         </div>
                     </nav>
                     <div class="tab-content">
-{{--                        host tab--}}
+                        {{--                        host tab--}}
                         <div class="tab-pane fade show active" id="nav-tabHostRating">
                             <h5 class="font-weight-bold pt-2 pb-2">
                                 雇主評價:
                                 @foreach($host_AVGrate as $i)
                                     @if($i=="0")
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
+                                        <i class="far fa-star" style="color:#FF9529"></i>
                                     @elseif($i=="0.5")
                                         <i class="fas fa-star-half-alt" style="color:#FF9529" aria-hidden="true"></i>
+                                    @elseif($i=="1")
+                                        <i class="fas fa-star" style="color:#FF9529"></i>
                                     @else
-                                        <i class="far fa-star" style="color:#FF9529"></i>
+                                        {{$host_AVGrate[0]}}
                                     @endif
                                 @endforeach
                             </h5>
@@ -107,7 +109,7 @@
                             @endforeach
                         </div>
 
-{{--                        //toolman tab--}}
+                        {{--                        //toolman tab--}}
                         <div class="tab-pane fade" id="nav-tabToolManRating">
                             <h5 class="font-weight-bold pt-2 pb-2">
                                 工具人評價:
@@ -116,8 +118,10 @@
                                         <i class="fas fa-star" style="color:#FF9529"></i>
                                     @elseif($i=="0.5")
                                         <i class="fas fa-star-half-alt" style="color:#FF9529" aria-hidden="true"></i>
-                                    @elseif($i=="0.5")
-                                        <i class="far fa-star" style="color:#FF9529"></i>
+                                    @elseif($i=="1")
+                                        <i class="fas fa-star" style="color:#FF9529"></i>
+                                    @else
+                                        {{$toolman_AVGrate[0]}}
                                     @endif
                                 @endforeach
                             </h5>
@@ -131,10 +135,10 @@
                                                 {{$i->host_comment}}
                                             </p>
                                             <p class="mb-1">
-                                                @for ($k = 0; $k < $i->host_rate; $k++)
+                                                @for ($k = 0; $k < $i->toolman_rate; $k++)
                                                     <i class="fas fa-star" style="color:#FF9529"></i>
                                                 @endfor
-                                                @for ($k = 0; $k < 5-$i->host_rate; $k++)
+                                                @for ($k = 0; $k < 5-$i->toolman_rate; $k++)
                                                     <i class="far fa-star" style="color:#FF9529"></i>
                                                 @endfor
                                             </p>

@@ -16,10 +16,6 @@ class EvaluationTable extends Migration
         Schema::create('evaluation', function (Blueprint $table) {
             $table->unsignedBigInteger('tasks_id')->primary()->unique();
             $table->foreign('tasks_id')->references('tasks_id')->on('tasks');
-            $table->string('host_id');
-            $table->foreign('host_id')->references('student_id')->on('tasks');
-            $table->string('toolman_id');
-            $table->foreign('toolman_id')->references('toolman_id')->on('tasks');
             $table->integer('toolman_rate')->nullable();
             $table->integer('host_rate')->nullable();
             $table->string('toolman_comment')->nullable();
