@@ -11,28 +11,28 @@
             <div class="modal-content container">
                 <form method="post" action="{{ route('task.complete')}}">
                     @csrf
-                    <input type="hidden" name="tasks_id" value={{$tasks->tasks_id}}>
+                    <input type="hidden" name="tasks_id" value={{$tasks->Tasks_id}}>
                     <center>
                         <div class="rate pl-0 mt-1">
-                            <input type="radio" id="star5" @if($id==$tasks->student_id) name="toolman_rate"
-                                   @elseif($id==$tasks->toolman_id) @endif name="host_rate" value="5"/>
+                            <input type="radio" id="star5" @if($id==$tasks->Student_id) name="toolman_rate"
+                                   @elseif($id==$tasks->Toolman_id) @endif name="host_rate" value="5"/>
                             <label class="mr-2" for="star5" title="text"><i class="fas fa-star"></i></label>
-                            <input type="radio" id="star4" @if($id==$tasks->student_id) name="toolman_rate"
-                                   @elseif($id==$tasks->toolman_id) @endif name="host_rate" value="4"/>
+                            <input type="radio" id="star4" @if($id==$tasks->Student_id) name="toolman_rate"
+                                   @elseif($id==$tasks->Toolman_id) @endif name="host_rate" value="4"/>
                             <label class="mr-2" for="star4" title="text"><i class="fas fa-star"></i></label>
-                            <input type="radio" id="star3" @if($id==$tasks->student_id) name="toolman_rate"
-                                   @elseif($id==$tasks->toolman_id) @endif name="host_rate" value="3"/>
+                            <input type="radio" id="star3" @if($id==$tasks->Student_id) name="toolman_rate"
+                                   @elseif($id==$tasks->Toolman_id) @endif name="host_rate" value="3"/>
                             <label class="mr-2" for="star3" title="text"><i class="fas fa-star"></i></label>
-                            <input type="radio" id="star2" @if($id==$tasks->student_id) name="toolman_rate"
-                                   @elseif($id==$tasks->toolman_id) @endif name="host_rate" value="2"/>
+                            <input type="radio" id="star2" @if($id==$tasks->Student_id) name="toolman_rate"
+                                   @elseif($id==$tasks->Toolman_id) @endif name="host_rate" value="2"/>
                             <label class="mr-2" for="star2" title="text"><i class="fas fa-star"></i></label>
-                            <input type="radio" id="star1" @if($id==$tasks->student_id) name="toolman_rate"
-                                   @elseif($id==$tasks->toolman_id) @endif name="host_rate" value="1"/>
+                            <input type="radio" id="star1" @if($id==$tasks->Student_id) name="toolman_rate"
+                                   @elseif($id==$tasks->Toolman_id) @endif name="host_rate" value="1"/>
                             <label class="mr-2" for="star1" title="text"><i class="fas fa-star"></i></label>
                         </div>
                         <div class="form-group">
-                            <textarea @if($id==$tasks->student_id) name="toolman_comment"
-                                      @elseif($id==$tasks->toolman_id) name="host_comment" @endif class="form-control"
+                            <textarea @if($id==$tasks->Student_id) name="toolman_comment"
+                                      @elseif($id==$tasks->Toolman_id) name="host_comment" @endif class="form-control"
                                       id="" rows="5" placeholder="給個評論吧..."></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary my-0 mb-3">確認送出</button>
@@ -45,8 +45,8 @@
     <div class="container pt-3 pb-0 " style="background-color:white;">
 
         <div class="" style="position:relative;">
-            <h3>委託編號：{{$tasks->tasks_id}}</h3>
-            @if($tasks->toolman_id==null)
+            <h3>委託編號：{{$tasks->Tasks_id}}</h3>
+            @if($tasks->Toolman_id==null)
                 <h3>工具人：尚無工具人</h3>
                 <div class="row  my-3">
                     <div class="col-1 col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
@@ -84,7 +84,7 @@
                 </div>
             @else
                 <h3>工具人：<a href="/profile.html">{{$tasks->toolmanname}}</a></h3>
-                @if($id==$tasks->toolman_id)
+                @if($id==$tasks->Toolman_id)
                     <div class="btn-group" style="position:absolute;top:0px;right:0px">
                         @if($tasks->Progress==null)
                             <input type="hidden" name="Progress" value="{{$tasks->Progress}}">
@@ -273,22 +273,22 @@
                 <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-3 pt-md-0 pl-5 pr-3 pl-md-5">
                     <h3>{{$tasks->Title}}</h3>
                     <span class="badge badge-primary">代購物品</span>
-                    <h5>委託內容：<p>{{$tasks->content}}</p></h5>
+                    <h5>委託內容：<p>{{$tasks->Content}}</p></h5>
                     <h5>購買地點：<p>{{$tasks->BuyAddress}}</p></h5>
                     <h5>面交地點：<p>{{$tasks->MeetAddress}}</p></h5>
                     <h5>面交時間：<p>{{$tasks->DateTime}}</p></h5>
                     <h5>酬勞金額：<p>{{$tasks->Pay}}$</p></h5>
                     <p class="m-0">雇主:
-                        <a href="{{ route('profile.id', $tasks->student_id) }}">{{$tasks->hostname}}</a>
+                        <a href="{{ route('profile.id', $tasks->Student_id) }}">{{$tasks->hostname}}</a>
                     </p>
                     <p class="m-0">發佈於:{{$tasks->created_at}}</p>
-                    @if($tasks->toolman_id==null)
+                    @if($tasks->Toolman_id==null)
                         <p class="m-0">接單截止期限：{{$tasks->DeadDateTime}}</p>
                     @endif
-                    @if($tasks->toolman_id==null||$tasks->Progress!="complete")
+                    @if($tasks->Toolman_id==null||$tasks->Progress!="complete")
 
                     @else
-                        @if( ($tasks->student_id==$id && $evaluation->toolman_rate==null) || ($tasks->toolman_id==$id && $evaluation->host_rate==null))
+                        @if( ($tasks->Student_id==$id && $evaluation->Toolman_rate==null) || ($tasks->Toolman_id==$id && $evaluation->Host_Rate==null))
                             <div class="d-flex justify-content-center justify-content-md-start" style="width:100%">
                                 <button type="button" class="btn btn-primary mt-2 mb-3" data-toggle="modal"
                                         data-target=".content0">委託完成
@@ -306,7 +306,7 @@
         <div class="modal-dialog modal-md"
              style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
             <div class="modal-content container">
-                <form method="post" action="{{ route('taskprogress', $tasks->tasks_id) }}">
+                <form method="post" action="{{ route('taskprogress', $tasks->Tasks_id) }}">
                     @csrf
                     <center class="my-3">
                         <h1 class="fas fa-exclamation-triangle" style="color:orange"></h1>

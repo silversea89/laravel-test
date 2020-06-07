@@ -15,10 +15,10 @@ class ContactController extends Controller
     protected function AddContact(Request $request)
     {
         Contact::create([
-            'user' => $request['user'],
-            'email' => $request['email'],
-            'title' => $request['title'],
-            'content' => $request['content'],
+            'User' => $request['user'],
+            'Email' => $request['email'],
+            'Title' => $request['title'],
+            'Content' => $request['content'],
         ]);
 
         return view("contact");

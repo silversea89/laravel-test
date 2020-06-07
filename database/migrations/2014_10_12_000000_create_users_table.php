@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('gender');
             $table->string('tel');
             $table->string('email');
-            $table->float('host_rate')->nullable();
-            $table->float('toolman_rate')->nullable();
+            $table->float('host_rate_avg')->nullable();
+            $table->float('toolman_rate_avg')->nullable();
             $table->string('password');
             $table->timestamps();
             $table->rememberToken();

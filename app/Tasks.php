@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Tasks extends Model
 {
     protected $fillable = [
-        'Classification','student_id','Title', 'toolman_id','Status','DateTime','DeadDateTime','BuyAddress', 'MeetAddress', 'Pay', 'content',"Progress"
+        'Classification','Student_id','Title', 'Toolman_id','Status','DateTime','DeadDateTime','BuyAddress', 'MeetAddress', 'Pay', 'Content',"Progress"
     ];
 
-    protected $primaryKey = "tasks_id";
+    protected $primaryKey = "Tasks_id";
 
     public function get_by_toolman(User $user)
     {
-        $toolman_id = $user->student_id;
+        $Toolman_id = $user->student_id;
 
-        if ($this->toolman_id == null && $this->student_id != $toolman_id) {
-            $this->toolman_id = $toolman_id;
+        if ($this->Toolman_id == null && $this->student_id != $Toolman_id) {
+            $this->Toolman_id = $Toolman_id;
             $this->Status = "Processing";
             $this->save();
         }

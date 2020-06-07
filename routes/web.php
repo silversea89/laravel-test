@@ -46,7 +46,9 @@ Route::get('/contact', function () {
 //Route::get('profile','ProfileController@showprofile')->name('profile');
 
 Route::post('AddTasks', 'TaskController@Add')->name("task.add");
-
+//admin
+Route::get('adminlogin', 'Auth\LoginController@showAdminLoginForm')->name('AdminLogin.show');
+Route::post('adminlogin', 'Auth\AdminLoginController@login')->name("AdminLogin");
 Auth::routes();
 //// Authentication Routes...
 //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

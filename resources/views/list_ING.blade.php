@@ -8,7 +8,7 @@
     <div class="container pt-3 pb-0 pl-0 pr-0" style="background-color:white;">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="background-color:white;">
             <div class="d-flex justify-content-between">
-                <h1 class="m-0">接受的委託-全部</h1>
+                <h1 class="m-0">接受的委託</h1>
                 <button class="btn btn-primary"  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                     <i class="fas fa-filter"></i>
                 </button>
@@ -78,7 +78,7 @@
                 <div class="row mr-0" id="pills-ing">
                     @foreach($tasksING as $i)
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
-                            <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black"></a>
+                            <a href="{{ route('task.detail', $i->Tasks_id)}}" style="text-decoration:none;color:black"></a>
                             <div style="border:1px #DFDFDF solid;"  data-toggle="modal" data-target=".content0">
                                 <div class="row pl-3" >
                                     <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">

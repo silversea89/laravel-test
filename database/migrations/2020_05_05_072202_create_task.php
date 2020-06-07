@@ -14,11 +14,11 @@ class CreateTask extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id('tasks_id');
-            $table->string('student_id');
-            $table->foreign('student_id')->references('student_id')->on('users');
-            $table->string('toolman_id')->nullable();
-            $table->foreign('toolman_id')->references('student_id')->on('users');
+            $table->id('Tasks_id');
+            $table->string('Student_id');
+            $table->foreign('Student_id')->references('student_id')->on('users');
+            $table->string('Toolman_id')->nullable();
+            $table->foreign('Toolman_id')->references('student_id')->on('users');
             $table->string('Classification');
             $table->string('Title');
             $table->dateTime('DateTime');
@@ -26,7 +26,7 @@ class CreateTask extends Migration
             $table->string('BuyAddress');
             $table->string('MeetAddress');
             $table->integer('Pay');
-            $table->string('content');
+            $table->string('Content');
             //Selectable,processing,complete
             $table->string('Status')->default("Selectable");
             //go,back,arrive,complete

@@ -14,7 +14,7 @@ class WelcomeController extends Controller
     protected function Welcome(Request $request)
     {
         $newesttasks = DB::table('tasks')
-            ->leftJoin('users', 'tasks.student_id', '=', 'users.student_id')
+            ->leftJoin('users', 'tasks.Student_id', '=', 'users.student_id')
             ->where('Status','=','Selectable')
             ->orderBy('tasks.created_at', 'desc')
             ->take(8)
@@ -24,10 +24,10 @@ class WelcomeController extends Controller
         $task_amount=DB::table('tasks')
             ->count();
         $task_complete_amount=DB::table('tasks')
-            ->where('status','=','complete')
+            ->where('Status','=','complete')
             ->count();
         $task_notcomplete_amount=DB::table('tasks')
-            ->where('status','=','selectable')
+            ->where('Status','=','selectable')
             ->count();
         return view('welcome')
             ->with(["newesttasks" => $newesttasks,

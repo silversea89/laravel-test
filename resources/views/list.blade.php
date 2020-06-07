@@ -72,14 +72,14 @@
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".content0">Extra large modal</button>
           -->
         @foreach($tasks as $i)
-            <div class="modal fade content{{$i->tasks_id}}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal fade content{{$i->Tasks_id}}" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content container">
                         <div class="row p-2 ">
                             <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 pr-0 pl-0">
                                 <h3 class="far fa-times-circle"
                                     style="color:white;position: absolute; top: 5px;left: 5px;border-radius:100%;box-shadow:0 0rem 0.5rem rgba(0, 0, 0, 1);"
-                                    data-toggle="modal" data-target=".content{{$i->tasks_id}}"></h3>
+                                    data-toggle="modal" data-target=".content{{$i->Tasks_id}}"></h3>
                                 <img src="img/food.jpg" class="img-fluid pr-0">
                             </div>
                             <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-1">
@@ -90,7 +90,7 @@
 
                                 <h3>{{$i->Title}}</h3>
                                 <span class="badge badge-primary">代購物品</span>
-                                <h5>購買物品和需求：<p>{{$i->content}}</p>
+                                <h5>購買物品和需求：<p>{{$i->Content}}</p>
                                     <h5>購買地點：<p>{{$i->BuyAddress}}</p>
                                     </h5>
                                     <h5>面交地點：<p>{{$i->MeetAddress}}</p>
@@ -104,10 +104,10 @@
                                 <p class="m-0">老闆:<a href="#">{{$i->name}}</a></p>
                                 <p class="m-0">發佈於:{{$i->created_at}}</p>
                                 <p class="m-0">接單截止期限：{{$i->DeadDateTime}}</p>
-                                @if($i->student_id!=$id)
+                                @if($i->Student_id!=$id)
                                     <form method="POST" action="{{ route('task.get') }}">
                                         @csrf
-                                        <input type="hidden" name="tasks_id" value="{{$i->tasks_id}}">
+                                        <input type="hidden" name="tasks_id" value="{{$i->Tasks_id}}">
                                         <button type="submit" class="btn btn-primary my-3">接受委託</button>
                                     </form>
                                 @endif
@@ -124,7 +124,7 @@
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0">
 
                         <div style="border:1px #DFDFDF solid;" data-toggle="modal"
-                             data-target=".content{{$i->tasks_id}}">
+                             data-target=".content{{$i->Tasks_id}}">
 
                             <div class="row pl-3">
 
@@ -154,9 +154,6 @@
                                             @endforeach
                                         </p>
                                         <p class="m-0">{{$i->Pay}}$</p>
-                                        <i class="fas fa-heart pr-3"
-                                           style="color:red;position:absolute;bottom:5px;right:5px"
-                                           aria-hidden="true"></i>
                                     </div>
 
                                 </div>

@@ -29,7 +29,12 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const LIST = '/list';
-
+    /**
+     * The path to the "home" route for your application.
+     *
+     * @var string
+     */
+    public const ADMIN = '/Dashboard';
     /**
      * The path to the "home" route for your application.
      *

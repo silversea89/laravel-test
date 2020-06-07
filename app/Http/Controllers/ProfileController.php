@@ -16,7 +16,7 @@ class ProfileController extends Controller
     {
         $profile = DB::table('users')
             ->select('users.*')
-            ->where('student_id', '=', $profile_id)
+            ->where('Student_id', '=', $profile_id)
             ->get();
         $taskaddrecord = DB::table('tasks')
             ->where('student_id', '=', $profile_id)
@@ -25,30 +25,30 @@ class ProfileController extends Controller
             ->where('status', '=', 'complete')
             ->count();
         $host_evaluation = DB::table('evaluation')
-            ->join("tasks", 'evaluation.tasks_id', '=', 'tasks.tasks_id')
-            ->where('tasks.student_id', '=', $profile_id)
+            ->join("tasks", 'evaluation.Tasks_id', '=', 'tasks.Tasks_id')
+            ->where('tasks.Student_id', '=', $profile_id)
             ->select('evaluation.*', 'tasks.Title')
             ->get();
         $toolman_evaluation = DB::table('evaluation')
-            ->join("tasks", 'evaluation.tasks_id', '=', 'tasks.tasks_id')
-            ->where('tasks.toolman_id', '=', $profile_id)
-            ->where('toolman_rate', '!=', 'null')
+            ->join("tasks", 'evaluation.Tasks_id', '=', 'tasks.Tasks_id')
+            ->where('tasks.Toolman_id', '=', $profile_id)
+            ->where('Toolman_Rate', '!=', 'null')
             ->select('evaluation.*', 'tasks.Title')
             ->get();
 
         $host_AVGrate = DB::table('users')
             ->where('student_id', '=', $profile_id)
-            ->select('host_rate')
+            ->select('host_rate_avg')
             ->first();
         $toolman_AVGrate = DB::table('users')
             ->where('student_id', '=', $profile_id)
-            ->select('toolman_rate')
+            ->select('toolman_rate_avg')
             ->first();
 
         $host_AVG_array = array();
         $toolman_AVG_array = array();
-        $host_AVGrate = get_object_vars($host_AVGrate)['host_rate'];
-        $toolman_AVGrate = get_object_vars($toolman_AVGrate)['toolman_rate'];
+        $host_AVGrate = get_object_vars($host_AVGrate)['host_rate_avg'];
+        $toolman_AVGrate = get_object_vars($toolman_AVGrate)['toolman_rate_avg'];
 
         if ($host_AVGrate != null) {
             while ($host_AVGrate >= 1) {
