@@ -84,10 +84,38 @@
                             </div>
                             <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-1">
 
-                                <button type="button" class="btn btn-danger"
-                                        style="position: absolute; top: 5px;right: 5px;">檢舉
-                                </button>
-
+                                @if($i->Student_id!=$id)
+                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                            data-target=".contentReport"
+                                            style="position: absolute; top: 5px;right: 5px;">檢舉
+                                    </button>
+                                    <div class="modal fade contentReport" tabindex="-1" role="dialog"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-md px-2"
+                                             style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
+                                            <div class="modal-content container">
+                                                <h3 class="fas fa-times"
+                                                    style="color:#999999;position: absolute; top: 7px;right: 15px;"
+                                                    data-toggle="modal" data-target=".contentReport"></h3>
+                                                <br>
+                                                <hr class="mb-3" size="8px" align="center" width="100%"
+                                                    style="color:#999999;">
+                                                <form method="post" action="{{ route('report.add')}}">
+                                                    <input type="hidden" name="tasks_id" value={{$i->Tasks_id}}>
+                                                    <input type="hidden" name="Title" value={{$i->Title}}>
+                                                    <center>
+                                                        <div class="form-group">
+                                                            <textarea class="form-control" id="" rows="5" name="reason"
+                                                                      placeholder="檢舉原因..."></textarea>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-danger my-0 mb-3">確認檢舉
+                                                        </button>
+                                                    </center>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                                 <h3>{{$i->Title}}</h3>
                                 <span class="badge badge-primary">代購物品</span>
                                 <h5>購買物品和需求：<p>{{$i->Content}}</p>
@@ -138,7 +166,7 @@
 
                                         <p class="m-0">{{$i->Title}}</p>
                                         <p class="m-0">
-                                            @foreach($host_AVGrate as $k)
+                                            @foreach($host_AVGrate[$i->Student_id] as $k)
                                                 @if($k=="0")
                                                     <i class="far fa-star" style="color:#FF9529"></i>
                                                 @elseif($k=="0.5")
@@ -148,7 +176,8 @@
                                                     <i class="fas fa-star" style="color:#FF9529"></i>
                                                 @else
                                                     <i class="fas fa-star" style="color:#FF9529"></i>
-                                                    {{$host_AVGrate[0]}}
+                                                    {{$k}}
+                                                    @break;
                                                 @endif
 
                                             @endforeach

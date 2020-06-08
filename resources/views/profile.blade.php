@@ -93,13 +93,13 @@
                                         <div class="p-2" style="border-style: outset;border-width:3px;height:100%">
                                             <p class="font-weight-bold mb-1">{{$i->Title}}</p>
                                             <p class="mb-1">
-                                                {{$i->host_comment}}
+                                                {{$i->Host_Comment}}
                                             </p>
                                             <p class="mb-1">
-                                                @for ($k = 0; $k < $i->host_rate; $k++)
+                                                @for ($k = 0; $k < $i->Host_Rate; $k++)
                                                     <i class="fas fa-star" style="color:#FF9529"></i>
                                                 @endfor
-                                                @for ($k = 0; $k < 5-$i->host_rate; $k++)
+                                                @for ($k = 0; $k < 5-$i->Host_Rate; $k++)
                                                     <i class="far fa-star" style="color:#FF9529"></i>
                                                 @endfor
                                             </p>

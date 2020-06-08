@@ -3,7 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
     <script src="https://kit.fontawesome.com/d53abecaf1.js"></script>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -40,19 +44,17 @@
         <div class=" navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/admin/dashboard">儀錶板</a>
+                    <a class="nav-link" href="{{route('Admin.Dashboard')}}">儀錶板</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/list">所有委託</a>
+                    <a class="nav-link" href="{{route('Admin.Tasks')}}">所有委託</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/members">會員</a>
+                    <a class="nav-link" href="{{route('Admin.Member')}}">會員</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/report">檢舉名單</a>
+                    <a class="nav-link" href="{{route('Admin.Report')}}">檢舉名單</a>
                 </li>
-
-
             </ul>
             <div class="form-inline my-2 my-lg-0">
                 <a class="btn btn-danger my-2 my-sm-0" href="/admin">登出</a>

@@ -9,7 +9,8 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="background-color:white;">
             <div class="d-flex justify-content-between">
                 <h1 class="m-0">接受的委託</h1>
-                <button class="btn btn-primary"  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <button class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
                     <i class="fas fa-filter"></i>
                 </button>
             </div>
@@ -66,70 +67,75 @@
 
             <ul class="nav nav-tabs mt-3" id="pills-tab" role="tablist">
                 <li class="nav-item col-6 pr-2 pr-md-2 pl-1" style="text-align:center;">
-                    <a class="nav-link px-0 " data-toggle="pill" href="#pills-ing" role="tab" aria-selected="true">執行中</a>
+                    <a class="nav-link px-0 " data-toggle="pill" href="#pills-ing" role="tab"
+                       aria-selected="true">執行中</a>
                 </li>
                 <li class="nav-item col-6 pr-0 pl-2" style="text-align:center;">
-                    <a class="nav-link px-0" data-toggle="pill" href="#pills-fin" role="tab" aria-selected="false">已完成</a>
+                    <a class="nav-link px-0" data-toggle="pill" href="#pills-fin" role="tab"
+                       aria-selected="false">已完成</a>
                 </li>
             </ul>
 
 
-            <div class="tab-pane tab-pane fade" id="pills-ing"  >
+            <div class="tab-pane tab-pane fade" id="pills-ing">
                 <div class="row mr-0" id="pills-ing">
                     @foreach($tasksING as $i)
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
-                            <a href="{{ route('task.detail', $i->Tasks_id)}}" style="text-decoration:none;color:black"></a>
-                            <div style="border:1px #DFDFDF solid;"  data-toggle="modal" data-target=".content0">
-                                <div class="row pl-3" >
-                                    <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
-                                        <div class="" style="background-color:gray;position:absolute;top:0px;left:0px">
-                                            <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0">
+                            <a href="{{ route('task.detail', $i->Tasks_id)}}"
+                               style="text-decoration:none;color:black">
+                                <div style="border:1px #DFDFDF solid;" data-toggle="modal" data-target=".content0">
+                                    <div class="row pl-3">
+                                        <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
+                                            <div class=""
+                                                 style="background-color:gray;position:absolute;top:0px;left:0px">
+                                                <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
+                                            </div>
+                                            <img src="{{asset('img/food.jpg')}}" class="img-fluid">
                                         </div>
-                                        <img src="{{asset('img/food.jpg')}}" class="img-fluid" >
-                                    </div>
-                                    <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 " >
-                                        <div class="pl-1" >
-                                            <p class="m-0">{{$i->Title}}</p>
-                                            <p class="m-0">
-                                                工具人：{{$i->toolmanname}}
-                                            </p>
+                                        <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 ">
+                                            <div class="pl-1">
+                                                <p class="m-0">{{$i->Title}}</p>
+                                                <p class="m-0">
+                                                    工具人：{{$i->toolmanname}}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>
             </div>
 
-            <div class="tab-pane tab-pane fade" id="pills-fin"  >
+            <div class="tab-pane tab-pane fade" id="pills-fin">
                 <div class="row mr-0" id="pills-fin">
                     @foreach($tasksComplete as $i)
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0" >
-                            <a href="{{ route('task.detail', $i->tasks_id)}}" style="text-decoration:none;color:black"></a>
-                            <div style="border:1px #DFDFDF solid;">
-
-                                <div class="row pl-3" >
-
-                                    <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
-                                        <div class="" style="background-color:gray;position:absolute;top:0px;left:0px">
-                                            <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0">
+                            <a href="{{ route('task.detail', $i->Tasks_id)}}" style="text-decoration:none;color:black">
+                                <div style="border:1px #DFDFDF solid;">
+                                    <div class="row pl-3">
+                                        <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
+                                            <div class=""
+                                                 style="background-color:gray;position:absolute;top:0px;left:0px">
+                                                <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
+                                            </div>
+                                            <img src="{{asset('img/food.jpg')}}" class="img-fluid">
                                         </div>
-                                        <img src="{{asset('img/food.jpg')}}" class="img-fluid" >
-                                    </div>
 
-                                    <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 " >
+                                        <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 ">
 
-                                        <div class="pl-1" >
+                                            <div class="pl-1">
 
-                                            <p class="m-0">{{$i->Title}}</p>
-                                            <p class="m-0">
-                                                工具人：{{$i->toolmanname}}
-                                            </p>
+                                                <p class="m-0">{{$i->Title}}</p>
+                                                <p class="m-0">
+                                                    工具人：{{$i->toolmanname}}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>
@@ -265,9 +271,15 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
 
     </body>
 @endsection

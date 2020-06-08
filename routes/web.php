@@ -24,7 +24,7 @@ Route::get('list', 'TaskController@showListForm')->name("list")->middleware('aut
 Route::get('list_push', 'TaskController@showListpush')->name("list.push");
 Route::get('list_ING', 'TaskController@showListING')->name("list.ING");
 Route::get('list/search', 'TaskController@showSearchListForm')->name("list.search");
-Route::get('list_id/{tasks_id}', 'TaskController@taskdetail')->name("task.detail");
+Route::get('list_id/{Tasks_id}', 'TaskController@taskdetail')->name("task.detail");
 Route::post('list/gettask', 'TaskController@gettask')->name("task.get");
 Route::post('list/taskcomplete', 'TaskController@taskcomplete')->name("task.complete");
 Route::post('list_id/{tasks_id}', 'TaskController@taskprogress')->name("taskprogress");
@@ -46,9 +46,26 @@ Route::get('/contact', function () {
 //Route::get('profile','ProfileController@showprofile')->name('profile');
 
 Route::post('AddTasks', 'TaskController@Add')->name("task.add");
+
 //admin
 Route::get('adminlogin', 'Auth\LoginController@showAdminLoginForm')->name('AdminLogin.show');
 Route::post('adminlogin', 'Auth\AdminLoginController@login')->name("AdminLogin");
+Route::get('/AdminDashboard', function () {
+    return view('Admin_Dashboard');
+})->name('Admin.Dashboard');
+Route::get('/AdminTasks', function () {
+    return view('Admin_Tasks');
+})->name('Admin.Tasks');
+Route::get('/AdminMember', function () {
+    return view('Admin_Member');
+})->name('Admin.Member');
+Route::get('/AdminReport', function () {
+    return view('Admin_Report');
+})->name('Admin.Report');
+
+//report
+Route::post('ReportAdd', 'TaskController@report_add')->name("report.add");
+
 Auth::routes();
 //// Authentication Routes...
 //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

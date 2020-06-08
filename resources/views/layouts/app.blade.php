@@ -63,17 +63,6 @@
                 @else
                     <ul class="navbar-nav ml-auto nav-flex-icons">
 
-                        <li class="nav-item dropdown pr-3 pb-1 pt-2">
-                            <a class="nav-link dropdown-toggle p-0" id="navbarDropdownMenuLink-1" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">1
-                                <i class="fas fa-envelope"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-lg-right"
-                                 aria-labelledby="navbarDropdownMenuLink-1">
-                                <a class="dropdown-item" href="#">通知</a>
-                            </div>
-                        </li>
-
                         <a class="btn btn-danger my-2 my-sm-0" href="{{ route('logout') }}"
                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                             {{ __('登出') }}

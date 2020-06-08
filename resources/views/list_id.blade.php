@@ -182,7 +182,7 @@
                           background-color:green
                         -->
                     </div>
-                @elseif($id==$tasks->student_id)
+                @elseif($id==$tasks->Student_id)
                     <div class="row  my-3">
                         <div class="col-1 col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
                         @if($tasks->Progress==null)
@@ -288,7 +288,7 @@
                     @if($tasks->Toolman_id==null||$tasks->Progress!="complete")
 
                     @else
-                        @if( ($tasks->Student_id==$id && $evaluation->Toolman_rate==null) || ($tasks->Toolman_id==$id && $evaluation->Host_Rate==null))
+                        @if( ($tasks->Student_id==$id && $evaluation->Toolman_Rate==null) || ($tasks->Toolman_id==$id && $evaluation->Host_Rate==null))
                             <div class="d-flex justify-content-center justify-content-md-start" style="width:100%">
                                 <button type="button" class="btn btn-primary mt-2 mb-3" data-toggle="modal"
                                         data-target=".content0">委託完成

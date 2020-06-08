@@ -55,7 +55,6 @@ class RegisterController extends Controller
             'student_id' => ['required', 'string', 'max:255','unique:users'],
             'name' => ['required', 'string', 'max:255'],
             'tel' => ['required', 'string', 'max:255','unique:users','regex:/(09)[0-9]{8}/'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -68,13 +67,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $Email="s".$data['student_id']."@nutc.edu.tw";
         return User::create([
             'gender' => $data['gender'],
             'department' => $data['department'],
             'student_id' => $data['student_id'],
             'name' => $data['name'],
             'tel' => $data['tel'],
-            'email' => $data['email'],
+            'email' => $Email,
             'password' => Hash::make($data['password']),
         ]);
     }

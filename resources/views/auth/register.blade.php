@@ -62,15 +62,6 @@
                     </div>
 
                     <div class="form-group">
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror border-top-0 border-right-0 border-left-0" aria-describedby="emailHelp" placeholder="電子郵件" name="email" value="{{ old('email') }}" required autocomplete="email">
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="密碼" name="password" value="{{ old('password') }}" required autocomplete="new-password">
                         @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -89,7 +80,7 @@
                 </form>
 
             </div>
-            <div class="d-none d-md-block col-md-6 col-lg-6 col-xl-7 p-0" style="background-color:74D2E7;">
+            <div class="d-none d-md-block col-md-6 col-lg-6 col-xl-7 p-0" style="background-color:#74D2E7;">
                 <img src="img/register.png" class="img-fluid pl-2">
             </div>
         </center>
