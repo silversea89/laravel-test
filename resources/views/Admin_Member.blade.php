@@ -118,69 +118,23 @@
         </tr>
         </thead>
         <tbody>
+        @foreach($members as $i)
         <tr>
-            <td><a href="/profile.html">王一明</a></td>
-            <td>男</td>
-            <td>資管</td>
-            <td>1110534069</td>
-            <td>0969696969</td>
-            <td>Jan 18, 2001 9:12 AM</td>
-            <td>5/5</td>
+            <td><a href="{{route('profile.id', $i->student_id)}}">{{$i->name}}</a></td>
+            <td>{{$i->name}}</td>
+            <td>{{$i->department}}</td>
+            <td>{{$i->student_id}}</td>
+            <td>{{$i->tel}}</td>
+            <td>{{$i->created_at}}</td>
+            <td>@if($i->host_rate_avg == null) 無 @else {{$i->host_rate_avg}}@endif
+                /
+                @if($i->toolman_rate_avg == null) 無 @else {{$i->toolman_rate_avg}}@endif</td>
             <td>
-
-
                 <button type="button" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">刪除</p></button>
                 <button type="button" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">凍結</p></button>
             </td>
         </tr>
-        <tr>
-            <td><a href="/profile.html">王二明</a></td>
-            <td>男</td>
-            <td>資應</td>
-            <td>1110534087</td>
-            <td>0987878787</td>
-            <td>Jan 18, 2007 9:12 AM</td>
-            <td>5/5</td>
-            <td>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">刪除</p></button>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">凍結</p></button></td>
-        </tr>
-        <tr>
-            <td><a href="/profile.html">王三明</a></td>
-            <td>女</td>
-            <td>資工</td>
-            <td>1110534078</td>
-            <td>0978787878</td>
-            <td>Jan 12, 2003 11:14 AM</td>
-            <td>5/5</td>
-            <td>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">刪除</p></button>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">凍結</p></button></td>
-        </tr>
-        <tr>
-            <td><a href="/profile.html">王四明</a></td>
-            <td>男</td>
-            <td>流管</td>
-            <td>1110534052</td>
-            <td>0952525252</td>
-            <td>Dec 10, 2002 5:14 AM</td>
-            <td>5/5</td>
-            <td>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">刪除</p></button>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">凍結</p></button></td>
-        </tr>
-        <tr>
-            <td><a href="/profile.html">王五明</a></td>
-            <td>女</td>
-            <td>企管</td>
-            <td>1110534094</td>
-            <td>0994949494</td>
-            <td>Jul 6, 2006 8:14 AM</td>
-            <td>5/5</td>
-            <td>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">刪除</p></button>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">凍結</p></button></td>
-        </tr>
+        @endforeach
         </tbody>
     </table>
 

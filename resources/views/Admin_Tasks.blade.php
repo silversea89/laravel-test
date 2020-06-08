@@ -33,7 +33,7 @@
                 widgets: ['zebra', 'resizable'],
                 widgetOptions: {
                     resizable_addLastColumn: true,
-                    resizable_widths: ['10%', '10%', '20%', '30%', '10%', '10%', '10%']
+                    resizable_widths: ['10%', '10%', '15%', '30%', '14%', '14%', '7%']
                 }
             });
 
@@ -119,16 +119,17 @@
         </tr>
         </thead>
         <tbody>
+        @foreach($tasks as $i)
         <tr>
-            <td><a href="/profile.html">王一明</a></td>
-            <td>1110534069</td>
-            <td>50嵐8冰綠一杯</td>
-            <td>午餐好油膩，想喝一杯8冰綠，半糖去冰謝謝！</td>
-            <td>2020/04/01 11:00</td>
-            <td>2020/04/01 12:30</td>
-            <td>5</td>
+            <td><a href="/profile.html">{{$i->name}}</a></td>
+            <td>{{$i->Student_id}}</td>
+            <td>{{$i->Title}}</td>
+            <td>{{$i->Content}}</td>
+            <td>{{$i->DateTime}}</td>
+            <td>{{$i->created_at}}</td>
+            <td>{{$i->host_rate_avg}}</td>
         </tr>
-
+        @endforeach
         </tbody>
     </table>
 

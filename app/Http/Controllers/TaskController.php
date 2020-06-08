@@ -362,10 +362,10 @@ class TaskController extends Controller
         $user = Auth::user();
         $id=$user->student_id;
         Report::create([
-            'Tasks_id' => $request->Tasks_id,
-            'Title' => $request-> Title,
+            'Tasks_id' => $request['Tasks_id'],
+            'Title' => $request['Title'],
             'UserName'=>$id,
-            'Reason'=>$request->reason,
+            'Reason'=>$request['reason'],
             'Status'=>"Waiting"
         ]);
         return redirect()->route('list');

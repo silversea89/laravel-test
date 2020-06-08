@@ -53,12 +53,8 @@ Route::post('adminlogin', 'Auth\AdminLoginController@login')->name("AdminLogin")
 Route::get('/AdminDashboard', function () {
     return view('Admin_Dashboard');
 })->name('Admin.Dashboard');
-Route::get('/AdminTasks', function () {
-    return view('Admin_Tasks');
-})->name('Admin.Tasks');
-Route::get('/AdminMember', function () {
-    return view('Admin_Member');
-})->name('Admin.Member');
+Route::get('/AdminTasks', 'DashboardController@tasks')->name("Admin.Tasks");
+Route::get('/AdminMember', 'DashboardController@members')->name('Admin.Member');
 Route::get('/AdminReport', function () {
     return view('Admin_Report');
 })->name('Admin.Report');
