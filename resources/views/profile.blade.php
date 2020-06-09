@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12 pr-0 ">
                                         <h5 class="font-weight-bold mb-0 pl-2">違規次數</h5>
-                                        <p class="font-weight-normal mb-3 pl-2">0</p>
+                                        <p class="font-weight-normal mb-3 pl-2">{{$i->violation}}</p>
                                     </div>
                                 </div>
                             </div>

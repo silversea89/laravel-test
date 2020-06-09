@@ -11,4 +11,5 @@ class Report extends Model
         'Report_id', 'Tasks_id','Title','UserName','Reason','Status'
     ];
     protected $table = "report";
+    protected $primaryKey ="Report_id";
 }

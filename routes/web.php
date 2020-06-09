@@ -50,20 +50,15 @@ Route::post('AddTasks', 'TaskController@Add')->name("task.add");
 //admin
 Route::get('adminlogin', 'Auth\AdminLoginController@showLoginForm')->name('AdminLogin.show');
 Route::post('adminlogin', 'Auth\AdminLoginController@login')->name("AdminLogin");
-Route::get('/AdminDashboard', function () {
-    $user = Auth::user();
-
-    if($user->is_admin){
-        return view('Admin_Dashboard');
-    }
-
-    return redirect('list');
-})->name('Admin.Dashboard');
+Route::get('/AdminDashboard', 'DashboardController@dashboard')->name('Admin.Dashboard');
 Route::get('/AdminLogout', 'Auth\AdminLoginController@logout')->name('Admin.logout');
 Route::get('/AdminTasks', 'DashboardController@tasks')->name("Admin.Tasks");
 Route::get('/AdminMember', 'DashboardController@members')->name('Admin.Member');
+Route::get('/AdminMember/Delete', 'DashboardController@deletemembers')->name('Admin.MemberDelete');
+Route::get('/AdminMember/inactive', 'DashboardController@inactivemembers')->name('Admin.MemberInactive');
 Route::get('/AdminReport', 'DashboardController@report')->name('Admin.Report');
-
+Route::get('/AdminReport/Pass', 'DashboardController@reportpass')->name('Admin.ReportPass');
+Route::get('/AdminReport/Denied', 'DashboardController@reportdenied')->name('Admin.ReportDenied');
 //report
 Route::post('ReportAdd', 'TaskController@report_add')->name("report.add");
 

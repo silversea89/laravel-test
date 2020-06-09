@@ -100,12 +100,10 @@
     </div>
 </nav>
 
-<div class="container p-0" style="background-color:#999999;" >
+<div class="container p-0" style="background-color:#999999;">
 
 
-
-
-    <table class="tablesorter wrapper-table  mt-0"  style="width:100%">
+    <table class="tablesorter wrapper-table  mt-0" style="width:100%">
         <thead>
         <tr>
             <th>檢舉編號</th>
@@ -119,25 +117,33 @@
         </thead>
         <tbody>
         @foreach($reports as $i)
-        <tr>
-            <td>{{$i->Report_id}}</td>
-            <td>{{$i->Tasks_id}}</td>
-            <td>{{$i->Title}}</td>
-            <td>{{$i->UserName}}</td>
-            <td>{{$i->Reason}}</td>
-            <td>{{$i->created_at}}</td>
-            <td>
-                <button type="button" class="btn btn-success btn-sm py-0 px-1">同意</button>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1">刪除</button>
-            </td>
-        </tr>
+            <tr>
+                <td>{{$i->Report_id}}</td>
+                <td>{{$i->Tasks_id}}</td>
+                <td>{{$i->Title}}</td>
+                <td>{{$i->UserName}}</td>
+                <td>{{$i->Reason}}</td>
+                <td>{{$i->created_at}}</td>
+                <td>
+                    <div class="row">
+                        <form action="{{ route('Admin.ReportPass') }}" method="GET">
+                            <input type="hidden" name="Report_id" value={{$i->Report_id}}>
+                            <input type="hidden" name="Tasks_id" value={{$i->Tasks_id}}>
+                            <button type="submit" class="btn btn-success btn-sm py-0 px-1">同意</button>
+                        </form>
+                        <form action="{{ route('Admin.ReportDenied') }}" method="GET">
+                            <input type="hidden" name="Report_id" value={{$i->Report_id}}>
+                            <button type="submit" class="btn btn-danger btn-sm py-0 px-1">刪除</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
         @endforeach
         </tbody>
     </table>
 
 
-
-    <nav aria-label="Page navigation example"  class="d-flex justify-content-center">
+    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
         <ul class="pagination">
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">
@@ -154,7 +160,6 @@
             </li>
         </ul>
     </nav>
-
 
 
 </div>

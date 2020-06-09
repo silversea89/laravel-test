@@ -23,9 +23,9 @@
                         </div>
                         <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 form-group pl-1">
                             <select class="form-control" name="gender">
-                                <option value="男">男</option>
-                                <option value="女">女</option>
-                                <option value="其他">其他</option>
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                                <option value="3">其他</option>
                             </select>
                         </div>
 

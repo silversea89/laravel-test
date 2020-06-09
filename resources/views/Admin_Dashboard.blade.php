@@ -39,7 +39,7 @@
 
     <div class="container pr-0">
 
-        <a class="navbar-brand" href="#">ToolMan</a>
+        <a class="navbar-brand" href="/">ToolMan</a>
 
         <div class=" navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -74,19 +74,19 @@
         <div class="col-12 col-md-6 mt-3 px-0 pr-md-2">
             <div class="col-12 m-0 p-2"
                  style="background-color:white;border-radius:20px;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);height:100%;">
-                <h3>今日瀏覽次數：5269</h3>
-                <h3>網站瀏覽次數：9487</h3>
-                <h3>總會員數量：8787</h3>
+                <h3>今日瀏覽次數：{{$today_count->Count}}</h3>
+                <h3>網站瀏覽次數：{{$all_count}}</h3>
+                <h3>總會員數量：{{$members_amount}}</h3>
             </div>
         </div>
 
         <div class="col-12 col-md-6 mt-3 px-0 pl-md-2">
             <div class="col-12 m-0 p-2"
                  style="background-color:white;border-radius:20px;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);height:100%;">
-                <h3>每個月新增的委託數</h3>
-                <h3>每個月新增的會員數</h3>
-                <h3>遭檢舉的委託數</h3>
-                <h3>總委託數量</h3>
+                <h3>每個月新增的委託數:{{$month_tasks_amount}}</h3>
+                <h3>每個月新增的會員數:{{$month_members_amount}}</h3>
+                <h3>遭檢舉的委託數:{{$reported_tasks_amount}}</h3>
+                <h3>總委託數量:{{$all_tasks_amount}}</h3>
             </div>
         </div>
 
@@ -108,7 +108,7 @@
                             labels: labels,
                             datasets: [{
                                 //預設資料
-                                data: [40, 48, 2],
+                                data: [{{$man_amount}}, {{$woman_amount}}, {{$else_amount}}],
                                 backgroundColor: [
                                     //資料顏色
                                     "#36A2EB",
@@ -141,7 +141,7 @@
                             labels: labels,
                             datasets: [{
                                 //預設資料
-                                data: [80, 15, 5],
+                                data: [{{$complete_amount}},{{$selectable_amount}}, {{$processing_amount}},],
                                 backgroundColor: [
                                     //資料顏色
                                     "#4BC0C0",
@@ -169,22 +169,30 @@
                     var myChart = new Chart(ctx, {
                         type: 'bar',
                         data: {
-                            labels: ["資管", "資應", "資工", "企管", "國貿", "保金", "應英", "應日", "應中", "品設"],
+                            labels: [@foreach($department_list as $i)
+                            "{{$i->department}}",
+                                @endforeach],
                             datasets: [{
                                 label: '男',
-                                data: [30, 70, 25, 5, 15, 40, 15, 25, 10, 0],
+                                data: [@foreach($department_man_amount as $i)
+                                    "{{$i}}",
+                                    @endforeach],
                                 // this dataset is drawn below
                                 order: 1,
                                 backgroundColor: "#36A2EB"
                             }, {
                                 label: '女',
-                                data: [50, 20, 25, 15, 25, 20, 15, 45, 0, 0],
+                                data: [@foreach($department_woman_amount as $i)
+                                    "{{$i}}",
+                                    @endforeach],
                                 // this dataset is drawn below
                                 order: 2,
                                 backgroundColor: "#FF6384"
                             }, {
                                 label: '其他',
-                                data: [8, 9, 5, 2, 4, 6, 3, 7, 1, 0],
+                                data: [@foreach($department_else_amount as $i)
+                                    "{{$i}}",
+                                    @endforeach],
                                 // this dataset is drawn on top
                                 order: 3,
                                 backgroundColor: "#FFCD56"

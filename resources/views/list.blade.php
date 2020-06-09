@@ -86,17 +86,17 @@
 
                                 @if($i->Student_id!=$id)
                                     <button type="button" class="btn btn-danger" data-toggle="modal"
-                                            data-target=".contentReport"
+                                            data-target=".contentReport{{$i->Tasks_id}}"
                                             style="position: absolute; top: 5px;right: 5px;">檢舉
                                     </button>
-                                    <div class="modal fade contentReport" tabindex="-1" role="dialog"
+                                    <div class="modal fade contentReport{{$i->Tasks_id}}" tabindex="-1" role="dialog"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-md px-2"
                                              style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
                                             <div class="modal-content container">
                                                 <h3 class="fas fa-times"
                                                     style="color:#999999;position: absolute; top: 7px;right: 15px;"
-                                                    data-toggle="modal" data-target=".contentReport"></h3>
+                                                    data-toggle="modal" data-target=".contentReport{{$i->Tasks_id}}"></h3>
                                                 <br>
                                                 <hr class="mb-3" size="8px" align="center" width="100%"
                                                     style="color:#999999;">

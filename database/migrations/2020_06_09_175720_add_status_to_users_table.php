@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class BrowseCount extends Migration
+class AddStatusToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class BrowseCount extends Migration
      */
     public function up()
     {
-        Schema::create('browse', function (Blueprint $table) {
-            $table->date('Date')->primary();
-            $table->integer('Count')->default(0);
+        Schema::table('users', function (Blueprint $table) {
+            //
+            $table->boolean('is_active')->default(true);
         });
     }
 
@@ -26,6 +26,9 @@ class BrowseCount extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('browse');
+        Schema::table('users', function (Blueprint $table) {
+            //
+            $table->removeColumn('is_active');
+        });
     }
 }

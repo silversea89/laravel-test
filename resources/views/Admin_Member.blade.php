@@ -32,7 +32,7 @@
                 widgets: ['zebra', 'resizable'],
                 widgetOptions: {
                     resizable_addLastColumn: true,
-                    resizable_widths: ['10%', '10%', '15%', '15%', '15%', '15%']
+                    resizable_widths: ['10%', '5%', '10%', '10%', '10%', '15%', '10%', '10%', '20%']
                 }
             });
 
@@ -101,10 +101,10 @@
 </nav>
 
 
-<div class="container p-0" style="background-color:#999999;" >
+<div class="container p-0" style="background-color:#999999;">
 
 
-    <table class="tablesorter wrapper-table  mt-0"  style="width:100%">
+    <table class="tablesorter wrapper-table  mt-0" style="width:100%">
         <thead>
         <tr>
             <th>姓名</th>
@@ -114,31 +114,53 @@
             <th>手機</th>
             <th>註冊時間</th>
             <th>雇/工評價</th>
-            <th></th>
+            <th>狀態</th>
+            <th>功能</th>
         </tr>
         </thead>
         <tbody>
         @foreach($members as $i)
-        <tr>
-            <td><a href="{{route('profile.id', $i->student_id)}}">{{$i->name}}</a></td>
-            <td>{{$i->name}}</td>
-            <td>{{$i->department}}</td>
-            <td>{{$i->student_id}}</td>
-            <td>{{$i->tel}}</td>
-            <td>{{$i->created_at}}</td>
-            <td>@if($i->host_rate_avg == null) 無 @else {{$i->host_rate_avg}}@endif
-                /
-                @if($i->toolman_rate_avg == null) 無 @else {{$i->toolman_rate_avg}}@endif</td>
-            <td>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">刪除</p></button>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">凍結</p></button>
-            </td>
-        </tr>
+            <tr>
+                <td><a href="{{route('profile.id', $i->student_id)}}">{{$i->name}}</a></td>
+                <td>@if($i->gender=="1") 男 @elseif ($i->gender=="2" ) 女 @else 其他 @endif</td>
+                <td>{{$i->department}}</td>
+                <td>{{$i->student_id}}</td>
+                <td>{{$i->tel}}</td>
+                <td>{{$i->created_at}}</td>
+                <td>@if($i->host_rate_avg == null) 無 @else {{$i->host_rate_avg}}@endif
+                    /
+                    @if($i->toolman_rate_avg == null) 無 @else {{$i->toolman_rate_avg}}@endif</td>
+                <td>
+                    @if($i->is_active==true)
+                        可使用
+                    @else
+                        已凍結
+                    @endif
+                </td>
+                <td>
+                    <div class="row">
+                        <form action="{{ route('Admin.MemberDelete') }}" method="GET">
+                            <input type="hidden" name="student_id" value={{$i->student_id}}>
+                            <button type="submit" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">刪除</p></button>
+                        </form>
+                        <form action="{{ route('Admin.MemberInactive') }}" method="GET">
+                            <input type="hidden" name="student_id" value={{$i->student_id}}>
+                            @if($i->is_active==true)
+                                <button type="submit" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">凍結</p>
+                                </button>
+                            @else
+                                <button type="submit" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">解凍</p>
+                                </button>
+                            @endif
+                        </form>
+                    </div>
+                </td>
+            </tr>
         @endforeach
         </tbody>
     </table>
 
-    <nav aria-label="Page navigation example"  class="d-flex justify-content-center">
+    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
         <ul class="pagination">
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">

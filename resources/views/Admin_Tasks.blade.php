@@ -33,7 +33,7 @@
                 widgets: ['zebra', 'resizable'],
                 widgetOptions: {
                     resizable_addLastColumn: true,
-                    resizable_widths: ['10%', '10%', '15%', '30%', '14%', '14%', '7%']
+                    resizable_widths: ['5%', '10%', '15%', '30%', '14%','7%', '14%', '5%']
                 }
             });
 
@@ -113,6 +113,7 @@
             <th>標題</th>
             <th>內容</th>
             <th>交易時間</th>
+            <th>狀態</th>
             <th>發布時間</th>
             <th>雇主評價</th>
 
@@ -126,6 +127,7 @@
             <td>{{$i->Title}}</td>
             <td>{{$i->Content}}</td>
             <td>{{$i->DateTime}}</td>
+            <td>{{$i->Status}}</td>
             <td>{{$i->created_at}}</td>
             <td>@if($i->host_rate_avg == null) 無 @else {{$i->host_rate_avg}}@endif
         </tr>
