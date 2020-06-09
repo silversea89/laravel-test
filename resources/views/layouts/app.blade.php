@@ -25,7 +25,7 @@
 </head>
 
 <body>
-<div id="app">
+<div id="app" >
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
 
         <div class="container pr-0">

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ResetPasswordController extends Controller
 {
@@ -26,14 +30,25 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    public function simpleReset(Request $request)
+    public function updatePassword(Request $request)
     {
         $user = Auth::user();
-        $password = $request->password;
-        $this->resetPassword(user, $password);
+        $id = $user->student_id;
+        $this->validate($request, [
+            'old_password' => 'required',
+            'new_password' => 'required|min:6',
+            'confirm_password' => 'required|same:new_password',
+        ]);
 
-
+        $data = $request->all();
+        $user = User::find($id);
+        if (!\Hash::check($data['old_password'], $user->password)) {
+            return view('password_reset')->with(["error"=>'舊密碼輸入錯誤']);
+        } else {
+            $changepassword = User::find($id);
+            $changepassword->password=Hash::make($data['new_password']);
+            $changepassword->save();
+            return view('password_reset')->with(["error"=>'密碼修改成功!']);
+        }
     }
 }

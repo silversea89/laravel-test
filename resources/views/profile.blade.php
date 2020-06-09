@@ -6,7 +6,7 @@
             <h2 class="font-weight-bold mb-0">
                 個人資料
             </h2>
-            <form action="{{ route('change.passwordform') }}" method="get">
+            <form action="{{ route('Password.ShowReset') }}" method="get">
                 <button type="submit" class="btn btn-primary">更改密碼</button>
             </form>
         </div>

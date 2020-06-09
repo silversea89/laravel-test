@@ -61,7 +61,11 @@ Route::get('/AdminReport/Pass', 'DashboardController@reportpass')->name('Admin.R
 Route::get('/AdminReport/Denied', 'DashboardController@reportdenied')->name('Admin.ReportDenied');
 //report
 Route::post('ReportAdd', 'TaskController@report_add')->name("report.add");
-
+//passwordreset
+Route::post('/passwordreset/reset', 'Auth\ResetPasswordController@updatePassword')->name('Password.Reset');
+Route::get('/passwordreset', function () {
+    return view('password_reset')->with(["error"=>'']);
+})->name('Password.ShowReset');
 Auth::routes();
 //// Authentication Routes...
 //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -79,3 +83,4 @@ Auth::routes();
 //Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
