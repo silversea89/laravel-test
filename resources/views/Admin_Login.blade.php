@@ -59,8 +59,9 @@
 
 
             <form action={{ route('AdminLogin') }} method="post">
+                @csrf
                 <div class="form-group">
-                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="account"
+                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="student_id"
                            aria-describedby="emailHelp" placeholder="帳號">
                 </div>
                 <div class="form-group">

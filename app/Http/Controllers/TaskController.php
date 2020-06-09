@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Evaluation;
+use App\Report;
 use App\Status;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -362,7 +363,7 @@ class TaskController extends Controller
         $user = Auth::user();
         $id=$user->student_id;
         Report::create([
-            'Tasks_id' => $request['Tasks_id'],
+            'Tasks_id' => $request['tasks_id'],
             'Title' => $request['Title'],
             'UserName'=>$id,
             'Reason'=>$request['reason'],

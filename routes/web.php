@@ -48,16 +48,21 @@ Route::get('/contact', function () {
 Route::post('AddTasks', 'TaskController@Add')->name("task.add");
 
 //admin
-Route::get('adminlogin', 'Auth\LoginController@showAdminLoginForm')->name('AdminLogin.show');
+Route::get('adminlogin', 'Auth\AdminLoginController@showLoginForm')->name('AdminLogin.show');
 Route::post('adminlogin', 'Auth\AdminLoginController@login')->name("AdminLogin");
 Route::get('/AdminDashboard', function () {
-    return view('Admin_Dashboard');
+    $user = Auth::user();
+
+    if($user->is_admin){
+        return view('Admin_Dashboard');
+    }
+
+    return redirect('list');
 })->name('Admin.Dashboard');
+Route::get('/AdminLogout', 'Auth\AdminLoginController@logout')->name('Admin.logout');
 Route::get('/AdminTasks', 'DashboardController@tasks')->name("Admin.Tasks");
 Route::get('/AdminMember', 'DashboardController@members')->name('Admin.Member');
-Route::get('/AdminReport', function () {
-    return view('Admin_Report');
-})->name('Admin.Report');
+Route::get('/AdminReport', 'DashboardController@report')->name('Admin.Report');
 
 //report
 Route::post('ReportAdd', 'TaskController@report_add')->name("report.add");

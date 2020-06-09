@@ -25,4 +25,10 @@ class DashboardController extends Controller
             ->get();
         return view('Admin_Member')->with(["members" => $members]);
     }
+    protected function report(Request $request){
+        $reports = DB::table('report')
+            ->where('Status','=','Waiting')
+            ->get();
+        return view('Admin_Report')->with(["reports" => $reports]);
+    }
 }

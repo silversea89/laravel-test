@@ -127,7 +127,7 @@
             <td>{{$i->Content}}</td>
             <td>{{$i->DateTime}}</td>
             <td>{{$i->created_at}}</td>
-            <td>{{$i->host_rate_avg}}</td>
+            <td>@if($i->host_rate_avg == null) 無 @else {{$i->host_rate_avg}}@endif
         </tr>
         @endforeach
         </tbody>

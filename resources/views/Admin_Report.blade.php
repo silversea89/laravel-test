@@ -118,67 +118,20 @@
         </tr>
         </thead>
         <tbody>
+        @foreach($reports as $i)
         <tr>
-            <td>#1</td>
-            <td>#1234</td>
-            <td>aaaa</td>
-            <td>王一明</td>
-            <td>1234</td>
-            <td>Jan 18, 2001 9:12 AM</td>
+            <td>{{$i->Report_id}}</td>
+            <td>{{$i->Tasks_id}}</td>
+            <td>{{$i->Title}}</td>
+            <td>{{$i->UserName}}</td>
+            <td>{{$i->Reason}}</td>
+            <td>{{$i->created_at}}</td>
             <td>
                 <button type="button" class="btn btn-success btn-sm py-0 px-1">同意</button>
                 <button type="button" class="btn btn-danger btn-sm py-0 px-1">刪除</button>
             </td>
         </tr>
-        <tr>
-            <td>#2</td>
-            <td>#2345</td>
-            <td>bbbb</td>
-            <td>王二明</td>
-            <td>2345</td>
-            <td>Jan 18, 2001 9:12 AM</td>
-            <td>
-                <button type="button" class="btn btn-success btn-sm py-0 px-1">同意</button>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1">刪除</button>
-            </td>
-        </tr>
-        <tr>
-            <td>#3</td>
-            <td>#3456</td>
-            <td>cccc</td>
-            <td>王三明</td>
-            <td>3456</td>
-            <td>Jan 18, 2001 9:12 AM</td>
-            <td>
-                <button type="button" class="btn btn-success btn-sm py-0 px-1">同意</button>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1">刪除</button>
-            </td>
-        </tr>
-        <tr>
-            <td>#4</td>
-            <td>#4567</td>
-            <td>dddd</td>
-            <td>王四明</td>
-            <td>4567</td>
-            <td>Jan 18, 2001 9:12 AM</td>
-            <td>
-                <button type="button" class="btn btn-success btn-sm py-0 px-1">同意</button>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1">刪除</button>
-            </td>
-        </tr>
-        <tr>
-            <td>#5</td>
-            <td>#5678</td>
-            <td>eeee</td>
-            <td>王五明</td>
-            <td>5678</td>
-            <td>Jan 18, 2001 9:12 AM</td>
-            <td>
-                <button type="button" class="btn btn-success btn-sm py-0 px-1">同意</button>
-                <button type="button" class="btn btn-danger btn-sm py-0 px-1">刪除</button>
-            </td>
-        </tr>
-
+        @endforeach
         </tbody>
     </table>
 

@@ -13,6 +13,8 @@ class WelcomeController extends Controller
 
     protected function Welcome(Request $request)
     {
+
+
         $newesttasks = DB::table('tasks')
             ->leftJoin('users', 'tasks.Student_id', '=', 'users.student_id')
             ->where('Status','=','Selectable')

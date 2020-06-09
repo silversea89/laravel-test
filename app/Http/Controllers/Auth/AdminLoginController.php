@@ -22,7 +22,7 @@ class AdminLoginController extends Controller
     use AuthenticatesUsers;
     public function username()
     {
-        return 'Admin_id';
+        return 'student_id';
     }
     /**
      * Where to redirect users after login.
@@ -31,6 +31,11 @@ class AdminLoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::ADMIN;
 
+
+    public function showLoginForm()
+    {
+        return view('Admin_Login');
+    }
 
     /**
      * Create a new controller instance.

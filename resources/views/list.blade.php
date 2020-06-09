@@ -101,6 +101,7 @@
                                                 <hr class="mb-3" size="8px" align="center" width="100%"
                                                     style="color:#999999;">
                                                 <form method="post" action="{{ route('report.add')}}">
+                                                    @csrf
                                                     <input type="hidden" name="tasks_id" value={{$i->Tasks_id}}>
                                                     <input type="hidden" name="Title" value={{$i->Title}}>
                                                     <center>
