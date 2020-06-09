@@ -47,9 +47,6 @@
                         <a class="nav-link" href="{{ route('about') }}">關於工具人</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">問題Q&A</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('contact') }}">聯絡我們</a>
                     </li>
                 </ul>

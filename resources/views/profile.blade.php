@@ -1,9 +1,15 @@
 @extends('layouts.app')
 @section('content')
     <div class="container pt-2" style="background-color:white;">
-        <h2 class="font-weight-bold mb-0">
-            個人資料
-        </h2>
+        <div class="d-flex justify-content-between">
+
+            <h2 class="font-weight-bold mb-0">
+                個人資料
+            </h2>
+            <form action="{{ route('change.passwordform') }}" method="get">
+                <button type="submit" class="btn btn-primary">更改密碼</button>
+            </form>
+        </div>
 
         <div class="row">
             @foreach($profile as $i)
