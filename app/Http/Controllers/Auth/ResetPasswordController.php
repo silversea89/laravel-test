@@ -27,4 +27,13 @@ class ResetPasswordController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+    public function simpleReset(Request $request)
+    {
+        $user = Auth::user();
+        $password = $request->password;
+        $this->resetPassword(user, $password);
+
+
+    }
 }

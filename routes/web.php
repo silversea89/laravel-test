@@ -79,5 +79,3 @@ Auth::routes();
 //Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('change-password', 'ChangePasswordController@index')->name('change.passwordform');
-Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
