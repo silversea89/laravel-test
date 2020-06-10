@@ -16,7 +16,7 @@ class ReportTable extends Migration
         Schema::create('report', function (Blueprint $table) {
             $table->id('Report_id');
             $table->unsignedBigInteger('Tasks_id');
-            $table->foreign('Tasks_id')->references('Tasks_id')->on('tasks');
+            $table->foreign('Tasks_id')->references('Tasks_id')->on('tasks')->onDelete('cascade');;
             $table->string('Title');
             $table->string('UserName');
             $table->string('Reason');

@@ -15,7 +15,7 @@ class EvaluationTable extends Migration
     {
         Schema::create('evaluation', function (Blueprint $table) {
             $table->unsignedBigInteger('Tasks_id')->primary()->unique();
-            $table->foreign('Tasks_id')->references('Tasks_id')->on('tasks');
+            $table->foreign('Tasks_id')->references('Tasks_id')->on('tasks')->onDelete('cascade');;
             $table->integer('Toolman_Rate')->nullable();
             $table->integer('Host_Rate')->nullable();
             $table->string('Toolman_Comment')->nullable();

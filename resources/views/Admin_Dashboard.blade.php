@@ -132,7 +132,7 @@
                 <script>
                     var borderWidth = 100;
                     //資料標題
-                    var labels = ['已完成', '未完成', '執行中'];
+                    var labels = ['已完成', '未完成', '執行中','違規'];
 
                     var ctx = document.getElementById('canvasPieAppointment').getContext('2d');
                     var pieChart = new Chart(ctx, {
@@ -141,12 +141,13 @@
                             labels: labels,
                             datasets: [{
                                 //預設資料
-                                data: [{{$complete_amount}},{{$selectable_amount}}, {{$processing_amount}},],
+                                data: [{{$complete_amount}},{{$selectable_amount}}, {{$processing_amount}},{{$blocked_amount}}],
                                 backgroundColor: [
                                     //資料顏色
                                     "#4BC0C0",
                                     "#FF6384",
-                                    "#FFCD56"
+                                    "#FFCD56",
+                                    "#"
                                 ],
                             }],
                         }

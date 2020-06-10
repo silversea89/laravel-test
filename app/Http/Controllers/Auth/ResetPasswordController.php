@@ -36,19 +36,24 @@ class ResetPasswordController extends Controller
         $id = $user->student_id;
         $this->validate($request, [
             'old_password' => 'required',
-            'new_password' => 'required|min:6',
+            'new_password' => 'required',
             'confirm_password' => 'required|same:new_password',
         ]);
 
         $data = $request->all();
         $user = User::find($id);
         if (!\Hash::check($data['old_password'], $user->password)) {
-            return view('password_reset')->with(["error"=>'舊密碼輸入錯誤']);
+            $message = '舊密碼輸入錯誤';
+            return redirect()->route('Password.ShowReset')->withMessage($message);
+        } elseif (strlen($data['new_password'])<8) {
+            $message = '新密碼過短，請設置8字以上';
+            return redirect()->route('Password.ShowReset')->withMessage($message);
         } else {
             $changepassword = User::find($id);
-            $changepassword->password=Hash::make($data['new_password']);
+            $changepassword->password = Hash::make($data['new_password']);
             $changepassword->save();
-            return view('password_reset')->with(["error"=>'密碼修改成功!']);
+            $message = '密碼修改成功';
+            return redirect()->route('Password.ShowReset')->withMessage($message);
         }
     }
 }

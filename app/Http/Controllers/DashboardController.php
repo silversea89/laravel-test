@@ -30,10 +30,10 @@ class DashboardController extends Controller
             $Members_Amount = DB::table('users')
                 ->count();
             $Month_Tasks_Amount = DB::table('tasks')
-                ->where('created_at', 'LIKE', "$Today%")
+                ->where('created_at', 'LIKE', date("Y-m-%"))
                 ->count();
             $Month_Members_Amount = DB::table('users')
-                ->where('created_at', 'LIKE', "$Today%")
+                ->where('created_at', 'LIKE', date("Y-m-%"))
                 ->count();
             $Reported_Tasks_Amount = DB::table('report')
                 ->distinct('Tasks_id')
@@ -58,33 +58,36 @@ class DashboardController extends Controller
             $Complete_Amount = DB::table('tasks')
                 ->where("Status", "=", "Complete")
                 ->count();
+            $Blocked_Amount = DB::table('tasks')
+                ->where("Status", "=", "Block")
+                ->count();
             $Department_List = DB::table('users')
                 ->select("department")
                 ->distinct('department')
                 ->get();
-            $Department_Man_Amount=Array();
-            foreach ($Department_List as $i){
-                $Department_Man=DB::table('users')
-                    ->where("department","=",$i->department)
-                    ->where("Gender","=","1")
+            $Department_Man_Amount = array();
+            foreach ($Department_List as $i) {
+                $Department_Man = DB::table('users')
+                    ->where("department", "=", $i->department)
+                    ->where("Gender", "=", "1")
                     ->count();
-                array_push($Department_Man_Amount,$Department_Man);
+                array_push($Department_Man_Amount, $Department_Man);
             }
-            $Department_Woman_Amount=Array();
-            foreach ($Department_List as $i){
-                $Department_Woman=DB::table('users')
-                    ->where("department","=",$i->department)
-                    ->where("Gender","=","2")
+            $Department_Woman_Amount = array();
+            foreach ($Department_List as $i) {
+                $Department_Woman = DB::table('users')
+                    ->where("department", "=", $i->department)
+                    ->where("Gender", "=", "2")
                     ->count();
-                array_push($Department_Woman_Amount,$Department_Woman);
+                array_push($Department_Woman_Amount, $Department_Woman);
             }
-            $Department_Else_Amount=Array();
-            foreach ($Department_List as $i){
-                $Department_Else=DB::table('users')
-                    ->where("department","=",$i->department)
-                    ->where("Gender","=","3")
+            $Department_Else_Amount = array();
+            foreach ($Department_List as $i) {
+                $Department_Else = DB::table('users')
+                    ->where("department", "=", $i->department)
+                    ->where("Gender", "=", "3")
                     ->count();
-                array_push($Department_Else_Amount,$Department_Else);
+                array_push($Department_Else_Amount, $Department_Else);
             }
             return view('Admin_Dashboard')->with(["today_count" => $Today_Count,
                 "all_count" => $All_Count,
@@ -100,9 +103,10 @@ class DashboardController extends Controller
                 "processing_amount" => $Processing_Amount,
                 "complete_amount" => $Complete_Amount,
                 "department_list" => $Department_List,
-                "department_man_amount"=>$Department_Man_Amount,
-                "department_woman_amount"=>$Department_Woman_Amount,
-                "department_else_amount"=>$Department_Else_Amount]);
+                "department_man_amount" => $Department_Man_Amount,
+                "department_woman_amount" => $Department_Woman_Amount,
+                "department_else_amount" => $Department_Else_Amount,
+                "blocked_amount"=>$Blocked_Amount]);
         } else {
             return redirect('list');
         }
@@ -123,35 +127,54 @@ class DashboardController extends Controller
             ->get();
         return view('Admin_Member')->with(["members" => $members]);
     }
+
     //TODO
-    protected function deletemembers (Request $request)
+    protected function deletemembers(Request $request)
     {
-        $task = Tasks::where('Student_id', '=', $request->student_id);
-        $task->delete();
         $user = User::find($request->student_id);
         $user->delete();
+        $all_student_id=DB::table('users')
+            ->select('student_id')
+            ->get();
+        foreach ($all_student_id as $i){
+            $host_AVGrate=DB::table('evaluation')
+                ->join("tasks",'evaluation.Tasks_id','=','tasks.Tasks_id')
+                ->where('tasks.Student_id', '=', $i->student_id)
+                ->avg('Host_Rate');
+            $toolman_AVGrate=DB::table('evaluation')
+                ->join("tasks",'evaluation.Tasks_id','=','tasks.Tasks_id')
+                ->where('tasks.Toolman_id', '=', $i->student_id)
+                ->avg('Toolman_Rate');
 
+            $toolman_AVGrate_update = User::find($i->student_id);
+            $toolman_AVGrate_update->toolman_rate_avg = $toolman_AVGrate;
+            $toolman_AVGrate_update->save();
+            $host_AVGrate_update = User::find($i->student_id);
+            $host_AVGrate_update->host_rate_avg = $host_AVGrate;
+            $host_AVGrate_update->save();
+        }
         return redirect()->route("Admin.Member");
     }
+
     protected function inactivemembers(Request $request)
     {
-        $status= DB::table('users')
-            ->where('student_id','=',$request->student_id)
+        $status = DB::table('users')
+            ->where('student_id', '=', $request->student_id)
             ->select('is_active')
             ->first();
         error_log($status->is_active);
-        if($status->is_active==true){
+        if ($status->is_active == true) {
             $user = User::find($request->student_id);
-            $user->is_active=false;
+            $user->is_active = false;
             $user->save();
-        }
-        else{
+        } else {
             $user = User::find($request->student_id);
-            $user->is_active=true;
+            $user->is_active = true;
             $user->save();
         }
         return redirect()->route("Admin.Member");
     }
+
     protected function report(Request $request)
     {
         $reports = DB::table('report')
@@ -159,29 +182,31 @@ class DashboardController extends Controller
             ->get();
         return view('Admin_Report')->with(["reports" => $reports]);
     }
+
     protected function reportpass(Request $request)
     {
         $reports = Report::find($request->Report_id);
-        $reports->Status="Pass";
+        $reports->Status = "Pass";
         $reports->save();
-        $Tasks=Tasks::find($request->Tasks_id);
-        $Tasks->Status="Block";
+        $Tasks = Tasks::find($request->Tasks_id);
+        $Tasks->Status = "Block";
         $Tasks->save();
-        $User=User::find($Tasks->Student_id);
-        $User->violation+=1;
+        $User = User::find($Tasks->Student_id);
+        $User->violation += 1;
         $User->save();
 
-        if($User->violation==5){
-            $User=User::find($Tasks->Student_id);
-            $User->is_active=false;
+        if ($User->violation == 5) {
+            $User = User::find($Tasks->Student_id);
+            $User->is_active = false;
             $User->save();
         }
         return redirect()->route("Admin.Report");
     }
+
     protected function reportdenied(Request $request)
     {
         $reports = Report::find($request->Report_id);
-        $reports->Status="Denied";
+        $reports->Status = "Denied";
         $reports->save();
         return redirect()->route("Admin.Report");
     }

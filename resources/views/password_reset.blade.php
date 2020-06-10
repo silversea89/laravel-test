@@ -21,7 +21,9 @@
                     <input type="password" class="form-control border-top-0 border-right-0 border-left-0" name="confirm_password"
                            placeholder="確認密碼">
                 </div>
-                <p class="text-danger">{{ $error }}</p>
+                @if (session('message'))
+                    <p class="text-danger">{{ session('message') }}</p>
+                @endif
                 <button type="submit" class="btn btn-primary btn-lg btn-block ">確認</button>
             </form>
         </div>

@@ -16,9 +16,9 @@ class CreateTask extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id('Tasks_id');
             $table->string('Student_id');
-            $table->foreign('Student_id')->references('student_id')->on('users');
+            $table->foreign('Student_id')->references('student_id')->on('users')->onDelete('cascade');
             $table->string('Toolman_id')->nullable();
-            $table->foreign('Toolman_id')->references('student_id')->on('users');
+            $table->foreign('Toolman_id')->references('student_id')->on('users')->onDelete('cascade');
             $table->string('Classification');
             $table->string('Title');
             $table->dateTime('DateTime');

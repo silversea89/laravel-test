@@ -23,6 +23,7 @@ class ProfileController extends Controller
             ->count();
         $taskcompleterecord = DB::table('tasks')
             ->where('status', '=', 'complete')
+            ->where('toolman_id', '=', $profile_id)
             ->count();
         $host_evaluation = DB::table('evaluation')
             ->join("tasks", 'evaluation.Tasks_id', '=', 'tasks.Tasks_id')
