@@ -30,6 +30,8 @@ class StatusTable extends Migration
                 "StatusValue" => "Complete",
                 "StatusName" => "已完成"
             ],
+            ["StatusValue" => "Expired",
+                "StatusName" => "已過期"]
         ]);
     }
 
