@@ -79,13 +79,23 @@ class RegisterController extends Controller
         $imageName = null;
         $Email = "s" . $data['student_id'] . "@nutc.edu.tw";
         $file = $data['image'];
-
         if ($file != null) {
             $imageName = $data['student_id'];
             $extension = $file->getClientOriginalExtension();
             $file_name = $imageName. "." .$extension;
             //TODO
             $file->move('C:\xampp\htdocs\toolman\laravel-test\public\profileimages', $file_name);
+        }
+        else{
+            if($data['gender']==1){
+                $file_name = "Man.png";
+            }
+            elseif($data['gender']==2){
+                $file_name = "Woman.png";
+            }
+            elseif ($data['gender']==3){
+                $file_name = "Else.png";
+            }
         }
 
 

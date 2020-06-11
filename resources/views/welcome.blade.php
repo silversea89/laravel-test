@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<body style="background-color:#FFFFFF;">
+<body style="background-color:#EFEFEF;">
     <!-- #F9F9F9 -->
     <script src="script.js"></script>
 
@@ -38,7 +38,7 @@
     <div class="container pt-4 ">
 
 
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:white;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
 
             <h1 class="m-0 ">最新委託</h1>
 
@@ -88,18 +88,22 @@
                 </div>
             </div>
         @endforeach
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:white;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
             <div class="row mr-0">
                 @foreach($newesttasks as $i)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0">
 
-                        <div style="border:1px #DFDFDF solid;" data-toggle="modal"
+                        <div style="border:1px #DFDFDF solid;background-color: #FFF" data-toggle="modal"
                              data-target=".content{{$i->Tasks_id}}">
 
                             <div class="row pl-3">
 
                                 <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
-                                    <img src="img/food.jpg" class="img-fluid">
+                                    @if($i->Classification == 'Food')
+                                        <img src="img/food.jpg" class="img-fluid">
+                                    @elseif($i->Classification == 'Stationery')
+                                        <img src="img/pen.jpg" class="img-fluid">
+                                    @endif
                                 </div>
 
                                 <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 ">
@@ -108,12 +112,20 @@
 
                                         <p class="m-0">{{$i->Title}}</p>
                                         <p class="m-0">
-                                            <i class="fas fa-star" style="color:#FF9529"></i>
-                                            <i class="fas fa-star" style="color:#FF9529"></i>
-                                            <i class="fas fa-star" style="color:#FF9529"></i>
-                                            <i class="fas fa-star-half-alt" style="color:#FF9529"></i>
-                                            <i class="far fa-star" style="color:#FF9529"></i>
-                                            3.5/5.0
+                                            @foreach($host_AVGrate[$i->Student_id] as $k)
+                                                @if($k=="0")
+                                                    <i class="far fa-star" style="color:#FF9529"></i>
+                                                @elseif($k=="0.5")
+                                                    <i class="fas fa-star-half-alt" style="color:#FF9529"
+                                                       aria-hidden="true"></i>
+                                                @elseif($k=="1")
+                                                    <i class="fas fa-star" style="color:#FF9529"></i>
+                                                @else
+                                                    <i class="fas fa-star" style="color:#FF9529"></i>
+                                                    {{$k}}
+                                                    @break;
+                                                @endif
+                                            @endforeach
                                         </p>
                                         <p class="m-0">{{$i->Pay}}$</p>
                                         <i class="fas fa-heart pr-3"
@@ -209,7 +221,7 @@
 
                     <div class="col-12 col-sm-12 col-md-6 pb-3" id="test-rb">
                         <div>
-                            <h4>未完成委託</h4>
+                            <h4>未被接委託</h4>
                             <h4>{{$task_notcomplete_amount}}</h4>
                         </div>
                     </div>
@@ -235,7 +247,7 @@
         </a>
     </div>
 
-    <div class="py-md-5 py-4" style="background-color:#EFF1F1;">
+    <div class="py-md-5 py-4 bg-light">
 
 
 
@@ -255,10 +267,7 @@
                         <a href="{{ route('about') }}"><span class="fa fa-angle-right" aria-hidden="true"></span> 關於工具人</a>
                     </div>
                     <div class="col-6 col-md-4 ">
-                        <a href="#"><span class="fa fa-angle-right" aria-hidden="true"></span> 常見問題</a>
-                    </div>
-                    <div class="col-6 col-md-4 ">
-                        <a href="#"><span class="fa fa-angle-right" aria-hidden="true"></span> 聯絡我們</a>
+                        <a href="{{ route('contact') }}"><span class="fa fa-angle-right" aria-hidden="true"></span> 聯絡我們</a>
                     </div>
 
                     <div class="col-6 col-md-4 ">

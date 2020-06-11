@@ -1,14 +1,51 @@
 @extends('layouts.app')
 @section('content')
     <div class="container pt-2" style="background-color:white;">
-        <div class="d-flex justify-content-between">
-
+        <div class="row pl-2">
             <h2 class="font-weight-bold mb-0">
                 個人資料
             </h2>
-            <form action="{{ route('Password.ShowReset') }}" method="get">
-                <button type="submit" class="btn btn-primary">更改密碼</button>
-            </form>
+            <div class="d-flex justify-content-end col">
+                <button class="btn btn-primary mr-1" data-toggle="modal"
+                   data-target=".changePhoto">更改照片</button>
+                <div class="modal fade changePhoto" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-md px-2"
+                         style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
+                        <div class="modal-content container">
+                            <h3 class="fas fa-times" style="color:#999999;position: absolute; top: 7px;right: 15px;"
+                                data-toggle="modal" data-target=".changePhoto"></h3>
+                            <br>
+                            <hr class="mb-3" size="8px" align="center" width="100%" style="color:#999999;">
+                            <form action="{{ route('Photo.Reset') }}" method="POST"  enctype="multipart/form-data">
+                                @csrf
+                                <center>
+                                    @foreach($profile as $i)
+                                    <input type="hidden" name="student_id" value={{$i->student_id}}>
+                                    @endforeach
+                                    <div class="form-group" style="position:relative">
+                                        <div class="row px-3">
+                                            <div>
+                                                <label class="my-1">上傳大頭貼：</label>
+                                            </div>
+                                            <div>
+                                                <input type="file" class="form-control-file" name="image"
+                                                       accept="image/png, image/jpeg, image/jpg">
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-question-circle"
+                                           style="color:#666;position:absolute;top:8px;right:0px" data-toggle="tooltip"
+                                           data-placement="left" title="請上傳大頭貼。"></i>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary my-0 mb-3">確認更改</button>
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <form action="{{ route('Password.ShowReset') }}" method="get">
+                    <button type="submit" class="btn btn-primary">更改密碼</button>
+                </form>
+            </div>
         </div>
 
         <div class="row">
@@ -20,7 +57,7 @@
                             <img
                                 src="{{asset('profileimages/'.$i->photo)}}"
                                 class="img-fluid"
-                                style="border-radius:20px;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);">
+                                style="border-radius:20px;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);background-color:#666;">
                         </div>
                         <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 p-2">
 
@@ -52,6 +89,25 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-12 p-2" >
+
+                            <div style="border-radius:20px;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);background-color:#FFFFFF">
+                                <div class="row pt-3" >
+
+                                    <div class="col-6 col-md-12 pr-0 ">
+                                        <h5 class="font-weight-bold mb-0 pl-2 ">電子郵件</h5>
+                                        <p class="font-weight-normal mb-2 pl-2">{{$i->email}}</p>
+                                    </div>
+                                    <div class="col-6 col-md-12 pr-0 ">
+                                        <h5 class="font-weight-bold mb-0 pl-2">電話號碼</h5>
+                                        <p class="font-weight-normal mb-2 pl-2">{{$i->tel}}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
 
@@ -153,7 +209,6 @@
                                 </div>
                             @endforeach
                         </div>
-
                     </div>
                 </div>
             </div>

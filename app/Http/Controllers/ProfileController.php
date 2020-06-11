@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -88,5 +89,21 @@ class ProfileController extends Controller
             "host_AVGrate" => $host_AVG_array,
             "toolman_AVGrate" => $toolman_AVG_array]);
     }
+    protected function changephoto(Request $request){
 
+        $validatedData = $request->validate([
+            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:2048']
+        ]);
+        $file = $request['image'];
+        $imageName = $request->student_id;
+        $extension = $file->getClientOriginalExtension();
+        $file_name = $imageName. "." .$extension;
+        $file->move('C:\xampp\htdocs\toolman\laravel-test\public\profileimages', $file_name);
+
+        $change = User::find($request->student_id);
+        $change->photo = $file_name;
+        $change->save();
+
+        return redirect()->route('profile.id', $request->student_id);
+    }
 }

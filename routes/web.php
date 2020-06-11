@@ -66,6 +66,8 @@ Route::post('/passwordreset/reset', 'Auth\ResetPasswordController@updatePassword
 Route::get('/passwordreset', function () {
     return view('password_reset')->with(["error"=>'']);
 })->name('Password.ShowReset');
+//photoreset
+Route::post('/changephoto', 'ProfileController@changephoto')->name('Photo.Reset');
 Auth::routes();
 //// Authentication Routes...
 //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
