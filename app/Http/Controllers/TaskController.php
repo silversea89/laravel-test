@@ -5,6 +5,7 @@ use App\Evaluation;
 use App\Report;
 use App\Status;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -65,13 +66,18 @@ class TaskController extends Controller
         $id = $user->student_id;
         $host_AVG_array = array();
         $host_AVG_array_tasks = array();
-        $tasks = DB::table('tasks')
+
+        $checktasks = DB::table('tasks')
             ->Join('users', 'tasks.student_id', '=', 'users.student_id')
             ->where('Status', '=', 'Selectable')
             ->get();
 
-        //TODO
-        foreach ($tasks as $i){
+        foreach ($checktasks as $i){
+            if($i->DeadDateTime < Carbon::now()){
+                $taskexpire=Tasks::find($i->Tasks_id);
+                $taskexpire->Status='Expired';
+                $taskexpire->save();
+            }
             $host_AVGrate= $i->host_rate_avg;
             if ($host_AVGrate != null) {
                 while ($host_AVGrate >= 1) {
@@ -90,22 +96,10 @@ class TaskController extends Controller
             $host_AVG_array_tasks[$i->Student_id]=$host_AVG_array;
             $host_AVG_array = array();
         }
-//        $host_AVGrate = get_object_vars($host_AVGrate)['host_rate_avg'];
-
-//        if ($host_AVGrate != null) {
-//            while ($host_AVGrate >= 1) {
-//                $host_AVGrate -= 1;
-//                array_push($host_AVG_array, 1);
-//                if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
-//                    array_push($host_AVG_array, 0.5);
-//                }
-//            }
-//            while (count($host_AVG_array) < 5) {
-//                array_push($host_AVG_array, 0);
-//            }
-//        } else {
-//            array_push($host_AVG_array, "尚無資料");
-//        }
+        $tasks = DB::table('tasks')
+            ->Join('users', 'tasks.student_id', '=', 'users.student_id')
+            ->where('Status', '=', 'Selectable')
+            ->get();
 
         return view('list')->with(["classifications" => $classifications, "tasks" => $tasks, "host_AVGrate"=>$host_AVG_array_tasks,"id" => $id]);
     }
@@ -209,10 +203,20 @@ class TaskController extends Controller
             ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
 
+        $tasksExpired = DB::table('tasks')
+            ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
+            ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
+            ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
+            ->where("tasks.student_id", "=", $id)
+            ->where("tasks.Status", "=", "Expired")
+            ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
+            ->get();
+        error_log($tasksExpired);
         return view('list_push')->with(["classifications" => $classifications,
             "tasksING" => $tasksING,
             "tasksWaiting" => $tasksWaiting,
-            "tasksComplete" => $tasksComplete]);
+            "tasksComplete" => $tasksComplete,
+            "tasksExpired"=>$tasksExpired]);
     }
 
     protected function showListING(Request $request)

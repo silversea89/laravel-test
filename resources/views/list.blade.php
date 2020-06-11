@@ -80,7 +80,11 @@
                                 <h3 class="far fa-times-circle"
                                     style="color:white;position: absolute; top: 5px;left: 5px;border-radius:100%;box-shadow:0 0rem 0.5rem rgba(0, 0, 0, 1);"
                                     data-toggle="modal" data-target=".content{{$i->Tasks_id}}"></h3>
-                                <img src="img/food.jpg" class="img-fluid pr-0">
+                                @if($i->Classification == 'Food')
+                                    <img src="img/food.jpg" class="img-fluid pr-0">
+                                @elseif($i->Classification == 'Stationery')
+                                    <img src="img/pen.jpg" class="img-fluid pr-0">
+                                @endif
                             </div>
                             <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-1">
 
@@ -96,7 +100,8 @@
                                             <div class="modal-content container">
                                                 <h3 class="fas fa-times"
                                                     style="color:#999999;position: absolute; top: 7px;right: 15px;"
-                                                    data-toggle="modal" data-target=".contentReport{{$i->Tasks_id}}"></h3>
+                                                    data-toggle="modal"
+                                                    data-target=".contentReport{{$i->Tasks_id}}"></h3>
                                                 <br>
                                                 <hr class="mb-3" size="8px" align="center" width="100%"
                                                     style="color:#999999;">
@@ -158,7 +163,11 @@
                             <div class="row pl-3">
 
                                 <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
-                                    <img src="{{asset('img/food.jpg')}}" class="img-fluid">
+                                    @if($i->Classification == 'Food')
+                                        <img src="img/food.jpg" class="img-fluid">
+                                    @elseif($i->Classification == 'Stationery')
+                                        <img src="img/pen.jpg" class="img-fluid">
+                                    @endif
                                 </div>
 
                                 <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 ">

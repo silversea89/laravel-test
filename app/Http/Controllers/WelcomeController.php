@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Browse;
 use App\Classification;
+use App\Tasks;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
@@ -26,12 +27,7 @@ class WelcomeController extends Controller
         $BrowseTimes_Add = Browse::find($Today);
         $BrowseTimes_Add->Count += 1;
         $BrowseTimes_Add->save();
-        $newesttasks = DB::table('tasks')
-            ->leftJoin('users', 'tasks.Student_id', '=', 'users.student_id')
-            ->where('Status', '=', 'Selectable')
-            ->orderBy('tasks.created_at', 'desc')
-            ->take(8)
-            ->get();
+
         $members_amount = DB::table('users')
             ->count();
         $task_amount = DB::table('tasks')
@@ -43,6 +39,23 @@ class WelcomeController extends Controller
             ->where('Status', '=', 'selectable')
             ->count();
 
+        $checktasks = DB::table('tasks')
+            ->Join('users', 'tasks.student_id', '=', 'users.student_id')
+            ->where('Status', '=', 'Selectable')
+            ->get();
+        foreach ($checktasks as $i){
+            if($i->DeadDateTime < Carbon::now()){
+                $taskexpire=Tasks::find($i->Tasks_id);
+                $taskexpire->Status='Expired';
+                $taskexpire->save();
+            }
+        }
+        $newesttasks = DB::table('tasks')
+            ->leftJoin('users', 'tasks.Student_id', '=', 'users.student_id')
+            ->where('Status', '=', 'Selectable')
+            ->orderBy('tasks.created_at', 'desc')
+            ->take(8)
+            ->get();
         return view('welcome')
             ->with(["newesttasks" => $newesttasks,
                 "members_amount" => $members_amount,

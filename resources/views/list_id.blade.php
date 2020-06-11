@@ -268,7 +268,11 @@
         <div class="row ">
             <div class="row ">
                 <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 pr-0 pl-0">
-                    <img src="{{asset('img/food.jpg')}}" class="img-fluid pr-0">
+                    @if($tasks->Classification == 'Food')
+                        <img src="{{asset('img/food.jpg')}}" class="img-fluid pr-0">
+                    @elseif($tasks->Classification == 'Stationery')
+                        <img src="{{asset('img/pen.jpg')}}" class="img-fluid pr-0">
+                    @endif
                 </div>
                 <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-3 pt-md-0 pl-5 pr-3 pl-md-5">
                     <h3>{{$tasks->Title}}</h3>

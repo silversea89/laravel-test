@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -23,6 +27,9 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+
+
 
     /**
      * Where to redirect users after registration.
@@ -49,13 +56,15 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+//        error_log(print_r($data, true));
         return Validator::make($data, [
             'gender' => ['required', 'string', 'max:255'],
             'department' => ['required', 'string', 'max:255'],
-            'student_id' => ['required', 'string', 'max:255','unique:users'],
+            'student_id' => ['required', 'string', 'max:255', 'unique:users'],
             'name' => ['required', 'string', 'max:255'],
-            'tel' => ['required', 'string', 'max:255','unique:users','regex:/(09)[0-9]{8}/'],
+            'tel' => ['required', 'string', 'max:255', 'unique:users', 'regex:/(09)[0-9]{8}/'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:2048']
         ]);
     }
 
@@ -67,7 +76,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $Email="s".$data['student_id']."@nutc.edu.tw";
+        $imageName = null;
+        $Email = "s" . $data['student_id'] . "@nutc.edu.tw";
+        $file = $data['image'];
+
+        if ($file != null) {
+            $imageName = $data['student_id'];
+            $extension = $file->getClientOriginalExtension();
+            $file_name = $imageName. "." .$extension;
+            $file->move('C:\xampp\htdocs\toolman\laravel-test\public\profileimages', $file_name);
+        }
+
+
         return User::create([
             'gender' => $data['gender'],
             'department' => $data['department'],
@@ -76,6 +96,7 @@ class RegisterController extends Controller
             'tel' => $data['tel'],
             'email' => $Email,
             'password' => Hash::make($data['password']),
+            'photo' => $file_name
         ]);
     }
 }

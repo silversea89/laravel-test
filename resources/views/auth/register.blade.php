@@ -10,7 +10,7 @@
                 <h1 class="p-3">ToolMan</h1>
 
 
-                <form action="{{ route('register') }}" method="POST">
+                <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group">
@@ -74,7 +74,21 @@
                         <input id="password-confirm" type="password" class="form-control border-top-0 border-right-0 border-left-0" placeholder="密碼確認" name="password_confirmation" required autocomplete="new-password">
                     </div>
 
-                    <br>
+                    <div class="form-group">
+                        <div class="row px-3">
+                            <div>
+                                <label class="my-1">上傳大頭貼：</label>
+                            </div>
+                            <div>
+                                <input type="file" class="form-control-file" name="image" accept="image/png, image/jpeg, image/jpg">
+                            </div>
+                        </div>
+                        @error('image')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
                     <button type="submit" class="btn btn-primary btn-lg btn-block ">{{ __('送出') }}</button>
                 </form>

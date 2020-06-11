@@ -18,7 +18,7 @@
 
                         <div class="col-6 col-sm-6 col-md-6 col-lg-12 col-xl-12 p-2">
                             <img
-                                src="https://www.cooperspetkitchen.co.nz/assets/themes/cpk-theme/img/dogs/golden_retriever.jpg"
+                                src="{{asset('profileimages/'.$i->photo)}}"
                                 class="img-fluid"
                                 style="border-radius:20px;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);">
                         </div>
