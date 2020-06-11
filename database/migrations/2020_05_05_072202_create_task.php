@@ -20,6 +20,7 @@ class CreateTask extends Migration
             $table->string('Toolman_id')->nullable();
             $table->foreign('Toolman_id')->references('student_id')->on('users')->onDelete('cascade');
             $table->string('Classification');
+            $table->foreign('Classification')->references('ClassValue')->on('classification');
             $table->string('Title');
             $table->dateTime('DateTime');
             $table->dateTime('DeadDateTime');
@@ -29,6 +30,7 @@ class CreateTask extends Migration
             $table->string('Content');
             //Selectable,processing,complete
             $table->string('Status')->default("Selectable");
+            $table->foreign('Status')->references('StatusValue')->on('status');
             //go,back,arrive,complete
             $table->string('Progress')->nullable();
             $table->timestamps();
