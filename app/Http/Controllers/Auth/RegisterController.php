@@ -84,6 +84,7 @@ class RegisterController extends Controller
             $imageName = $data['student_id'];
             $extension = $file->getClientOriginalExtension();
             $file_name = $imageName. "." .$extension;
+            //TODO
             $file->move('C:\xampp\htdocs\toolman\laravel-test\public\profileimages', $file_name);
         }
 
