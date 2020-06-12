@@ -128,9 +128,6 @@
                                             @endforeach
                                         </p>
                                         <p class="m-0">{{$i->Pay}}$</p>
-                                        <i class="fas fa-heart pr-3"
-                                           style="color:red;position:absolute;bottom:5px;right:5px"
-                                           aria-hidden="true"></i>
                                     </div>
 
                                 </div>

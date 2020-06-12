@@ -74,7 +74,7 @@
 
     <div class="container pr-0">
 
-        <a class="navbar-brand" href="#">ToolMan</a>
+        <a class="navbar-brand" href="/">ToolMan</a>
 
         <div class=" navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">

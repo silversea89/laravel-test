@@ -7,8 +7,8 @@
     </script>
 
 
-    <div class="container pt-3 pb-0 pl-0 pr-0" style="background-color:white;height:100%">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:white;">
+    <div class="container pt-3 pb-0 pl-0 pr-0" style="background-color:#EFEFEF;height:100%">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:#EFEFEF;">
 
             <div class="d-flex justify-content-between">
                 <h1 class="m-0">全部</h1>
@@ -152,12 +152,12 @@
                 </div>
             </div>
         @endforeach
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:white;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:#EFEFEF;">
             <div class="row mr-0">
                 @foreach($tasks as $i)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0">
 
-                        <div style="border:1px #DFDFDF solid;" data-toggle="modal"
+                        <div style="background-color:white;border:1px #DFDFDF solid;" data-toggle="modal"
                              data-target=".content{{$i->Tasks_id}}">
 
                             <div class="row pl-3">
@@ -284,7 +284,7 @@
 
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
                                 <label class="m-0">接單截止時間</label>
-                                <input id="timepicker2" readonly="true" width="100%" name="DeadTime"/>
+                                <input id="timepicker2" readonly="true" width="100%" name="DeadTime" required/>
                                 <script>
                                     $('#timepicker2').timepicker({
                                         uiLibrary: 'bootstrap4'

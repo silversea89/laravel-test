@@ -54,10 +54,14 @@
                     <div class="row">
 
                         <div class="col-6 col-sm-6 col-md-6 col-lg-12 col-xl-12 p-2">
+                            <div style="border-radius:20px;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);
+                            height:200px;max-height:100%;background-color:#FFFFFF;display: flex; flex-direction: column;
+                            justify-content: center;text-align: center;position: relative;">
                             <img
                                 src="{{asset('profileimages/'.$i->photo)}}"
-                                class="img-fluid"
-                                style="border-radius:20px;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);background-color:#666;">
+                                style="border-radius:20px;max-height: 100%;max-width: 100%;width: auto;
+                                height: auto;position: absolute;top:0;bottom:0;left:0;right:0;margin: auto;">
+                            </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 p-2">
 

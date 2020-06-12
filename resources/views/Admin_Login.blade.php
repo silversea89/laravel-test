@@ -31,7 +31,7 @@
 
     <div class="container pr-0">
 
-        <a class="navbar-brand" href="#">ToolMan</a>
+        <a class="navbar-brand" href="/">ToolMan</a>
 
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
