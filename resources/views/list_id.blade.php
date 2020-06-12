@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <textarea @if($id==$tasks->Student_id) name="toolman_comment"
                                       @elseif($id==$tasks->Toolman_id) name="host_comment" @endif class="form-control"
-                                      id="" rows="5" placeholder="給個評論吧..."></textarea>
+                                      id="" rows="5" placeholder="請留下評語，最多40字" maxlength="40"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary my-0 mb-3">確認送出</button>
                     </center>

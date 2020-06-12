@@ -13,9 +13,10 @@
                     <input type="password" class="form-control border-top-0 border-right-0 border-left-0" name="old_password"
                            placeholder="舊密碼">
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="position:relative">
                     <input type="password" class="form-control border-top-0 border-right-0 border-left-0" name="new_password"
                            placeholder="新密碼">
+                    <i class="fas fa-question-circle" style="color:#666;position:absolute;top:11px;right:0px" data-toggle="tooltip" data-placement="left" title="密碼至少8字以上。"></i>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control border-top-0 border-right-0 border-left-0" name="confirm_password"

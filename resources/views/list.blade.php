@@ -194,10 +194,8 @@
                                         </p>
                                         <p class="m-0">{{$i->Pay}}$</p>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 @endforeach

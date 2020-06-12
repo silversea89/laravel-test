@@ -26,7 +26,7 @@
 
 <body>
 <div id="app" >
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="width: 100%;position: fixed;top:0px;left: 0px;z-index: 999;">
 
         <div class="container pr-0">
 
@@ -73,6 +73,12 @@
             </div>
         </div>
     </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+
+        <div class="container pr-0">
+            <a class="navbar-brand" href="/">ToolMan</a>
+        </div>
+    </nav>
 </div>
 @yield('content')
 
@@ -80,7 +86,7 @@
 @if(\Request::is('/')||\Request::is('about')||\Request::is('contact')||\Request::is('login')||\Request::is('register'))
 
 @else
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-0" style="width:100%;position: fixed; bottom: 0px;right: 0px;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-0" style="width:100%;position: fixed; bottom: 0px;right: 0px;z-index: 999;">
         <div class="container bg-dark">
 
             <div class="row ml-0" style="width:100%">

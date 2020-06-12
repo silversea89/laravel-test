@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Pagination\Paginator;
 
 class ProfileController extends Controller
 {
@@ -30,13 +31,13 @@ class ProfileController extends Controller
             ->join("tasks", 'evaluation.Tasks_id', '=', 'tasks.Tasks_id')
             ->where('tasks.Student_id', '=', $profile_id)
             ->select('evaluation.*', 'tasks.Title')
-            ->get();
+            -> Paginate(6);
         $toolman_evaluation = DB::table('evaluation')
             ->join("tasks", 'evaluation.Tasks_id', '=', 'tasks.Tasks_id')
             ->where('tasks.Toolman_id', '=', $profile_id)
             ->where('Toolman_Rate', '!=', 'null')
             ->select('evaluation.*', 'tasks.Title')
-            ->get();
+            -> Paginate(6);
 
         $host_AVGrate = DB::table('users')
             ->where('student_id', '=', $profile_id)

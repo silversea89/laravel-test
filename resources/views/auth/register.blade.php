@@ -40,8 +40,9 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="position:relative">
                             <input id="name" type="text" class="form-control @error('department') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="科系" name="department" value="{{ old('department') }}" required autocomplete="tel" autofocus>
+                            <i class="fas fa-question-circle" style="color:#666;position:absolute;top:11px;right:0px" data-toggle="tooltip" data-placement="left" title="請填入OO(系/科)。"></i>
                             @error('department')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -61,8 +62,9 @@
                         @enderror
                     </div>
 
-                    <div class="form-group">
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="密碼" name="password" value="{{ old('password') }}" required autocomplete="new-password">
+                    <div class="form-group" style="position:relative">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="密碼" name="password" value="{{ old('password') }}" required autocomplete="new-password">
+                        <i class="fas fa-question-circle" style="color:#666;position:absolute;top:11px;right:0px" data-toggle="tooltip" data-placement="left" title="密碼至少8字以上。"></i>
                         @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -74,13 +76,14 @@
                         <input id="password-confirm" type="password" class="form-control border-top-0 border-right-0 border-left-0" placeholder="密碼確認" name="password_confirmation" required autocomplete="new-password">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" style="position:relative">
                         <div class="row px-3">
                             <div>
                                 <label class="my-1">上傳大頭貼：</label>
                             </div>
                             <div>
                                 <input type="file" class="form-control-file" name="image" accept="image/png, image/jpeg, image/jpg">
+
                             </div>
                         </div>
                         @error('image')
@@ -88,6 +91,7 @@
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
+                        <i class="fas fa-question-circle" style="color:#666;position:absolute;top:11px;right:0px" data-toggle="tooltip" data-placement="left" title="照片大小2MB以下，若無上傳照片即使用預設圖片"></i>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-lg btn-block ">{{ __('送出') }}</button>
