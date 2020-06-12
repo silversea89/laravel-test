@@ -78,8 +78,10 @@ class RegisterController extends Controller
     {
         $imageName = null;
         $Email = "s" . $data['student_id'] . "@nutc.edu.tw";
-        $file = $data['image'];
-        if ($file != null) {
+
+
+        if (isset($data['image'])) {
+            $file = $data['image'];
             $imageName = $data['student_id'];
             $extension = $file->getClientOriginalExtension();
             $file_name = $imageName. "." .$extension;
