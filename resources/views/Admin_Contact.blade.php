@@ -12,6 +12,7 @@
     <link href="/tablesorter-master/dist/css/theme.default.min.css" rel="stylesheet">
     <script src="/tablesorter-master/dist/js/jquery.tablesorter.js"></script>
     <script src="/tablesorter-master/dist/js/jquery.tablesorter.widgets.js"></script>
+
     <!-- Demo styling -->
     <link href="/tablesorter-master/docs/css/jq.css" rel="stylesheet">
 
@@ -31,24 +32,10 @@
                 theme: 'default',
                 widgets: ['zebra', 'resizable'],
                 widgetOptions: {
-                    resizable_addLastColumn: true,
-                    resizable_widths: ['10%', '5%', '10%', '10%', '10%', '15%', '10%', '10%', '20%']
+                    resizable_addLastColumn : true,
+                    resizable_widths : [ '10%', '20%', '10%', '40%','20%']
                 }
             });
-
-            // $('.full-width-table').tablesorter({
-            //   theme : 'default',
-            //   // initialize zebra striping and resizable widgets on the table
-            //   widgets: [ 'zebra', 'resizable', 'stickyHeaders' ],
-            //   widgetOptions: {
-            //     resizable: true,
-            //     // These are the default column widths which are used when the table is
-            //     // initialized or resizing is reset; note that the "Age" column is not
-            //     // resizable, but the width can still be set to 40px here
-            //     resizable_widths : [ '10%', '10%', '40px', '10%', '100px' ]
-            //   }
-            // });
-
         });
     </script>
     <link
@@ -78,19 +65,19 @@
 
         <div class=" navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item ">
+                <li class="nav-item">
                     <a class="nav-link" href="{{route('Admin.Dashboard')}}">儀錶板</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item ">
                     <a class="nav-link" href="{{route('Admin.Tasks')}}">所有委託</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="{{route('Admin.Member')}}">會員</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('Admin.Report')}}">檢舉名單</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="{{route('Admin.Contact')}}">聯絡我們</a>
                 </li>
             </ul>
@@ -110,76 +97,25 @@
     <table class="tablesorter wrapper-table  mt-0" style="width:100%">
         <thead>
         <tr>
-            <th>姓名</th>
-            <th>性別</th>
-            <th>科系</th>
-            <th>學號</th>
-            <th>手機</th>
-            <th>註冊時間</th>
-            <th>雇/工評價</th>
-            <th>狀態</th>
-            <th>功能</th>
+            <th>使用者名稱</th>
+            <th>信箱</th>
+            <th>標題</th>
+            <th>內容</th>
+            <th>發布日期</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($members as $i)
-            <tr>
-                <td><a href="{{route('profile.id', $i->student_id)}}">{{$i->name}}</a></td>
-                <td>@if($i->gender=="1") 男 @elseif ($i->gender=="2" ) 女 @else 其他 @endif</td>
-                <td>{{$i->department}}</td>
-                <td>{{$i->student_id}}</td>
-                <td>{{$i->tel}}</td>
-                <td>{{$i->created_at}}</td>
-                <td>@if($i->host_rate_avg == null) 無 @else {{$i->host_rate_avg}}@endif
-                    /
-                    @if($i->toolman_rate_avg == null) 無 @else {{$i->toolman_rate_avg}}@endif</td>
-                <td>
-                    @if($i->is_active==true)
-                        可使用
-                    @else
-                        已凍結
-                    @endif
-                </td>
-                <td>
-                    <div class="row">
-                        <form action="{{ route('Admin.MemberDelete') }}" method="GET">
-                            <input type="hidden" name="student_id" value={{$i->student_id}}>
-                            <button type="submit" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">刪除</p></button>
-                        </form>
-                        <form action="{{ route('Admin.MemberInactive') }}" method="GET">
-                            <input type="hidden" name="student_id" value={{$i->student_id}}>
-                            @if($i->is_active==true)
-                                <button type="submit" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">凍結</p>
-                                </button>
-                            @else
-                                <button type="submit" class="btn btn-danger btn-sm py-0 px-1"><p class="m-0">解凍</p>
-                                </button>
-                            @endif
-                        </form>
-                    </div>
-                </td>
-            </tr>
+        @foreach($contact as $i)
+        <tr>
+            <td>{{$i->User}}</td>
+            <td>{{$i->Email}}</td>
+            <td>{{$i->Title}}</td>
+            <td>{{$i->Content}}</td>
+            <td>{{$i->created_at}}</td>
+        </tr>
         @endforeach
         </tbody>
     </table>
-
-    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 </div>
 
 

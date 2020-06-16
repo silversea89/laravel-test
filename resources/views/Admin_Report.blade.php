@@ -90,6 +90,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{route('Admin.Report')}}">檢舉名單</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('Admin.Contact')}}">聯絡我們</a>
+                </li>
             </ul>
             <div class="form-inline my-2 my-lg-0">
                 <a class="btn btn-danger my-2 my-sm-0" href="/admin">登出</a>

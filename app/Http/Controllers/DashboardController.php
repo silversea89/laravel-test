@@ -210,4 +210,10 @@ class DashboardController extends Controller
         $reports->save();
         return redirect()->route("Admin.Report");
     }
+    protected function contact(Request $request)
+    {
+        $contact = DB::table('contact')
+            ->get();
+        return view('Admin_Contact')->with(["contact" => $contact]);
+    }
 }

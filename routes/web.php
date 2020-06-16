@@ -55,6 +55,7 @@ Route::post('adminlogin', 'Auth\AdminLoginController@login')->name("AdminLogin")
 Route::get('/AdminDashboard', 'DashboardController@dashboard')->name('Admin.Dashboard');
 Route::get('/AdminLogout', 'Auth\AdminLoginController@logout')->name('Admin.logout');
 Route::get('/AdminTasks', 'DashboardController@tasks')->name("Admin.Tasks");
+Route::get('/AdminContact', 'DashboardController@contact')->name("Admin.Contact");
 Route::get('/AdminMember', 'DashboardController@members')->name('Admin.Member');
 Route::get('/AdminMember/Delete', 'DashboardController@deletemembers')->name('Admin.MemberDelete');
 Route::get('/AdminMember/inactive', 'DashboardController@inactivemembers')->name('Admin.MemberInactive');
