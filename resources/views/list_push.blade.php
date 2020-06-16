@@ -19,7 +19,7 @@
             <div class="collapse" id="collapseExample">
 
 
-                <form class="card p-2" action="{{ route('list.search')}}" method="get">
+                <form class="card p-2" action="{{ route('list_push.search')}}" method="get">
 
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 m-0">

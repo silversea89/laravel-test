@@ -18,10 +18,9 @@
             <div class="collapse" id="collapseExample">
 
 
-                <form class="card p-2" action="{{ route('list.search')}}" method="get">
+                <form class="card p-2" action="{{ route('list_ING.search')}}" method="get">
 
                     <div class="row">
-
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 m-0">
                             <label class="m-0">分類選擇</label>
                             <select class="form-control" name="Classification">
