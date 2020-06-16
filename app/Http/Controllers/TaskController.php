@@ -96,6 +96,7 @@ class TaskController extends Controller
             $host_AVG_array_tasks[$i->Student_id]=$host_AVG_array;
             $host_AVG_array = array();
         }
+        print_r($host_AVG_array_tasks["1110534020"]);
         $tasks = DB::table('tasks')
             ->Join('users', 'tasks.student_id', '=', 'users.student_id')
             ->where('Status', '=', 'Selectable')
@@ -119,10 +120,6 @@ class TaskController extends Controller
             $search_keyword = "%";
         $sort_by = $request->input('sort_by');
 
-        $host_AVGrate=DB::table('users')
-            ->where('student_id', '=', $id)
-            ->select('host_rate_avg')
-            ->first();
 
         $checktasks = DB::table('tasks')
             ->Join('users', 'tasks.student_id', '=', 'users.student_id')
