@@ -97,9 +97,9 @@
                                                 <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
                                             </div>
                                             @if($i->Classification == 'Food')
-                                                <img src="img/food.jpg" class="img-fluid">
+                                                <img src="{{asset('img/food.jpg')}}" class="img-fluid">
                                             @elseif($i->Classification == 'Stationery')
-                                                <img src="img/pen.jpg" class="img-fluid">
+                                                <img src="{{asset('img/pen.jpg')}}" class="img-fluid">
                                             @endif
                                         </div>
                                         <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 ">
@@ -131,9 +131,9 @@
                                                 <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
                                             </div>
                                             @if($i->Classification == 'Food')
-                                                <img src="img/food.jpg" class="img-fluid">
+                                                <img src="{{asset('img/food.jpg')}}" class="img-fluid">
                                             @elseif($i->Classification == 'Stationery')
-                                                <img src="img/pen.jpg" class="img-fluid">
+                                                <img src="{{asset('img/pen.jpg')}}" class="img-fluid">
                                             @endif
                                         </div>
 
@@ -171,9 +171,9 @@
                                                 <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
                                             </div>
                                             @if($i->Classification == 'Food')
-                                                <img src="img/food.jpg" class="img-fluid">
+                                                <img src="{{asset('img/food.jpg')}}" class="img-fluid">
                                             @elseif($i->Classification == 'Stationery')
-                                                <img src="img/pen.jpg" class="img-fluid">
+                                                <img src="{{asset('img/pen.jpg')}}" class="img-fluid">
                                             @endif
                                         </div>
 
@@ -208,9 +208,9 @@
                                                 <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
                                             </div>
                                             @if($i->Classification == 'Food')
-                                                <img src="img/food.jpg" class="img-fluid">
+                                                <img src="{{asset('img/food.jpg')}}" class="img-fluid">
                                             @elseif($i->Classification == 'Stationery')
-                                                <img src="img/pen.jpg" class="img-fluid">
+                                                <img src="{{asset('img/pen.jpg')}}" class="img-fluid">
                                             @endif
                                         </div>
 

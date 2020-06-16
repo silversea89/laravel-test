@@ -90,9 +90,9 @@
                                                 <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
                                             </div>
                                             @if($i->Classification == 'Food')
-                                                <img src="img/food.jpg" class="img-fluid">
+                                                <img src="{{asset('img/food.jpg')}}" class="img-fluid">
                                             @elseif($i->Classification == 'Stationery')
-                                                <img src="img/pen.jpg" class="img-fluid">
+                                                <img src="{{asset('img/pen.jpg')}}" class="img-fluid">
                                             @endif
                                         </div>
                                         <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 ">
@@ -123,7 +123,11 @@
                                                  style="background-color:gray;position:absolute;top:0px;left:0px">
                                                 <p class="m-0 p-1" style="color:white;">{{$i->StatusName}}</p>
                                             </div>
-                                            <img src="{{asset('img/food.jpg')}}" class="img-fluid">
+                                            @if($i->Classification == 'Food')
+                                                <img src="{{asset('img/food.jpg')}}" class="img-fluid">
+                                            @elseif($i->Classification == 'Stationery')
+                                                <img src="{{asset('img/pen.jpg')}}" class="img-fluid">
+                                            @endif
                                         </div>
 
                                         <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 ">
