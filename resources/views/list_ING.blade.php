@@ -158,7 +158,9 @@
     <div class="modal fade add" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content container">
-
+                <h3 class="fas fa-times" style="color:#999999;position: absolute; top: 7px;right: 15px;"  data-toggle="modal" data-target=".content{{$i->Tasks_id}}"></h3>
+                <br>
+                <hr class="mb-3" size="8px" align="center" width="100%" style="color:#999999;" >
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:white;">
                     <form action="{{ route('task.add') }}" method="POST">
                         @csrf
