@@ -109,6 +109,7 @@ class TaskController extends Controller
         $user = Auth::user();
         $id = $user->student_id;
         $host_AVG_array = array();
+        $host_AVG_array_tasks = array();
         $classifications = Classification::all();
         $classification_target = Classification::where('ClassValue', $request->input('Classification'))->first();
 
@@ -117,26 +118,39 @@ class TaskController extends Controller
         else
             $search_keyword = "%";
         $sort_by = $request->input('sort_by');
+
         $host_AVGrate=DB::table('users')
             ->where('student_id', '=', $id)
             ->select('host_rate_avg')
             ->first();
 
-        $host_AVGrate = get_object_vars($host_AVGrate)['host_rate_avg'];
-
-        if ($host_AVGrate != null) {
-            while ($host_AVGrate >= 1) {
-                $host_AVGrate -= 1;
-                array_push($host_AVG_array, 1);
-                if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
-                    array_push($host_AVG_array, 0.5);
+        $checktasks = DB::table('tasks')
+            ->Join('users', 'tasks.student_id', '=', 'users.student_id')
+            ->where('Status', '=', 'Selectable')
+            ->get();
+        foreach ($checktasks as $i){
+            if($i->DeadDateTime < Carbon::now()){
+                $taskexpire=Tasks::find($i->Tasks_id);
+                $taskexpire->Status='Expired';
+                $taskexpire->save();
+            }
+            $host_AVGrate= $i->host_rate_avg;
+            if ($host_AVGrate != null) {
+                while ($host_AVGrate >= 1) {
+                    $host_AVGrate -= 1;
+                    array_push($host_AVG_array, 1);
+                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+                        array_push($host_AVG_array, 0.5);
+                    }
                 }
+                while (count($host_AVG_array) < 5) {
+                    array_push($host_AVG_array, 0);
+                }
+            } else {
+                array_push($host_AVG_array, "尚無資料");
             }
-            while (count($host_AVG_array) < 5) {
-                array_push($host_AVG_array, 0);
-            }
-        } else {
-            array_push($host_AVG_array, "尚無資料");
+            $host_AVG_array_tasks[$i->Student_id]=$host_AVG_array;
+            $host_AVG_array = array();
         }
 
         $tasks = DB::table('tasks')
@@ -148,10 +162,6 @@ class TaskController extends Controller
             ->select('tasks.*', 'users.name')
             ->get();
 
-        $host_AVGrate=DB::table('users')
-            ->where('student_id', '=', $id)
-            ->select('host_rate_avg')
-            ->first();
 
         return view('list')->with(["classifications" => $classifications, "tasks" => $tasks, "host_AVGrate"=>$host_AVG_array, "id" => $id]);
     }
