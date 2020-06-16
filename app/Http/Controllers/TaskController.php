@@ -124,7 +124,7 @@ class TaskController extends Controller
         if ($request->input('keyword') != null)
             $search_keyword = $request->input('keyword');
         else
-            $search_keyword = "%";
+            $search_keyword = "";
         $sort_by = $request->input('sort_by');
 
 

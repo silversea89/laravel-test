@@ -49,17 +49,11 @@
             <div class="modal fade content{{$i->Tasks_id}}" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content container">
-<<<<<<< Updated upstream
                         <h3 class="fas fa-times" style="color:#999999;position: absolute; top: 7px;right: 15px;"  data-toggle="modal" data-target=".content{{$i->Tasks_id}}"></h3>
                         <br>
                         <hr class="mb-3" size="8px" align="center" width="100%" style="color:#999999;" >
-=======
->>>>>>> Stashed changes
                         <div class="row p-2 ">
                             <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 pr-0 pl-0">
-                                <h3 class="far fa-times-circle"
-                                    style="color:white;position: absolute; top: 5px;left: 5px;border-radius:100%;box-shadow:0 0rem 0.5rem rgba(0, 0, 0, 1);"
-                                    data-toggle="modal" data-target=".content{{$i->Tasks_id}}"></h3>
                                 <img src="img/food.jpg" class="img-fluid pr-0">
                             </div>
                             <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-1">

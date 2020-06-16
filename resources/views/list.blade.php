@@ -11,7 +11,9 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:#EFEFEF;">
 
             <div class="d-flex justify-content-between">
-                <h1 class="m-0">委託列表 (分類:{{$TitleClass}}/排序:{{$orderBy}}/關鍵字:{{$keyword}})</h1>
+                <h2 class="m-0">委託列表 (分類:{{$TitleClass}}/
+                    排序:@if($orderBy=="created_at")發布時間@elseif($orderBy=="Pay")酬勞金額@elseif($orderBy=="DateTime")面交金額@endif/
+                    關鍵字:{{$keyword}})</h2>
                 <button class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button"
                         aria-expanded="false" aria-controls="collapseExample">
                     <i class="fas fa-filter"></i>
@@ -80,9 +82,6 @@
                         <hr class="mb-3" size="8px" align="center" width="100%" style="color:#999999;" >
                         <div class="row p-2 ">
                             <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 pr-0 pl-0">
-                                <h3 class="far fa-times-circle"
-                                    style="color:white;position: absolute; top: 5px;left: 5px;border-radius:100%;box-shadow:0 0rem 0.5rem rgba(0, 0, 0, 1);"
-                                    data-toggle="modal" data-target=".content{{$i->Tasks_id}}"></h3>
                                 @if($i->Classification == 'Food')
                                     <img src="{{asset('img/food.jpg')}}" class="img-fluid pr-0">
                                 @elseif($i->Classification == 'Stationery')
