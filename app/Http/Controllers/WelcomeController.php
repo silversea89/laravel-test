@@ -16,8 +16,6 @@ class WelcomeController extends Controller
 {
     protected function Welcome(Request $request)
     {
-        $user = Auth::user();
-        $id=$user->student_id;
         $host_AVG_array = array();
         $host_AVG_array_tasks = array();
         $Today = Carbon::today('Asia/Taipei');
@@ -83,8 +81,7 @@ class WelcomeController extends Controller
                 "task_amount" => $task_amount,
                 "task_complete_amount" => $task_complete_amount,
                 "task_notcomplete_amount" => $task_notcomplete_amount,
-                "host_AVGrate"=>$host_AVG_array_tasks,
-                "id"=>$id]);
+                "host_AVGrate"=>$host_AVG_array_tasks,]);
 
     }
 
