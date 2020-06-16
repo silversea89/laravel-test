@@ -95,7 +95,7 @@
                     <center>
                         <i class="fas fa-clipboard-list" @if(\Request::is('list','list/*'))style="color:#00FFFB"
                            @else style="color:white"@endif></i>
-                        <p class="m-0" @if(\Request::is('list*'))style="color:#00FFFB" @else style="color:white"@endif>
+                        <p class="m-0" @if(\Request::is('list','list/*'))style="color:#00FFFB" @else style="color:white"@endif>
                             所有</p>
                     </center>
                 </a>
