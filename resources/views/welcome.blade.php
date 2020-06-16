@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<body style="background-color:#EFEFEF;">
+    <body style="background-color:#EFEFEF;">
     <!-- #F9F9F9 -->
     <script src="script.js"></script>
 
@@ -18,9 +18,11 @@
                         </div>
                         <div class=" bd-highlight">
                             @guest
-                            <a href="{{ route('login') }}" class="golden-btn animate__animated animate__heartBeat infinite animate__repeat-2 animate__delay-1s">開始體驗</a>
+                                <a href="{{ route('login') }}"
+                                   class="golden-btn animate__animated animate__heartBeat infinite animate__repeat-2 animate__delay-1s">開始體驗</a>
                             @else
-                            <a href="{{ route('list') }}" class="golden-btn animate__animated animate__heartBeat infinite animate__repeat-2 animate__delay-1s">開始體驗</a>
+                                <a href="{{ route('list') }}"
+                                   class="golden-btn animate__animated animate__heartBeat infinite animate__repeat-2 animate__delay-1s">開始體驗</a>
                             @endguest
                         </div>
                     </div>
@@ -57,9 +59,9 @@
                             <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-1">
                                 @guest
                                 @else
-                                <button type="button" class="btn btn-danger"
-                                        style="position: absolute; top: 5px;right: 5px;">檢舉
-                                </button>
+                                    <button type="button" class="btn btn-danger"
+                                            style="position: absolute; top: 5px;right: 5px;">檢舉
+                                    </button>
                                 @endguest
                                 <h3>{{$i->Title}}</h3>
                                 <span class="badge badge-primary">代購物品</span>
@@ -79,7 +81,9 @@
                                 <p class="m-0">截止期限：{{$i->DeadDateTime}}</p>
                                 @guest
                                 @else
-                                <button type="button" class="btn btn-primary my-3">接受委託</button>
+                                    @if($i->Student_id==$id)
+                                        <button type="button" class="btn btn-primary my-3">接受委託</button>
+                                    @endif
                                 @endguest
                             </div>
                         </div>
@@ -141,16 +145,14 @@
         </div>
 
 
-
-
-
         <div class="row ">
 
             <div class="col-12 col-md-6 order-12 order-md-0 p-0">
                 <!-- https://www.enisa.europa.eu/tips-for-cybersecurity-when-working-from-home/@@images/d707ed75-fa16-4add-9b38-054a4ac7dfcf.png -->
                 <img src="{{asset('img/home1.png')}}" class="img-fluid py-4">
             </div>
-            <div class="col-12 col-md-6 " style="display: flex; flex-direction: column;justify-content: center;text-align: center;">
+            <div class="col-12 col-md-6 "
+                 style="display: flex; flex-direction: column;justify-content: center;text-align: center;">
 
                 <div class="row ">
 
@@ -161,9 +163,9 @@
                             <h4 class="px-1">達成你的使命</h4>
                         </div>
                         @guest
-                        <div><a href="{{ route('login') }}" class="btn btn-primary">尋找您的委託</a></div>
+                            <div><a href="{{ route('login') }}" class="btn btn-primary">尋找您的委託</a></div>
                         @else
-                        <div><a href="{{ route('list') }}" class="btn btn-primary">尋找您的委託</a></div>
+                            <div><a href="{{ route('list') }}" class="btn btn-primary">尋找您的委託</a></div>
                         @endguest
                     </div>
 
@@ -175,9 +177,9 @@
                             <h4 class="px-1">享受你的服務</h4>
                         </div>
                         @guest
-                        <div><a href="{{ route('login') }}" class="btn btn-primary">提出您的委託</a></div>
+                            <div><a href="{{ route('login') }}" class="btn btn-primary">提出您的委託</a></div>
                         @else
-                        <div><a href="{{ route('list') }}" class="btn btn-primary">提出您的委託</a></div>
+                            <div><a href="{{ route('list') }}" class="btn btn-primary">提出您的委託</a></div>
                         @endguest
                     </div>
 
@@ -189,7 +191,8 @@
 
         <div class="row d-flex justify-content-center">
 
-            <div class="col-12 col-md-6 col-xl-6 py-md-4 pt-4 pb-0" style="display: flex; flex-direction: column;justify-content: center;text-align: center;">
+            <div class="col-12 col-md-6 col-xl-6 py-md-4 pt-4 pb-0"
+                 style="display: flex; flex-direction: column;justify-content: center;text-align: center;">
 
                 <div class="row ">
 
@@ -233,9 +236,6 @@
         </div>
 
 
-
-
-
     </div>
 
     <div class="text-center mt-md-2 mt-3">
@@ -245,7 +245,6 @@
     </div>
 
     <div class="py-md-5 py-4 bg-light">
-
 
 
         <div class="container py-md-2">
@@ -269,16 +268,18 @@
 
                     <div class="col-6 col-md-4 ">
                         @guest
-                        <a href="{{ route('login') }}"><span class="fa fa-angle-right" aria-hidden="true"></span> 我要當工具人</a>
+                            <a href="{{ route('login') }}"><span class="fa fa-angle-right" aria-hidden="true"></span>
+                                我要當工具人</a>
                         @else
-                        <a href="{{ route('list') }}"><span class="fa fa-angle-right" aria-hidden="true"></span> 我要當工具人</a>
+                            <a href="{{ route('list') }}"><span class="fa fa-angle-right" aria-hidden="true"></span>
+                                我要當工具人</a>
                         @endguest
                     </div>
                     <div class="col-6 col-md-4 ">
                         @guest
-                        <a href="{{ route('login') }}"><span class="fa fa-angle-right" aria-hidden="true"></span>我要當乾爹</a>
+                            <a href="{{ route('login') }}"><span class="fa fa-angle-right" aria-hidden="true"></span>我要當乾爹</a>
                         @else
-                        <a href="{{ route('list') }}"><span class="fa fa-angle-right" aria-hidden="true"></span>我要當乾爹</a>
+                            <a href="{{ route('list') }}"><span class="fa fa-angle-right" aria-hidden="true"></span>我要當乾爹</a>
                         @endguest
                     </div>
                 </div>
@@ -286,7 +287,6 @@
             </div>
 
         </div>
-
 
 
     </div>
@@ -297,10 +297,15 @@
     </div>
 
 
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-</body>
-@endsection
-</html>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+    </body>
+    @endsection
+    </html>
