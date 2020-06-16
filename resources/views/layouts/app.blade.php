@@ -93,7 +93,7 @@
 
                 <a class="col-3 col-sm-3" href="{{route('list')}}" style="text-decoration:none;color:black">
                     <center>
-                        <i class="fas fa-clipboard-list" @if(\Request::is('list*'))style="color:#00FFFB"
+                        <i class="fas fa-clipboard-list" @if(\Request::is('list','list/*'))style="color:#00FFFB"
                            @else style="color:white"@endif></i>
                         <p class="m-0" @if(\Request::is('list*'))style="color:#00FFFB" @else style="color:white"@endif>
                             所有</p>
@@ -125,7 +125,7 @@
                             <i class="fas fa-user" @if(\Request::is('profile*'))style="color:#00FFFB"
                                @else style="color:white"@endif></i>
                             <p class="m-0" @if(\Request::is('profile*'))style="color:#00FFFB"
-                               @else style="color:white"@endif></p>
+                               @else style="color:white"@endif>我的</p>
                         </center>
                     </a>
                 @endif
