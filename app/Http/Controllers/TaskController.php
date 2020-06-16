@@ -170,7 +170,14 @@ class TaskController extends Controller
         }
 
 
-        return view('list')->with(["classifications" => $classifications, "tasks" => $tasks, "host_AVGrate" => $host_AVG_array_tasks, "id" => $id]);
+        return view('list')->with(["classifications" => $classifications,
+            "tasks" => $tasks,
+            "host_AVGrate" => $host_AVG_array_tasks,
+            "id" => $id,
+            "TitleClass" => $classification_target["ClassName"],
+            "orderBy" => $sort_by,
+            "keyword"=>$search_keyword,
+        ]);
     }
 
     protected function gettask(Request $request)
@@ -283,8 +290,7 @@ class TaskController extends Controller
                 ->where("tasks.Status", "=", "Expired")
                 ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
                 ->get();
-        }
-        else{
+        } else {
             $tasksING = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
                 ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
@@ -368,6 +374,7 @@ class TaskController extends Controller
             "tasksING" => $tasksING,
             "tasksComplete" => $tasksComplete]);
     }
+
     protected function showListINGsearch(Request $request)
     {
         $classifications = Classification::all();
@@ -380,7 +387,7 @@ class TaskController extends Controller
             $search_keyword = "%";
         $sort_by = $request->input('sort_by');
 
-        if($classification_target['ClassValue'] == "All"){
+        if ($classification_target['ClassValue'] == "All") {
             $tasksING = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
                 ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
@@ -399,8 +406,7 @@ class TaskController extends Controller
                 ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
                 ->get();
 
-        }
-        else{
+        } else {
             $tasksING = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
                 ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
@@ -430,6 +436,7 @@ class TaskController extends Controller
             "tasksING" => $tasksING,
             "tasksComplete" => $tasksComplete]);
     }
+
     protected function taskdetail(Request $request, $Tasks_id)
     {
         $user = Auth::user();

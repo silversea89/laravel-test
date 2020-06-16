@@ -11,7 +11,7 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:#EFEFEF;">
 
             <div class="d-flex justify-content-between">
-                <h1 class="m-0">全部</h1>
+                <h1 class="m-0">委託列表 (分類:{{}}/排序:{{}}/關鍵字:{{}})</h1>
                 <button class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button"
                         aria-expanded="false" aria-controls="collapseExample">
                     <i class="fas fa-filter"></i>
@@ -75,7 +75,7 @@
             <div class="modal fade content{{$i->Tasks_id}}" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content container">
-                        <h3 class="fas fa-times" style="color:#999999;position: absolute; top: 7px;right: 15px;"  data-toggle="modal" data-target=".contentReport"></h3>
+                        <h3 class="fas fa-times" style="color:#999999;position: absolute; top: 7px;right: 15px;"  data-toggle="modal" data-target=".content{{$i->Tasks_id}}"></h3>
                         <br>
                         <hr class="mb-3" size="8px" align="center" width="100%" style="color:#999999;" >
                         <div class="row p-2 ">
@@ -214,7 +214,7 @@
     <div class="modal fade add" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content container">
-                <h3 class="fas fa-times" style="color:#999999;position: absolute; top: 7px;right: 15px;"  data-toggle="modal" data-target=".contentReport"></h3>
+                <h3 class="fas fa-times" style="color:#999999;position: absolute; top: 7px;right: 15px;"  data-toggle="modal" data-target=".add"></h3>
                 <br>
                 <hr class="mb-3" size="8px" align="center" width="100%" style="color:#999999;" >
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:white;">
