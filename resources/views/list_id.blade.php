@@ -83,7 +83,7 @@
                     -->
                 </div>
             @else
-                <h3>工具人：<a href="/profile.html">{{$tasks->toolmanname}}</a></h3>
+                <h3>工具人：<a href="{{ route('profile.id', $tasks->Toolman_id   ) }}">{{$tasks->toolmanname}}</a></h3>
                 @if($id==$tasks->Toolman_id)
                     <div class="btn-group" style="position:absolute;top:0px;right:0px">
                         @if($tasks->Progress==null)

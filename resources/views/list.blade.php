@@ -81,9 +81,9 @@
                                     style="color:white;position: absolute; top: 5px;left: 5px;border-radius:100%;box-shadow:0 0rem 0.5rem rgba(0, 0, 0, 1);"
                                     data-toggle="modal" data-target=".content{{$i->Tasks_id}}"></h3>
                                 @if($i->Classification == 'Food')
-                                    <img src="img/food.jpg" class="img-fluid pr-0">
+                                    <img src="{{asset('img/food.jpg')}}" class="img-fluid pr-0">
                                 @elseif($i->Classification == 'Stationery')
-                                    <img src="img/pen.jpg" class="img-fluid pr-0">
+                                    <img src="{{asset('img/pen.jpg')}}" class="img-fluid pr-0">
                                 @endif
                             </div>
                             <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-1">
@@ -164,9 +164,9 @@
 
                                 <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">
                                     @if($i->Classification == 'Food')
-                                        <img src="img/food.jpg" class="img-fluid">
+                                        <img src="{{asset('img/food.jpg')}}" class="img-fluid">
                                     @elseif($i->Classification == 'Stationery')
-                                        <img src="img/pen.jpg" class="img-fluid">
+                                        <img src="{{asset('img/pen.jpg')}}" class="img-fluid">
                                     @endif
                                 </div>
 

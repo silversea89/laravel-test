@@ -118,13 +118,15 @@
                     </center>
                 </a>
 
-                <a class="col-3 col-sm-3" href="{{route('profile.id', Auth::user()->student_id)}}"
-                   style="text-decoration:none;color:black">
-                    <center>
-                        <i class="fas fa-user" style="color:white"></i>
-                        <p class="m-0" style="color:white">我的</p>
-                    </center>
-                </a>
+                @if(Auth::check())
+                    <a class="col-3 col-sm-3" href="{{route('profile.id', Auth::user()->student_id)}}"
+                       style="text-decoration:none;color:black">
+                        <center>
+                            <i class="fas fa-user" style="color:white"></i>
+                            <p class="m-0" style="color:white">我的</p>
+                        </center>
+                    </a>
+                @endif
             </div>
         </div>
     </nav>

@@ -96,7 +96,7 @@ class TaskController extends Controller
             $host_AVG_array_tasks[$i->Student_id]=$host_AVG_array;
             $host_AVG_array = array();
         }
-        print_r($host_AVG_array_tasks["1110534020"]);
+
         $tasks = DB::table('tasks')
             ->Join('users', 'tasks.student_id', '=', 'users.student_id')
             ->where('Status', '=', 'Selectable')
@@ -160,7 +160,7 @@ class TaskController extends Controller
             ->get();
 
 
-        return view('list')->with(["classifications" => $classifications, "tasks" => $tasks, "host_AVGrate"=>$host_AVG_array, "id" => $id]);
+        return view('list')->with(["classifications" => $classifications, "tasks" => $tasks, "host_AVGrate"=>$host_AVG_array_tasks,"id" => $id]);
     }
 
     protected function gettask(Request $request)

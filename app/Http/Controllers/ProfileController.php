@@ -30,6 +30,7 @@ class ProfileController extends Controller
         $host_evaluation = DB::table('evaluation')
             ->join("tasks", 'evaluation.Tasks_id', '=', 'tasks.Tasks_id')
             ->where('tasks.Student_id', '=', $profile_id)
+            ->where('Host_Rate', '!=', 'null')
             ->select('evaluation.*', 'tasks.Title')
             -> Paginate(6);
         $toolman_evaluation = DB::table('evaluation')
