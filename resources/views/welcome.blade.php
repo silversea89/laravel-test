@@ -49,6 +49,9 @@
             <div class="modal fade content{{$i->Tasks_id}}" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content container">
+                        <h3 class="fas fa-times" style="color:#999999;position: absolute; top: 7px;right: 15px;"  data-toggle="modal" data-target=".contentReport"></h3>
+                        <br>
+                        <hr class="mb-3" size="8px" align="center" width="100%" style="color:#999999;" >
                         <div class="row p-2 ">
                             <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 pr-0 pl-0">
                                 <h3 class="far fa-times-circle"
@@ -80,8 +83,8 @@
                                 <p class="m-0">發佈於{{$i->created_at}}</p>
                                 <p class="m-0">截止期限：{{$i->DeadDateTime}}</p>
                                 @guest
-                                @else
-                                    @if($i->Student_id==$id)
+                                @elsegi
+                                    @if($i->Student_id!=$id)
                                         <button type="button" class="btn btn-primary my-3">接受委託</button>
                                     @endif
                                 @endguest
