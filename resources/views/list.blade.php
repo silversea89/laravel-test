@@ -11,7 +11,7 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:#EFEFEF;">
 
             <div class="d-flex justify-content-between">
-                <h1 class="m-0">委託列表 (分類:{{}}/排序:{{}}/關鍵字:{{}})</h1>
+                <h1 class="m-0">委託列表 (分類:{{$TitleClass}}/排序:{{$orderBy}}/關鍵字:{{$keyword}})</h1>
                 <button class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button"
                         aria-expanded="false" aria-controls="collapseExample">
                     <i class="fas fa-filter"></i>

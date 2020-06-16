@@ -103,7 +103,13 @@ class TaskController extends Controller
             ->where('Status', '=', 'Selectable')
             ->get();
 
-        return view('list')->with(["classifications" => $classifications, "tasks" => $tasks, "host_AVGrate" => $host_AVG_array_tasks, "id" => $id]);
+        return view('list')->with(["classifications" => $classifications,
+            "tasks" => $tasks,
+            "host_AVGrate" => $host_AVG_array_tasks,
+            "id" => $id,
+            "TitleClass" => "全部",
+            "orderBy" => "",
+            "keyword"=>""]);
     }
 
     protected function showSearchListForm(Request $request)
