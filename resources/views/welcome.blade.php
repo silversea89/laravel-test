@@ -6,10 +6,39 @@
     <script src="script.js"></script>
 
 
+{{--    <div style="width:100%;background-color:#74D2E7;">--}}
+{{--        <div class="container">--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-12 col-md-6 col-xl-5 d-flex align-items-start flex-column bd-highlight">--}}
+
+{{--                    <div class="d-flex align-items-start flex-column bd-highlight mb-3" style="height: 100%;">--}}
+{{--                        <div class="mb-auto bd-highlight"></div>--}}
+{{--                        <div class="pt-2 bd-highlight">--}}
+{{--                            <h1>專為學生打造的<br><span style="color:white">校園委託平台</span></h1>--}}
+{{--                        </div>--}}
+{{--                        <div class=" bd-highlight">--}}
+{{--                            @guest--}}
+{{--                                <a href="{{ route('login') }}"--}}
+{{--                                   class="golden-btn animate__animated animate__heartBeat infinite animate__repeat-2 animate__delay-1s">開始體驗</a>--}}
+{{--                            @else--}}
+{{--                                <a href="{{ route('list') }}"--}}
+{{--                                   class="golden-btn animate__animated animate__heartBeat infinite animate__repeat-2 animate__delay-1s">開始體驗</a>--}}
+{{--                            @endguest--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                </div>--}}
+{{--                <div class="col-12 col-md-6 col-xl-7 p-0">--}}
+{{--                    <!-- https://miro.medium.com/max/800/0*YoS7JWhSyxNlIfX-.png -->--}}
+{{--                    <img src="{{asset('img/home.png')}}" class="img-fluid ">--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
     <div style="width:100%;background-color:#74D2E7;">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-6 col-xl-5 d-flex align-items-start flex-column bd-highlight">
+                <div class="col-12 col-md-6 col-xl-5 d-flex align-items-start flex-column bd-highlight order-12 order-md-0">
 
                     <div class="d-flex align-items-start flex-column bd-highlight mb-3" style="height: 100%;">
                         <div class="mb-auto bd-highlight"></div>
@@ -28,14 +57,13 @@
                     </div>
 
                 </div>
-                <div class="col-12 col-md-6 col-xl-7 p-0">
+                <div class="col-12 col-md-6 col-xl-7 p-0 order-0 order-md-12">
                     <!-- https://miro.medium.com/max/800/0*YoS7JWhSyxNlIfX-.png -->
                     <img src="{{asset('img/home.png')}}" class="img-fluid ">
                 </div>
             </div>
         </div>
     </div>
-
 
     <div class="container pt-4 ">
 
