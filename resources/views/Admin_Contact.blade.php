@@ -82,7 +82,7 @@
                 </li>
             </ul>
             <div class="form-inline my-2 my-lg-0">
-                <a class="btn btn-danger my-2 my-sm-0" href="/admin">登出</a>
+                <a class="btn btn-danger my-2 my-sm-0" href="{{ route('logout') }}">登出</a>
             </div>
         </div>
 
