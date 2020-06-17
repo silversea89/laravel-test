@@ -24,7 +24,7 @@ Route::get('list', 'TaskController@showListForm')->name("list")->middleware('aut
 Route::get('list_push', 'TaskController@showListpush')->name("list.push");
 Route::get('list_push/search', 'TaskController@showListpushsearch')->name("list_push.search");
 Route::get('list_ING', 'TaskController@showListING')->name("list.ING");
-Route::get('list_ing/search', 'TaskController@showListINGsearch')->name("list_ING.search");
+Route::get('list_ING/search', 'TaskController@showListINGsearch')->name("list_ING.search");
 Route::get('list/search', 'TaskController@showSearchListForm')->name("list.search");
 Route::get('list_id/{Tasks_id}', 'TaskController@taskdetail')->name("task.detail");
 Route::post('list/gettask', 'TaskController@gettask')->name("task.get");

@@ -125,9 +125,9 @@
         <tbody>
         @foreach($tasks as $i)
         <tr>
-            <td><a href="/profile.html">{{$i->name}}</a></td>
+            <td><a href="{{ route('profile.id', $i->Student_id) }}">{{$i->name}}</a></td>
             <td>{{$i->Student_id}}</td>
-            <td>{{$i->Title}}</td>
+            <td><a href="{{ route('task.detail', $i->Tasks_id)}}">{{$i->Title}}</a></td>
             <td>{{$i->Content}}</td>
             <td>{{$i->DateTime}}</td>
             <td>{{$i->Status}}</td>

@@ -114,7 +114,7 @@
                                                     <center>
                                                         <div class="form-group">
                                                             <textarea class="form-control" id="" rows="5" name="reason"
-                                                                      placeholder="檢舉原因..."></textarea>
+                                                                      placeholder="檢舉原因..." required></textarea>
                                                         </div>
                                                         <button type="submit" class="btn btn-danger my-0 mb-3">確認檢舉
                                                         </button>
