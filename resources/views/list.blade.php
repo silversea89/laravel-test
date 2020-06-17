@@ -308,8 +308,8 @@
 
                         <div class="row">
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group pb-2 pl-1 pr-1 m-0">
-                                <label class="m-0">面交地點</label>
-                                <input type="text" class="form-control" placeholder="請輸入面交地點(EX:資訊樓4樓、正門校門口)"
+                                <label class="m-0">面交地點和特徵</label>
+                                <input type="text" class="form-control" placeholder="請輸入面交地點(EX:資訊樓4樓、正門校門口)和您的特徵(EX:帽子衣服顏色..)"
                                        name="MeetAddress" required></input>
                             </div>
                         </div>
