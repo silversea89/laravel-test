@@ -6,7 +6,7 @@
             <h2 class="font-weight-bold mb-0">
                 個人資料
             </h2>
-            @if($profile[0]->student_id==$id){
+            @if($profile[0]->student_id==$id)
             <div class="d-flex justify-content-end col">
                 <button class="btn btn-primary mr-1" data-toggle="modal"
                         data-target=".changePhoto">更改照片
@@ -49,7 +49,6 @@
                     <button type="submit" class="btn btn-primary">更改密碼</button>
                 </form>
             </div>
-            }
             @endif
         </div>
 
