@@ -98,7 +98,7 @@
                 </div>
             </div>
         @endforeach
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+        <div class=" d-none d-md-block col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
             <div class="row mr-0">
                 @foreach($newesttasks as $i)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0">
@@ -149,7 +149,61 @@
             </div>
             <br>
         </div>
+        <div class="d-md-none d-block col-12 col-sm-12 px-0" >
+            <div class="mr-0 d-flex align-items-center" style="overflow-y:hidden;overflow-x:auto;white-space: nowrap;">
 
+                @foreach($newesttasks as $i)
+                <div class="col-8 col-sm-8 mt-3 pl-0" style="display: inline-table;vertical-align: top;">
+
+                    <div style="border:1px #DFDFDF solid;background-color:#FFF"  data-toggle="modal" data-target=".content{{$i->Tasks_id}}">
+
+                        <div class="row pl-3" >
+
+                            <div class="col-12 col-sm-12 pl-0">
+                                @if($i->Classification == 'Food')
+                                    <img src="img/food.jpg" class="img-fluid">
+                                @elseif($i->Classification == 'Stationery')
+                                    <img src="img/pen.jpg" class="img-fluid">
+                                @endif
+                            </div>
+
+                            <div class="col-12 col-sm-12 pl-0 " >
+
+                                <div class="pl-1">
+
+                                    <p class="m-0">{{$i->Title}}</p>
+                                    <p class="m-0">
+                                        @foreach($host_AVGrate[$i->Student_id] as $k)
+                                            @if($k=="0")
+                                                <i class="far fa-star" style="color:#FF9529"></i>
+                                            @elseif($k=="0.5")
+                                                <i class="fas fa-star-half-alt" style="color:#FF9529"
+                                                   aria-hidden="true"></i>
+                                            @elseif($k=="1")
+                                                <i class="fas fa-star" style="color:#FF9529"></i>
+                                            @else
+                                                <i class="fas fa-star" style="color:#FF9529"></i>
+                                                {{$k}}
+                                                @break;
+                                            @endif
+                                        @endforeach
+                                    </p>
+                                    <p class="m-0">{{$i->Pay}}$</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                @endforeach
+                <div class="col-4 col-sm-4 mt-3 pl-0 " style="display: inline-table;vertical-align: top;">
+                    <a href="{{ route('login') }}"><h1>more&nbsp;<p class="fas fa-arrow-right"></p></h1></a>
+                </div>
+            </div>
+            <br>
+
+        </div>
 
         <div class="row ">
 
