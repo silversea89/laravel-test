@@ -101,7 +101,6 @@ class ProfileController extends Controller
         $extension = $file->getClientOriginalExtension();
         $file_name = $imageName. "." .$extension;
         $file->move(getcwd()."\profileimages", $file_name);
-        error_log(getcwd());
         $change = User::find($request->student_id);
         $change->photo = $file_name;
         $change->save();
