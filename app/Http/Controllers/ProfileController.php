@@ -21,7 +21,7 @@ class ProfileController extends Controller
         $profile = DB::table('users')
             ->select('users.*')
             ->where('Student_id', '=', $profile_id)
-            ->first();
+            ->get();
         $taskaddrecord = DB::table('tasks')
             ->where('student_id', '=', $profile_id)
             ->count();
