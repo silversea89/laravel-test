@@ -16,6 +16,8 @@ class ProfileController extends Controller
 
     protected function showprofile(Request $request, $profile_id)
     {
+        $user = Auth::user();
+        $id = $user->student_id;
         $profile = DB::table('users')
             ->select('users.*')
             ->where('Student_id', '=', $profile_id)
@@ -89,7 +91,8 @@ class ProfileController extends Controller
             "host_evaluation" => $host_evaluation,
             "toolman_evaluation" => $toolman_evaluation,
             "host_AVGrate" => $host_AVG_array,
-            "toolman_AVGrate" => $toolman_AVG_array]);
+            "toolman_AVGrate" => $toolman_AVG_array,
+            "id"=>$id]);
     }
     protected function changephoto(Request $request){
 

@@ -104,7 +104,7 @@
                                     </h5>
 
                                 </h5>
-                                <p class="m-0">老闆:<a href="#">{{$i->name}}</a></p>
+                                <p class="m-0">老闆:<a href="{{ route('profile.id', $i->Student_id) }}">{{$i->name}}</a></p>
                                 <p class="m-0">發佈於{{$i->created_at}}</p>
                                 <p class="m-0">截止期限：{{$i->DeadDateTime}}</p>
                                 @guest

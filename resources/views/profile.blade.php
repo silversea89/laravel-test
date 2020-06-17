@@ -6,6 +6,7 @@
             <h2 class="font-weight-bold mb-0">
                 個人資料
             </h2>
+            @if($profile->Student_id==$id){
             <div class="d-flex justify-content-end col">
                 <button class="btn btn-primary mr-1" data-toggle="modal"
                         data-target=".changePhoto">更改照片
@@ -48,6 +49,8 @@
                     <button type="submit" class="btn btn-primary">更改密碼</button>
                 </form>
             </div>
+            }
+            @endif
         </div>
 
         <div class="row">
@@ -65,9 +68,10 @@
                                 height: auto;position: absolute;top:0;bottom:0;left:0;right:0;margin: auto;">
                             </div>
                         </div>
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 p-2" >
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 p-2">
 
-                            <div style="border-radius:20px;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);height:100%;background-color: white">
+                            <div
+                                style="border-radius:20px;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);height:100%;background-color: white">
                                 <h5 class="font-weight-bold mb-0 pl-2 pt-3">姓名</h5>
                                 <p class="font-weight-normal mb-2 pl-2">{{$i->name}}</p>
 
@@ -79,7 +83,8 @@
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 p-2">
-                            <div style="border-radius:20px;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);background-color: white">
+                            <div
+                                style="border-radius:20px;box-shadow:0 0.1rem 0.5rem rgba(0, 0, 0, 0.6);background-color: white">
                                 <div class="row pt-3">
                                     <div class="col-4 col-sm-4 col-md-4 col-lg-12 col-xl-12 pr-0 ">
                                         <h5 class="font-weight-bold mb-0 pl-2 ">提出委託數</h5>
