@@ -198,7 +198,11 @@
                 </div>
                 @endforeach
                 <div class="col-4 col-sm-4 mt-3 pl-0 " style="display: inline-table;vertical-align: top;">
+                    @guest
                     <a href="{{ route('login') }}"><h1>more&nbsp;<p class="fas fa-arrow-right"></p></h1></a>
+                    @else
+                        <a href="{{ route('list') }}"><h1>more&nbsp;<p class="fas fa-arrow-right"></p></h1></a>
+                    @endguest
                 </div>
             </div>
             <br>
