@@ -225,8 +225,10 @@
                                 <label class="m-0">分類選擇</label>
                                 <select class="form-control" name="Classification">
                                     @foreach($classifications as $classification)
+                                        @if($classification->ClassValue!="All")
                                         <option
                                             value="{{$classification->ClassValue}}">{{$classification->ClassName}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -239,7 +241,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group pb-2 pl-1 pr-1 m-0">
-                                <label class="m-0">購買物品(請詳細說明需求)</label>
+                                <label class="m-0">需求詳細說明(購買物品資訊、教學內容、工作內容..)</label>
                                 <textarea rows="4" cols="50" class="form-control"
                                           placeholder="請輸入購買物品、委託細節或注意事項(Ex:是否要袋子、餐具..)" name="Content"></textarea>
                             </div>

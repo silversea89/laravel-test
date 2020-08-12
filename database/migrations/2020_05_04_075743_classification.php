@@ -29,9 +29,21 @@ class Classification extends Migration
                 "ClassName" => "文具用品"
             ],
             [
+                "ClassValue" => "Work",
+                "ClassName" => "代勞跑腿"
+            ],
+            [
+                "ClassValue" => "Teach",
+                "ClassName" => "教學"
+            ],
+            [
+                "ClassValue" => "Secondhand",
+                "ClassName" => "二手物品交易"
+            ],
+            [
                 "ClassValue" => "All",
                 "ClassName" => "全部"
-            ]
+            ],
         ]);
     }
 

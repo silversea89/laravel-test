@@ -12,6 +12,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -100,8 +101,7 @@ class RegisterController extends Controller
             }
         }
 
-
-        return User::create([
+        return $user=User::create([
             'gender' => $data['gender'],
             'department' => $data['department'],
             'student_id' => $data['student_id'],
@@ -109,7 +109,11 @@ class RegisterController extends Controller
             'tel' => $data['tel'],
             'email' => $Email,
             'password' => Hash::make($data['password']),
-            'photo' => $file_name
+            'photo' => $file_name,
+            'verification_token' => Str::random(32),
         ]);
+
+        \Mail::to($user->email)->send(new VerificationEmail($user));
+
     }
 }
