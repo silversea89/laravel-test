@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'student_id','department', 'name','gender', 'tel','email','password','host_rate_avg','host_rate_avg','is_active','violation','photo','verification_token'
+        'student_id','department', 'name','gender', 'tel','email','password','host_rate_avg','host_rate_avg','is_active','violation','photo'
     ];
 
     /**
@@ -38,4 +38,9 @@ class User extends Authenticatable
     ];
 
     protected $primaryKey = 'student_id';
+
+    public function verifyUser()
+    {
+        return $this->hasOne('App\VerifyUser');
+    }
 }

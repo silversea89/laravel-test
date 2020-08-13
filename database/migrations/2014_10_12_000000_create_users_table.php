@@ -20,11 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('gender',1);
             $table->string('tel',10);
             $table->string('email',50);
+            $table->boolean('verified')->default(false);
             $table->float('host_rate_avg')->nullable();
             $table->float('toolman_rate_avg')->nullable();
             $table->string('password',100);
-            $table->string('verification_token')->nullable();
-            $table->boolean('verified')->default(false);
             $table->timestamps();
             $table->rememberToken();
         });

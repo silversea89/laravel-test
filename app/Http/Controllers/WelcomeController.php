@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class WelcomeController extends Controller
 {
+
     protected function Welcome(Request $request)
     {
         $host_AVG_array = array();

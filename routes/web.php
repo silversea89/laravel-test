@@ -71,6 +71,7 @@ Route::get('/passwordreset', function () {
 })->name('Password.ShowReset');
 //photoreset
 Route::post('/changephoto', 'ProfileController@changephoto')->name('Photo.Reset');
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
 Auth::routes();
 //// Authentication Routes...
 //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -86,6 +87,5 @@ Auth::routes();
 //Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 //Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 //Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-Route::get('/verify/{token}', 'VerifyController@VerifyEmail')->name('verify');
 Route::get('/home', 'HomeController@index')->name('home');
 

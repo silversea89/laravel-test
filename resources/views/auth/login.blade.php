@@ -11,6 +11,18 @@
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-5 pb-3 " style="background-color:white;border-radius:20px;">
                 <h1 class="p-3">ToolMan</h1>
+
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                @if (session('warning'))
+                    <div class="alert alert-warning">
+                        {{ session('warning') }}
+                    </div>
+                @endif
+
                 @if (session('message'))
                     <p class="text-danger">{{ session('message') }}</p>
                 @endif
