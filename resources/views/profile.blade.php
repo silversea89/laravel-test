@@ -78,7 +78,7 @@
                                 <p class="font-weight-normal mb-2 pl-2">{{$i->student_id}}</p>
 
                                 <h5 class="font-weight-bold mb-0 pl-2">科系</h5>
-                                <p class="font-weight-normal mb-3 pl-2 ">{{$i->department}}</p>
+                                <p class="font-weight-normal mb-3 pl-2 ">{{$department->De_Name}}</p>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 p-2">

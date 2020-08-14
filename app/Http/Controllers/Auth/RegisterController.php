@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\department;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -77,6 +78,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         $imageName = null;
         $Email = "s" . $data['student_id'] . "@nutc.edu.tw";
 
@@ -142,6 +144,6 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         $this->guard()->logout();
-        return redirect('login')->with('status', '已寄出認證信件至您註冊的信箱，請至信箱查看後點擊連結後開通帳號。');
+        return redirect('login')->with('status', '已寄出認證信件至您註冊的信箱，請至信箱查看後點擊連結以開通帳號。');
     }
 }

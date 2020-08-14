@@ -40,14 +40,14 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="form-group" style="position:relative">
-                            <input id="name" type="text" class="form-control @error('department') is-invalid @enderror border-top-0 border-right-0 border-left-0" placeholder="科系" name="department" value="{{ old('department') }}" required autocomplete="tel" autofocus>
-                            <i class="fas fa-question-circle" style="color:#666;position:absolute;top:11px;right:0px" data-toggle="tooltip" data-placement="left" title="請填入OO(系/科)。"></i>
-                            @error('department')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 form-group" style="position:relative">
+                            <select class="form-control" name="department">
+                                @foreach($department as $department)
+                                    <option
+                                        value="{{$department->De_Value}}">{{$department->De_Name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 

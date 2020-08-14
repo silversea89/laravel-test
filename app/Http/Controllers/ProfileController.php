@@ -18,6 +18,14 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $id = $user->student_id;
+        $de_value = DB::table('users')
+            ->select('department')
+            ->where('Student_id', '=', $profile_id)
+            ->first();
+        $de_name=DB::table('departments')
+            ->select('De_Name')
+            ->where('De_Value', '=', $de_value->department)
+            ->first();
         $profile = DB::table('users')
             ->select('users.*')
             ->where('Student_id', '=', $profile_id)
@@ -84,8 +92,8 @@ class ProfileController extends Controller
         } else {
             array_push($toolman_AVG_array, "尚無資料");
         }
-
         return view('profile')->with(["profile" => $profile,
+            "department"=>$de_name,
             "addrecord" => $taskaddrecord,
             "completerecord" => $taskcompleterecord,
             "host_evaluation" => $host_evaluation,
