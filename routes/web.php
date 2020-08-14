@@ -46,7 +46,10 @@ Route::get('/contact', function () {
 })->name('contact');
 
 //Route::get('profile','ProfileController@showprofile')->name('profile');
-
+//Route::get('/verification/verify', function (){
+//    error_log("test");
+//})->name('verification.verify');
+//Route::get('/verification/verify', 'Auth\RegisterController@verifyUser')->name('verification.verify');
 Route::post('AddTasks', 'TaskController@Add')->name("task.add");
 
 //admin
@@ -71,7 +74,7 @@ Route::get('/passwordreset', function () {
 })->name('Password.ShowReset');
 //photoreset
 Route::post('/changephoto', 'ProfileController@changephoto')->name('Photo.Reset');
-Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser')->name('verification.verify');
 Auth::routes();
 //// Authentication Routes...
 //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

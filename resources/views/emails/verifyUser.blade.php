@@ -3,10 +3,10 @@
     <title>Welcome Email</title>
 </head>
 <body>
-<h2>Welcome to the site {{$user['name']}}</h2>
+<h2>感謝您註冊工具人帳號 {{$user['name']}}</h2>
 <br/>
-Your registered email-id is {{$user['email']}} , Please click on the below link to verify your email account
+您申請的信箱為{{$user['email']}} , 請點擊下方連結完成信箱認證
 <br/>
-<a href="{{url('user/verify', $user->verifyUser->token)}}">Verify Email</a>
+<a href="{{url('user/verify', $verifyUser->token)}}">認證信箱</a>
 </body>
 </html>

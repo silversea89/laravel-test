@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -30,9 +31,6 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
-
-
-
 
     /**
      * Where to redirect users after registration.
@@ -82,7 +80,6 @@ class RegisterController extends Controller
         $imageName = null;
         $Email = "s" . $data['student_id'] . "@nutc.edu.tw";
 
-
         if (isset($data['image'])) {
             $file = $data['image'];
             $imageName = $data['student_id'];
@@ -112,17 +109,18 @@ class RegisterController extends Controller
             'email' => $Email,
             'password' => Hash::make($data['password']),
             'photo' => $file_name,
-            'verification_token' => Str::random(32),
         ]);
+
         $verifyUser = VerifyUser::create([
-            'student_id' => $data['student_id'],
+            'user_id' => $data['student_id'],
             'token' => sha1(time())
         ]);
 
-        \Mail::to($user->email)->send(new VerifyMail($user));
-        return $user;
+        Mail::to($user->email)->send(new VerifyMail($user, $verifyUser));
 
+        return $user;
     }
+
     public function verifyUser($token)
     {
         $verifyUser = VerifyUser::where('token', $token)->first();
@@ -131,18 +129,19 @@ class RegisterController extends Controller
             if(!$user->verified) {
                 $verifyUser->user->verified = 1;
                 $verifyUser->user->save();
-                $status = "Your e-mail is verified. You can now login.";
+                $status = "您的帳號已完成驗證！您現在可以登入了。";
             } else {
-                $status = "Your e-mail is already verified. You can now login.";
+                $status = "您的帳號已經驗證過囉！您現在可以登入了。";
             }
         } else {
             return redirect('/login')->with('warning', "Sorry your email cannot be identified.");
         }
         return redirect('/login')->with('status', $status);
     }
+
     protected function registered(Request $request, $user)
     {
         $this->guard()->logout();
-        return redirect('login')->with('status', 'We sent you an activation code. Check your email and click on the link to verify.');
+        return redirect('login')->with('status', '已寄出認證信件至您註冊的信箱，請至信箱查看後點擊連結後開通帳號。');
     }
 }
