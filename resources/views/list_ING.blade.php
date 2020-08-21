@@ -170,8 +170,10 @@
                                 <label class="m-0">分類選擇</label>
                                 <select class="form-control" name="Classification">
                                     @foreach($classifications as $classification)
-                                        <option
-                                            value="{{$classification->ClassValue}}">{{$classification->ClassName}}</option>
+                                        @if($classification->ClassValue!="All")
+                                            <option
+                                                value="{{$classification->ClassValue}}">{{$classification->ClassName}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
