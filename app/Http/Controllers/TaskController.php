@@ -188,16 +188,19 @@ class TaskController extends Controller
 
     protected function gettask(Request $request)
     {
-
-        $tasks_id = $request->tasks_id;
-        $tasks = Tasks::find($tasks_id);
         $user = Auth::user();
+        $name = $user->name;
+        $tasks_id = $request->tasks_id;
+
+        $tasks = Tasks::find($tasks_id);
+        $target=$tasks->Student_id;
         if ($tasks) {
             $tasks->get_by_toolman($user);
         }
         Evaluation::create([
             'Tasks_id' => $request->tasks_id
         ]);
+        event(new App\Events\taskhasgot($name,$target));
         return redirect('list');
     }
 

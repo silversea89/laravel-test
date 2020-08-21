@@ -6,17 +6,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <script src="https://kit.fontawesome.com/d53abecaf1.js"></script>
     <!-- CSRF Token -->
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width">
     <title>ToolMan</title>
 
     <!-- Scripts -->
 <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+    <script src="//js.pusher.com/3.1/pusher.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js">
     </script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript">
     </script>
-
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
     <!-- Styles -->
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/style.css" rel="stylesheet" type="text/css"/>
@@ -25,8 +30,31 @@
 </head>
 
 <body>
-<div id="app" >
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="width: 100%;position: fixed;top:0px;left: 0px;z-index: 999;">
+@guest
+
+@else
+    <script type="text/javascript">
+        //通知
+        var pusher = new Pusher('993455b6a583e521b7dc', {
+            encrypted: true,
+            cluster: 'ap3'
+        });
+
+        // Subscribe to the channel we specified in our Laravel Event
+        // var channel = pusher.subscribe('status-liked');
+        var channel = pusher.subscribe("taskhasgot.".{{Auth::user()->student_id}});
+
+        // Bind a function to a Event (the full Laravel class)
+        channel.bind('App\\Events\\taskhasgot', function (data) {
+            console.log(data);
+        });
+    </script>
+@endguest
+
+<div id="app">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark "
+         style="width: 100%;position: fixed;top:0px;left: 0px;z-index: 999;">
 
         <div class="container pr-0">
 
@@ -86,7 +114,8 @@
 @if(\Request::is('/')||\Request::is('about')||\Request::is('contact')||\Request::is('login')||\Request::is('register'))
 
 @else
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-0" style="width:100%;position: fixed; bottom: 0px;right: 0px;z-index: 999;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-0"
+         style="width:100%;position: fixed; bottom: 0px;right: 0px;z-index: 999;">
         <div class="container bg-dark">
 
             <div class="row ml-0" style="width:100%">
@@ -95,7 +124,8 @@
                     <center>
                         <i class="fas fa-clipboard-list" @if(\Request::is('list','list/*'))style="color:#00FFFB"
                            @else style="color:white"@endif></i>
-                        <p class="m-0" @if(\Request::is('list','list/*'))style="color:#00FFFB" @else style="color:white"@endif>
+                        <p class="m-0" @if(\Request::is('list','list/*'))style="color:#00FFFB"
+                           @else style="color:white"@endif>
                             所有</p>
                     </center>
                 </a>

@@ -92,3 +92,11 @@ Auth::routes();
 //Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('test', function () {
+    event(new App\Events\taskhasgot('Someone'));
+    return "Event has been sent!";
+});
+
+Route::get('bububu', function () {
+    return view('test');
+});
