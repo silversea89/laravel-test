@@ -35,18 +35,51 @@
 @else
     <script type="text/javascript">
         //通知
-        var pusher = new Pusher('993455b6a583e521b7dc', {
+        var pusher = new Pusher('fc19df46a56b703d0c4a', {
             encrypted: true,
             cluster: 'ap3'
         });
 
         // Subscribe to the channel we specified in our Laravel Event
         // var channel = pusher.subscribe('status-liked');
-        var channel = pusher.subscribe("taskhasgot.".{{Auth::user()->student_id}});
+        var channel1 = pusher.subscribe("taskhasgot.{{Auth::user()->student_id}}");
 
         // Bind a function to a Event (the full Laravel class)
-        channel.bind('App\\Events\\taskhasgot', function (data) {
-            console.log(data);
+        channel1.bind('App\\Events\\taskhasgot', function (data) {
+            console.log(data.message);
+            console.log(data.time);
+        });
+
+        var channel2 = pusher.subscribe("taskstart.{{Auth::user()->student_id}}");
+
+        // Bind a function to a Event (the full Laravel class)
+        channel2.bind('App\\Events\\taskstart', function (data) {
+            console.log(data.message);
+            console.log(data.time);
+        });
+
+        var channel3 = pusher.subscribe("back.{{Auth::user()->student_id}}");
+
+        // Bind a function to a Event (the full Laravel class)
+        channel3.bind('App\\Events\\back', function (data) {
+            console.log(data.message);
+            console.log(data.time);
+        });
+
+        var channel4 = pusher.subscribe("arrive.{{Auth::user()->student_id}}");
+
+        // Bind a function to a Event (the full Laravel class)
+        channel4.bind('App\\Events\\arrive', function (data) {
+            console.log(data.message);
+            console.log(data.time);
+        });
+
+        var channel5 = pusher.subscribe("complete.{{Auth::user()->student_id}}");
+
+        // Bind a function to a Event (the full Laravel class)
+        channel5.bind('App\\Events\\complete', function (data) {
+            console.log(data.message);
+            console.log(data.time);
         });
     </script>
 @endguest

@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Evaluation;
+use App\Events\taskhasgot;
+use App\Events\arrive;
+use App\Events\complete;
+use App\Events\back;
+use App\Events\taskstart;
 use App\Report;
 use App\Status;
 use App\User;
@@ -189,9 +194,7 @@ class TaskController extends Controller
     protected function gettask(Request $request)
     {
         $user = Auth::user();
-        $name = $user->name;
         $tasks_id = $request->tasks_id;
-
         $tasks = Tasks::find($tasks_id);
         $target=$tasks->Student_id;
         if ($tasks) {
@@ -200,7 +203,7 @@ class TaskController extends Controller
         Evaluation::create([
             'Tasks_id' => $request->tasks_id
         ]);
-        event(new App\Events\taskhasgot($name,$target));
+        event(new taskhasgot($user,$target));
         return redirect('list');
     }
 
@@ -466,24 +469,30 @@ class TaskController extends Controller
     {
         $user = Auth::user();
         $id = $user->student_id;
+        $tasks = Tasks::find($tasks_id);
+        $target=$tasks->Student_id;
         $progress_get = $request->input("Progress");
         if ($progress_get == null) {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "go";
             $progress_change->save();
+            event(new taskstart($user,$target));
         } elseif ($progress_get == "go") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "back";
             $progress_change->save();
+            event(new back($user,$target));
         } elseif ($progress_get == "back") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "arrive";
             $progress_change->save();
+            event(new arrive($user,$target));
         } elseif ($progress_get == "arrive") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "complete";
             $progress_change->Status = "Complete";
             $progress_change->save();
+            event(new complete($user,$target));
         }
         $tasks = DB::table('tasks')
             ->Join('users as host', 'tasks.Student_id', '=', 'host.student_id')

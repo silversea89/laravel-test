@@ -2,26 +2,25 @@
 
 namespace App\Events;
 
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 use App\Notification;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Foundation\Events\Dispatchable;
+use Carbon\Carbon;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
-class taskhasgot implements ShouldBroadcast
+class complete implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $from;
     public $username;
-
     public $message;
-
     public $target;
     public $time;
-
     /**
      * Create a new event instance.
      *
@@ -30,7 +29,7 @@ class taskhasgot implements ShouldBroadcast
     public function __construct($from, $target)
     {
         $username = $from->name;
-        $this->message = $username." 接受了你的委託";
+        $this->message = $username." 委託完成囉!給予對方評價吧!";
         $this->target = $target;
         $this->time=Carbon::now();
         Notification::create([
@@ -45,10 +44,10 @@ class taskhasgot implements ShouldBroadcast
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return Channel|array
+     * @return \Illuminate\Broadcasting\Channel|array
      */
     public function broadcastOn()
     {
-        return ['taskhasgot.' . $this->target];
+        return ['complete.' . $this->target];
     }
 }

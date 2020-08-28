@@ -93,7 +93,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('test', function () {
-    event(new App\Events\taskhasgot('Someone'));
+    event(new App\Events\taskhasgot('Someone','1110534020'));
     return "Event has been sent!";
 });
 

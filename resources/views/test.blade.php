@@ -21,14 +21,14 @@
     // Enable pusher logging - don't include this in production
     // Pusher.logToConsole = true;
 
-    var pusher = new Pusher('993455b6a583e521b7dc', {
+    var pusher = new Pusher('fc19df46a56b703d0c4a', {
         encrypted: true,
         cluster: 'ap3'
     });
 
     // Subscribe to the channel we specified in our Laravel Event
     // var channel = pusher.subscribe('status-liked');
-    var channel = pusher.subscribe("taskhasgot.member");
+    var channel = pusher.subscribe("taskhasgot");
 
     // Bind a function to a Event (the full Laravel class)
     channel.bind('App\\Events\\taskhasgot', function(data) {
