@@ -3,8 +3,24 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-    <script src="https://kit.fontawesome.com/d53abecaf1.js"></script>
+    <!--animate.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <!--animate.css-->
+    <!--aos-->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!--aos-->
+    <!--fontawesome-->
+    <script src="https://kit.fontawesome.com/d53abecaf1.js">
+
+    </script>
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css" media="all"
+          rel="stylesheet">
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css" media="all"
+          rel="stylesheet">
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all" rel="stylesheet">
+    <!--fontawesome-->
     <!-- CSRF Token -->
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -14,8 +30,15 @@
     <!-- Scripts -->
 <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
     <script src="//js.pusher.com/3.1/pusher.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js">
+
+    <!--jQuery-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous">
+
     </script>
+    <!--jQuery-->
+
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript">
     </script>
     <!--[if lt IE 9]>
@@ -25,8 +48,13 @@
     <!-- Styles -->
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/main.css" rel="stylesheet" type="text/css"/>
+    <script src="{{ asset('js/main.js')}}"></script>
+    <!--Bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+          crossorigin="anonymous">
+    <!--Bootstrap-->
 </head>
 
 <body>
@@ -84,63 +112,130 @@
     </script>
 @endguest
 
-<div id="app">
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark "
-         style="width: 100%;position: fixed;top:0px;left: 0px;z-index: 999;">
-
-        <div class="container pr-0">
-
-            <a class="navbar-brand" href="/">ToolMan</a>
-
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+<nav class="navbar-dark bg-darker" id="realNav">
+    <div class="container p-0">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-darker p-0">
+            <button class="navbar-toggler border-0 p-3" type="button" data-toggle="collapse"
+                    data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="fas fa-bars"></span>
             </button>
+            <a class="navbar-brand m-0 mr-md-3 p-0" href="/" id="logo">Toolman</a>
+            <div class="dropdown order-md-last">
+                @guest
+                    <button class="border-0 p-3 fakeBtn" type="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        <span class="far fa-user"></span>
+                    </button>
 
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                @else
+                    <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" id="profile">
+                        <span class="far fa-user"></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" id="profileDropdown">
+                        <a class="dropdown-item navbar-dark" href="#">未登入這塊消失</a>
+                        <a class="dropdown-item navbar-dark" href="#">個人資料</a>
+                        <a class="dropdown-item navbar-dark" href="#">訊息</a>
+                        <a class="dropdown-item navbar-dark" href="#">已提出的委託</a>
+                        <a class="dropdown-item navbar-dark" href="#">已接受的委託</a>
+                        <a class="dropdown-item navbar-dark" href="/home">登出</a>
+                    </div>
+                @endguest
+            </div>
+
+
+            <div class="collapse navbar-collapse px-3" id="navbarToggler">
+                <ul class="navbar-nav mr-auto ">
+
                     <li class="nav-item">
-                        <a class="nav-link" href="/">首頁<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/">首頁</a>
                     </li>
+                    @if(\Request::is('register'))
+
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ route('list') }}" class="nav-link">所有委託</a>
+                        </li>
+                    @endif
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('about') }}">關於工具人</a>
                     </li>
                     <li class="nav-item">
+                        <a href="#" class="nav-link">問題Q&A</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('contact') }}">聯絡我們</a>
                     </li>
+
                 </ul>
-
-                @guest
-                    <div class="form-inline my-2 my-lg-0">
-                        <a class="btn btn-outline-success my-2 my-sm-0 mr-2"
-                           href="{{ route('register') }}">{{ __('註冊') }}</a>
-                        <a class="btn btn-success my-2 my-sm-0" href="{{ route('login') }}">{{ __('登入') }}</a>
-                    </div>
-                @else
-                    <ul class="navbar-nav ml-auto nav-flex-icons">
-
-                        <a class="btn btn-danger my-2 my-sm-0" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                            {{ __('登出') }}
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </ul>
-                @endguest
+                <div class="form-inline my-0">
+                    <a class="btn btn-outline-orange my-2 my-sm-0 mr-3 mr-md-2 px-4 rounded-0"
+                       href="{{ route('register') }}">註冊</a>
+                    <a class="btn btn-orange my-2 my-sm-0 px-4 rounded-0" href="{{ route('login') }}">登入</a>
+                </div>
             </div>
-        </div>
-    </nav>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        </nav>
+    </div>
+</nav>
+<nav class="navbar-dark bg-darker" id="fakeNav"></nav>
 
-        <div class="container pr-0">
-            <a class="navbar-brand" href="/">ToolMan</a>
-        </div>
-    </nav>
-</div>
+{{--    <nav class="navbar navbar-expand-lg navbar-dark bg-dark "--}}
+{{--         style="width: 100%;position: fixed;top:0px;left: 0px;z-index: 999;">--}}
+
+{{--        <div class="container pr-0">--}}
+
+{{--            <a class="navbar-brand" href="/">ToolMan</a>--}}
+
+
+{{--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"--}}
+{{--                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">--}}
+{{--                <span class="navbar-toggler-icon"></span>--}}
+{{--            </button>--}}
+
+{{--            <div class="collapse navbar-collapse" id="navbarNavDropdown">--}}
+{{--                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="nav-link" href="/">首頁<span class="sr-only">(current)</span></a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="nav-link" href="{{ route('about') }}">關於工具人</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="nav-link" href="{{ route('contact') }}">聯絡我們</a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+
+{{--                @guest--}}
+{{--                    <div class="form-inline my-2 my-lg-0">--}}
+{{--                        <a class="btn btn-outline-success my-2 my-sm-0 mr-2"--}}
+{{--                           href="{{ route('register') }}">{{ __('註冊') }}</a>--}}
+{{--                        <a class="btn btn-success my-2 my-sm-0" href="{{ route('login') }}">{{ __('登入') }}</a>--}}
+{{--                    </div>--}}
+{{--                @else--}}
+{{--                    <ul class="navbar-nav ml-auto nav-flex-icons">--}}
+
+{{--                        <a class="btn btn-danger my-2 my-sm-0" href="{{ route('logout') }}"--}}
+{{--                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">--}}
+{{--                            {{ __('登出') }}--}}
+{{--                        </a>--}}
+
+{{--                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+{{--                            @csrf--}}
+{{--                        </form>--}}
+{{--                    </ul>--}}
+{{--                @endguest--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </nav>--}}
+
+
+
+
+
+
 @yield('content')
 
 </body>

@@ -2,9 +2,6 @@
 
 namespace App\Events;
 
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
-use App\Notification;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -14,32 +11,22 @@ class taskhasgot implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $from;
     public $username;
 
     public $message;
 
     public $target;
-    public $time;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($from, $target)
+    public function __construct($username)
     {
-        $username = $from->name;
-        $this->message = $username." 接受了你的委託";
-        $this->target = $target;
-        $this->time=Carbon::now();
-        Notification::create([
-            'from' => $from->student_id,
-            'to' => $target,
-            'message' => $this->message,
-            'read' => false,
-            'created_at' => $this->time
-        ]);
+        $this->username = $username;
+        $this->message  = "{$username} 接受了你的委託";
+//        $this->target = $target;
     }
 
     /**
@@ -49,6 +36,7 @@ class taskhasgot implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['taskhasgot.' . $this->target];
+//        return ['taskhasgot.'.$this->target];
+        return ["status-liked"];
     }
 }
