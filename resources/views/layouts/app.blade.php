@@ -139,7 +139,11 @@
                         <a class="dropdown-item navbar-dark" href="#">訊息</a>
                         <a class="dropdown-item navbar-dark" href="#">已提出的委託</a>
                         <a class="dropdown-item navbar-dark" href="#">已接受的委託</a>
-                        <a class="dropdown-item navbar-dark" href="/home">登出</a>
+                        <a class="dropdown-item navbar-dark" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                        </form>
                     </div>
                 @endguest
             </div>
@@ -151,7 +155,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/">首頁</a>
                     </li>
-                    @if(\Request::is('register'))
+                    @if(\Request::is('register')||\Request::is('login'))
 
                     @else
                         <li class="nav-item">
@@ -172,9 +176,12 @@
 
                 </ul>
                 <div class="form-inline my-0">
-                    <a class="btn btn-outline-orange my-2 my-sm-0 mr-3 mr-md-2 px-4 rounded-0"
-                       href="{{ route('register') }}">註冊</a>
-                    <a class="btn btn-orange my-2 my-sm-0 px-4 rounded-0" href="{{ route('login') }}">登入</a>
+                    @guest
+                        <a class="btn btn-outline-orange my-2 my-sm-0 mr-3 mr-md-2 px-4 rounded-0"
+                           href="{{ route('register') }}">註冊</a>
+                        <a class="btn btn-orange my-2 my-sm-0 px-4 rounded-0" href="{{ route('login') }}">登入</a>
+                    @else
+                    @endguest
                 </div>
             </div>
         </nav>
