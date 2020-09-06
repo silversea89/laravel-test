@@ -39,16 +39,20 @@
     </script>
     <!--jQuery-->
 
-    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/js/gijgo.min.js" integrity="sha512-T62eI76S3z2X8q+QaoTTn7FdKOVGjzKPjKNHw+vdAGQdcDMbxZUAKwRcGCPt0vtSbRuxNWr/BccUKYJo634ygQ=="
+            crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/css/gijgo.min.css" integrity="sha512-oCuecFHHGu/Y4zKF8IoSoj5hQq1dLNIiUCwN08ChNW1VoMcjIIirAJT2JmKlYde6DeLN6JRSgntz6EDYDdFhCg=="
+          crossorigin="anonymous" />
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!-- Styles -->
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="/css/main.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/css/style.css') }}" rel="stylesheet" type="text/css"/>
+
+    <link href="{{ asset('/css/main.css') }}" rel="stylesheet" type="text/css"/>
     <script src="{{ asset('js/main.js')}}"></script>
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -246,56 +250,56 @@
 @yield('content')
 
 </body>
-@if(\Request::is('/')||\Request::is('about')||\Request::is('contact')||\Request::is('login')||\Request::is('register'))
+{{--@if(\Request::is('/')||\Request::is('about')||\Request::is('contact')||\Request::is('login')||\Request::is('register'))--}}
 
-@else
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-0"
-         style="width:100%;position: fixed; bottom: 0px;right: 0px;z-index: 999;">
-        <div class="container bg-dark">
+{{--@else--}}
+{{--    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-0"--}}
+{{--         style="width:100%;position: fixed; bottom: 0px;right: 0px;z-index: 999;">--}}
+{{--        <div class="container bg-dark">--}}
 
-            <div class="row ml-0" style="width:100%">
+{{--            <div class="row ml-0" style="width:100%">--}}
 
-                <a class="col-3 col-sm-3" href="{{route('list')}}" style="text-decoration:none;color:black">
-                    <center>
-                        <i class="fas fa-clipboard-list" @if(\Request::is('list','list/*'))style="color:#00FFFB"
-                           @else style="color:white"@endif></i>
-                        <p class="m-0" @if(\Request::is('list','list/*'))style="color:#00FFFB"
-                           @else style="color:white"@endif>
-                            所有</p>
-                    </center>
-                </a>
+{{--                <a class="col-3 col-sm-3" href="{{route('list')}}" style="text-decoration:none;color:black">--}}
+{{--                    <center>--}}
+{{--                        <i class="fas fa-clipboard-list" @if(\Request::is('list','list/*'))style="color:#00FFFB"--}}
+{{--                           @else style="color:white"@endif></i>--}}
+{{--                        <p class="m-0" @if(\Request::is('list','list/*'))style="color:#00FFFB"--}}
+{{--                           @else style="color:white"@endif>--}}
+{{--                            所有</p>--}}
+{{--                    </center>--}}
+{{--                </a>--}}
 
-                <a class="col-3 col-sm-3" href="{{route('list.push')}}" style="text-decoration:none;color:black">
-                    <center>
-                        <i class="fas fa-arrow-up" @if(\Request::is('list_push*'))style="color:#00FFFB"
-                           @else style="color:white"@endif></i>
-                        <p class="m-0" @if(\Request::is('list_push*'))style="color:#00FFFB"
-                           @else style="color:white"@endif>已提出</p>
-                    </center>
-                </a>
+{{--                <a class="col-3 col-sm-3" href="{{route('list.push')}}" style="text-decoration:none;color:black">--}}
+{{--                    <center>--}}
+{{--                        <i class="fas fa-arrow-up" @if(\Request::is('list_push*'))style="color:#00FFFB"--}}
+{{--                           @else style="color:white"@endif></i>--}}
+{{--                        <p class="m-0" @if(\Request::is('list_push*'))style="color:#00FFFB"--}}
+{{--                           @else style="color:white"@endif>已提出</p>--}}
+{{--                    </center>--}}
+{{--                </a>--}}
 
-                <a class="col-3 col-sm-3" href="{{route('list.ING')}}" style="text-decoration:none;color:black">
-                    <center>
-                        <i class="fas fa-arrow-down" @if(\Request::is('list_ING*'))style="color:#00FFFB"
-                           @else style="color:white"@endif></i>
-                        <p class="m-0" @if(\Request::is('list_ING*'))style="color:#00FFFB"
-                           @else style="color:white"@endif>已接受</p>
-                    </center>
-                </a>
+{{--                <a class="col-3 col-sm-3" href="{{route('list.ING')}}" style="text-decoration:none;color:black">--}}
+{{--                    <center>--}}
+{{--                        <i class="fas fa-arrow-down" @if(\Request::is('list_ING*'))style="color:#00FFFB"--}}
+{{--                           @else style="color:white"@endif></i>--}}
+{{--                        <p class="m-0" @if(\Request::is('list_ING*'))style="color:#00FFFB"--}}
+{{--                           @else style="color:white"@endif>已接受</p>--}}
+{{--                    </center>--}}
+{{--                </a>--}}
 
-                @if(Auth::check())
-                    <a class="col-3 col-sm-3" href="{{route('profile.id', Auth::user()->student_id)}}"
-                       style="text-decoration:none;color:black">
-                        <center>
-                            <i class="fas fa-user" @if(\Request::is('profile*'))style="color:#00FFFB"
-                               @else style="color:white"@endif></i>
-                            <p class="m-0" @if(\Request::is('profile*'))style="color:#00FFFB"
-                               @else style="color:white"@endif>我的</p>
-                        </center>
-                    </a>
-                @endif
-            </div>
-        </div>
-    </nav>
-@endif
+{{--                @if(Auth::check())--}}
+{{--                    <a class="col-3 col-sm-3" href="{{route('profile.id', Auth::user()->student_id)}}"--}}
+{{--                       style="text-decoration:none;color:black">--}}
+{{--                        <center>--}}
+{{--                            <i class="fas fa-user" @if(\Request::is('profile*'))style="color:#00FFFB"--}}
+{{--                               @else style="color:white"@endif></i>--}}
+{{--                            <p class="m-0" @if(\Request::is('profile*'))style="color:#00FFFB"--}}
+{{--                               @else style="color:white"@endif>我的</p>--}}
+{{--                        </center>--}}
+{{--                    </a>--}}
+{{--                @endif--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </nav>--}}
+{{--@endif--}}
 </html>
