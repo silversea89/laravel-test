@@ -138,11 +138,10 @@
                         <span class="far fa-user"></span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" id="profileDropdown">
-                        <a class="dropdown-item navbar-dark" href="#">未登入這塊消失</a>
-                        <a class="dropdown-item navbar-dark" href="#">個人資料</a>
+                        <a class="dropdown-item navbar-dark" href="{{route('profile.id', Auth::user()->student_id)}}">個人資料</a>
                         <a class="dropdown-item navbar-dark" href="#">訊息</a>
-                        <a class="dropdown-item navbar-dark" href="#">已提出的委託</a>
-                        <a class="dropdown-item navbar-dark" href="#">已接受的委託</a>
+                        <a class="dropdown-item navbar-dark" href="{{route('list.push')}}">已提出的委託</a>
+                        <a class="dropdown-item navbar-dark" href="{{route('list.ING')}}">已接受的委託</a>
                         <a class="dropdown-item navbar-dark" href="{{ route('logout') }}"
                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
