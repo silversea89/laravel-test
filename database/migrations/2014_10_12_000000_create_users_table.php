@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->float('host_rate_avg')->nullable();
             $table->float('toolman_rate_avg')->nullable();
             $table->string('password',100);
+            $table->integer('task_count')->default(0);;
             $table->timestamps();
             $table->rememberToken();
         });

@@ -83,6 +83,7 @@
                             <!-- 這個才是完整版~ -->
                             @foreach($tasksING as $i)
                                 <div class="col-6 col-lg-4 col-xl-3 p-1">
+                                    <a href="{{ route('task.detail', $i->Tasks_id)}}">
                                     <div class="height100p p-0 bg-dark">
                                         <div data-toggle="modal" data-target="#missionCard{{$i->Tasks_id}}">
                                             <div class="div-square">
@@ -116,20 +117,21 @@
                                                             <i class="fas fa-star font-orange"></i>
                                                         @else
                                                             <i class="fas fa-star font-orange"></i>
-                                                            {{$k}}
+                                                            <a class="font-grey">尚無資料</a>
                                                             @break;
                                                         @endif
                                                     @endforeach
                                                 </div>
                                                 <a class="font-grey"
-                                                   href="{{ route('profile.id',$i->Student_id) }}">{{$i->name}}</a>
+                                                   href="{{ route('profile.id',$i->Student_id) }}">{{$i->hostname}}</a>
                                             </div>
                                             <div class="d-flex justify-content-between">
                                                 <i class="fas fa-heart font-red m-0 pt-1"></i>
-                                                <p class="m-0 font-grey">已發過 18</p>
+                                                <p class="m-0 font-grey">已發過 {{$i->task_count}}</p>
                                             </div>
                                         </div>
                                     </div>
+                                    </a>
                                 </div>
                         @endforeach
                         <!-- ~這個才是完整版 -->

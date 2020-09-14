@@ -116,7 +116,7 @@
                                                             <i class="fas fa-star font-orange"></i>
                                                         @else
                                                             <i class="fas fa-star font-orange"></i>
-                                                            {{$k}}
+                                                            <a class="font-grey">尚無資料</a>
                                                             @break;
                                                         @endif
                                                     @endforeach
@@ -126,7 +126,7 @@
                                             </div>
                                             <div class="d-flex justify-content-between">
                                                 <i class="fas fa-heart font-red m-0 pt-1"></i>
-                                                <p class="m-0 font-grey">已發過 18</p>
+                                                <p class="m-0 font-grey">已發過 {{$i->task_count}}</p>
                                             </div>
                                         </div>
                                     </div>

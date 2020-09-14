@@ -111,7 +111,7 @@
                                 @elseif($i=="1")
                                     <i class="fas fa-star" style="color:#FF9529"></i>
                                 @else
-                                    {{$host_AVGrate[0]}}
+                                    <a class="font-grey">尚無資料</a>
                                 @endif
                             @endforeach
                         </div>
@@ -131,7 +131,7 @@
                                 @elseif($i=="1")
                                     <i class="fas fa-star" style="color:#FF9529"></i>
                                 @else
-                                    {{$toolman_AVGrate[0]}}
+                                    <a class="font-grey">尚無資料</a>
                                 @endif
                             @endforeach
                         </div>
@@ -165,17 +165,18 @@
                                 </div>
                                 <div class="col pl-0">
                                     <h5 class="guestProfileName font-white font-weight-bold m-0">
-                                        柯*勛
+                                        {{$i->ToolmanName}}
                                     </h5>
                                     <p class="font-grey m-0">
-                                        July 15 at 12:18 PM
+                                        {{$i->H_Time}}
                                     </p>
                                     <div class="row pl-3">
-                                        <i class="fas fa-star font-orange"></i>
-                                        <i class="fas fa-star font-orange"></i>
-                                        <i class="fas fa-star font-orange"></i>
-                                        <i class="fas fa-star font-orange"></i>
-                                        <i class="fas fa-star font-orange"></i>
+                                        @for ($k = 0; $k < $i->Host_Rate; $k++)
+                                            <i class="fas fa-star" style="color:#FF9529"></i>
+                                        @endfor
+                                        @for ($k = 0; $k < 5-$i->Host_Rate; $k++)
+                                            <i class="far fa-star" style="color:#FF9529"></i>
+                                        @endfor
                                     </div>
 
                                     <p class="font-grey m-0">
@@ -228,10 +229,10 @@
                             </div>
                             <div class="col pl-0">
                                 <h5 class="guestProfileName font-white font-weight-bold m-0">
-                                    柯*勛
+                                    {{$i->HostName}}
                                 </h5>
                                 <p class="font-grey m-0">
-                                    July 15 at 12:18 PM
+                                    {{$i->T_Time}}
                                 </p>
                                 <div class="row pl-3">
                                     @for ($k = 0; $k < $i->Toolman_Rate; $k++)
@@ -247,8 +248,23 @@
                                 </p>
 
                                 <p class="font-white m-0 mt-3">
-                                    {{$i->Host_Comment}}
+                                    {{$i->Toolman_Comment}}
                                 </p>
+
+                                <div class="row pl-3 mt-1">
+                                    <p class="badge-grey m-0 mt-2 mr-2 px-2 py-0">
+                                        超讚的出貨速度
+                                    </p>
+                                    <p class="badge-grey m-0 mt-2 mr-2 px-2 py-0">
+                                        超讚的CP值
+                                    </p>
+                                    <p class="badge-grey m-0 mt-2 mr-2 px-2 py-0">
+                                        超讚的商品品質
+                                    </p>
+                                    <p class="badge-grey m-0 mt-2 mr-2 px-2 py-0">
+                                        超讚的服務
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>

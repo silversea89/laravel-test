@@ -61,7 +61,9 @@ class TaskController extends Controller
             'Pay' => $data['Pay'],
             'Content' => $data['Content'],
         ]);
-
+        DB::table('users')
+            ->where('student_id',$data['student_id'])
+            ->increment('task_count', 1);
     }
 
 //    TODO login required.
@@ -72,7 +74,6 @@ class TaskController extends Controller
         $id = $user->student_id;
         $host_AVG_array = array();
         $host_AVG_array_tasks = array();
-
         $checktasks = DB::table('tasks')
             ->Join('users', 'tasks.student_id', '=', 'users.student_id')
             ->where('Status', '=', 'Selectable')
@@ -107,7 +108,6 @@ class TaskController extends Controller
             ->Join('users', 'tasks.student_id', '=', 'users.student_id')
             ->where('Status', '=', 'Selectable')
             ->get();
-
         return view('list')->with(["classifications" => $classifications,
             "tasks" => $tasks,
             "host_AVGrate" => $host_AVG_array_tasks,
@@ -212,14 +212,21 @@ class TaskController extends Controller
         $classifications = Classification::all();
         $user = Auth::user();
         $id = $user->student_id;
-
+        $host_AVG_array_ING = array();
+        $host_AVG_array_tasks_ING = array();
+        $host_AVG_array_Com = array();
+        $host_AVG_array_tasks_Com = array();
+        $host_AVG_array_Wait = array();
+        $host_AVG_array_tasks_Wait = array();
+        $host_AVG_array_Ex = array();
+        $host_AVG_array_tasks_Ex = array();
         $tasksING = DB::table('tasks')
             ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
             ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
             ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
             ->where("tasks.student_id", "=", $id)
             ->where("tasks.Status", "=", "Processing")
-            ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
+            ->select('tasks.*', 'host.name as hostname','host.task_count as task_count','host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
 
         $tasksWaiting = DB::table('tasks')
@@ -228,7 +235,7 @@ class TaskController extends Controller
             ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
             ->where("tasks.Student_id", "=", $id)
             ->where("tasks.Status", "=", "Selectable")
-            ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
+            ->select('tasks.*', 'host.name as hostname','host.task_count as task_count','host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
 
         $tasksComplete = DB::table('tasks')
@@ -237,7 +244,7 @@ class TaskController extends Controller
             ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
             ->where("tasks.Student_id", "=", $id)
             ->where("tasks.Status", "=", "Complete")
-            ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
+            ->select('tasks.*', 'host.name as hostname','host.task_count as task_count','host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
 
         $tasksExpired = DB::table('tasks')
@@ -246,17 +253,105 @@ class TaskController extends Controller
             ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
             ->where("tasks.student_id", "=", $id)
             ->where("tasks.Status", "=", "Expired")
-            ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
+            ->select('tasks.*', 'host.name as hostname','host.task_count as task_count','host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
+        foreach ($tasksING as $i) {
+            $host_AVGrate = $i->host_rate_avg;
+            if ($host_AVGrate != null) {
+                while ($host_AVGrate >= 1) {
+                    $host_AVGrate -= 1;
+                    array_push($host_AVG_array_ING, 1);
+                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+                        array_push($host_AVG_array_ING, 0.5);
+                    }
+                }
+                while (count($host_AVG_array_ING) < 5) {
+                    array_push($host_AVG_array_ING, 0);
+                }
+            } else {
+                array_push($host_AVG_array_ING, "尚無資料");
+            }
+            $host_AVG_array_tasks_ING[$i->Student_id] = $host_AVG_array_ING;
+            $host_AVG_array_ING = array();
+        }
+        foreach ($tasksComplete as $i) {
+            $host_AVGrate = $i->host_rate_avg;
+            if ($host_AVGrate != null) {
+                while ($host_AVGrate >= 1) {
+                    $host_AVGrate -= 1;
+                    array_push($host_AVG_array_Com, 1);
+                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+                        array_push($host_AVG_array_Com, 0.5);
+                    }
+                }
+                while (count($host_AVG_array_Com) < 5) {
+                    array_push($host_AVG_array_Com, 0);
+                }
+            } else {
+                array_push($host_AVG_array_Com, "尚無資料");
+            }
+            $host_AVG_array_tasks_Com[$i->Student_id] = $host_AVG_array_Com;
+            $host_AVG_array_Com = array();
+        }
+        foreach ($tasksWaiting as $i) {
+            $host_AVGrate = $i->host_rate_avg;
+            if ($host_AVGrate != null) {
+                while ($host_AVGrate >= 1) {
+                    $host_AVGrate -= 1;
+                    array_push($host_AVG_array_Wait, 1);
+                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+                        array_push($host_AVG_array_Wait, 0.5);
+                    }
+                }
+                while (count($host_AVG_array_Wait) < 5) {
+                    array_push($host_AVG_array_Wait, 0);
+                }
+            } else {
+                array_push($host_AVG_array_Wait, "尚無資料");
+            }
+            $host_AVG_array_tasks_Wait[$i->Student_id] = $host_AVG_array_Wait;
+            $host_AVG_array_Wait = array();
+        }
+        foreach ($tasksExpired as $i) {
+            $host_AVGrate = $i->host_rate_avg;
+            if ($host_AVGrate != null) {
+                while ($host_AVGrate >= 1) {
+                    $host_AVGrate -= 1;
+                    array_push($host_AVG_array_Ex, 1);
+                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+                        array_push($host_AVG_array_Ex, 0.5);
+                    }
+                }
+                while (count($host_AVG_array_Ex) < 5) {
+                    array_push($host_AVG_array_Ex, 0);
+                }
+            } else {
+                array_push($host_AVG_array_Ex, "尚無資料");
+            }
+            $host_AVG_array_tasks_Ex[$i->Student_id] = $host_AVG_array_Ex;
+            $host_AVG_array_Wait = array();
+        }
         return view('list_push')->with(["classifications" => $classifications,
             "tasksING" => $tasksING,
             "tasksWaiting" => $tasksWaiting,
             "tasksComplete" => $tasksComplete,
-            "tasksExpired" => $tasksExpired]);
+            "tasksExpired" => $tasksExpired,
+            "host_AVGrate" => $host_AVG_array_tasks_ING,
+            "host_AVGrate_Com" => $host_AVG_array_tasks_Com,
+            "host_AVGrate_Wait" => $host_AVG_array_tasks_Wait,
+            "host_AVGrate_Ex" => $host_AVG_array_tasks_Ex,]);
     }
 
     protected function showListpushsearch(Request $request)
     {
+        $host_AVG_array_ING = array();
+        $host_AVG_array_tasks_ING = array();
+        $host_AVG_array_Com = array();
+        $host_AVG_array_tasks_Com = array();
+        $host_AVG_array_Wait = array();
+        $host_AVG_array_tasks_Wait = array();
+        $host_AVG_array_Ex = array();
+        $host_AVG_array_tasks_Ex = array();
         $classifications = Classification::all();
         $user = Auth::user();
         $id = $user->student_id;
@@ -351,11 +446,91 @@ class TaskController extends Controller
                 ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
                 ->get();
         }
+        foreach ($tasksING as $i) {
+            $host_AVGrate = $i->host_rate_avg;
+            if ($host_AVGrate != null) {
+                while ($host_AVGrate >= 1) {
+                    $host_AVGrate -= 1;
+                    array_push($host_AVG_array_ING, 1);
+                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+                        array_push($host_AVG_array_ING, 0.5);
+                    }
+                }
+                while (count($host_AVG_array_ING) < 5) {
+                    array_push($host_AVG_array_ING, 0);
+                }
+            } else {
+                array_push($host_AVG_array_ING, "尚無資料");
+            }
+            $host_AVG_array_tasks_ING[$i->Student_id] = $host_AVG_array_ING;
+            $host_AVG_array_ING = array();
+        }
+        foreach ($tasksComplete as $i) {
+            $host_AVGrate = $i->host_rate_avg;
+            if ($host_AVGrate != null) {
+                while ($host_AVGrate >= 1) {
+                    $host_AVGrate -= 1;
+                    array_push($host_AVG_array_Com, 1);
+                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+                        array_push($host_AVG_array_Com, 0.5);
+                    }
+                }
+                while (count($host_AVG_array_Com) < 5) {
+                    array_push($host_AVG_array_Com, 0);
+                }
+            } else {
+                array_push($host_AVG_array_Com, "尚無資料");
+            }
+            $host_AVG_array_tasks_Com[$i->Student_id] = $host_AVG_array_Com;
+            $host_AVG_array_Com = array();
+        }
+        foreach ($tasksWaiting as $i) {
+            $host_AVGrate = $i->host_rate_avg;
+            if ($host_AVGrate != null) {
+                while ($host_AVGrate >= 1) {
+                    $host_AVGrate -= 1;
+                    array_push($host_AVG_array_Wait, 1);
+                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+                        array_push($host_AVG_array_Wait, 0.5);
+                    }
+                }
+                while (count($host_AVG_array_Wait) < 5) {
+                    array_push($host_AVG_array_Wait, 0);
+                }
+            } else {
+                array_push($host_AVG_array_Wait, "尚無資料");
+            }
+            $host_AVG_array_tasks_Wait[$i->Student_id] = $host_AVG_array_Wait;
+            $host_AVG_array_Wait = array();
+        }
+        foreach ($tasksExpired as $i) {
+            $host_AVGrate = $i->host_rate_avg;
+            if ($host_AVGrate != null) {
+                while ($host_AVGrate >= 1) {
+                    $host_AVGrate -= 1;
+                    array_push($host_AVG_array_Ex, 1);
+                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+                        array_push($host_AVG_array_Ex, 0.5);
+                    }
+                }
+                while (count($host_AVG_array_Ex) < 5) {
+                    array_push($host_AVG_array_Ex, 0);
+                }
+            } else {
+                array_push($host_AVG_array_Ex, "尚無資料");
+            }
+            $host_AVG_array_tasks_Ex[$i->Student_id] = $host_AVG_array_Ex;
+            $host_AVG_array_Wait = array();
+        }
         return view('list_push')->with(["classifications" => $classifications,
             "tasksING" => $tasksING,
             "tasksWaiting" => $tasksWaiting,
             "tasksComplete" => $tasksComplete,
-            "tasksExpired" => $tasksExpired]);
+            "tasksExpired" => $tasksExpired,
+            "host_AVGrate" => $host_AVG_array_tasks_ING,
+            "host_AVGrate_Com" => $host_AVG_array_tasks_Com,
+            "host_AVGrate_Wait" => $host_AVG_array_tasks_Wait,
+            "host_AVGrate_Ex" => $host_AVG_array_tasks_Ex]);
     }
 
     protected function showListING(Request $request)
@@ -363,6 +538,10 @@ class TaskController extends Controller
         $classifications = Classification::all();
         $user = Auth::user();
         $id = $user->student_id;
+        $host_AVG_array_ING = array();
+        $host_AVG_array_tasks_ING = array();
+        $host_AVG_array_Com = array();
+        $host_AVG_array_tasks_Com = array();
 
         $tasksING = DB::table('tasks')
             ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
@@ -370,7 +549,7 @@ class TaskController extends Controller
             ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
             ->where("tasks.Toolman_id", "=", $id)
             ->where("tasks.Status", "=", "Processing")
-            ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
+            ->select('tasks.*', 'host.name as hostname','host.task_count as task_count','host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
 
         $tasksComplete = DB::table('tasks')
@@ -379,16 +558,59 @@ class TaskController extends Controller
             ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
             ->where("tasks.toolman_id", "=", $id)
             ->where("tasks.Status", "=", "Complete")
-            ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname', 'status.StatusName')
+            ->select('tasks.*', 'host.name as hostname','host.task_count as task_count','host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
-
+        foreach ($tasksING as $i) {
+            $host_AVGrate = $i->host_rate_avg;
+            if ($host_AVGrate != null) {
+                while ($host_AVGrate >= 1) {
+                    $host_AVGrate -= 1;
+                    array_push($host_AVG_array_ING, 1);
+                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+                        array_push($host_AVG_array_ING, 0.5);
+                    }
+                }
+                while (count($host_AVG_array_ING) < 5) {
+                    array_push($host_AVG_array_ING, 0);
+                }
+            } else {
+                array_push($host_AVG_array_ING, "尚無資料");
+            }
+            $host_AVG_array_tasks_ING[$i->Student_id] = $host_AVG_array_ING;
+            $host_AVG_array_ING = array();
+        }
+        foreach ($tasksComplete as $i) {
+            $host_AVGrate = $i->host_rate_avg;
+            if ($host_AVGrate != null) {
+                while ($host_AVGrate >= 1) {
+                    $host_AVGrate -= 1;
+                    array_push($host_AVG_array_Com, 1);
+                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+                        array_push($host_AVG_array_Com, 0.5);
+                    }
+                }
+                while (count($host_AVG_array_Com) < 5) {
+                    array_push($host_AVG_array_Com, 0);
+                }
+            } else {
+                array_push($host_AVG_array_Com, "尚無資料");
+            }
+            $host_AVG_array_tasks_Com[$i->Student_id] = $host_AVG_array_Com;
+            $host_AVG_array_Com = array();
+        }
         return view('list_ING')->with(["classifications" => $classifications,
             "tasksING" => $tasksING,
-            "tasksComplete" => $tasksComplete]);
+            "tasksComplete" => $tasksComplete,
+            "host_AVGrate" => $host_AVG_array_tasks_ING,
+            "host_AVGrate_Com" => $host_AVG_array_tasks_Com,]);
     }
 
     protected function showListINGsearch(Request $request)
     {
+        $host_AVG_array_ING = array();
+        $host_AVG_array_tasks_ING = array();
+        $host_AVG_array_Com = array();
+        $host_AVG_array_tasks_Com = array();
         $classifications = Classification::all();
         $user = Auth::user();
         $id = $user->student_id;
@@ -444,9 +666,49 @@ class TaskController extends Controller
                 ->get();
 
         }
+        foreach ($tasksING as $i) {
+            $host_AVGrate = $i->host_rate_avg;
+            if ($host_AVGrate != null) {
+                while ($host_AVGrate >= 1) {
+                    $host_AVGrate -= 1;
+                    array_push($host_AVG_array_ING, 1);
+                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+                        array_push($host_AVG_array_ING, 0.5);
+                    }
+                }
+                while (count($host_AVG_array_ING) < 5) {
+                    array_push($host_AVG_array_ING, 0);
+                }
+            } else {
+                array_push($host_AVG_array_ING, "尚無資料");
+            }
+            $host_AVG_array_tasks_ING[$i->Student_id] = $host_AVG_array_ING;
+            $host_AVG_array_ING = array();
+        }
+        foreach ($tasksComplete as $i) {
+            $host_AVGrate = $i->host_rate_avg;
+            if ($host_AVGrate != null) {
+                while ($host_AVGrate >= 1) {
+                    $host_AVGrate -= 1;
+                    array_push($host_AVG_array_Com, 1);
+                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+                        array_push($host_AVG_array_Com, 0.5);
+                    }
+                }
+                while (count($host_AVG_array_Com) < 5) {
+                    array_push($host_AVG_array_Com, 0);
+                }
+            } else {
+                array_push($host_AVG_array_Com, "尚無資料");
+            }
+            $host_AVG_array_tasks_Com[$i->Student_id] = $host_AVG_array_Com;
+            $host_AVG_array_Com = array();
+        }
         return view('list_ING')->with(["classifications" => $classifications,
             "tasksING" => $tasksING,
-            "tasksComplete" => $tasksComplete]);
+            "tasksComplete" => $tasksComplete,
+            "host_AVGrate" => $host_AVG_array_tasks_ING,
+            "host_AVGrate_Com" => $host_AVG_array_tasks_Com,]);
     }
 
     protected function taskdetail(Request $request, $Tasks_id)
@@ -529,7 +791,8 @@ class TaskController extends Controller
 
     protected function evaluation_add(array $data)
     {
-
+        $user = Auth::user();
+        $name= $user->name;
         $tasks = DB::table('tasks')
             ->where('Tasks_id', '=', $data['tasks_id'])
             ->first();
@@ -541,6 +804,8 @@ class TaskController extends Controller
             $putdata = Evaluation::find($data['tasks_id']);
             $putdata->Toolman_Rate = $data['toolman_rate'];
             $putdata->Toolman_Comment = $data['toolman_comment'];
+            $putdata->HostName = $name;
+            $putdata->T_Time = Carbon::now();;
             $putdata->save();
 
         }
@@ -549,6 +814,8 @@ class TaskController extends Controller
             $putdata = Evaluation::find($data['tasks_id']);
             $putdata->Host_Rate = $data['host_rate'];
             $putdata->Host_Comment = $data['host_comment'];
+            $putdata->ToolmanName = $name;
+            $putdata->H_Time = Carbon::now();;
             $putdata->save();
         }
 

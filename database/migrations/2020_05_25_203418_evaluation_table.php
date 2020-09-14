@@ -20,6 +20,10 @@ class EvaluationTable extends Migration
             $table->integer('Host_Rate')->nullable();
             $table->string('Toolman_Comment')->nullable();
             $table->string('Host_Comment')->nullable();
+            $table->string('HostName')->nullable();
+            $table->string('ToolmanName')->nullable();
+            $table->dateTime('H_Time')->nullable();
+            $table->dateTime('T_Time')->nullable();
         });
     }
 
