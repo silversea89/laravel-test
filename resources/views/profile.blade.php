@@ -160,42 +160,34 @@
                 <div class="tab-content" id="evaluateContent">
                     <div class="tab-pane fade show active" id="employer" role="tabpanel">
                         @foreach($host_evaluation as $i)
-                        <div class="bg-dark width100p p-3 mb-3">
-                            <div class="row">
-
-                                <div class="col-auto pr-2">
-                                </div>
-                                <div class="col pl-0">
-                                    <h5 class="guestProfileName font-white font-weight-bold m-0">
-                                        {{$i->ToolmanName}}
-{{--                                        <?php--}}
-{{--                                        echo substr_replace({{$i->ToolmanName}}, '*', 1, 0);--}}
-{{--                                        ?>--}}
-                                    </h5>
-                                    <p class="font-grey m-0">
-                                        {{$i->H_Time}}
-                                    </p>
-                                    <div class="row pl-3">
-                                        @for ($k = 0; $k < $i->Host_Rate; $k++)
-                                            <i class="fas fa-star" style="color:#FF9529"></i>
-                                        @endfor
-                                        @for ($k = 0; $k < 5-$i->Host_Rate; $k++)
-                                            <i class="far fa-star" style="color:#FF9529"></i>
-                                        @endfor
+                            <div class="bg-dark width100p p-3 mb-3">
+                                <div class="row">
+                                    <div class="col-auto pr-2">
                                     </div>
-
-                                    <p class="font-grey m-0">
-                                        {{$i->Title}}
-                                    </p>
-
-                                    <p class="font-white m-0 mt-3">
-                                        {{$i->Host_Comment}}
-                                    </p>
-
+                                    <div class="col pl-0">
+                                        <h5 class="guestProfileName font-white font-weight-bold m-0">
+                                            {{$i->ToolmanName}}
+                                        </h5>
+                                        <p class="font-grey m-0">
+                                            {{$i->H_Time}}
+                                        </p>
+                                        <div class="row pl-3">
+                                            @for ($k = 0; $k < $i->Host_Rate; $k++)
+                                                <i class="fas fa-star" style="color:#FF9529"></i>
+                                            @endfor
+                                            @for ($k = 0; $k < 5-$i->Host_Rate; $k++)
+                                                <i class="far fa-star" style="color:#FF9529"></i>
+                                            @endfor
+                                        </div>
+                                        <p class="font-grey m-0">
+                                            {{$i->Title}}
+                                        </p>
+                                        <p class="font-white m-0 mt-3">
+                                            {{$i->Host_Comment}}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                         <nav>
                             <ul class="pagination justify-content-center">
@@ -208,58 +200,50 @@
                                             aria-hidden="true">&raquo;</span></a></li>
                             </ul>
                         </nav>
-
                     </div>
                     <div class="tab-pane fade" id="toolman" role="tabpanel" >
                         @foreach($toolman_evaluation as $i)
-                    <div class="bg-dark width100p p-3 mb-3">
-                        <div class="row">
-
-                            <div class="col-auto pr-2">
-                            </div>
-                            <div class="col pl-0">
-                                <h5 class="guestProfileName font-white font-weight-bold m-0">
-                                    {{$i->HostName}}
-                                @php
-                                    echo substr_replace($i->HostName, '*', 1, 0);
-                                @endphp
-                                </h5>
-                                <p class="font-grey m-0">
-                                    {{$i->T_Time}}
-                                </p>
-                                <div class="row pl-3">
-                                    @for ($k = 0; $k < $i->Toolman_Rate; $k++)
-                                        <i class="fas fa-star" style="color:#FF9529"></i>
-                                    @endfor
-                                    @for ($k = 0; $k < 5-$i->Toolman_Rate; $k++)
-                                        <i class="far fa-star" style="color:#FF9529"></i>
-                                    @endfor
+                            <div class="bg-dark width100p p-3 mb-3">
+                                <div class="row">
+                                    <div class="col-auto pr-2">
+                                    </div>
+                                    <div class="col pl-0">
+                                        <h5 class="guestProfileName font-white font-weight-bold m-0">
+                                            {{$i->HostName}}
+                                        </h5>
+                                        <p class="font-grey m-0">
+                                            {{$i->T_Time}}
+                                        </p>
+                                        <div class="row pl-3">
+                                            @for ($k = 0; $k < $i->Toolman_Rate; $k++)
+                                                <i class="fas fa-star" style="color:#FF9529"></i>
+                                            @endfor
+                                            @for ($k = 0; $k < 5-$i->Toolman_Rate; $k++)
+                                                <i class="far fa-star" style="color:#FF9529"></i>
+                                            @endfor
+                                        </div>
+                                        <p class="font-grey m-0">
+                                            {{$i->Title}}
+                                        </p>
+                                        <p class="font-white m-0 mt-3">
+                                            {{$i->Toolman_Comment}}
+                                        </p>
+                                    </div>
                                 </div>
-
-                                <p class="font-grey m-0">
-                                    {{$i->Title}}
-                                </p>
-
-                                <p class="font-white m-0 mt-3">
-                                    {{$i->Toolman_Comment}}
-                                </p>
-
-
                             </div>
-                        </div>
-                    </div>
                         @endforeach
-                    <nav>
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span
-                                        aria-hidden="true">&laquo;</span></a></li>
-                            <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
-                                        aria-hidden="true">&raquo;</span></a></li>
-                        </ul>
-                    </nav>
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span
+                                            aria-hidden="true">&laquo;</span></a></li>
+                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
+                                            aria-hidden="true">&raquo;</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>

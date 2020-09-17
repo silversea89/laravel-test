@@ -16,8 +16,6 @@ class ProfileController extends Controller
 
     protected function showprofile(Request $request, $profile_id)
     {
-        $hidename = array();
-        $hidename_array = array();
         $user = Auth::user();
         $id = $user->student_id;
         $de_value = DB::table('users')
@@ -94,6 +92,7 @@ class ProfileController extends Controller
         } else {
             array_push($toolman_AVG_array, "尚無資料");
         }
+
         return view('profile')->with(["profile" => $profile,
             "department"=>$de_name,
             "addrecord" => $taskaddrecord,
@@ -102,6 +101,7 @@ class ProfileController extends Controller
             "toolman_evaluation" => $toolman_evaluation,
             "host_AVGrate" => $host_AVG_array,
             "toolman_AVGrate" => $toolman_AVG_array,
+
             "id"=>$id]);
     }
     protected function changephoto(Request $request){
