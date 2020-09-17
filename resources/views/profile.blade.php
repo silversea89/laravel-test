@@ -164,14 +164,13 @@
                             <div class="row">
 
                                 <div class="col-auto pr-2">
-                                    <image class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
-                                           src="/src/img/profile.jpg"></image>
                                 </div>
                                 <div class="col pl-0">
                                     <h5 class="guestProfileName font-white font-weight-bold m-0">
-                                        <?php
-                                        echo substr_replace({{$i->ToolmanName}}, '*', 1, 0);
-                                        ?>
+                                        {{$i->ToolmanName}}
+{{--                                        <?php--}}
+{{--                                        echo substr_replace({{$i->ToolmanName}}, '*', 1, 0);--}}
+{{--                                        ?>--}}
                                     </h5>
                                     <p class="font-grey m-0">
                                         {{$i->H_Time}}
@@ -193,19 +192,6 @@
                                         {{$i->Host_Comment}}
                                     </p>
 
-                                    <div class="row pl-3 mt-1">
-                                        <p class="badge-grey m-0 mt-2 mr-2 px-2 py-0">
-                                            超讚的出貨速度
-                                        </p>
-                                        <p class="badge-grey m-0 mt-2 mr-2 px-2 py-0">
-                                            超讚的CP值
-                                        </p>
-                                        <p class="badge-grey m-0 mt-2 mr-2 px-2 py-0">
-                                            超讚的商品品質
-                                        </p>
-                                        <p class="badge-grey m-0 mt-2 mr-2 px-2 py-0">
-                                            超讚的服務
-                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -230,14 +216,12 @@
                         <div class="row">
 
                             <div class="col-auto pr-2">
-                                <image class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
-                                       src="/src/img/profile.jpg"></image>
                             </div>
                             <div class="col pl-0">
                                 <h5 class="guestProfileName font-white font-weight-bold m-0">
                                     {{$i->HostName}}
                                 @php
-                                    echo substr_replace({{$i->HostName}}, '*', 1, 0);
+                                    echo substr_replace($i->HostName, '*', 1, 0);
                                 @endphp
                                 </h5>
                                 <p class="font-grey m-0">
@@ -260,20 +244,7 @@
                                     {{$i->Toolman_Comment}}
                                 </p>
 
-                                <div class="row pl-3 mt-1">
-                                    <p class="badge-grey m-0 mt-2 mr-2 px-2 py-0">
-                                        超讚的出貨速度
-                                    </p>
-                                    <p class="badge-grey m-0 mt-2 mr-2 px-2 py-0">
-                                        超讚的CP值
-                                    </p>
-                                    <p class="badge-grey m-0 mt-2 mr-2 px-2 py-0">
-                                        超讚的商品品質
-                                    </p>
-                                    <p class="badge-grey m-0 mt-2 mr-2 px-2 py-0">
-                                        超讚的服務
-                                    </p>
-                                </div>
+
                             </div>
                         </div>
                     </div>
