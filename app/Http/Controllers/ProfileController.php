@@ -16,6 +16,8 @@ class ProfileController extends Controller
 
     protected function showprofile(Request $request, $profile_id)
     {
+        $hidename = array();
+        $hidename_array = array();
         $user = Auth::user();
         $id = $user->student_id;
         $de_value = DB::table('users')
