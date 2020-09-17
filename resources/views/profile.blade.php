@@ -9,7 +9,11 @@
                 <image class="rounded-circle border-0 img-fluid hwAuto" src="{{asset('profileimages/'.$i->photo)}}"
                        id="profileImg"></image>
                 <label id="changePhoto">
-                    <input id="upload_img" style="display:none;" type="file" accept="image/png, image/jpeg, image/jpg">
+                    <form action="{{ route('Photo.Reset') }}" method="POST" enctype="multipart/form-data" id="upload_img_form">
+                        @csrf
+                        <input type="hidden" name="student_id" value={{$i->student_id}}>
+                        <input name="image" id="upload_img" style="display:none;" type="file" accept="image/png, image/jpeg, image/jpg">
+                    </form>
                     <h5 class="fas fa-camera font-white p-2 rounded-circle bg-grey"></h5>
                 </label>
             </div>
@@ -165,7 +169,9 @@
                                 </div>
                                 <div class="col pl-0">
                                     <h5 class="guestProfileName font-white font-weight-bold m-0">
-                                        {{$i->ToolmanName}}
+                                        <?php
+                                        echo substr_replace({{$i->ToolmanName}}, '*', 1, 0);
+                                        ?>
                                     </h5>
                                     <p class="font-grey m-0">
                                         {{$i->H_Time}}
@@ -230,6 +236,9 @@
                             <div class="col pl-0">
                                 <h5 class="guestProfileName font-white font-weight-bold m-0">
                                     {{$i->HostName}}
+                                @php
+                                    echo substr_replace({{$i->HostName}}, '*', 1, 0);
+                                @endphp
                                 </h5>
                                 <p class="font-grey m-0">
                                     {{$i->T_Time}}

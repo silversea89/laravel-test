@@ -14,6 +14,12 @@ $(document).ready(function () {
 });
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
+
+    let uploadImgForm = $("#upload_img_form")
+    $("#upload_img").on("change", (e)=>{
+        console.log(uploadImgForm);
+        uploadImgForm.submit()
+    })
 })
 

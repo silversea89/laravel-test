@@ -83,9 +83,10 @@
                             <!-- 這個才是完整版~ -->
                             @foreach($tasksING as $i)
                                 <div class="col-6 col-lg-4 col-xl-3 p-1">
-                                    <a href="{{ route('task.detail', $i->Tasks_id)}}">
+
                                     <div class="height100p p-0 bg-dark">
                                         <div data-toggle="modal" data-target="#missionCard{{$i->Tasks_id}}">
+                                            <a href="{{ route('task.detail', $i->Tasks_id)}}">
                                             <div class="div-square">
                                                 @if($i->Classification == 'Food')
                                                     <img class="div-square-content img-fluid hwAuto pt-1 px-1"
@@ -95,6 +96,7 @@
                                                          src="{{asset('img/pen.jpg')}}">
                                                 @endif
                                             </div>
+                                            </a>
                                             <div class="px-2 pt-2">
                                                 <p class="font-white ellipsis mission-title m-0">{{$i->Title}}</p>
 
@@ -131,7 +133,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    </a>
+
                                 </div>
                         @endforeach
                         <!-- ~這個才是完整版 -->
