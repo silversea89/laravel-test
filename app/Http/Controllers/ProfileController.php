@@ -101,7 +101,6 @@ class ProfileController extends Controller
             "toolman_evaluation" => $toolman_evaluation,
             "host_AVGrate" => $host_AVG_array,
             "toolman_AVGrate" => $toolman_AVG_array,
-
             "id"=>$id]);
     }
     protected function changephoto(Request $request){

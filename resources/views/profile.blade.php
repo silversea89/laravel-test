@@ -166,7 +166,7 @@
                                     </div>
                                     <div class="col pl-0">
                                         <h5 class="guestProfileName font-white font-weight-bold m-0">
-                                            {{$i->ToolmanName}}
+                                            {{substr_replace($i->ToolmanName,"*",3,3)}}
                                         </h5>
                                         <p class="font-grey m-0">
                                             {{$i->H_Time}}
@@ -209,7 +209,7 @@
                                     </div>
                                     <div class="col pl-0">
                                         <h5 class="guestProfileName font-white font-weight-bold m-0">
-                                            {{$i->HostName}}
+                                            {{substr_replace($i->HostName,"*",3,3)}}
                                         </h5>
                                         <p class="font-grey m-0">
                                             {{$i->T_Time}}
