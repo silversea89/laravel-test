@@ -7,12 +7,12 @@
         <div class="row">
             <div class="col-12 mt-3">
                 <div class="row">
-                    <form class="width100p" action="#">
+                    <form class="width100p" action="{{ route('list.search')}}" method="get">
                         <div class="input-group width100p px-sm-2">
                             <input type="text" class="form-control font-white bg-grey " name="keyword"
                                    laceholder="在此輸入關鍵字">
                             <button type="submit" class="btn btn-orange fas fa-search"></button>
-                            <button type="button" class="btn btn-orange d-block d-md-none fas fa-filter ml-1"
+                            <button type="submit" class="btn btn-orange d-block d-md-none fas fa-filter ml-1"
                                     data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false"
                                     aria-controls="collapseFilter"></button>
                         </div>
@@ -59,17 +59,33 @@
                         <form action="#">
                             <ul class="nav mb-2 mt-1" id="evaluate">
                                 <li class="nav-item col-3 p-0 m-0">
-                                    <button class="nav-link btn-block tab active px-0 m-0" type="submit">最新</button>
+                                    <form action="{{ route('list')}}" method="get">
+                                        @csrf
+                                        <input type="hidden" name="order" value="newest">
+                                        <button class="nav-link btn-block tab active px-0 m-0" type="submit">最新</button>
+                                    </form>
                                 </li>
                                 <li class="nav-item col-3 p-0 m-0">
-                                    <button class="nav-link btn-block tab px-0 m-0" type="submit">最有經驗</button>
+                                    <form action="{{ route('list')}}" method="get">
+                                        @csrf
+                                        <input type="hidden" name="order" value="exp">
+                                        <button class="nav-link btn-block tab  px-0 m-0" type="submit">最有經驗</button>
+                                    </form>
                                 </li>
                                 <li class="nav-item col-3 p-0 m-0">
-                                    <button class="nav-link btn-block tab px-0 m-0" type="submit">最有信譽</button>
+                                    <form action="{{ route('list')}}" method="get">
+                                        @csrf
+                                        <input type="hidden" name="order" value="eva">
+                                        <button class="nav-link btn-block tab  px-0 m-0" type="submit">最有信譽</button>
+                                    </form>
                                 </li>
                                 <li class="nav-item col-3 p-0 m-0">
-                                    <button class="nav-link btn-block tab px-0 m-0" type="submit">價格<i
-                                            class="fas fa-sort-amount-up"></i></button>
+                                    <form action="{{ route('list')}}" method="get">
+                                        @csrf
+                                        <input type="hidden" name="order" value="price">
+                                        <button class="nav-link btn-block tab px-0 m-0" type="submit">價格<i
+                                                class="fas fa-sort-amount-up"></i></button>
+                                    </form>
                                 </li>
                                 <!-- <li class="nav-item col-3">
                                   <button class="nav-link btn-block tab px-0 m-0"  type="submit">價格<i class="fas fa-sort-amount-down"></i></button>
@@ -122,7 +138,7 @@
                                                     @endforeach
                                                 </div>
                                                 <a class="font-grey"
-                                                   href="{{ route('profile.id',$i->Student_id) }}">{{$i->name}}</a>
+                                                   href="{{ route('profile.id',$i->Student_id)}}">{{$i->name}}</a>
                                             </div>
                                             <div class="d-flex justify-content-between">
                                                 <i class="fas fa-heart font-red m-0 pt-1"></i>

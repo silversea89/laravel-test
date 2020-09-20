@@ -62,7 +62,7 @@ class TaskController extends Controller
             'Content' => $data['Content'],
         ]);
         DB::table('users')
-            ->where('student_id',$data['student_id'])
+            ->where('student_id', $data['student_id'])
             ->increment('task_count', 1);
     }
 
@@ -103,18 +103,41 @@ class TaskController extends Controller
             $host_AVG_array_tasks[$i->Student_id] = $host_AVG_array;
             $host_AVG_array = array();
         }
-
-        $tasks = DB::table('tasks')
-            ->Join('users', 'tasks.student_id', '=', 'users.student_id')
-            ->where('Status', '=', 'Selectable')
-            ->get();
+        if($request->input('order')==null or $request->input('order')=="newest"){
+            $tasks = DB::table('tasks')
+                ->Join('users', 'tasks.student_id', '=', 'users.student_id')
+                ->where('Status', '=', 'Selectable')
+                ->orderBy('tasks.created_at', 'desc')
+                ->get();
+        }
+        elseif($request->input('order')=="exp"){
+            $tasks = DB::table('tasks')
+                ->Join('users', 'tasks.student_id', '=', 'users.student_id')
+                ->where('Status', '=', 'Selectable')
+                ->orderBy('users.task_count', 'desc')
+                ->get();
+        }
+        elseif($request->input('order')=="eva"){
+            $tasks = DB::table('tasks')
+                ->Join('users', 'tasks.student_id', '=', 'users.student_id')
+                ->where('Status', '=', 'Selectable')
+                ->orderBy('users.host_rate_avg', 'desc')
+                ->get();
+        }
+        elseif($request->input('order')=="price"){
+            $tasks = DB::table('tasks')
+                ->Join('users', 'tasks.student_id', '=', 'users.student_id')
+                ->where('Status', '=', 'Selectable')
+                ->orderBy('tasks.Pay', 'desc')
+                ->get();
+        }
         return view('list')->with(["classifications" => $classifications,
             "tasks" => $tasks,
             "host_AVGrate" => $host_AVG_array_tasks,
             "id" => $id,
             "TitleClass" => "全部",
             "orderBy" => "",
-            "keyword"=>""]);
+            "keyword" => ""]);
     }
 
     protected function showSearchListForm(Request $request)
@@ -123,8 +146,8 @@ class TaskController extends Controller
         $id = $user->student_id;
         $host_AVG_array = array();
         $host_AVG_array_tasks = array();
-        $classifications = Classification::all();
-        $classification_target = Classification::where('ClassValue', $request->input('Classification'))->first();
+//        $classifications = Classification::all();
+//        $classification_target = Classification::where('ClassValue', $request->input('Classification'))->first();
 
         if ($request->input('keyword') != null)
             $search_keyword = $request->input('keyword');
@@ -132,12 +155,31 @@ class TaskController extends Controller
             $search_keyword = "";
         $sort_by = $request->input('sort_by');
 
+//
+//        $checktasks = DB::table('tasks')
+//            ->Join('users', 'tasks.student_id', '=', 'users.student_id')
+//            ->where('Status', '=', 'Selectable')
+//            ->get();
 
-        $checktasks = DB::table('tasks')
-            ->Join('users', 'tasks.student_id', '=', 'users.student_id')
-            ->where('Status', '=', 'Selectable')
-            ->get();
-        foreach ($checktasks as $i) {
+//        if ($classification_target['ClassValue'] == "All") {
+            $tasks = DB::table('tasks')
+                ->join('users', 'tasks.Student_id', '=', 'users.Student_id')
+                ->where('Title', 'LIKE', "%$search_keyword%")
+                ->where('Status', '=', 'Selectable')
+                ->orderBy($sort_by, 'desc')
+                ->select('tasks.*', 'users.name')
+                ->get();
+//        } else {
+//            $tasks = DB::table('tasks')
+//                ->join('users', 'tasks.Student_id', '=', 'users.Student_id')
+//                ->where('Classification', $classification_target['ClassValue'])
+//                ->where('Title', 'LIKE', "%$search_keyword%")
+//                ->where('Status', '=', 'Selectable')
+//                ->orderBy($sort_by, 'desc')
+//                ->select('tasks.*', 'users.name')
+//                ->get();
+//        }
+        foreach ($tasks as $i) {
             if ($i->DeadDateTime < Carbon::now()) {
                 $taskexpire = Tasks::find($i->Tasks_id);
                 $taskexpire->Status = 'Expired';
@@ -161,33 +203,13 @@ class TaskController extends Controller
             $host_AVG_array_tasks[$i->Student_id] = $host_AVG_array;
             $host_AVG_array = array();
         }
-        if ($classification_target['ClassValue'] == "All") {
-            $tasks = DB::table('tasks')
-                ->join('users', 'tasks.Student_id', '=', 'users.Student_id')
-                ->where('Title', 'LIKE', "%$search_keyword%")
-                ->where('Status', '=', 'Selectable')
-                ->orderBy($sort_by, 'desc')
-                ->select('tasks.*', 'users.name')
-                ->get();
-        } else {
-            $tasks = DB::table('tasks')
-                ->join('users', 'tasks.Student_id', '=', 'users.Student_id')
-                ->where('Classification', $classification_target['ClassValue'])
-                ->where('Title', 'LIKE', "%$search_keyword%")
-                ->where('Status', '=', 'Selectable')
-                ->orderBy($sort_by, 'desc')
-                ->select('tasks.*', 'users.name')
-                ->get();
-        }
 
-
-        return view('list')->with(["classifications" => $classifications,
+        return Redirect::route('list',"newest")->with([
             "tasks" => $tasks,
             "host_AVGrate" => $host_AVG_array_tasks,
             "id" => $id,
-            "TitleClass" => $classification_target["ClassName"],
             "orderBy" => $sort_by,
-            "keyword"=>$search_keyword,
+            "keyword" => $search_keyword,
         ]);
     }
 
@@ -196,14 +218,14 @@ class TaskController extends Controller
         $user = Auth::user();
         $tasks_id = $request->tasks_id;
         $tasks = Tasks::find($tasks_id);
-        $target=$tasks->Student_id;
+        $target = $tasks->Student_id;
         if ($tasks) {
             $tasks->get_by_toolman($user);
         }
         Evaluation::create([
             'Tasks_id' => $request->tasks_id
         ]);
-        event(new taskhasgot($user,$target));
+        event(new taskhasgot($user, $target));
         return redirect('list');
     }
 
@@ -226,7 +248,7 @@ class TaskController extends Controller
             ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
             ->where("tasks.student_id", "=", $id)
             ->where("tasks.Status", "=", "Processing")
-            ->select('tasks.*', 'host.name as hostname','host.task_count as task_count','host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
+            ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
 
         $tasksWaiting = DB::table('tasks')
@@ -235,7 +257,7 @@ class TaskController extends Controller
             ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
             ->where("tasks.Student_id", "=", $id)
             ->where("tasks.Status", "=", "Selectable")
-            ->select('tasks.*', 'host.name as hostname','host.task_count as task_count','host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
+            ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
 
         $tasksComplete = DB::table('tasks')
@@ -244,7 +266,7 @@ class TaskController extends Controller
             ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
             ->where("tasks.Student_id", "=", $id)
             ->where("tasks.Status", "=", "Complete")
-            ->select('tasks.*', 'host.name as hostname','host.task_count as task_count','host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
+            ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
 
         $tasksExpired = DB::table('tasks')
@@ -253,7 +275,7 @@ class TaskController extends Controller
             ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
             ->where("tasks.student_id", "=", $id)
             ->where("tasks.Status", "=", "Expired")
-            ->select('tasks.*', 'host.name as hostname','host.task_count as task_count','host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
+            ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
         foreach ($tasksING as $i) {
             $host_AVGrate = $i->host_rate_avg;
@@ -549,7 +571,7 @@ class TaskController extends Controller
             ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
             ->where("tasks.Toolman_id", "=", $id)
             ->where("tasks.Status", "=", "Processing")
-            ->select('tasks.*', 'host.name as hostname','host.task_count as task_count','host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
+            ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
 
         $tasksComplete = DB::table('tasks')
@@ -558,7 +580,7 @@ class TaskController extends Controller
             ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
             ->where("tasks.toolman_id", "=", $id)
             ->where("tasks.Status", "=", "Complete")
-            ->select('tasks.*', 'host.name as hostname','host.task_count as task_count','host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
+            ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
             ->get();
         foreach ($tasksING as $i) {
             $host_AVGrate = $i->host_rate_avg;
@@ -732,29 +754,29 @@ class TaskController extends Controller
         $user = Auth::user();
         $id = $user->student_id;
         $tasks = Tasks::find($tasks_id);
-        $target=$tasks->Student_id;
+        $target = $tasks->Student_id;
         $progress_get = $request->input("Progress");
         if ($progress_get == null) {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "go";
             $progress_change->save();
-            event(new taskstart($user,$target));
+            event(new taskstart($user, $target));
         } elseif ($progress_get == "go") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "back";
             $progress_change->save();
-            event(new back($user,$target));
+            event(new back($user, $target));
         } elseif ($progress_get == "back") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "arrive";
             $progress_change->save();
-            event(new arrive($user,$target));
+            event(new arrive($user, $target));
         } elseif ($progress_get == "arrive") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "complete";
             $progress_change->Status = "Complete";
             $progress_change->save();
-            event(new complete($user,$target));
+            event(new complete($user, $target));
         }
         $tasks = DB::table('tasks')
             ->Join('users as host', 'tasks.Student_id', '=', 'host.student_id')
@@ -792,7 +814,7 @@ class TaskController extends Controller
     protected function evaluation_add(array $data)
     {
         $user = Auth::user();
-        $name= $user->name;
+        $name = $user->name;
         $tasks = DB::table('tasks')
             ->where('Tasks_id', '=', $data['tasks_id'])
             ->first();

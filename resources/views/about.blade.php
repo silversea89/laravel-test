@@ -75,14 +75,14 @@
             @guest
             <a href="{{ route('login') }}"><span class="fa fa-angle-right" aria-hidden="true"></span> 我要當工具人</a>
             @else
-            <a href="{{ route('list') }}"><span class="fa fa-angle-right" aria-hidden="true"></span> 我要當工具人</a>
+            <a href="{{ route('list',"newest") }}"><span class="fa fa-angle-right" aria-hidden="true"></span> 我要當工具人</a>
             @endguest
         </div>
         <div class="col-6 col-md-4 ">
             @guest
             <a href="{{ route('login') }}"><span class="fa fa-angle-right" aria-hidden="true"></span>我要當乾爹</a>
             @else
-            <a href="{{ route('list') }}"><span class="fa fa-angle-right" aria-hidden="true"></span>我要當乾爹</a>
+            <a href="{{ route('list',"newest") }}"><span class="fa fa-angle-right" aria-hidden="true"></span>我要當乾爹</a>
             @endguest
         </div>
     </div>

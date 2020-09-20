@@ -162,7 +162,7 @@
 
                     @else
                         <li class="nav-item">
-                            <a href="{{ route('list') }}" class="nav-link">所有委託</a>
+                            <a href="{{ route('list')}}" class="nav-link">所有委託</a>
                         </li>
                     @endif
 
