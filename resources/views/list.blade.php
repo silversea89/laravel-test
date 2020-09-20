@@ -56,7 +56,6 @@
                 <div class="row">
                     <div class="col-12 px-sm-2 px-0 px-md-2">
                         <h3 class="mb-0 mt-2 pl-2 pl-md-0 font-white">所有委託</h3>
-                        <form action="#">
                             <ul class="nav mb-2 mt-1" id="evaluate">
                                 <li class="nav-item col-3 p-0 m-0">
                                     <form action="{{ route('list')}}" method="get">
@@ -87,11 +86,7 @@
                                                 class="fas fa-sort-amount-up"></i></button>
                                     </form>
                                 </li>
-                                <!-- <li class="nav-item col-3">
-                                  <button class="nav-link btn-block tab px-0 m-0"  type="submit">價格<i class="fas fa-sort-amount-down"></i></button>
-                                </li> -->
                             </ul>
-                        </form>
                     </div>
 
                     <div class="col-12">

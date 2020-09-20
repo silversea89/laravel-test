@@ -79,30 +79,30 @@ class TaskController extends Controller
             ->where('Status', '=', 'Selectable')
             ->get();
 
-        foreach ($checktasks as $i) {
-            if ($i->DeadDateTime < Carbon::now()) {
-                $taskexpire = Tasks::find($i->Tasks_id);
-                $taskexpire->Status = 'Expired';
-                $taskexpire->save();
-            }
-            $host_AVGrate = $i->host_rate_avg;
-            if ($host_AVGrate != null) {
-                while ($host_AVGrate >= 1) {
-                    $host_AVGrate -= 1;
-                    array_push($host_AVG_array, 1);
-                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
-                        array_push($host_AVG_array, 0.5);
-                    }
-                }
-                while (count($host_AVG_array) < 5) {
-                    array_push($host_AVG_array, 0);
-                }
-            } else {
-                array_push($host_AVG_array, "尚無資料");
-            }
-            $host_AVG_array_tasks[$i->Student_id] = $host_AVG_array;
-            $host_AVG_array = array();
-        }
+//        foreach ($checktasks as $i) {
+//            if ($i->DeadDateTime < Carbon::now()) {
+//                $taskexpire = Tasks::find($i->Tasks_id);
+//                $taskexpire->Status = 'Expired';
+//                $taskexpire->save();
+//            }
+//            $host_AVGrate = $i->host_rate_avg;
+//            if ($host_AVGrate != null) {
+//                while ($host_AVGrate >= 1) {
+//                    $host_AVGrate -= 1;
+//                    array_push($host_AVG_array, 1);
+//                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+//                        array_push($host_AVG_array, 0.5);
+//                    }
+//                }
+//                while (count($host_AVG_array) < 5) {
+//                    array_push($host_AVG_array, 0);
+//                }
+//            } else {
+//                array_push($host_AVG_array, "尚無資料");
+//            }
+//            $host_AVG_array_tasks[$i->Student_id] = $host_AVG_array;
+//            $host_AVG_array = array();
+//        }
         if($request->input('order')==null or $request->input('order')=="newest"){
             $tasks = DB::table('tasks')
                 ->Join('users', 'tasks.student_id', '=', 'users.student_id')
@@ -131,6 +131,30 @@ class TaskController extends Controller
                 ->orderBy('tasks.Pay', 'desc')
                 ->get();
         }
+        foreach ($tasks as $i) {
+            if ($i->DeadDateTime < Carbon::now()) {
+                $taskexpire = Tasks::find($i->Tasks_id);
+                $taskexpire->Status = 'Expired';
+                $taskexpire->save();
+            }
+            $host_AVGrate = $i->host_rate_avg;
+            if ($host_AVGrate != null) {
+                while ($host_AVGrate >= 1) {
+                    $host_AVGrate -= 1;
+                    array_push($host_AVG_array, 1);
+                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
+                        array_push($host_AVG_array, 0.5);
+                    }
+                }
+                while (count($host_AVG_array) < 5) {
+                    array_push($host_AVG_array, 0);
+                }
+            } else {
+                array_push($host_AVG_array, "尚無資料");
+            }
+            $host_AVG_array_tasks[$i->Student_id] = $host_AVG_array;
+            $host_AVG_array = array();
+        }
         return view('list')->with(["classifications" => $classifications,
             "tasks" => $tasks,
             "host_AVGrate" => $host_AVG_array_tasks,
@@ -142,6 +166,7 @@ class TaskController extends Controller
 
     protected function showSearchListForm(Request $request)
     {
+        $classifications = Classification::all();
         $user = Auth::user();
         $id = $user->student_id;
         $host_AVG_array = array();
@@ -153,7 +178,7 @@ class TaskController extends Controller
             $search_keyword = $request->input('keyword');
         else
             $search_keyword = "";
-        $sort_by = $request->input('sort_by');
+//        $sort_by = $request->input('sort_by');
 
 //
 //        $checktasks = DB::table('tasks')
@@ -161,14 +186,14 @@ class TaskController extends Controller
 //            ->where('Status', '=', 'Selectable')
 //            ->get();
 
+        $tasks = DB::table('tasks')
+            ->join('users', 'tasks.student_id', '=', 'users.student_id')
+            ->where('Title', 'LIKE', "%$search_keyword%")
+            ->where('Status', '=', 'Selectable')
+            ->orderBy('users.created_at', 'desc')
+            ->get();
 //        if ($classification_target['ClassValue'] == "All") {
-            $tasks = DB::table('tasks')
-                ->join('users', 'tasks.Student_id', '=', 'users.Student_id')
-                ->where('Title', 'LIKE', "%$search_keyword%")
-                ->where('Status', '=', 'Selectable')
-                ->orderBy($sort_by, 'desc')
-                ->select('tasks.*', 'users.name')
-                ->get();
+
 //        } else {
 //            $tasks = DB::table('tasks')
 //                ->join('users', 'tasks.Student_id', '=', 'users.Student_id')
@@ -204,12 +229,13 @@ class TaskController extends Controller
             $host_AVG_array = array();
         }
 
-        return Redirect::route('list',"newest")->with([
+        return view('list')->with([
+            "classifications" => $classifications,
             "tasks" => $tasks,
             "host_AVGrate" => $host_AVG_array_tasks,
             "id" => $id,
-            "orderBy" => $sort_by,
-            "keyword" => $search_keyword,
+            "orderBy" => "",
+            "keyword" => $search_keyword
         ]);
     }
 
