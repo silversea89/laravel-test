@@ -6,12 +6,12 @@
         <div class="row">
             <div class="col-12 mt-3">
                 <div class="row">
-                    <form class="width100p" action="#">
+                    <form class="width100p" action="{{ route('list_push.search')}}" method="get">
                         <div class="input-group width100p px-sm-2">
                             <input type="text" class="form-control font-white bg-grey " name="keyword"
                                    laceholder="在此輸入關鍵字">
                             <button type="submit" class="btn btn-orange fas fa-search"></button>
-                            <button type="button" class="btn btn-orange d-block d-md-none fas fa-filter ml-1"
+                            <button type="submit" class="btn btn-orange d-block d-md-none fas fa-filter ml-1"
                                     data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false"
                                     aria-controls="collapseFilter"></button>
                         </div>

@@ -169,20 +169,11 @@ class TaskController extends Controller
         $id = $user->student_id;
         $host_AVG_array = array();
         $host_AVG_array_tasks = array();
-//        $classifications = Classification::all();
-//        $classification_target = Classification::where('ClassValue', $request->input('Classification'))->first();
 
         if ($request->input('keyword') != null)
             $search_keyword = $request->input('keyword');
         else
             $search_keyword = "";
-//        $sort_by = $request->input('sort_by');
-
-//
-//        $checktasks = DB::table('tasks')
-//            ->Join('users', 'tasks.student_id', '=', 'users.student_id')
-//            ->where('Status', '=', 'Selectable')
-//            ->get();
 
         $tasks = DB::table('tasks')
             ->join('users', 'tasks.student_id', '=', 'users.student_id')
@@ -190,18 +181,8 @@ class TaskController extends Controller
             ->where('Status', '=', 'Selectable')
             ->orderBy('users.created_at', 'desc')
             ->get();
-//        if ($classification_target['ClassValue'] == "All") {
 
-//        } else {
-//            $tasks = DB::table('tasks')
-//                ->join('users', 'tasks.Student_id', '=', 'users.Student_id')
-//                ->where('Classification', $classification_target['ClassValue'])
-//                ->where('Title', 'LIKE', "%$search_keyword%")
-//                ->where('Status', '=', 'Selectable')
-//                ->orderBy($sort_by, 'desc')
-//                ->select('tasks.*', 'users.name')
-//                ->get();
-//        }
+
         foreach ($tasks as $i) {
             if ($i->DeadDateTime < Carbon::now()) {
                 $taskexpire = Tasks::find($i->Tasks_id);
@@ -232,7 +213,6 @@ class TaskController extends Controller
             "tasks" => $tasks,
             "host_AVGrate" => $host_AVG_array_tasks,
             "id" => $id,
-            "orderBy" => "",
             "keyword" => $search_keyword
         ]);
     }
@@ -260,123 +240,7 @@ class TaskController extends Controller
         $id = $user->student_id;
         $host_AVG_array = array();
         $host_AVG_array_tasks = array();
-//        $host_AVG_array_Com = array();
-//        $host_AVG_array_tasks_Com = array();
-//        $host_AVG_array_Wait = array();
-//        $host_AVG_array_tasks_Wait = array();
-//        $host_AVG_array_Ex = array();
-//        $host_AVG_array_tasks_Ex = array();
-//        $tasksING = DB::table('tasks')
-//            ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
-//            ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
-//            ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
-//            ->where("tasks.student_id", "=", $id)
-//            ->where("tasks.Status", "=", "Processing")
-//            ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
-//            ->get();
-//
-//        $tasksWaiting = DB::table('tasks')
-//            ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
-//            ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
-//            ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
-//            ->where("tasks.Student_id", "=", $id)
-//            ->where("tasks.Status", "=", "Selectable")
-//            ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
-//            ->get();
-//
-//        $tasksComplete = DB::table('tasks')
-//            ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
-//            ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
-//            ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
-//            ->where("tasks.Student_id", "=", $id)
-//            ->where("tasks.Status", "=", "Complete")
-//            ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
-//            ->get();
-//
-//        $tasksExpired = DB::table('tasks')
-//            ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
-//            ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
-//            ->leftJoin('status', 'tasks.Status', '=', 'status.StatusValue')
-//            ->where("tasks.student_id", "=", $id)
-//            ->where("tasks.Status", "=", "Expired")
-//            ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
-//            ->get();
-//        foreach ($tasksING as $i) {
-//            $host_AVGrate = $i->host_rate_avg;
-//            if ($host_AVGrate != null) {
-//                while ($host_AVGrate >= 1) {
-//                    $host_AVGrate -= 1;
-//                    array_push($host_AVG_array_ING, 1);
-//                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
-//                        array_push($host_AVG_array_ING, 0.5);
-//                    }
-//                }
-//                while (count($host_AVG_array_ING) < 5) {
-//                    array_push($host_AVG_array_ING, 0);
-//                }
-//            } else {
-//                array_push($host_AVG_array_ING, "尚無資料");
-//            }
-//            $host_AVG_array_tasks_ING[$i->Student_id] = $host_AVG_array_ING;
-//            $host_AVG_array_ING = array();
-//        }
-//        foreach ($tasksComplete as $i) {
-//            $host_AVGrate = $i->host_rate_avg;
-//            if ($host_AVGrate != null) {
-//                while ($host_AVGrate >= 1) {
-//                    $host_AVGrate -= 1;
-//                    array_push($host_AVG_array_Com, 1);
-//                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
-//                        array_push($host_AVG_array_Com, 0.5);
-//                    }
-//                }
-//                while (count($host_AVG_array_Com) < 5) {
-//                    array_push($host_AVG_array_Com, 0);
-//                }
-//            } else {
-//                array_push($host_AVG_array_Com, "尚無資料");
-//            }
-//            $host_AVG_array_tasks_Com[$i->Student_id] = $host_AVG_array_Com;
-//            $host_AVG_array_Com = array();
-//        }
-//        foreach ($tasksWaiting as $i) {
-//            $host_AVGrate = $i->host_rate_avg;
-//            if ($host_AVGrate != null) {
-//                while ($host_AVGrate >= 1) {
-//                    $host_AVGrate -= 1;
-//                    array_push($host_AVG_array_Wait, 1);
-//                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
-//                        array_push($host_AVG_array_Wait, 0.5);
-//                    }
-//                }
-//                while (count($host_AVG_array_Wait) < 5) {
-//                    array_push($host_AVG_array_Wait, 0);
-//                }
-//            } else {
-//                array_push($host_AVG_array_Wait, "尚無資料");
-//            }
-//            $host_AVG_array_tasks_Wait[$i->Student_id] = $host_AVG_array_Wait;
-//            $host_AVG_array_Wait = array();
-//        }
-//        foreach ($tasksExpired as $i) {
-//            $host_AVGrate = $i->host_rate_avg;
-//            if ($host_AVGrate != null) {
-//                while ($host_AVGrate >= 1) {
-//                    $host_AVGrate -= 1;
-//                    array_push($host_AVG_array_Ex, 1);
-//                    if ($host_AVGrate >= 0.3 && $host_AVGrate <= 0.7) {
-//                        array_push($host_AVG_array_Ex, 0.5);
-//                    }
-//                }
-//                while (count($host_AVG_array_Ex) < 5) {
-//                    array_push($host_AVG_array_Ex, 0);
-//                }
-//            } else {
-//                array_push($host_AVG_array_Ex, "尚無資料");
-//            }
-//            $host_AVG_array_tasks_Ex[$i->Student_id] = $host_AVG_array_Ex;
-//            $host_AVG_array_Wait = array();
-//        }
+
         if($request->input('order')==null or $request->input('order')=="ING"){
             $tasks = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
