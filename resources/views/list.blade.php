@@ -61,29 +61,46 @@
                                     <form action="{{ route('list')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="newest">
-                                        <button class="nav-link btn-block tab active px-0 m-0" type="submit">最新</button>
+                                        @if($order=="newest" or $order==null)
+                                            <button class="nav-link btn-block tab active px-0 m-0" type="submit">最新</button>
+                                        @else
+                                            <button class="nav-link btn-block tab px-0 m-0" type="submit">最新</button>
+                                        @endif
                                     </form>
                                 </li>
                                 <li class="nav-item col-3 p-0 m-0">
                                     <form action="{{ route('list')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="exp">
-                                        <button class="nav-link btn-block tab  px-0 m-0" type="submit">最有經驗</button>
+                                        @if($order=="exp")
+                                            <button class="nav-link btn-block tab active px-0 m-0" type="submit">最有經驗</button>
+                                        @else
+                                            <button class="nav-link btn-block tab px-0 m-0" type="submit">最有經驗</button>
+                                        @endif
                                     </form>
                                 </li>
                                 <li class="nav-item col-3 p-0 m-0">
                                     <form action="{{ route('list')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="eva">
-                                        <button class="nav-link btn-block tab  px-0 m-0" type="submit">最有信譽</button>
+                                        @if($order=="eva")
+                                            <button class="nav-link btn-block tab active px-0 m-0" type="submit">最有信譽</button>
+                                        @else
+                                            <button class="nav-link btn-block tab px-0 m-0" type="submit">最有信譽</button>
+                                        @endif
                                     </form>
                                 </li>
                                 <li class="nav-item col-3 p-0 m-0">
                                     <form action="{{ route('list')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="price">
-                                        <button class="nav-link btn-block tab px-0 m-0" type="submit">價格<i
-                                                class="fas fa-sort-amount-up"></i></button>
+                                        @if($order=="price")
+                                            <button class="nav-link btn-block tab px-0 m-0 active" type="submit">價格<i
+                                                    class="fas fa-sort-amount-up"></i></button>
+                                        @else
+                                            <button class="nav-link btn-block tab px-0 m-0" type="submit">價格<i
+                                                    class="fas fa-sort-amount-up"></i></button>
+                                        @endif
                                     </form>
                                 </li>
                             </ul>

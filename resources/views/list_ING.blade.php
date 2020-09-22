@@ -58,19 +58,29 @@
                         <h3 class="mb-0 mt-2 pl-2 pl-md-0 font-white">已接受的委託</h3>
                         <form action="#">
                             <ul class="nav mb-2 mt-1" id="evaluate">
-                                <li class="nav-item col-3 p-0 m-0">
-                                    <button class="nav-link btn-block tab active px-0 m-0" type="submit">執行中</button>
+                                <li class="nav-item col-6 p-0 m-0">
+                                    <form action="{{ route('list.ING')}}" method="get">
+                                        @csrf
+                                        <input type="hidden" name="order" value="ING">
+                                        @if($order=="ING" or $order==null)
+                                            <button class="nav-link btn-block tab active px-0 m-0" type="submit">執行中</button>
+                                        @else
+                                            <button class="nav-link btn-block tab px-0 m-0" type="submit">執行中</button>
+                                        @endif
+                                    </form>
                                 </li>
-                                <li class="nav-item col-3 p-0 m-0">
-                                    <button class="nav-link btn-block tab px-0 m-0" type="submit">待處理</button>
+                                <li class="nav-item col-6 p-0 m-0">
+                                    <form action="{{ route('list.ING')}}" method="get">
+                                        @csrf
+                                        <input type="hidden" name="order" value="Complete">
+                                        @if($order=="Complete")
+                                            <button class="nav-link btn-block tab active px-0 m-0" type="submit">已完成</button>
+                                        @else
+                                            <button class="nav-link btn-block tab px-0 m-0" type="submit">已完成</button>
+                                        @endif
+                                    </form>
                                 </li>
-                                <li class="nav-item col-3 p-0 m-0">
-                                    <button class="nav-link btn-block tab px-0 m-0" type="submit">已完成</button>
-                                </li>
-                                <li class="nav-item col-3 p-0 m-0">
-                                    <button class="nav-link btn-block tab px-0 m-0" type="submit">已過期<i
-                                            class="fas fa-sort-amount-up"></i></button>
-                                </li>
+
                                 <!-- <li class="nav-item col-3">
                                   <button class="nav-link btn-block tab px-0 m-0"  type="submit">價格<i class="fas fa-sort-amount-down"></i></button>
                                 </li> -->
@@ -81,7 +91,7 @@
                     <div class="col-12">
                         <div class="row">
                             <!-- 這個才是完整版~ -->
-                            @foreach($tasksING as $i)
+                            @foreach($tasks as $i)
                                 <div class="col-6 col-lg-4 col-xl-3 p-1">
 
                                     <div class="height100p p-0 bg-dark">
