@@ -7,12 +7,12 @@
         <div class="row">
             <div class="col-12 mt-3">
                 <div class="row">
-                    <form class="width100p" action="#">
+                    <form class="width100p" action="{{ route('list.ING')}}" method="get">
                         <div class="input-group width100p px-sm-2">
                             <input type="text" class="form-control font-white bg-grey " name="keyword"
-                                   laceholder="在此輸入關鍵字">
+                                   laceholder="在此輸入關鍵字" value={{$keyword}}>
                             <button type="submit" class="btn btn-orange fas fa-search"></button>
-                            <button type="button" class="btn btn-orange d-block d-md-none fas fa-filter ml-1"
+                            <button type="submit" class="btn btn-orange d-block d-md-none fas fa-filter ml-1"
                                     data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false"
                                     aria-controls="collapseFilter"></button>
                         </div>
@@ -58,10 +58,11 @@
                         <h3 class="mb-0 mt-2 pl-2 pl-md-0 font-white">已接受的委託</h3>
                         <form action="#">
                             <ul class="nav mb-2 mt-1" id="evaluate">
-                                <li class="nav-item col-6 p-0 m-0">
+                                <li class="nav-item col-4 p-0 m-0">
                                     <form action="{{ route('list.ING')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="ING">
+                                        <input type="hidden" name="keyword" value={{$keyword}}>
                                         @if($order=="ING" or $order==null)
                                             <button class="nav-link btn-block tab active px-0 m-0" type="submit">執行中</button>
                                         @else
@@ -69,10 +70,11 @@
                                         @endif
                                     </form>
                                 </li>
-                                <li class="nav-item col-6 p-0 m-0">
+                                <li class="nav-item col-4 p-0 m-0">
                                     <form action="{{ route('list.ING')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="Complete">
+                                        <input type="hidden" name="keyword" value={{$keyword}}>
                                         @if($order=="Complete")
                                             <button class="nav-link btn-block tab active px-0 m-0" type="submit">已完成</button>
                                         @else
@@ -80,7 +82,18 @@
                                         @endif
                                     </form>
                                 </li>
-
+                                <li class="nav-item col-4 p-0 m-0">
+                                    <form action="{{ route('list.ING')}}" method="get">
+                                        @csrf
+                                        <input type="hidden" name="order" value="Expired">
+                                        <input type="hidden" name="keyword" value={{$keyword}}>
+                                        @if($order=="Expired")
+                                            <button class="nav-link btn-block tab active px-0 m-0" type="submit">已過期</button>
+                                        @else
+                                            <button class="nav-link btn-block tab px-0 m-0" type="submit">已過期</button>
+                                        @endif
+                                    </form>
+                                </li>
                                 <!-- <li class="nav-item col-3">
                                   <button class="nav-link btn-block tab px-0 m-0"  type="submit">價格<i class="fas fa-sort-amount-down"></i></button>
                                 </li> -->

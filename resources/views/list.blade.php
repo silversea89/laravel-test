@@ -7,10 +7,10 @@
         <div class="row">
             <div class="col-12 mt-3">
                 <div class="row">
-                    <form class="width100p" action="{{ route('list.search')}}" method="get">
+                    <form class="width100p" action="{{ route('list')}}" method="get">
                         <div class="input-group width100p px-sm-2">
                             <input type="text" class="form-control font-white bg-grey " name="keyword"
-                                   laceholder="在此輸入關鍵字">
+                                   placeholder="在此輸入關鍵字" value={{$keyword}}>
                             <button type="submit" class="btn btn-orange fas fa-search"></button>
                             <button type="submit" class="btn btn-orange d-block d-md-none fas fa-filter ml-1"
                                     data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false"
@@ -61,6 +61,7 @@
                                     <form action="{{ route('list')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="newest">
+                                        <input type="hidden" name="keyword" value={{$keyword}}>
                                         @if($order=="newest" or $order==null)
                                             <button class="nav-link btn-block tab active px-0 m-0" type="submit">最新</button>
                                         @else
@@ -72,6 +73,7 @@
                                     <form action="{{ route('list')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="exp">
+                                        <input type="hidden" name="keyword" value={{$keyword}}>
                                         @if($order=="exp")
                                             <button class="nav-link btn-block tab active px-0 m-0" type="submit">最有經驗</button>
                                         @else
@@ -83,6 +85,7 @@
                                     <form action="{{ route('list')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="eva">
+                                        <input type="hidden" name="keyword" value={{$keyword}}>
                                         @if($order=="eva")
                                             <button class="nav-link btn-block tab active px-0 m-0" type="submit">最有信譽</button>
                                         @else
@@ -94,6 +97,7 @@
                                     <form action="{{ route('list')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="price">
+                                        <input type="hidden" name="keyword" value={{$keyword}}>
                                         @if($order=="price")
                                             <button class="nav-link btn-block tab px-0 m-0 active" type="submit">價格<i
                                                     class="fas fa-sort-amount-up"></i></button>

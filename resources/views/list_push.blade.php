@@ -6,10 +6,10 @@
         <div class="row">
             <div class="col-12 mt-3">
                 <div class="row">
-                    <form class="width100p" action="{{ route('list_push.search')}}" method="get">
+                    <form class="width100p" action="{{ route('list.push')}}" method="get">
                         <div class="input-group width100p px-sm-2">
                             <input type="text" class="form-control font-white bg-grey " name="keyword"
-                                   laceholder="在此輸入關鍵字">
+                                   laceholder="在此輸入關鍵字" value={{$keyword}}>
                             <button type="submit" class="btn btn-orange fas fa-search"></button>
                             <button type="submit" class="btn btn-orange d-block d-md-none fas fa-filter ml-1"
                                     data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false"
@@ -61,6 +61,7 @@
                                     <form action="{{ route('list.push')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="ING">
+                                        <input type="hidden" name="keyword" value={{$keyword}}>
                                         @if($order=="ING" or $order==null)
                                             <button class="nav-link btn-block tab active px-0 m-0" type="submit">執行中</button>
                                         @else
@@ -72,6 +73,7 @@
                                     <form action="{{ route('list.push')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="Waiting">
+                                        <input type="hidden" name="keyword" value={{$keyword}}>
                                         @if($order=="Waiting")
                                             <button class="nav-link btn-block tab active px-0 m-0" type="submit">待處理</button>
                                         @else
@@ -83,6 +85,7 @@
                                     <form action="{{ route('list.push')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="Complete">
+                                        <input type="hidden" name="keyword" value={{$keyword}}>
                                         @if($order=="Complete")
                                             <button class="nav-link btn-block tab active px-0 m-0" type="submit">已完成</button>
                                         @else
@@ -94,6 +97,7 @@
                                     <form action="{{ route('list.push')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="Expired">
+                                        <input type="hidden" name="keyword" value={{$keyword}}>
                                         @if($order=="Expired")
                                             <button class="nav-link btn-block tab active px-0 m-0" type="submit">已過期</button>
                                         @else
