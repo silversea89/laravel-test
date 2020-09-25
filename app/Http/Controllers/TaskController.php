@@ -86,7 +86,7 @@ class TaskController extends Controller
                 ->where('Status', '=', 'Selectable')
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->orderBy('tasks.created_at', 'desc')
-                ->get();
+                ->paginate(2);
         }
         elseif($request->input('order')=="exp"){
             $tasks = DB::table('tasks')
@@ -94,7 +94,7 @@ class TaskController extends Controller
                 ->where('Status', '=', 'Selectable')
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->orderBy('users.task_count', 'desc')
-                ->get();
+                ->paginate(2);
         }
         elseif($request->input('order')=="eva"){
             $tasks = DB::table('tasks')
@@ -102,7 +102,7 @@ class TaskController extends Controller
                 ->where('Status', '=', 'Selectable')
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->orderBy('users.host_rate_avg', 'desc')
-                ->get();
+                ->paginate(2);
         }
         elseif($request->input('order')=="price"){
             $tasks = DB::table('tasks')
@@ -110,7 +110,7 @@ class TaskController extends Controller
                 ->where('Status', '=', 'Selectable')
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->orderBy('tasks.Pay', 'desc')
-                ->get();
+                ->paginate(2);
         }
         foreach ($tasks as $i) {
             if ($i->DeadDateTime < Carbon::now()) {

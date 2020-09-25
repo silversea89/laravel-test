@@ -166,17 +166,18 @@
                         @endforeach
                         <!-- ~這個才是完整版 -->
                             <center class="width100p mt-3">
-                                <nav>
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span
-                                                    aria-hidden="true">&laquo;</span></a></li>
-                                        <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
-                                                    aria-hidden="true">&raquo;</span></a></li>
-                                    </ul>
-                                </nav>
+{{--                                <nav>--}}
+{{--                                    <ul class="pagination justify-content-center">--}}
+{{--                                        <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span--}}
+{{--                                                    aria-hidden="true">&laquo;</span></a></li>--}}
+{{--                                        <li class="page-item"><a class="page-link active" href="#">1</a></li>--}}
+{{--                                        <li class="page-item"><a class="page-link" href="#">2</a></li>--}}
+{{--                                        <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
+{{--                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span--}}
+{{--                                                    aria-hidden="true">&raquo;</span></a></li>--}}
+{{--                                    </ul>--}}
+{{--                                </nav>--}}
+                                {{ $tasks->links()}}
                             </center>
                         </div>
                     </div>

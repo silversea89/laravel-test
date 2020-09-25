@@ -29,7 +29,7 @@ class complete implements ShouldBroadcast
     public function __construct($from, $target)
     {
         $username = $from->name;
-        $this->message = $username." 委託完成囉!給予對方評價吧!";
+        $this->message = $username." 完成您的委託囉!給予對方評價吧!";
         $this->target = $target;
         $this->time=Carbon::now();
         Notification::create([
