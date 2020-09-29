@@ -69,6 +69,40 @@ button,li,a{
 
 /* general~ */
 
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    #profileDropdown{
+        width: 100vw!important;
+
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    #profileDropdown{
+        width: 50vw!important;
+        max-width: 375px!important;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    #profileDropdown{
+        width: 50vw!important;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
+
 *{
     font-family: "Helvetica", "Arial","LiHei Pro","黑體-繁","微軟正黑體", sans-serif;
 }
@@ -134,6 +168,12 @@ button,li,a{
 .bg-orange{
     background-color: #FF7E26!important;
 }
+.bg-light-orange{
+    background-color: #ffc99d!important;
+}
+.bg-light-grey{
+    background-color: #5e5c5c!important;
+}
 .bg-grey{
     background-color: #525252!important;
 }
@@ -175,6 +215,11 @@ button,li,a{
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
+}
+
+.badge-orange {
+    color: #fff;
+    background-color: #FF7E26;
 }
 
 .text-star-flow{
@@ -238,6 +283,14 @@ button,li,a{
 
 /* ~nav-link */
 
+
+/* footer~ */
+
+.footer-link:hover{
+    text-decoration: none;
+}
+
+/* ~footer*/
 
 
 
@@ -508,3 +561,43 @@ select{
 }
 
 /* ~modal */
+
+
+
+
+/* star */
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '';
+}
+.rate > input:checked ~ label {
+    color: #FF9529;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #FF9529;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #FF9529;
+}
+/* star */

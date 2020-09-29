@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <body style="background-color:#FFFFFF;height:100%">
+    <body class="height100vh antiFlow bg-darker">
     <script src="script.js">
     </script>
 
@@ -42,48 +42,43 @@
         </div>
     </div>
 
-    <div class="container pt-3 pb-0 " style="background-color:white;">
+    <div class="container pt-3 pb-0 ">
 
         <div class="" style="position:relative;">
-            <h3>委託編號：{{$tasks->Tasks_id}}</h3>
+            <h3 class="font-white">委託編號：{{$tasks->Tasks_id}}</h3>
             @if($tasks->Toolman_id==null)
-                <h3>工具人：尚無工具人</h3>
+                <h3 class="font-white">工具人：尚無工具人</h3>
                 <div class="row  my-3">
                     <div class="col-1 col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
                     <center class="col col-sm-1 p-0">
                         <h1 class="far fa-circle m-0 text-secondary"></h1>
-                        <h6>去程</h6>
+                        <h6 class="font-white">去程</h6>
                     </center>
                     <center class="col p-0">
                         <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
                     </center>
                     <center class="col col-sm-1 p-0">
                         <h1 class="far fa-circle m-0 text-secondary"></h1>
-                        <h6>回程</h6>
+                        <h6 class="font-white">回程</h6>
                     </center>
                     <center class="col p-0">
                         <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
                     </center>
                     <center class="col col-sm-1 p-0">
                         <h1 class="far fa-circle m-0 text-secondary"></h1>
-                        <h6>抵達</h6>
+                        <h6 class="font-white">抵達</h6>
                     </center>
                     <center class="col p-0">
                         <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
                     </center>
                     <center class="col col-sm-1 p-0">
                         <h1 class="far fa-circle m-0 text-secondary"></h1>
-                        <h6>結案</h6>
+                        <h6 class="font-white">結案</h6>
                     </center>
                     <div class="col-1 col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
-                    <!--
-                      background-color:blue
-                      background-color:red
-                      background-color:green
-                    -->
                 </div>
             @else
-                <h3>工具人：<a href="{{ route('profile.id', $tasks->Toolman_id   ) }}">{{$tasks->toolmanname}}</a></h3>
+                <h3 class="font-white">工具人：<a href="{{ route('profile.id', $tasks->Toolman_id   ) }}">{{$tasks->toolmanname}}</a></h3>
                 @if($id==$tasks->Toolman_id)
                     <div class="btn-group" style="position:absolute;top:0px;right:0px">
                         @if($tasks->Progress==null)
@@ -108,7 +103,7 @@
                         @if($tasks->Progress==null)
                             <center class="col col-sm-1 p-0">
                                 <h1 class="far fa-circle m-0 text-secondary"></h1>
-                                <h6>去程</h6>
+                                <h6 class="font-white">去程</h6>
                             </center>
                             <center class="col p-0">
                                 <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
@@ -116,7 +111,7 @@
                         @else
                             <center class="col col-sm-1 p-0">
                                 <h1 class="fas fa-circle m-0 text-success"></h1>
-                                <h6>去程</h6>
+                                <h6 class="font-white">去程</h6>
                             </center>
                             <center class="col p-0">
                                 <h1 class="fas fa-arrow-right m-0 text-success"></h1>
@@ -127,7 +122,7 @@
                         @if($tasks->Progress==null||$tasks->Progress=="go")
                             <center class="col col-sm-1 p-0">
                                 <h1 class="far fa-circle m-0 text-secondary"></h1>
-                                <h6>回程</h6>
+                                <h6 class="font-white">回程</h6>
                             </center>
                             <center class="col p-0">
                                 <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
@@ -135,7 +130,7 @@
                         @else
                             <center class="col col-sm-1 p-0">
                                 <h1 class="fas fa-circle m-0 text-success"></h1>
-                                <h6>回程</h6>
+                                <h6 class="font-white">回程</h6>
                             </center>
                             <center class="col p-0">
                                 <h1 class="fas fa-arrow-right m-0 text-success"></h1>
@@ -147,7 +142,7 @@
                         @if($tasks->Progress==null||$tasks->Progress=="go"||$tasks->Progress=="back")
                             <center class="col col-sm-1 p-0">
                                 <h1 class="far fa-circle m-0 text-secondary"></h1>
-                                <h6>抵達</h6>
+                                <h6 class="font-white">抵達</h6>
                             </center>
                             <center class="col p-0">
                                 <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
@@ -155,7 +150,7 @@
                         @else
                             <center class="col col-sm-1 p-0">
                                 <h1 class="fas fa-circle m-0 text-success"></h1>
-                                <h6>抵達</h6>
+                                <h6 class="font-white">抵達</h6>
                             </center>
                             <center class="col p-0">
                                 <h1 class="fas fa-arrow-right m-0 text-success"></h1>
@@ -166,12 +161,12 @@
                         @if($tasks->Progress!="complete")
                             <center class="col col-sm-1 p-0">
                                 <h1 class="far fa-circle m-0 text-secondary"></h1>
-                                <h6>結案</h6>
+                                <h6 class="font-white">結案</h6>
                             </center>
                         @else
                             <center class="col col-sm-1 p-0">
                                 <h1 class="fas fa-circle m-0 text-success"></h1>
-                                <h6>結案</h6>
+                                <h6 class="font-white">結案</h6>
                             </center>
                         @endif
 
@@ -188,7 +183,7 @@
                         @if($tasks->Progress==null)
                             <center class="col col-sm-1 p-0">
                                 <h1 class="far fa-circle m-0 text-secondary"></h1>
-                                <h6>去程</h6>
+                                <h6 class="font-white">去程</h6>
                             </center>
                             <center class="col p-0">
                                 <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
@@ -196,7 +191,7 @@
                         @else
                             <center class="col col-sm-1 p-0">
                                 <h1 class="fas fa-circle m-0 text-success"></h1>
-                                <h6>去程</h6>
+                                <h6 class="font-white">去程</h6>
                             </center>
                             <center class="col p-0">
                                 <h1 class="fas fa-arrow-right m-0 text-success"></h1>
@@ -207,7 +202,7 @@
                         @if($tasks->Progress==null||$tasks->Progress=="go")
                             <center class="col col-sm-1 p-0">
                                 <h1 class="far fa-circle m-0 text-secondary"></h1>
-                                <h6>回程</h6>
+                                <h6 class="font-white">回程</h6>
                             </center>
                             <center class="col p-0">
                                 <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
@@ -215,7 +210,7 @@
                         @else
                             <center class="col col-sm-1 p-0">
                                 <h1 class="fas fa-circle m-0 text-success"></h1>
-                                <h6>回程</h6>
+                                <h6 class="font-white">回程</h6>
                             </center>
                             <center class="col p-0">
                                 <h1 class="fas fa-arrow-right m-0 text-success"></h1>
@@ -225,7 +220,7 @@
                         @if($tasks->Progress==null||$tasks->Progress=="go"||$tasks->Progress=="back")
                             <center class="col col-sm-1 p-0">
                                 <h1 class="far fa-circle m-0 text-secondary"></h1>
-                                <h6>抵達</h6>
+                                <h6 class="font-white">抵達</h6>
                             </center>
                             <center class="col p-0">
                                 <h1 class="fas fa-arrow-right m-0 text-secondary"></h1>
@@ -233,7 +228,7 @@
                         @else
                             <center class="col col-sm-1 p-0">
                                 <h1 class="fas fa-circle m-0 text-success"></h1>
-                                <h6>抵達</h6>
+                                <h6 class="font-white">抵達</h6>
                             </center>
                             <center class="col p-0">
                                 <h1 class="fas fa-arrow-right m-0 text-success"></h1>
@@ -245,12 +240,12 @@
                         @if($tasks->Progress!="complete")
                             <center class="col col-sm-1 p-0">
                                 <h1 class="far fa-circle m-0 text-secondary"></h1>
-                                <h6>結案</h6>
+                                <h6 class="font-white">結案</h6>
                             </center>
                         @else
                             <center class="col col-sm-1 p-0">
                                 <h1 class="fas fa-circle m-0 text-success"></h1>
-                                <h6>結案</h6>
+                                <h6 class="font-white">結案</h6>
                             </center>
                         @endif
 
@@ -275,19 +270,19 @@
                     @endif
                 </div>
                 <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-3 pt-md-0 pl-5 pr-3 pl-md-5">
-                    <h3>{{$tasks->Title}}</h3>
+                    <h3 class="font-white">{{$tasks->Title}}</h3>
                     <span class="badge badge-primary">代購物品</span>
-                    <h5>委託內容：<p>{{$tasks->Content}}</p></h5>
-                    <h5>購買地點：<p>{{$tasks->BuyAddress}}</p></h5>
-                    <h5>面交地點：<p>{{$tasks->MeetAddress}}</p></h5>
-                    <h5>面交時間：<p>{{$tasks->DateTime}}</p></h5>
-                    <h5>酬勞金額：<p>{{$tasks->Pay}}$</p></h5>
-                    <p class="m-0">雇主:
-                        <a href="{{ route('profile.id', $tasks->Student_id) }}">{{$tasks->hostname}}</a>
+                    <h5 class="font-white">委託內容：<p class="font-white">{{$tasks->Content}}</p></h5>
+                    <h5 class="font-white">購買地點：<p class="font-white">{{$tasks->BuyAddress}}</p></h5>
+                    <h5 class="font-white">面交地點：<p class="font-white">{{$tasks->MeetAddress}}</p></h5>
+                    <h5 class="font-white">面交時間：<p class="font-white">{{$tasks->DateTime}}</p></h5>
+                    <h5 class="font-white">酬勞金額：<p class="font-white">{{$tasks->Pay}}$</p></h5>
+                    <p class="m-0 font-white">雇主:
+                        <a  href="{{ route('profile.id', $tasks->Student_id) }}">{{$tasks->hostname}}</a>
                     </p>
-                    <p class="m-0">發佈於:{{$tasks->created_at}}</p>
+                    <p class="m-0 font-white">發佈於:{{$tasks->created_at}}</p>
                     @if($tasks->Toolman_id==null)
-                        <p class="m-0">接單截止期限：{{$tasks->DeadDateTime}}</p>
+                        <p class="font-white" class="m-0">接單截止期限：{{$tasks->DeadDateTime}}</p>
                     @endif
                     @if($tasks->Toolman_id==null||$tasks->Progress!="complete")
 
@@ -295,7 +290,7 @@
                         @if( ($tasks->Student_id==$id && $evaluation->Toolman_Rate==null) || ($tasks->Toolman_id==$id && $evaluation->Host_Rate==null))
                             <div class="d-flex justify-content-center justify-content-md-start" style="width:100%">
                                 <button type="button" class="btn btn-primary mt-2 mb-3" data-toggle="modal"
-                                        data-target=".content0">委託完成
+                                        data-target=".content0" >委託完成
                                 </button>
                             </div>
                         @else

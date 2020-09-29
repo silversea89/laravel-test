@@ -1,0 +1,26 @@
+.btn-light{
+    border-style: outset;
+    border-width: 5px;
+}
+
+@media (max-width: 768px) {
+    #find-left ,#right-bottom-waiting{
+        border:none !important;
+    }
+
+    #left-top-member ,#left-bottom-total ,#right-top-finish{
+        border-bottom:1px solid black;
+    }
+
+}
+
+@media (min-width: 768px) {
+    #find-left ,#left-top-member ,#right-top-finish{
+        border-right:1px solid black;
+    }
+
+    #left-top-member ,#left-bottom-total{
+        border-bottom:1px solid black;
+    }
+
+}

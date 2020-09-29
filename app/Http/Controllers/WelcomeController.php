@@ -17,6 +17,14 @@ class WelcomeController extends Controller
 
     protected function Welcome(Request $request)
     {
+        $classifications = Classification::all();
+        if(Auth::user()!=null){
+            $user = Auth::user();
+            $id = $user->student_id;
+        }
+        else{
+            $id = null;
+        }
         $host_AVG_array = array();
         $host_AVG_array_tasks = array();
         $Today = Carbon::today('Asia/Taipei');
@@ -42,11 +50,13 @@ class WelcomeController extends Controller
             ->where('Status', '=', 'selectable')
             ->count();
 
-        $checktasks = DB::table('tasks')
-            ->Join('users', 'tasks.student_id', '=', 'users.student_id')
+        $newesttasks = DB::table('tasks')
+            ->leftJoin('users', 'tasks.Student_id', '=', 'users.student_id')
             ->where('Status', '=', 'Selectable')
+            ->orderBy('tasks.created_at', 'desc')
+            ->take(8)
             ->get();
-        foreach ($checktasks as $i){
+        foreach ($newesttasks as $i){
             if($i->DeadDateTime < Carbon::now()){
                 $taskexpire=Tasks::find($i->Tasks_id);
                 $taskexpire->Status='Expired';
@@ -70,19 +80,15 @@ class WelcomeController extends Controller
             $host_AVG_array_tasks[$i->Student_id]=$host_AVG_array;
             $host_AVG_array = array();
         }
-        $newesttasks = DB::table('tasks')
-            ->leftJoin('users', 'tasks.Student_id', '=', 'users.student_id')
-            ->where('Status', '=', 'Selectable')
-            ->orderBy('tasks.created_at', 'desc')
-            ->take(8)
-            ->get();
         return view('welcome')
-            ->with(["newesttasks" => $newesttasks,
+            ->with(["classifications" => $classifications,
+                "newesttasks" => $newesttasks,
                 "members_amount" => $members_amount,
                 "task_amount" => $task_amount,
                 "task_complete_amount" => $task_complete_amount,
                 "task_notcomplete_amount" => $task_notcomplete_amount,
-                "host_AVGrate"=>$host_AVG_array_tasks,]);
+                "host_AVGrate"=>$host_AVG_array_tasks,
+                "id" => $id,]);
 
     }
 

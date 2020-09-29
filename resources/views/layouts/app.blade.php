@@ -28,7 +28,7 @@
     <title>ToolMan</title>
 
     <!-- Scripts -->
-<!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+{{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
     <script src="//js.pusher.com/3.1/pusher.min.js"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!--jQuery-->
@@ -39,11 +39,13 @@
     </script>
     <!--jQuery-->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/js/gijgo.min.js" integrity="sha512-T62eI76S3z2X8q+QaoTTn7FdKOVGjzKPjKNHw+vdAGQdcDMbxZUAKwRcGCPt0vtSbRuxNWr/BccUKYJo634ygQ=="
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/js/gijgo.min.js"
+            integrity="sha512-T62eI76S3z2X8q+QaoTTn7FdKOVGjzKPjKNHw+vdAGQdcDMbxZUAKwRcGCPt0vtSbRuxNWr/BccUKYJo634ygQ=="
             crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/css/gijgo.min.css" integrity="sha512-oCuecFHHGu/Y4zKF8IoSoj5hQq1dLNIiUCwN08ChNW1VoMcjIIirAJT2JmKlYde6DeLN6JRSgntz6EDYDdFhCg=="
-          crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/css/gijgo.min.css"
+          integrity="sha512-oCuecFHHGu/Y4zKF8IoSoj5hQq1dLNIiUCwN08ChNW1VoMcjIIirAJT2JmKlYde6DeLN6JRSgntz6EDYDdFhCg=="
+          crossorigin="anonymous"/>
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -53,8 +55,13 @@
     <link href="{{ asset('/css/style.css') }}" rel="stylesheet" type="text/css"/>
 
     <link href="{{ asset('/css/main.css') }}" rel="stylesheet" type="text/css"/>
-    <script src="{{ asset('js/main.js')}}"></script>
-    <!--Bootstrap-->
+
+    @if(Request::is('/'))
+        <script src="{{ asset('js/main2.js')}}"></script>
+    @else
+        <script src="{{ asset('js/main.js')}}"></script>
+@endif
+<!--Bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
           crossorigin="anonymous">
@@ -145,7 +152,7 @@
                         <a class="dropdown-item navbar-dark" href="{{ route('logout') }}"
                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
+                            @csrf
                         </form>
                     </div>
                 @endguest
