@@ -11,6 +11,7 @@ use App\Events\taskstart;
 use App\Report;
 use App\Status;
 use App\User;
+use App\Volunteer;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
@@ -465,6 +466,16 @@ class TaskController extends Controller
             'UserName' => $id,
             'Reason' => $request['reason'],
             'Status' => "Waiting"
+        ]);
+        return redirect()->route('list');
+    }
+    protected function volunteer(Request $request)
+    {
+        $user = Auth::user();
+        Volunteer::create([
+            'Tasks_id' => $request['tasks_id'],
+            'Name' => $user->name,
+            'Student_id' => $user->student_id,
         ]);
         return redirect()->route('list');
     }
