@@ -615,7 +615,7 @@
                             <div class="row">
 
                                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
-                                    <label class="font-white m-0">截止日期</label>
+                                    <label class="font-white m-0">截止日期(請選預計日期之前)</label>
                                     <input class="bg-grey font-white" id="datepicker2" readonly="true" width="100%"
                                            name="DeadDate" required/>
                                     <script>
