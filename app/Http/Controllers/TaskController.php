@@ -8,6 +8,7 @@ use App\Events\arrive;
 use App\Events\complete;
 use App\Events\back;
 use App\Events\taskstart;
+use App\Events\givetask;
 use App\Report;
 use App\Status;
 use App\User;
@@ -149,17 +150,18 @@ class TaskController extends Controller
     protected function gettask(Request $request)
     {
         $user = Auth::user();
+        $toolman = $request->Toolman_id;
         $tasks_id = $request->tasks_id;
         $tasks = Tasks::find($tasks_id);
-        $target = $tasks->Student_id;
+        $target = $toolman;
         if ($tasks) {
-            $tasks->get_by_toolman($user);
+            $tasks->get_by_toolman($toolman);
         }
         Evaluation::create([
             'Tasks_id' => $request->tasks_id
         ]);
-        event(new taskhasgot($user, $target));
-        return redirect('list');
+        event(new givetask($user, $target));
+        return redirect('list_push');
     }
 
     protected function showListpush(Request $request)
@@ -341,7 +343,17 @@ class TaskController extends Controller
             ->where('Tasks_id', '=', $Tasks_id)
             ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname')
             ->first();
-        return view('list_id')->with(["tasks" => $tasks, "id" => $id, "evaluation" => $evaluation]);
+        $volunteer=DB::table('volunteer')
+            ->where('Tasks_id',"=",$Tasks_id)
+            ->get();
+        $vol_count=DB::table('volunteer')
+            ->where('Tasks_id',"=",$Tasks_id)
+            ->count();
+        return view('list_id')->with(["tasks" => $tasks,
+            "id" => $id,
+            "evaluation" => $evaluation,
+        "volunteer"=>$volunteer,
+            "vol_count"=>$vol_count]);
     }
 
     protected function taskprogress(Request $request, $tasks_id)
@@ -373,6 +385,12 @@ class TaskController extends Controller
             $progress_change->save();
             event(new complete($user, $target));
         }
+        $volunteer=DB::table('volunteer')
+            ->where('Tasks_id',"=",$tasks_id)
+            ->get();
+        $vol_count=DB::table('volunteer')
+            ->where('Tasks_id',"=",$tasks_id)
+            ->count();
         $tasks = DB::table('tasks')
             ->Join('users as host', 'tasks.Student_id', '=', 'host.student_id')
             ->Join('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
@@ -383,7 +401,8 @@ class TaskController extends Controller
         $evaluation = DB::table('evaluation')
             ->where('Tasks_id', '=', $tasks_id)
             ->first();
-        return view('list_id')->with(["tasks" => $tasks, "id" => $id, "evaluation" => $evaluation]);
+        return view('list_id')->with(["tasks" => $tasks, "id" => $id, "evaluation" => $evaluation,"volunteer"=>$volunteer,
+            "vol_count"=>$vol_count]);
     }
 
     protected function taskcomplete(Request $request)
@@ -472,11 +491,19 @@ class TaskController extends Controller
     protected function volunteer(Request $request)
     {
         $user = Auth::user();
-        Volunteer::create([
-            'Tasks_id' => $request['tasks_id'],
-            'Name' => $user->name,
-            'Student_id' => $user->student_id,
-        ]);
-        return redirect()->route('list');
+        if(DB::table('volunteer')
+            ->where('Tasks_id', '=', $request['tasks_id'])
+            ->where('Student_id', '=', $user->student_id)
+            ->count()>0){
+            return redirect()->route('list');
+        }
+        else{
+            Volunteer::create([
+                'Tasks_id' => $request['tasks_id'],
+                'Name' => $user->name,
+                'Student_id' => $user->student_id,
+            ]);
+            return redirect()->route('list');
+        }
     }
 }

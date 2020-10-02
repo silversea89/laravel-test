@@ -120,6 +120,14 @@
             console.log(data.message);
             console.log(data.time);
         });
+
+        var channel6 = pusher.subscribe("givetask.{{Auth::user()->student_id}}");
+
+        // Bind a function to a Event (the full Laravel class)
+        channel6.bind('App\\Events\\givetask', function (data) {
+            console.log(data.message);
+            console.log(data.time);
+        });
     </script>
 @endguest
 

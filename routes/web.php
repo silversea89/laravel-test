@@ -27,6 +27,7 @@ Route::get('list_ING', 'TaskController@showListING')->name("list.ING");
 Route::get('list_ING/search', 'TaskController@showListINGsearch')->name("list_ING.search");
 //Route::get('list/search', 'TaskController@showSearchListForm')->name("list.search");
 Route::get('list_id/{Tasks_id}', 'TaskController@taskdetail')->name("task.detail");
+Route::post('list/volunteer', 'TaskController@volunteer')->name("task.volunteer");
 Route::post('list/gettask', 'TaskController@gettask')->name("task.get");
 Route::post('list/taskcomplete', 'TaskController@taskcomplete')->name("task.complete");
 Route::post('list_id/{tasks_id}', 'TaskController@taskprogress')->name("taskprogress");

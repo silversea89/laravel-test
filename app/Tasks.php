@@ -12,9 +12,9 @@ class Tasks extends Model
 
     protected $primaryKey = "Tasks_id";
 
-    public function get_by_toolman(User $user)
+    public function get_by_toolman(String $toolman)
     {
-        $Toolman_id = $user->student_id;
+        $Toolman_id = $toolman;
 
         if ($this->Toolman_id == null && $this->student_id != $Toolman_id) {
             $this->Toolman_id = $Toolman_id;

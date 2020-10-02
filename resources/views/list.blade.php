@@ -302,11 +302,11 @@
                             </h6>
                             <div class="px-3 px-lg-0">
                                 @if($i->Student_id!=$id)
-                                    <form method="POST" action="{{ route('task.get') }}">
+                                    <form method="POST" action="{{ route('task.volunteer') }}">
                                         @csrf
                                         <input type="hidden" name="tasks_id" value="{{$i->Tasks_id}}">
                                         <button type="submit" class="btn btn-orange">
-                                            接受委託
+                                            提出接受委託許可
                                         </button>
                                     </form>
                                 @endif

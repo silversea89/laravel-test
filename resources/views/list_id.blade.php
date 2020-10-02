@@ -48,6 +48,15 @@
             <h3 class="font-white">委託編號：{{$tasks->Tasks_id}}</h3>
             @if($tasks->Toolman_id==null)
                 <h3 class="font-white">工具人：尚無工具人</h3>
+                @if($id!=$tasks->Toolman_id)
+                    <div class="btn-group" style="position:absolute;top:0px;right:0px">
+                        <button type="button" class="btn btn-orange" data-toggle="modal" data-target=".volunteer">
+                        <span class="badge badge-pill badge-danger"
+                              style="position:absolute;top:-10px;left:-10px">{{$vol_count}}</span>
+                            接單請求
+                        </button>
+                    </div>
+                @endif
                 <div class="row  my-3">
                     <div class="col-1 col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
                     <center class="col col-sm-1 p-0">
@@ -78,7 +87,8 @@
                     <div class="col-1 col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
                 </div>
             @else
-                <h3 class="font-white">工具人：<a href="{{ route('profile.id', $tasks->Toolman_id   ) }}">{{$tasks->toolmanname}}</a></h3>
+                <h3 class="font-white">工具人：<a
+                        href="{{ route('profile.id', $tasks->Toolman_id   ) }}">{{$tasks->toolmanname}}</a></h3>
                 @if($id==$tasks->Toolman_id)
                     <div class="btn-group" style="position:absolute;top:0px;right:0px">
                         @if($tasks->Progress==null)
@@ -98,6 +108,16 @@
                         @endif
 
                     </div>
+                    @if($id!=$tasks->Toolman_id)
+                        <div class="btn-group" style="position:absolute;top:0px;right:0px">
+                            <button type="button" class="btn btn-orange" data-toggle="modal"
+                                    data-target=".volunteer">
+                            <span class="badge badge-pill badge-danger"
+                                  style="position:absolute;top:-10px;left:-10px">{{$vol_count}}</span>
+                                接單請求
+                            </button>
+                        </div>
+                    @endif
                     <div class="row  my-3">
                         <div class="col-1 col-xs-1 col-sm-2 col-md-3 col-lg-3"></div>
                         @if($tasks->Progress==null)
@@ -278,7 +298,7 @@
                     <h5 class="font-white">面交時間：<p class="font-white">{{$tasks->DateTime}}</p></h5>
                     <h5 class="font-white">酬勞金額：<p class="font-white">{{$tasks->Pay}}$</p></h5>
                     <p class="m-0 font-white">雇主:
-                        <a  href="{{ route('profile.id', $tasks->Student_id) }}">{{$tasks->hostname}}</a>
+                        <a href="{{ route('profile.id', $tasks->Student_id) }}">{{$tasks->hostname}}</a>
                     </p>
                     <p class="m-0 font-white">發佈於:{{$tasks->created_at}}</p>
                     @if($tasks->Toolman_id==null)
@@ -290,7 +310,7 @@
                         @if( ($tasks->Student_id==$id && $evaluation->Toolman_Rate==null) || ($tasks->Toolman_id==$id && $evaluation->Host_Rate==null))
                             <div class="d-flex justify-content-center justify-content-md-start" style="width:100%">
                                 <button type="button" class="btn btn-primary mt-2 mb-3" data-toggle="modal"
-                                        data-target=".content0" >委託完成
+                                        data-target=".content0">委託完成
                                 </button>
                             </div>
                         @else
@@ -301,6 +321,34 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade " tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md"
+             style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
+            <div class="modal-content container bg-dark">
+                <h3 class="fas fa-times" style="color:#999999;position: absolute; top: 7px;right: 15px;"
+                    data-toggle="modal" data-target=".statusReport"></h3>
+                <br>
+                <hr class="mb-1" size="8px" align="center" width="100%" style="color:#999999;">
+                @if($volunteer!=null)
+                    @foreach($volunteer as $i)
+                        <form method="post" action="{{ route('task.get')}}">
+                            @csrf
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ route('profile.id', $i->Student_id)}}"><h4 class="m-0 p-2">{{$i->Name}}</h4>
+                                </a>
+                                <input type="hidden" name="Toolman_id" value="{{$i->Student_id}}">
+                                <input type="hidden" name="tasks_id" value="{{$i->Tasks_id}}">
+                                <button type="submit" class="btn btn-orange">選擇</button>
+                            </div>
+                        </form>
+                        <hr class="my-1" size="8px" align="center" width="100%" style="color:#999999;">
+                    @endforeach
+                @endif
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade statusReport" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-md"
              style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
