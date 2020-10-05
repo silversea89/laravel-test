@@ -28,7 +28,7 @@ class TaskController extends Controller
     {
         $user = Auth::user();
         $this->create(array_merge($request->all(), ['student_id' => $user->student_id]));
-        return Redirect('/list');
+        return Redirect('/list')->with('success','委託新增成功!請至「已提出的委託」查看');;
     }
 
     protected function create(array $data)
@@ -503,7 +503,7 @@ class TaskController extends Controller
                 'Name' => $user->name,
                 'Student_id' => $user->student_id,
             ]);
-            return redirect()->route('list');
+            return redirect()->route('list')->with('success','已成功提出申請!');
         }
     }
 }

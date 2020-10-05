@@ -55,6 +55,7 @@
             <div class="col-12 col-md-9 col-xl-10">
                 <div class="row">
                     <div class="col-12 px-sm-2 px-0 px-md-2">
+                        @include('flash-message')
                         <h3 class="mb-0 mt-2 pl-2 pl-md-0 font-white">所有委託</h3>
                             <ul class="nav mb-2 mt-1" id="evaluate">
                                 <li class="nav-item col-3 p-0 m-0">
