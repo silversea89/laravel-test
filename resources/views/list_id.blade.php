@@ -322,12 +322,12 @@
         </div>
     </div>
 
-    <div class="modal fade " tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade volunteer" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-md"
              style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
             <div class="modal-content container bg-dark">
                 <h3 class="fas fa-times" style="color:#999999;position: absolute; top: 7px;right: 15px;"
-                    data-toggle="modal" data-target=".statusReport"></h3>
+                    data-toggle="modal" data-target=".volunteer"></h3>
                 <br>
                 <hr class="mb-1" size="8px" align="center" width="100%" style="color:#999999;">
                 @if($volunteer!=null)

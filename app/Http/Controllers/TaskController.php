@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\applicate;
 use App\Evaluation;
 use App\Events\taskhasgot;
 use App\Events\arrive;
@@ -491,11 +492,13 @@ class TaskController extends Controller
     protected function volunteer(Request $request)
     {
         $user = Auth::user();
+        $tasks = Tasks::find($request['tasks_id']);
+        $target = $tasks->Student_id;
         if(DB::table('volunteer')
             ->where('Tasks_id', '=', $request['tasks_id'])
             ->where('Student_id', '=', $user->student_id)
             ->count()>0){
-            return redirect()->route('list');
+            return redirect()->route('list')->with('error','您已經對此委託提出過申請囉!');
         }
         else{
             Volunteer::create([
@@ -503,6 +506,7 @@ class TaskController extends Controller
                 'Name' => $user->name,
                 'Student_id' => $user->student_id,
             ]);
+            event(new applicate($user, $target));
             return redirect()->route('list')->with('success','已成功提出申請!');
         }
     }
