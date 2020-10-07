@@ -31,7 +31,7 @@ class arrive implements ShouldBroadcast
         $username = $from->name;
         $this->message = $username." 已抵達面交地點";
         $this->target = $target;
-        $this->time=Carbon::now();
+        $this->time=Carbon::now()->toDateTimeString();
         Notification::create([
             'from' => $from->student_id,
             'to' => $target,

@@ -29,7 +29,7 @@ class taskhasgot implements ShouldBroadcast
         $username = $from->name;
         $this->message  = "{$username} 接受了你的委託";
         $this->target = $target;
-        $this->time=Carbon::now();
+        $this->time=Carbon::now()->toDateTimeString();
         Notification::create([
             'from' => $from->student_id,
             'to' => $target,

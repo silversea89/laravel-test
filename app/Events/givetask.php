@@ -29,7 +29,7 @@ class givetask implements ShouldBroadcast
         $username = $from->name;
         $this->message  = "{$username} 同意您擔任工具人了!";
         $this->target = $target;
-        $this->time=Carbon::now();
+        $this->time=Carbon::now()->toDateTimeString();
         Notification::create([
             'from' => $from->student_id,
             'to' => $target,

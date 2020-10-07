@@ -60,7 +60,8 @@
         <script src="{{ asset('js/main2.js')}}"></script>
     @else
         <script src="{{ asset('js/main.js')}}"></script>
-@endif
+    @endif
+        <script src="{{ asset('js/notification.js')}}"></script>
 <!--Bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
@@ -72,71 +73,7 @@
 @guest
 
 @else
-    <script type="text/javascript">
-        //通知
-        var pusher = new Pusher('fc19df46a56b703d0c4a', {
-            encrypted: true,
-            cluster: 'ap3'
-        });
 
-        // Subscribe to the channel we specified in our Laravel Event
-        // var channel = pusher.subscribe('status-liked');
-        var channel1 = pusher.subscribe("taskhasgot.{{Auth::user()->student_id}}");
-
-        // Bind a function to a Event (the full Laravel class)
-        channel1.bind('App\\Events\\taskhasgot', function (data) {
-            console.log(data.message);
-            console.log(data.time);
-        });
-
-        var channel2 = pusher.subscribe("taskstart.{{Auth::user()->student_id}}");
-
-        // Bind a function to a Event (the full Laravel class)
-        channel2.bind('App\\Events\\taskstart', function (data) {
-            console.log(data.message);
-            console.log(data.time);
-        });
-
-        var channel3 = pusher.subscribe("back.{{Auth::user()->student_id}}");
-
-        // Bind a function to a Event (the full Laravel class)
-        channel3.bind('App\\Events\\back', function (data) {
-            console.log(data.message);
-            console.log(data.time);
-        });
-
-        var channel4 = pusher.subscribe("arrive.{{Auth::user()->student_id}}");
-
-        // Bind a function to a Event (the full Laravel class)
-        channel4.bind('App\\Events\\arrive', function (data) {
-            console.log(data.message);
-            console.log(data.time);
-        });
-
-        var channel5 = pusher.subscribe("complete.{{Auth::user()->student_id}}");
-
-        // Bind a function to a Event (the full Laravel class)
-        channel5.bind('App\\Events\\complete', function (data) {
-            console.log(data.message);
-            console.log(data.time);
-        });
-
-        var channel6 = pusher.subscribe("givetask.{{Auth::user()->student_id}}");
-
-        // Bind a function to a Event (the full Laravel class)
-        channel6.bind('App\\Events\\givetask', function (data) {
-            console.log(data.message);
-            console.log(data.time);
-        });
-
-        var channel7 = pusher.subscribe("applicate.{{Auth::user()->student_id}}");
-
-        // Bind a function to a Event (the full Laravel class)
-        channel7.bind('App\\Events\\applicate', function (data) {
-            console.log(data.message);
-            console.log(data.time);
-        });
-    </script>
 @endguest
 
 <nav class="navbar-dark bg-darker" id="realNav">
@@ -180,100 +117,10 @@
                         <span class="far fa-bell"></span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right bg-dark border py-0" id="profileDropdown">
-                        <script type="text/javascript">
-                            var pusher = new Pusher('fc19df46a56b703d0c4a', {
-                                encrypted: true,
-                                cluster: 'ap3'
-                            });
-                            var channel1 = pusher.subscribe("taskhasgot.{{Auth::user()->student_id}}");
+                        <div id="dp-item">
 
-                            // Bind a function to a Event (the full Laravel class)
-                            channel1.bind('App\\Events\\taskhasgot', function (data) {
-                                console.log(data.message);
-                                console.log(data.time);
-                            });
+                        </div>
 
-                            var channel2 = pusher.subscribe("taskstart.{{Auth::user()->student_id}}");
-
-                            // Bind a function to a Event (the full Laravel class)
-                            channel2.bind('App\\Events\\taskstart', function (data) {
-                                console.log(data.message);
-                                console.log(data.time);
-                            });
-
-                            var channel3 = pusher.subscribe("back.{{Auth::user()->student_id}}");
-
-                            // Bind a function to a Event (the full Laravel class)
-                            channel3.bind('App\\Events\\back', function (data) {
-                                console.log(data.message);
-                                console.log(data.time);
-                            });
-
-                            var channel4 = pusher.subscribe("arrive.{{Auth::user()->student_id}}");
-
-                            // Bind a function to a Event (the full Laravel class)
-                            channel4.bind('App\\Events\\arrive', function (data) {
-                                console.log(data.message);
-                                console.log(data.time);
-                            });
-                            var channel5 = pusher.subscribe("complete.{{Auth::user()->student_id}}");
-
-                            // Bind a function to a Event (the full Laravel class)
-                            channel5.bind('App\\Events\\complete', function (data) {
-                                console.log(data.message);
-                                console.log(data.time);
-                            });
-                            var channel6 = pusher.subscribe("givetask.{{Auth::user()->student_id}}");
-
-                            // Bind a function to a Event (the full Laravel class)
-                            channel6.bind('App\\Events\\givetask', function (data) {
-                                console.log(data.message);
-                                console.log(data.time);
-                            });
-                            var channel7 = pusher.subscribe("applicate.{{Auth::user()->student_id}}");
-
-                            channel7.bind('App\\Events\\applicate', function (data) {
-                                var notification = `<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
-                                        <div class="row">
-                                        <div class="col-auto pr-2">
-                                        <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
-                                    src="/src/img/profile.jpg">
-                                        </div>
-                                        <div class="col pl-0">
-                                        <h5 class="guestProfileName font-white font-weight-bold m-0">
-                                        ` + data.message + `
-                                        </h5>
-                                        <p class="font-grey m-0">
-                                        ` + data.time + `
-                                        </p>
-                                        <p class="font-grey m-0">
-                                        //委託標題(如果有)
-                                        </p>
-                                        </div>
-                                        </div>
-                                        </a>`
-                                document.write(notification)
-                            });
-                        </script>
-                        {{--                        <a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">--}}
-                        {{--                            <div class="row">--}}
-                        {{--                                <div class="col-auto pr-2">--}}
-                        {{--                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"--}}
-                        {{--                                         src="/src/img/profile.jpg">--}}
-                        {{--                                </div>--}}
-                        {{--                                <div class="col pl-0">--}}
-                        {{--                                    <h5 class="guestProfileName font-white font-weight-bold m-0">--}}
-                        {{--                                        //通知內容--}}
-                        {{--                                    </h5>--}}
-                        {{--                                    <p class="font-grey m-0">--}}
-                        {{--                                        //通知時間--}}
-                        {{--                                    </p>--}}
-                        {{--                                    <p class="font-grey m-0">--}}
-                        {{--                                        //委託標題(如果有)--}}
-                        {{--                                    </p>--}}
-                        {{--                                </div>--}}
-                        {{--                            </div>--}}
-                        {{--                        </a>--}}
                         <a class="dropdown-item navbar-dark font-orange border-bottom px-3 py-2"
                            href="/nofitications">查看所有通知</a>
                     </div>
@@ -375,155 +222,194 @@
                         @endguest
                     </div>
             </div>
-
-
-            {{--                        <div class="collapse navbar-collapse px-3" id="navbarToggler">--}}
-            {{--                            <ul class="navbar-nav mr-auto ">--}}
-
-            {{--                                <li class="nav-item">--}}
-            {{--                                    <a class="nav-link" href="/">首頁</a>--}}
-            {{--                                </li>--}}
-            {{--                                @if(\Request::is('register')||\Request::is('login'))--}}
-
-            {{--                                @else--}}
-            {{--                                    <li class="nav-item">--}}
-            {{--                                        <a href="{{ route('list')}}" class="nav-link">所有委託</a>--}}
-            {{--                                    </li>--}}
-            {{--                                @endif--}}
-
-            {{--                                <li class="nav-item">--}}
-            {{--                                    <a class="nav-link" href="{{ route('about') }}">關於工具人</a>--}}
-            {{--                                </li>--}}
-            {{--                                <li class="nav-item">--}}
-            {{--                                    <a href="#" class="nav-link">問題Q&A</a>--}}
-            {{--                                </li>--}}
-
-            {{--                                <li class="nav-item">--}}
-            {{--                                    <a class="nav-link" href="{{ route('contact') }}">聯絡我們</a>--}}
-            {{--                                </li>--}}
-
-            {{--                            </ul>--}}
-            {{--                            <div class="form-inline my-0">--}}
-            {{--                                @guest--}}
-            {{--                                    <a class="btn btn-outline-orange my-2 my-sm-0 mr-3 mr-md-2 px-4 rounded-0"--}}
-            {{--                                       href="{{ route('register') }}">註冊</a>--}}
-            {{--                                    <a class="btn btn-orange my-2 my-sm-0 px-4 rounded-0" href="{{ route('login') }}">登入</a>--}}
-            {{--                                @else--}}
-            {{--                                @endguest--}}
-            {{--                            </div>--}}
-            {{--                        </div>--}}
         </nav>
     </div>
 </nav>
 <nav class="navbar-dark bg-darker" id="fakeNav"></nav>
-
-{{--    <nav class="navbar navbar-expand-lg navbar-dark bg-dark "--}}
-{{--         style="width: 100%;position: fixed;top:0px;left: 0px;z-index: 999;">--}}
-
-{{--        <div class="container pr-0">--}}
-
-{{--            <a class="navbar-brand" href="/">ToolMan</a>--}}
-
-
-{{--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"--}}
-{{--                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">--}}
-{{--                <span class="navbar-toggler-icon"></span>--}}
-{{--            </button>--}}
-
-{{--            <div class="collapse navbar-collapse" id="navbarNavDropdown">--}}
-{{--                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">--}}
-{{--                    <li class="nav-item">--}}
-{{--                        <a class="nav-link" href="/">首頁<span class="sr-only">(current)</span></a>--}}
-{{--                    </li>--}}
-{{--                    <li class="nav-item">--}}
-{{--                        <a class="nav-link" href="{{ route('about') }}">關於工具人</a>--}}
-{{--                    </li>--}}
-{{--                    <li class="nav-item">--}}
-{{--                        <a class="nav-link" href="{{ route('contact') }}">聯絡我們</a>--}}
-{{--                    </li>--}}
-{{--                </ul>--}}
-
-{{--                @guest--}}
-{{--                    <div class="form-inline my-2 my-lg-0">--}}
-{{--                        <a class="btn btn-outline-success my-2 my-sm-0 mr-2"--}}
-{{--                           href="{{ route('register') }}">{{ __('註冊') }}</a>--}}
-{{--                        <a class="btn btn-success my-2 my-sm-0" href="{{ route('login') }}">{{ __('登入') }}</a>--}}
-{{--                    </div>--}}
-{{--                @else--}}
-{{--                    <ul class="navbar-nav ml-auto nav-flex-icons">--}}
-
-{{--                        <a class="btn btn-danger my-2 my-sm-0" href="{{ route('logout') }}"--}}
-{{--                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">--}}
-{{--                            {{ __('登出') }}--}}
-{{--                        </a>--}}
-
-{{--                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-{{--                            @csrf--}}
-{{--                        </form>--}}
-{{--                    </ul>--}}
-{{--                @endguest--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </nav>--}}
-
-
-
-
-
-
 @yield('content')
 
 </body>
-{{--@if(\Request::is('/')||\Request::is('about')||\Request::is('contact')||\Request::is('login')||\Request::is('register'))--}}
+<script type="text/javascript">
+    var pusher = new Pusher('fc19df46a56b703d0c4a', {
+        encrypted: true,
+        cluster: 'ap3'
+    });
 
-{{--@else--}}
-{{--    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-0"--}}
-{{--         style="width:100%;position: fixed; bottom: 0px;right: 0px;z-index: 999;">--}}
-{{--        <div class="container bg-dark">--}}
+    // Subscribe to the channel we specified in our Laravel Event
+    // var channel = pusher.subscribe('status-liked');
+    var channel1 = pusher.subscribe("taskhasgot.{{Auth::user()->student_id}}");
 
-{{--            <div class="row ml-0" style="width:100%">--}}
+    // Bind a function to a Event (the full Laravel class)
+    channel1.bind('App\\Events\\taskhasgot', function (data) {
+        $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
+                            <div class="row">
+                                <div class="col-auto pr-2">
+                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
+                                         src="/src/img/profile.jpg">
+                                </div>
+                                <div class="col pl-0">
+                                    <h5 class="guestProfileName font-white font-weight-bold m-0">
+                                        ${data.message}
+                                    </h5>
+                                    <p class="font-grey m-0">
+                                        ${data.time}
+                                    </p>
+                                    <p class="font-grey m-0">
+                                        //委託標題(如果有)
+                                    </p>
+                                </div>
+                            </div>
+                        </a>`);
+    });
 
-{{--                <a class="col-3 col-sm-3" href="{{route('list')}}" style="text-decoration:none;color:black">--}}
-{{--                    <center>--}}
-{{--                        <i class="fas fa-clipboard-list" @if(\Request::is('list','list/*'))style="color:#00FFFB"--}}
-{{--                           @else style="color:white"@endif></i>--}}
-{{--                        <p class="m-0" @if(\Request::is('list','list/*'))style="color:#00FFFB"--}}
-{{--                           @else style="color:white"@endif>--}}
-{{--                            所有</p>--}}
-{{--                    </center>--}}
-{{--                </a>--}}
+    var channel2 = pusher.subscribe("taskstart.{{Auth::user()->student_id}}");
 
-{{--                <a class="col-3 col-sm-3" href="{{route('list.push')}}" style="text-decoration:none;color:black">--}}
-{{--                    <center>--}}
-{{--                        <i class="fas fa-arrow-up" @if(\Request::is('list_push*'))style="color:#00FFFB"--}}
-{{--                           @else style="color:white"@endif></i>--}}
-{{--                        <p class="m-0" @if(\Request::is('list_push*'))style="color:#00FFFB"--}}
-{{--                           @else style="color:white"@endif>已提出</p>--}}
-{{--                    </center>--}}
-{{--                </a>--}}
+    // Bind a function to a Event (the full Laravel class)
+    channel2.bind('App\\Events\\taskstart', function (data) {
+        $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
+                            <div class="row">
+                                <div class="col-auto pr-2">
+                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
+                                         src="/src/img/profile.jpg">
+                                </div>
+                                <div class="col pl-0">
+                                    <h5 class="guestProfileName font-white font-weight-bold m-0">
+                                        ${data.message}
+                                    </h5>
+                                    <p class="font-grey m-0">
+                                        ${data.time}
+                                    </p>
+                                    <p class="font-grey m-0">
+                                        //委託標題(如果有)
+                                    </p>
+                                </div>
+                            </div>
+                        </a>`);
+    });
 
-{{--                <a class="col-3 col-sm-3" href="{{route('list.ING')}}" style="text-decoration:none;color:black">--}}
-{{--                    <center>--}}
-{{--                        <i class="fas fa-arrow-down" @if(\Request::is('list_ING*'))style="color:#00FFFB"--}}
-{{--                           @else style="color:white"@endif></i>--}}
-{{--                        <p class="m-0" @if(\Request::is('list_ING*'))style="color:#00FFFB"--}}
-{{--                           @else style="color:white"@endif>已接受</p>--}}
-{{--                    </center>--}}
-{{--                </a>--}}
+    var channel3 = pusher.subscribe("back.{{Auth::user()->student_id}}");
 
-{{--                @if(Auth::check())--}}
-{{--                    <a class="col-3 col-sm-3" href="{{route('profile.id', Auth::user()->student_id)}}"--}}
-{{--                       style="text-decoration:none;color:black">--}}
-{{--                        <center>--}}
-{{--                            <i class="fas fa-user" @if(\Request::is('profile*'))style="color:#00FFFB"--}}
-{{--                               @else style="color:white"@endif></i>--}}
-{{--                            <p class="m-0" @if(\Request::is('profile*'))style="color:#00FFFB"--}}
-{{--                               @else style="color:white"@endif>我的</p>--}}
-{{--                        </center>--}}
-{{--                    </a>--}}
-{{--                @endif--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </nav>--}}
-{{--@endif--}}
+    // Bind a function to a Event (the full Laravel class)
+    channel3.bind('App\\Events\\back', function (data) {
+        $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
+                            <div class="row">
+                                <div class="col-auto pr-2">
+                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
+                                         src="/src/img/profile.jpg">
+                                </div>
+                                <div class="col pl-0">
+                                    <h5 class="guestProfileName font-white font-weight-bold m-0">
+                                        ${data.message}
+                                    </h5>
+                                    <p class="font-grey m-0">
+                                        ${data.time}
+                                    </p>
+                                    <p class="font-grey m-0">
+                                        //委託標題(如果有)
+                                    </p>
+                                </div>
+                            </div>
+                        </a>`);
+    });
+
+    var channel4 = pusher.subscribe("arrive.{{Auth::user()->student_id}}");
+
+    // Bind a function to a Event (the full Laravel class)
+    channel4.bind('App\\Events\\arrive', function (data) {
+        $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
+                            <div class="row">
+                                <div class="col-auto pr-2">
+                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
+                                         src="/src/img/profile.jpg">
+                                </div>
+                                <div class="col pl-0">
+                                    <h5 class="guestProfileName font-white font-weight-bold m-0">
+                                        ${data.message}
+                                    </h5>
+                                    <p class="font-grey m-0">
+                                        ${data.time}
+                                    </p>
+                                    <p class="font-grey m-0">
+                                        //委託標題(如果有)
+                                    </p>
+                                </div>
+                            </div>
+                        </a>`);
+    });
+
+    var channel5 = pusher.subscribe("complete.{{Auth::user()->student_id}}");
+
+    // Bind a function to a Event (the full Laravel class)
+    channel5.bind('App\\Events\\complete', function (data) {
+        $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
+                            <div class="row">
+                                <div class="col-auto pr-2">
+                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
+                                         src="/src/img/profile.jpg">
+                                </div>
+                                <div class="col pl-0">
+                                    <h5 class="guestProfileName font-white font-weight-bold m-0">
+                                        ${data.message}
+                                    </h5>
+                                    <p class="font-grey m-0">
+                                        ${data.time}
+                                    </p>
+                                    <p class="font-grey m-0">
+                                        //委託標題(如果有)
+                                    </p>
+                                </div>
+                            </div>
+                        </a>`);
+    });
+
+    var channel6 = pusher.subscribe("givetask.{{Auth::user()->student_id}}");
+
+    // Bind a function to a Event (the full Laravel class)
+    channel6.bind('App\\Events\\givetask', function (data) {
+        $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
+                            <div class="row">
+                                <div class="col-auto pr-2">
+                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
+                                         src="/src/img/profile.jpg">
+                                </div>
+                                <div class="col pl-0">
+                                    <h5 class="guestProfileName font-white font-weight-bold m-0">
+                                        ${data.message}
+                                    </h5>
+                                    <p class="font-grey m-0">
+                                        ${data.time}
+                                    </p>
+                                    <p class="font-grey m-0">
+                                        //委託標題(如果有)
+                                    </p>
+                                </div>
+                            </div>
+                        </a>`);
+    });
+
+    var channel7 = pusher.subscribe("applicate.{{Auth::user()->student_id}}");
+
+    // Bind a function to a Event (the full Laravel class)
+    channel7.bind('App\\Events\\applicate', function (data) {
+        $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
+                            <div class="row">
+                                <div class="col-auto pr-2">
+                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
+                                         src="/src/img/profile.jpg">
+                                </div>
+                                <div class="col pl-0">
+                                    <h5 class="guestProfileName font-white font-weight-bold m-0">
+                                        ${data.message}
+                                    </h5>
+                                    <p class="font-grey m-0">
+                                        ${data.time}
+                                    </p>
+                                    <p class="font-grey m-0">
+                                        //委託標題(如果有)
+                                    </p>
+                                </div>
+                            </div>
+                        </a>`);
+    });
+</script>
 </html>

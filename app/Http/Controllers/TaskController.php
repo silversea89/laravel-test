@@ -506,7 +506,7 @@ class TaskController extends Controller
                 'Name' => $user->name,
                 'Student_id' => $user->student_id,
             ]);
-            event(new applicate($user, $target));
+            event(new applicate($user, $target,$tasks));
             return redirect()->route('list')->with('success','已成功提出申請!');
         }
     }

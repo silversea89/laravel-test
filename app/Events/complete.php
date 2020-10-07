@@ -31,7 +31,7 @@ class complete implements ShouldBroadcast
         $username = $from->name;
         $this->message = $username." 完成您的委託囉!給予對方評價吧!";
         $this->target = $target;
-        $this->time=Carbon::now();
+        $this->time=Carbon::now()->toDateTimeString();
         Notification::create([
             'from' => $from->student_id,
             'to' => $target,

@@ -26,16 +26,18 @@ class applicate implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($from, $target)
+    public function __construct($from, $target,$task)
     {
         $username = $from->name;
         $this->message = $username." 想成為您的工具人!前往委託細項查看!";
         $this->target = $target;
-        $this->time=Carbon::now();
+        $this->time=Carbon::now()->toDateTimeString();
+        $this->Title=$task->Title;
         Notification::create([
             'from' => $from->student_id,
             'to' => $target,
             'message' => $this->message,
+            'href'=>$task->Tasks_id,
             'read' => false,
             'created_at' => $this->time
         ]);

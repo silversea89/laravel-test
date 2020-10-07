@@ -31,7 +31,7 @@ class taskstart implements ShouldBroadcast
         $username = $from->name;
         $this->message = $username." 開始執行您的委託了";
         $this->target = $target;
-        $this->time=Carbon::now();
+        $this->time=Carbon::now()->toDateTimeString();
         Notification::create([
             'from' => $from->student_id,
             'to' => $target,

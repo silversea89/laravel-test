@@ -31,7 +31,7 @@ class back implements ShouldBroadcast
         $username = $from->name;
         $this->message = $username." 正在前往面交地點";
         $this->target = $target;
-        $this->time=Carbon::now();
+        $this->time= Carbon::today()->toDateTimeString();
         Notification::create([
             'from' => $from->student_id,
             'to' => $target,

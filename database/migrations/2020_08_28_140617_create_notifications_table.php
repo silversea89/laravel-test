@@ -18,6 +18,7 @@ class CreateNotificationsTable extends Migration
             $table->string('from',11);
             $table->string('to',11);
             $table->string('message');
+            $table->string('href');
             $table->boolean('read')->default(false);
             $table->dateTime('created_at');
         });
