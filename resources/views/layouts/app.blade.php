@@ -149,101 +149,176 @@
             </button>
             <a class="navbar-brand m-0 mr-md-3 p-0" href="/" id="logo">Toolman</a>
 
-                <div class="dropdown order-md-last">
-                    @guest
-                        <button class="border-0 p-3 fakeBtn" type="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                            <span class="far fa-user"></span>
-                        </button>
+            <div class="dropdown order-md-last">
+                @guest
+                    <button class="border-0 p-3 fakeBtn" type="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        <span class="far fa-user"></span>
+                    </button>
 
-                    @else
-{{--                        <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"--}}
-{{--                                aria-expanded="false" id="profile">--}}
-{{--                            <span class="far fa-user"></span>--}}
-{{--                        </button>--}}
-{{--                        <div class="dropdown-menu dropdown-menu-right" id="profileDropdown">--}}
-{{--                            <a class="dropdown-item navbar-dark"--}}
-{{--                               href="{{route('profile.id', Auth::user()->student_id)}}">個人資料</a>--}}
-{{--                            <a class="dropdown-item navbar-dark" href="#">訊息</a>--}}
-{{--                            <a class="dropdown-item navbar-dark" href="{{route('list.push')}}">已提出的委託</a>--}}
-{{--                            <a class="dropdown-item navbar-dark" href="{{route('list.ING')}}">已接受的委託</a>--}}
-{{--                            <a class="dropdown-item navbar-dark" href="{{ route('logout') }}"--}}
-{{--                               onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a>--}}
-{{--                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-{{--                                @csrf--}}
-{{--                            </form>--}}
-{{--                        </div>--}}
-                        <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" id="profile">
+                @else
+                    {{--                        <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"--}}
+                    {{--                                aria-expanded="false" id="profile">--}}
+                    {{--                            <span class="far fa-user"></span>--}}
+                    {{--                        </button>--}}
+                    {{--                        <div class="dropdown-menu dropdown-menu-right" id="profileDropdown">--}}
+                    {{--                            <a class="dropdown-item navbar-dark"--}}
+                    {{--                               href="{{route('profile.id', Auth::user()->student_id)}}">個人資料</a>--}}
+                    {{--                            <a class="dropdown-item navbar-dark" href="#">訊息</a>--}}
+                    {{--                            <a class="dropdown-item navbar-dark" href="{{route('list.push')}}">已提出的委託</a>--}}
+                    {{--                            <a class="dropdown-item navbar-dark" href="{{route('list.ING')}}">已接受的委託</a>--}}
+                    {{--                            <a class="dropdown-item navbar-dark" href="{{ route('logout') }}"--}}
+                    {{--                               onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a>--}}
+                    {{--                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+                    {{--                                @csrf--}}
+                    {{--                            </form>--}}
+                    {{--                        </div>--}}
+                    <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" id="profile">
                             <span class="badge badge-pill badge-danger"
                                   style="position:absolute;top:10px;left:3px">6</span>
-                            <span class="far fa-bell"></span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right bg-dark border py-0" id="profileDropdown">
-                            <a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
-                                <div class="row">
-                                    <div class="col-auto pr-2">
+                        <span class="far fa-bell"></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right bg-dark border py-0" id="profileDropdown">
+                        <script type="text/javascript">
+                            var pusher = new Pusher('fc19df46a56b703d0c4a', {
+                                encrypted: true,
+                                cluster: 'ap3'
+                            });
+                            var channel1 = pusher.subscribe("taskhasgot.{{Auth::user()->student_id}}");
+
+                            // Bind a function to a Event (the full Laravel class)
+                            channel1.bind('App\\Events\\taskhasgot', function (data) {
+                                console.log(data.message);
+                                console.log(data.time);
+                            });
+
+                            var channel2 = pusher.subscribe("taskstart.{{Auth::user()->student_id}}");
+
+                            // Bind a function to a Event (the full Laravel class)
+                            channel2.bind('App\\Events\\taskstart', function (data) {
+                                console.log(data.message);
+                                console.log(data.time);
+                            });
+
+                            var channel3 = pusher.subscribe("back.{{Auth::user()->student_id}}");
+
+                            // Bind a function to a Event (the full Laravel class)
+                            channel3.bind('App\\Events\\back', function (data) {
+                                console.log(data.message);
+                                console.log(data.time);
+                            });
+
+                            var channel4 = pusher.subscribe("arrive.{{Auth::user()->student_id}}");
+
+                            // Bind a function to a Event (the full Laravel class)
+                            channel4.bind('App\\Events\\arrive', function (data) {
+                                console.log(data.message);
+                                console.log(data.time);
+                            });
+                            var channel5 = pusher.subscribe("complete.{{Auth::user()->student_id}}");
+
+                            // Bind a function to a Event (the full Laravel class)
+                            channel5.bind('App\\Events\\complete', function (data) {
+                                console.log(data.message);
+                                console.log(data.time);
+                            });
+                            var channel6 = pusher.subscribe("givetask.{{Auth::user()->student_id}}");
+
+                            // Bind a function to a Event (the full Laravel class)
+                            channel6.bind('App\\Events\\givetask', function (data) {
+                                console.log(data.message);
+                                console.log(data.time);
+                            });
+                            var channel7 = pusher.subscribe("applicate.{{Auth::user()->student_id}}");
+
+                            channel7.bind('App\\Events\\applicate', function (data) {
+                                var notification = `<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
+                                        <div class="row">
+                                        <div class="col-auto pr-2">
                                         <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
-                                             src="/src/img/profile.jpg">
-                                    </div>
-                                    <div class="col pl-0">
+                                    src="/src/img/profile.jpg">
+                                        </div>
+                                        <div class="col pl-0">
                                         <h5 class="guestProfileName font-white font-weight-bold m-0">
-                                            //通知內容
+                                        ` + data.message + `
                                         </h5>
                                         <p class="font-grey m-0">
-                                            //通知時間
+                                        ` + data.time + `
                                         </p>
                                         <p class="font-grey m-0">
-                                            //委託標題(如果有)
+                                        //委託標題(如果有)
                                         </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item navbar-dark font-orange border-bottom px-3 py-2"
-                               href="/nofitications">查看所有通知</a>
-                        </div>
-                    @endguest
-                </div>
+                                        </div>
+                                        </div>
+                                        </a>`
+                                document.write(notification)
+                            });
+                        </script>
+                        {{--                        <a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">--}}
+                        {{--                            <div class="row">--}}
+                        {{--                                <div class="col-auto pr-2">--}}
+                        {{--                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"--}}
+                        {{--                                         src="/src/img/profile.jpg">--}}
+                        {{--                                </div>--}}
+                        {{--                                <div class="col pl-0">--}}
+                        {{--                                    <h5 class="guestProfileName font-white font-weight-bold m-0">--}}
+                        {{--                                        //通知內容--}}
+                        {{--                                    </h5>--}}
+                        {{--                                    <p class="font-grey m-0">--}}
+                        {{--                                        //通知時間--}}
+                        {{--                                    </p>--}}
+                        {{--                                    <p class="font-grey m-0">--}}
+                        {{--                                        //委託標題(如果有)--}}
+                        {{--                                    </p>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
+                        {{--                        </a>--}}
+                        <a class="dropdown-item navbar-dark font-orange border-bottom px-3 py-2"
+                           href="/nofitications">查看所有通知</a>
+                    </div>
+                @endguest
+            </div>
 
-{{--                <div class="dropdown order-md-last">--}}
-{{--                    @guest--}}
-{{--                        <button class="border-0 p-3 fakeBtn" type="button" data-toggle="dropdown" aria-haspopup="true"--}}
-{{--                                aria-expanded="false">--}}
-{{--                            <span class="far fa-user"></span>--}}
-{{--                        </button>--}}
-{{--                    @else--}}
-{{--                        <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"--}}
-{{--                                aria-expanded="false" id="profile">--}}
-{{--                            <span class="badge badge-pill badge-danger"--}}
-{{--                                  style="position:absolute;top:10px;left:3px">6</span>--}}
-{{--                            <span class="far fa-bell"></span>--}}
-{{--                        </button>--}}
-{{--                        <div class="dropdown-menu dropdown-menu-right bg-dark border py-0" id="profileDropdown">--}}
-{{--                            <a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">--}}
-{{--                                <div class="row">--}}
-{{--                                    <div class="col-auto pr-2">--}}
-{{--                                        <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"--}}
-{{--                                             src="/src/img/profile.jpg">--}}
-{{--                                    </div>--}}
-{{--                                    <div class="col pl-0">--}}
-{{--                                        <h5 class="guestProfileName font-white font-weight-bold m-0">--}}
-{{--                                            //通知內容--}}
-{{--                                        </h5>--}}
-{{--                                        <p class="font-grey m-0">--}}
-{{--                                            //通知時間--}}
-{{--                                        </p>--}}
-{{--                                        <p class="font-grey m-0">--}}
-{{--                                            //委託標題(如果有)--}}
-{{--                                        </p>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                            <a class="dropdown-item navbar-dark font-orange border-bottom px-3 py-2"--}}
-{{--                               href="/nofitications">查看所有通知</a>--}}
-{{--                        </div>--}}
-{{--                        <!-- ~未登入這塊消失 -->--}}
-{{--                    @endguest--}}
-{{--                </div>--}}
+            {{--                <div class="dropdown order-md-last">--}}
+            {{--                    @guest--}}
+            {{--                        <button class="border-0 p-3 fakeBtn" type="button" data-toggle="dropdown" aria-haspopup="true"--}}
+            {{--                                aria-expanded="false">--}}
+            {{--                            <span class="far fa-user"></span>--}}
+            {{--                        </button>--}}
+            {{--                    @else--}}
+            {{--                        <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"--}}
+            {{--                                aria-expanded="false" id="profile">--}}
+            {{--                            <span class="badge badge-pill badge-danger"--}}
+            {{--                                  style="position:absolute;top:10px;left:3px">6</span>--}}
+            {{--                            <span class="far fa-bell"></span>--}}
+            {{--                        </button>--}}
+            {{--                        <div class="dropdown-menu dropdown-menu-right bg-dark border py-0" id="profileDropdown">--}}
+            {{--                            <a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">--}}
+            {{--                                <div class="row">--}}
+            {{--                                    <div class="col-auto pr-2">--}}
+            {{--                                        <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"--}}
+            {{--                                             src="/src/img/profile.jpg">--}}
+            {{--                                    </div>--}}
+            {{--                                    <div class="col pl-0">--}}
+            {{--                                        <h5 class="guestProfileName font-white font-weight-bold m-0">--}}
+            {{--                                            //通知內容--}}
+            {{--                                        </h5>--}}
+            {{--                                        <p class="font-grey m-0">--}}
+            {{--                                            //通知時間--}}
+            {{--                                        </p>--}}
+            {{--                                        <p class="font-grey m-0">--}}
+            {{--                                            //委託標題(如果有)--}}
+            {{--                                        </p>--}}
+            {{--                                    </div>--}}
+            {{--                                </div>--}}
+            {{--                            </a>--}}
+            {{--                            <a class="dropdown-item navbar-dark font-orange border-bottom px-3 py-2"--}}
+            {{--                               href="/nofitications">查看所有通知</a>--}}
+            {{--                        </div>--}}
+            {{--                        <!-- ~未登入這塊消失 -->--}}
+            {{--                    @endguest--}}
+            {{--                </div>--}}
 
 
             <div class="collapse navbar-collapse px-3" id="navbarToggler">
