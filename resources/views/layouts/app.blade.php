@@ -83,66 +83,76 @@
             <a class="navbar-brand m-0 mr-md-3 p-0" href="/" id="logo">Toolman</a>
 
             <div class="dropdown order-md-last">
-                @guest
-                    <button class="border-0 p-3 fakeBtn" type="button" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                        <span class="far fa-user"></span>
-                    </button>
-                @else
-                    {{--                        <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"--}}
-                    {{--                                aria-expanded="false" id="profile">--}}
-                    {{--                            <span class="far fa-user"></span>--}}
-                    {{--                        </button>--}}
-                    {{--                        <div class="dropdown-menu dropdown-menu-right" id="profileDropdown">--}}
-                    {{--                            <a class="dropdown-item navbar-dark"--}}
-                    {{--                               href="{{route('profile.id', Auth::user()->student_id)}}">個人資料</a>--}}
-                    {{--                            <a class="dropdown-item navbar-dark" href="#">訊息</a>--}}
-                    {{--                            <a class="dropdown-item navbar-dark" href="{{route('list.push')}}">已提出的委託</a>--}}
-                    {{--                            <a class="dropdown-item navbar-dark" href="{{route('list.ING')}}">已接受的委託</a>--}}
-                    {{--                            <a class="dropdown-item navbar-dark" href="{{ route('logout') }}"--}}
-                    {{--                               onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a>--}}
-                    {{--                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-                    {{--                                @csrf--}}
-                    {{--                            </form>--}}
-                    {{--                        </div>--}}
-                    <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" id="profile">
+                <div class="row">
+                    @guest
+                        <button class="border-0 p-3 fakeBtn" type="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                            <span class="far fa-user"></span>
+                        </button>
+                    @else
+
+                        <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" id="profile">
                             <span class="badge badge-pill badge-danger" id="noti-count"
                                   style="position:absolute;top:10px;left:3px">{{$count}}</span>
-                        <span class="far fa-bell"></span>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right bg-dark border py-0" id="profileDropdown">
-                        <div id="dp-item">
-                            @isset($notification)
-                                @foreach($notification as $i)
-                                    <a class="dropdown-item navbar-dark border-bottom p-2"
-                                       href="{{ route('task.detail', $i->href)}}">
-                                        <div class="row">
-                                            <div class="col-auto pr-2">
-                                                <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
-                                                     src="/src/img/profile.jpg">
+                            <span class="far fa-bell"></span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right bg-dark border py-0" id="profileDropdown">
+                            <div id="dp-item">
+                                @isset($notification)
+                                    @foreach($notification as $i)
+                                        <a class="dropdown-item navbar-dark border-bottom p-2"
+                                           href="{{ route('task.detail', $i->href)}}">
+                                            <div class="row">
+                                                <div class="col-auto pr-2">
+                                                    <img
+                                                        class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
+                                                        src="/src/img/profile.jpg">
+                                                </div>
+                                                <div class="col pl-0">
+                                                    <h5 class="guestProfileName font-white font-weight-bold m-0">
+                                                        {{$i->message}}
+                                                    </h5>
+                                                    <p class="font-grey m-0">
+                                                        {{$i->created_at}}
+                                                    </p>
+                                                    <p class="font-grey m-0">
+                                                        //委託標題(如果有)
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="col pl-0">
-                                                <h5 class="guestProfileName font-white font-weight-bold m-0">
-                                                    {{$i->message}}
-                                                </h5>
-                                                <p class="font-grey m-0">
-                                                    {{$i->created_at}}
-                                                </p>
-                                                <p class="font-grey m-0">
-                                                    //委託標題(如果有)
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                @endforeach
-                            @endisset
+                                        </a>
+                                    @endforeach
+                                @endisset
+
+                            </div>
+                            <a class="dropdown-item navbar-dark font-orange border-bottom px-3 py-2"
+                               href="/nofitications">查看所有通知 </a>
+                        </div>
+                        <div class="dropdown">
+                            <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" id="profile">
+                                <span class="far fa-user"></span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right bg-dark border py-0" id="profileDropdown">
+                                <a class="dropdown-item navbar-light font-white border-bottom btn-orange"
+                                   href="{{route('profile.id', Auth::user()->student_id)}}">個人資料</a>
+                                <a class="dropdown-item navbar-light font-white border-bottom"
+                                   href="{{route('list.push')}}">已提出的委託</a>
+                                <a class="dropdown-item navbar-light font-white border-bottom"
+                                   href="{{route('list.ING')}}">已接受的委託</a>
+                                <a class="dropdown-item navbar-light font-white" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">--}}
+                                    @csrf
+                                </form>
+                            </div>
+                            <!-- ~未登入這塊消失 -->
 
                         </div>
-                        <a class="dropdown-item navbar-dark font-orange border-bottom px-3 py-2"
-                           href="/nofitications">查看所有通知 </a>
-                    </div>
-                @endguest
+                    @endguest
+                </div>
             </div>
 
             {{--                <div class="dropdown order-md-last">--}}
@@ -205,32 +215,22 @@
                 @else
                     <ul class="navbar-nav mr-auto ">
                         <li class="nav-item">
-                            <a href="/" class="nav-link">首頁</a>
+                            <a class="nav-link" href="/">首頁</a>
                         </li>
-
                         <li class="nav-item">
                             <a href="{{ route('list')}}" class="nav-link">所有委託</a>
                         </li>
-
                         <li class="nav-item">
-                            <a href="{{route('list.push')}}" class="nav-link">已提出的委託</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{route('list.ING')}}" class="nav-link">已接受的委託</a>
+                            <a class="nav-link" href="{{ route('about') }}">關於工具人</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('profile.id', Auth::user()->student_id)}}" class="nav-link">個人資料</a>
+                            <a href="#" class="nav-link">問題Q&A</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();document.getElementById('logout-form').submit();">登出</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
+                            <a class="nav-link" href="{{ route('contact') }}">聯絡我們</a>
                         </li>
-                        @endguest
                     </ul>
+                @endguest
                     <div class="form-inline my-0">
                         @guest
                             <a class="btn btn-outline-orange my-2 my-sm-0 mr-3 mr-md-2 px-4 rounded-0"
