@@ -70,11 +70,7 @@
 </head>
 
 <body>
-@guest
 
-@else
-
-@endguest
 
 <nav class="navbar-dark bg-darker" id="realNav">
     <div class="container p-0">
@@ -252,6 +248,7 @@
 
 </body>
 @guest
+
 @else
     <script type="text/javascript">
         var pusher = new Pusher('fc19df46a56b703d0c4a', {

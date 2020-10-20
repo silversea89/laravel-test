@@ -76,6 +76,12 @@ class RegisterController extends Controller
      * @param array $data
      * @return \App\User
      */
+    public function showRegistrationForm()
+    {
+        $department = department::all();
+        return view('auth.register')->with(["department" => $department]);
+    }
+
     protected function create(array $data)
     {
 
