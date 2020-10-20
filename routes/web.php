@@ -93,11 +93,4 @@ Auth::routes();
 //Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('test', function () {
-    event(new App\Events\taskhasgot('Someone','1110534020'));
-    return "Event has been sent!";
-});
-
-Route::get('bububu', function () {
-    return view('test');
-});
+Route::post('/read','NotificationController@read')->name("read");

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Events\applicate;
 use App\Evaluation;
-use App\Events\taskhasgot;
 use App\Events\arrive;
 use App\Events\complete;
 use App\Events\back;
@@ -161,7 +160,7 @@ class TaskController extends Controller
         Evaluation::create([
             'Tasks_id' => $request->tasks_id
         ]);
-        event(new givetask($user, $target));
+        event(new givetask($user, $target,$tasks));
         return redirect('list_push');
     }
 
@@ -368,23 +367,23 @@ class TaskController extends Controller
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "go";
             $progress_change->save();
-            event(new taskstart($user, $target));
+            event(new taskstart($user, $target,$tasks));
         } elseif ($progress_get == "go") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "back";
             $progress_change->save();
-            event(new back($user, $target));
+            event(new back($user, $target,$tasks));
         } elseif ($progress_get == "back") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "arrive";
             $progress_change->save();
-            event(new arrive($user, $target));
+            event(new arrive($user, $target,$tasks));
         } elseif ($progress_get == "arrive") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "complete";
             $progress_change->Status = "Complete";
             $progress_change->save();
-            event(new complete($user, $target));
+            event(new complete($user, $target,$tasks));
         }
         $volunteer=DB::table('volunteer')
             ->where('Tasks_id',"=",$tasks_id)

@@ -14,12 +14,12 @@ class Classification extends Migration
      */
     public function up()
     {
-        Schema::create('Classification', function (Blueprint $table) {
+        Schema::create('classification', function (Blueprint $table) {
             $table->String("ClassValue")->primary();
             $table->String("ClassName");
         });
 
-        DB::table('Classification')->insert([
+        DB::table('classification')->insert([
             [
                 "ClassValue" => "Food",
                 "ClassName" => "食物飲料"
@@ -54,6 +54,6 @@ class Classification extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Classification');
+        Schema::dropIfExists('classification');
     }
 }

@@ -569,14 +569,17 @@
                                     <input class="bg-grey font-white" id="datepicker" readonly="true" width="100%"
                                            name="Date" type="text" required/>
                                     <script>
+                                        var today= new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
                                         $('#datepicker').datepicker({
                                             uiLibrary: 'bootstrap4',
-                                            format: 'yyyy-mm-dd', change: function (e) {
-                                                var datepicker = e.target.value;
-                                                var datepicker2 = $('#datepicker2').val();
-                                                if (datepicker !== "" && datepicker2 !== "") {
-                                                    if (datepicker2 > datepicker) {
-                                                        $("#error").modal({show: true});
+                                            format: 'yyyy-mm-dd',
+                                            minDate: today,
+                                            change: function (e){
+                                                var datepicker=e.target.value;
+                                                var datepicker2=$('#datepicker2').val();
+                                                if(datepicker !=="" && datepicker2 !==""){
+                                                    if(datepicker2>datepicker){
+                                                        $("#error").modal({show:true});
                                                         $('#datepicker').val("");
                                                         $('#datepicker2').val("");
                                                     }
@@ -584,7 +587,6 @@
                                             }
                                         });
                                     </script>
-
                                 </div>
 
                                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
@@ -620,14 +622,17 @@
                                     <input class="bg-grey font-white" id="datepicker2" readonly="true" width="100%"
                                            name="DeadDate" required/>
                                     <script>
+                                        var today= new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
                                         $('#datepicker2').datepicker({
                                             uiLibrary: 'bootstrap4',
-                                            format: 'yyyy-mm-dd', change: function (e) {
-                                                var datepicker = $('#datepicker').val();
-                                                var datepicker2 = e.target.value;
-                                                if (datepicker !== "" && datepicker2 !== "") {
-                                                    if (datepicker2 > datepicker) {
-                                                        $("#error").modal({show: true});
+                                            format: 'yyyy-mm-dd',
+                                            minDate: today,
+                                            change: function (e){
+                                                var datepicker=$('#datepicker').val();
+                                                var datepicker2=e.target.value;
+                                                if(datepicker !=="" && datepicker2 !==""){
+                                                    if(datepicker2>datepicker){
+                                                        $("#error").modal({show:true});
                                                         $('#datepicker').val("");
                                                         $('#datepicker2').val("");
                                                     }

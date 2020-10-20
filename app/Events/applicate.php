@@ -21,6 +21,8 @@ class applicate implements ShouldBroadcast
     public $message;
     public $target;
     public $time;
+    public $title;
+    public $href;
     /**
      * Create a new event instance.
      *
@@ -32,12 +34,14 @@ class applicate implements ShouldBroadcast
         $this->message = $username." 想成為您的工具人!前往委託細項查看!";
         $this->target = $target;
         $this->time=Carbon::now()->toDateTimeString();
-        $this->Title=$task->Title;
+        $this->title=$task->Title;
+        $this->href=$task->Tasks_id;
         Notification::create([
             'from' => $from->student_id,
             'to' => $target,
             'message' => $this->message,
             'href'=>$task->Tasks_id,
+            'title'=>$task->Title,
             'read' => false,
             'created_at' => $this->time
         ]);

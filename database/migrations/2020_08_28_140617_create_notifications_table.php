@@ -20,6 +20,7 @@ class CreateNotificationsTable extends Migration
             $table->string('message');
             $table->string('href');
             $table->boolean('read')->default(false);
+            $table->string('title');
             $table->dateTime('created_at');
         });
     }

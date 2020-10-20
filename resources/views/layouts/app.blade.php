@@ -32,12 +32,13 @@
     <script src="//js.pusher.com/3.1/pusher.min.js"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!--jQuery-->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-            crossorigin="anonymous">
-
-    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!--jQuery-->
+
+    <!--axios-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!--axios-->
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/js/gijgo.min.js"
             integrity="sha512-T62eI76S3z2X8q+QaoTTn7FdKOVGjzKPjKNHw+vdAGQdcDMbxZUAKwRcGCPt0vtSbRuxNWr/BccUKYJo634ygQ=="
@@ -60,8 +61,7 @@
         <script src="{{ asset('js/main2.js')}}"></script>
     @else
         <script src="{{ asset('js/main.js')}}"></script>
-    @endif
-        <script src="{{ asset('js/notification.js')}}"></script>
+@endif
 <!--Bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
@@ -92,7 +92,6 @@
                             aria-expanded="false">
                         <span class="far fa-user"></span>
                     </button>
-
                 @else
                     {{--                        <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"--}}
                     {{--                                aria-expanded="false" id="profile">--}}
@@ -112,17 +111,40 @@
                     {{--                        </div>--}}
                     <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" id="profile">
-                            <span class="badge badge-pill badge-danger"
-                                  style="position:absolute;top:10px;left:3px">6</span>
+                            <span class="badge badge-pill badge-danger" id="noti-count"
+                                  style="position:absolute;top:10px;left:3px">{{$count}}</span>
                         <span class="far fa-bell"></span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right bg-dark border py-0" id="profileDropdown">
                         <div id="dp-item">
+                            @isset($notification)
+                                @foreach($notification as $i)
+                                    <a class="dropdown-item navbar-dark border-bottom p-2"
+                                       href="{{ route('task.detail', $i->href)}}">
+                                        <div class="row">
+                                            <div class="col-auto pr-2">
+                                                <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
+                                                     src="/src/img/profile.jpg">
+                                            </div>
+                                            <div class="col pl-0">
+                                                <h5 class="guestProfileName font-white font-weight-bold m-0">
+                                                    {{$i->message}}
+                                                </h5>
+                                                <p class="font-grey m-0">
+                                                    {{$i->created_at}}
+                                                </p>
+                                                <p class="font-grey m-0">
+                                                    //委託標題(如果有)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            @endisset
 
                         </div>
-
                         <a class="dropdown-item navbar-dark font-orange border-bottom px-3 py-2"
-                           href="/nofitications">查看所有通知</a>
+                           href="/nofitications">查看所有通知 </a>
                     </div>
                 @endguest
             </div>
@@ -229,19 +251,21 @@
 @yield('content')
 
 </body>
-<script type="text/javascript">
-    var pusher = new Pusher('fc19df46a56b703d0c4a', {
-        encrypted: true,
-        cluster: 'ap3'
-    });
+@guest
+@else
+    <script type="text/javascript">
+        var pusher = new Pusher('fc19df46a56b703d0c4a', {
+            encrypted: true,
+            cluster: 'ap3'
+        });
 
-    // Subscribe to the channel we specified in our Laravel Event
-    // var channel = pusher.subscribe('status-liked');
-    var channel1 = pusher.subscribe("taskhasgot.{{Auth::user()->student_id}}");
+        var channel2 = pusher.subscribe("taskstart.{{Auth::user()->student_id}}");
 
-    // Bind a function to a Event (the full Laravel class)
-    channel1.bind('App\\Events\\taskhasgot', function (data) {
-        $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
+        // Bind a function to a Event (the full Laravel class)
+        channel2.bind('App\\Events\\taskstart', function (data) {
+            $("#noti-count").text(parseInt($("#noti-count").text()) + 1);
+            let task_href = `{{route('task.detail', '')}}/${data.href}`;
+            $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="${task_href}">
                             <div class="row">
                                 <div class="col-auto pr-2">
                                     <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
@@ -255,18 +279,20 @@
                                         ${data.time}
                                     </p>
                                     <p class="font-grey m-0">
-                                        //委託標題(如果有)
+                                        ${data.title}
                                     </p>
                                 </div>
                             </div>
                         </a>`);
-    });
+        });
 
-    var channel2 = pusher.subscribe("taskstart.{{Auth::user()->student_id}}");
+        var channel3 = pusher.subscribe("back.{{Auth::user()->student_id}}");
 
-    // Bind a function to a Event (the full Laravel class)
-    channel2.bind('App\\Events\\taskstart', function (data) {
-        $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
+        // Bind a function to a Event (the full Laravel class)
+        channel3.bind('App\\Events\\back', function (data) {
+            $("#noti-count").text(parseInt($("#noti-count").text()) + 1);
+            let task_href = `{{route('task.detail', '')}}/${data.href}`;
+            $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="${task_href}">
                             <div class="row">
                                 <div class="col-auto pr-2">
                                     <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
@@ -280,18 +306,20 @@
                                         ${data.time}
                                     </p>
                                     <p class="font-grey m-0">
-                                        //委託標題(如果有)
+                                        ${data.title}
                                     </p>
                                 </div>
                             </div>
                         </a>`);
-    });
+        });
 
-    var channel3 = pusher.subscribe("back.{{Auth::user()->student_id}}");
+        var channel4 = pusher.subscribe("arrive.{{Auth::user()->student_id}}");
 
-    // Bind a function to a Event (the full Laravel class)
-    channel3.bind('App\\Events\\back', function (data) {
-        $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
+        // Bind a function to a Event (the full Laravel class)
+        channel4.bind('App\\Events\\arrive', function (data) {
+            $("#noti-count").text(parseInt($("#noti-count").text()) + 1);
+            let task_href = `{{route('task.detail', '')}}/${data.href}`;
+            $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="${task_href}">
                             <div class="row">
                                 <div class="col-auto pr-2">
                                     <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
@@ -305,18 +333,20 @@
                                         ${data.time}
                                     </p>
                                     <p class="font-grey m-0">
-                                        //委託標題(如果有)
+                                        ${data.title}
                                     </p>
                                 </div>
                             </div>
                         </a>`);
-    });
+        });
 
-    var channel4 = pusher.subscribe("arrive.{{Auth::user()->student_id}}");
+        var channel5 = pusher.subscribe("complete.{{Auth::user()->student_id}}");
 
-    // Bind a function to a Event (the full Laravel class)
-    channel4.bind('App\\Events\\arrive', function (data) {
-        $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
+        // Bind a function to a Event (the full Laravel class)
+        channel5.bind('App\\Events\\complete', function (data) {
+            $("#noti-count").text(parseInt($("#noti-count").text()) + 1);
+            let task_href = `{{route('task.detail', '')}}/${data.href}`;
+            $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="${task_href}">
                             <div class="row">
                                 <div class="col-auto pr-2">
                                     <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
@@ -330,18 +360,20 @@
                                         ${data.time}
                                     </p>
                                     <p class="font-grey m-0">
-                                        //委託標題(如果有)
+                                        ${data.title}
                                     </p>
                                 </div>
                             </div>
                         </a>`);
-    });
+        });
 
-    var channel5 = pusher.subscribe("complete.{{Auth::user()->student_id}}");
+        var channel6 = pusher.subscribe("givetask.{{Auth::user()->student_id}}");
 
-    // Bind a function to a Event (the full Laravel class)
-    channel5.bind('App\\Events\\complete', function (data) {
-        $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
+        // Bind a function to a Event (the full Laravel class)
+        channel6.bind('App\\Events\\givetask', function (data) {
+            $("#noti-count").text(parseInt($("#noti-count").text()) + 1);
+            let task_href = `{{route('task.detail', '')}}/${data.href}`;
+            $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="${task_href}">
                             <div class="row">
                                 <div class="col-auto pr-2">
                                     <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
@@ -355,18 +387,20 @@
                                         ${data.time}
                                     </p>
                                     <p class="font-grey m-0">
-                                        //委託標題(如果有)
+                                        ${data.title}
                                     </p>
                                 </div>
                             </div>
                         </a>`);
-    });
+        });
 
-    var channel6 = pusher.subscribe("givetask.{{Auth::user()->student_id}}");
+        var channel7 = pusher.subscribe("applicate.{{Auth::user()->student_id}}");
 
-    // Bind a function to a Event (the full Laravel class)
-    channel6.bind('App\\Events\\givetask', function (data) {
-        $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
+        // Bind a function to a Event (the full Laravel class)
+        channel7.bind('App\\Events\\applicate', function (data) {
+            $("#noti-count").text(parseInt($("#noti-count").text()) + 1);
+            let task_href = `{{route('task.detail', '')}}/${data.href}`;
+            $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="${task_href}">
                             <div class="row">
                                 <div class="col-auto pr-2">
                                     <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
@@ -380,36 +414,22 @@
                                         ${data.time}
                                     </p>
                                     <p class="font-grey m-0">
-                                        //委託標題(如果有)
+                                        ${data.title}
                                     </p>
                                 </div>
                             </div>
                         </a>`);
-    });
+        });
 
-    var channel7 = pusher.subscribe("applicate.{{Auth::user()->student_id}}");
+        $("#profile").on('click', () => {
+            axios.post(`{{route("read")}}`, {}, {
+                headers: {'X-XSRF-TOKEN': "{{csrf_token()}}"}
+            }).then((res) => {
+                console.log(res);
+                $("#noti-count").text(0);
+            })
+        })
+    </script>
+@endguest
 
-    // Bind a function to a Event (the full Laravel class)
-    channel7.bind('App\\Events\\applicate', function (data) {
-        $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">
-                            <div class="row">
-                                <div class="col-auto pr-2">
-                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
-                                         src="/src/img/profile.jpg">
-                                </div>
-                                <div class="col pl-0">
-                                    <h5 class="guestProfileName font-white font-weight-bold m-0">
-                                        ${data.message}
-                                    </h5>
-                                    <p class="font-grey m-0">
-                                        ${data.time}
-                                    </p>
-                                    <p class="font-grey m-0">
-                                        //委託標題(如果有)
-                                    </p>
-                                </div>
-                            </div>
-                        </a>`);
-    });
-</script>
 </html>

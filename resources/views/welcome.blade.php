@@ -42,9 +42,9 @@
                     <h2>專為學生打造的</h2>
                     <h2 class="font-white">校園委託平台</h2>
                     @guest
-                        <input type="button" class="btn btn-light py-2 my-2" value="開始體驗" onclick="javascript:location.href='{{ route('list') }}'">
+                        <input type="button" class="my-2 golden-btn animate__animated animate__heartBeat animate__repeat-2 animate__delay-1s" value="開始體驗" onclick="javascript:location.href='{{ route('list') }}'">
                     @else
-                        <input type="button" class="btn btn-light py-2 my-2" value="開始體驗" onclick="javascript:location.href='{{ route('list') }}'">
+                        <input type="button" class="my-2 golden-btn animate__animated animate__heartBeat animate__repeat-2 animate__delay-1s" value="開始體驗" onclick="javascript:location.href='{{ route('list') }}'">
                     @endguest
                 </div>
 
@@ -255,7 +255,7 @@
     @endforeach
     <!-- ~missionCard1 -->
 
-    <div class="bg-light-orange">
+    <div class="bg-light-grey font-white">
         <div class="container">
             <div class="py-4">
                 <div class="row">
