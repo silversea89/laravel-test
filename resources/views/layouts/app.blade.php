@@ -236,6 +236,7 @@
                             <a class="btn btn-outline-orange my-2 my-sm-0 mr-3 mr-md-2 px-4 rounded-0"
                                href="{{ route('register') }}">註冊</a>
                             <a class="btn btn-orange my-2 my-sm-0 px-4 rounded-0" href="{{ route('login') }}">登入</a>
+
                         @else
                         @endguest
                     </div>
@@ -243,7 +244,11 @@
         </nav>
     </div>
 </nav>
-<nav class="navbar-dark bg-darker" id="fakeNav"></nav>
+
+<button class="border-0 p-3 fakeBtn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="far fa-user" aria-hidden="true"></span>
+</button>
+
 @yield('content')
 
 </body>

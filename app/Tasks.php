@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tasks extends Model
 {
     protected $fillable = [
-        'Classification','Student_id','Title', 'Toolman_id','Status','DateTime','DeadDateTime','BuyAddress', 'MeetAddress', 'Pay', 'Content',"Progress"
+        'Classification','Student_id','Title', 'Toolman_id','Status','DateTime','BuyAddress', 'MeetAddress', 'Pay', 'Content',"Progress"
     ];
 
     protected $primaryKey = "Tasks_id";

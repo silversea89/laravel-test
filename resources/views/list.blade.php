@@ -615,55 +615,55 @@
 
                             </div>
 
-                            <div class="row">
+{{--                            <div class="row">--}}
 
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
-                                    <label class="font-white m-0">截止日期(請選預計日期之前)</label>
-                                    <input class="bg-grey font-white" id="datepicker2" readonly="true" width="100%"
-                                           name="DeadDate" required/>
-                                    <script>
-                                        var today= new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-                                        $('#datepicker2').datepicker({
-                                            uiLibrary: 'bootstrap4',
-                                            format: 'yyyy-mm-dd',
-                                            minDate: today,
-                                            change: function (e){
-                                                var datepicker=$('#datepicker').val();
-                                                var datepicker2=e.target.value;
-                                                if(datepicker !=="" && datepicker2 !==""){
-                                                    if(datepicker2>datepicker){
-                                                        $("#error").modal({show:true});
-                                                        $('#datepicker').val("");
-                                                        $('#datepicker2').val("");
-                                                    }
-                                                }
-                                            }
-                                        });
-                                    </script>
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
-                                    <label class="font-white m-0">截止時間</label>
-                                    <input class="bg-grey font-white" id="timepicker2" readonly="true" width="100%"
-                                           name="DeadTime" required/>
-                                    <script>
-                                        $('#timepicker2').timepicker({
-                                            uiLibrary: 'bootstrap4', change: function (e) {
-                                                var timepicker = $('#timepicker').val();
-                                                var timepicker2 = e.target.value;
-                                                var datepicker = $('#datepicker').val();
-                                                var datepicker2 = $('#datepicker2').val();
-                                                if (datepicker == datepicker2) {
-                                                    if (timepicker2 > timepicker) {
-                                                        $("#error").modal({show: true});
-                                                        $('#timepicker').val("");
-                                                        $('#timepicker2').val("");
-                                                    }
-                                                }
-                                            }
-                                        });
-                                    </script>
-                                </div>
-                            </div>
+{{--                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">--}}
+{{--                                    <label class="font-white m-0">截止日期(請選預計日期之前)</label>--}}
+{{--                                    <input class="bg-grey font-white" id="datepicker2" readonly="true" width="100%"--}}
+{{--                                           name="DeadDate" required/>--}}
+{{--                                    <script>--}}
+{{--                                        var today= new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());--}}
+{{--                                        $('#datepicker2').datepicker({--}}
+{{--                                            uiLibrary: 'bootstrap4',--}}
+{{--                                            format: 'yyyy-mm-dd',--}}
+{{--                                            minDate: today,--}}
+{{--                                            change: function (e){--}}
+{{--                                                var datepicker=$('#datepicker').val();--}}
+{{--                                                var datepicker2=e.target.value;--}}
+{{--                                                if(datepicker !=="" && datepicker2 !==""){--}}
+{{--                                                    if(datepicker2>datepicker){--}}
+{{--                                                        $("#error").modal({show:true});--}}
+{{--                                                        $('#datepicker').val("");--}}
+{{--                                                        $('#datepicker2').val("");--}}
+{{--                                                    }--}}
+{{--                                                }--}}
+{{--                                            }--}}
+{{--                                        });--}}
+{{--                                    </script>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">--}}
+{{--                                    <label class="font-white m-0">截止時間</label>--}}
+{{--                                    <input class="bg-grey font-white" id="timepicker2" readonly="true" width="100%"--}}
+{{--                                           name="DeadTime" required/>--}}
+{{--                                    <script>--}}
+{{--                                        $('#timepicker2').timepicker({--}}
+{{--                                            uiLibrary: 'bootstrap4', change: function (e) {--}}
+{{--                                                var timepicker = $('#timepicker').val();--}}
+{{--                                                var timepicker2 = e.target.value;--}}
+{{--                                                var datepicker = $('#datepicker').val();--}}
+{{--                                                var datepicker2 = $('#datepicker2').val();--}}
+{{--                                                if (datepicker == datepicker2) {--}}
+{{--                                                    if (timepicker2 > timepicker) {--}}
+{{--                                                        $("#error").modal({show: true});--}}
+{{--                                                        $('#timepicker').val("");--}}
+{{--                                                        $('#timepicker2').val("");--}}
+{{--                                                    }--}}
+{{--                                                }--}}
+{{--                                            }--}}
+{{--                                        });--}}
+{{--                                    </script>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="row">
                                 <div
                                     class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group pb-2 pl-1 pr-1 m-0">
@@ -696,7 +696,7 @@
                                     class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group pb-2 pl-1 pr-1 m-0">
                                     <label class="m-0 font-white">委託內容細節與補充</label>
                                     <textarea rows="4" cols="50" class="form-control font-white bg-grey"
-                                              placeholder="請輸入委託細節或注意事項(Ex:是否要袋子、餐具..)" name="Content"></textarea>
+                                              placeholder="請輸入委託細節或注意事項(Ex:是否要袋子、餐具..)" name="Content" required></textarea>
                                 </div>
                             </div>
 

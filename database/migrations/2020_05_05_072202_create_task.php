@@ -23,7 +23,6 @@ class CreateTask extends Migration
             $table->foreign('Classification')->references('ClassValue')->on('classification');
             $table->string('Title');
             $table->dateTime('DateTime');
-            $table->dateTime('DeadDateTime');
             $table->string('BuyAddress');
             $table->string('MeetAddress');
             $table->integer('Pay');
