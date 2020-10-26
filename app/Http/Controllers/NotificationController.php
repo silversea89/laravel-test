@@ -22,5 +22,13 @@ class NotificationController extends Controller
             ->update(['read' => 1]);
         return "success";
     }
-
+    protected function shownotificationsform(Request $request)
+    {
+        $user = Auth::user();
+        $notification = DB::table('notifications')
+            ->where('to', '=', $user->student_id)
+            ->where('read','=','0')
+            ->paginate(12);
+        return view('notifications')->with(["notification" => $notification]);
+    }
 }

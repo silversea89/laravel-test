@@ -120,7 +120,7 @@
                                                         {{$i->created_at}}
                                                     </p>
                                                     <p class="font-grey m-0">
-                                                        //委託標題(如果有)
+                                                        {{$i->title}}
                                                     </p>
                                                 </div>
                                             </div>
@@ -130,7 +130,7 @@
 
                             </div>
                             <a class="dropdown-item navbar-dark font-orange border-bottom px-3 py-2"
-                               href="/nofitications">查看所有通知 </a>
+                               href="{{ route('notifications')}}">查看所有通知 </a>
                         </div>
                         <div class="dropdown">
                             <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"
