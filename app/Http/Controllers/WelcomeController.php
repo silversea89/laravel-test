@@ -57,7 +57,7 @@ class WelcomeController extends Controller
             ->take(8)
             ->get();
         foreach ($newesttasks as $i){
-            if($i->DeadDateTime < Carbon::now()){
+            if($i->DateTime < Carbon::now()){
                 $taskexpire=Tasks::find($i->Tasks_id);
                 $taskexpire->Status='Expired';
                 $taskexpire->save();

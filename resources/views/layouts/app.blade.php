@@ -53,15 +53,18 @@
     <![endif]-->
     <!-- Styles -->
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('/css/style.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css"/>
 
-    <link href="{{ asset('/css/main.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css"/>
 
     @if(Request::is('/'))
         <script src="{{ asset('js/main2.js')}}"></script>
     @else
         <script src="{{ asset('js/main.js')}}"></script>
-@endif
+    @endif
+    <script src="{{ asset('js/chatroomjs.js')}}"></script>
+    <link href="{{ asset('css/chatcss.css') }}" rel="stylesheet" type="text/css"/>
+
 <!--Bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
@@ -231,15 +234,15 @@
                         </li>
                     </ul>
                 @endguest
-                    <div class="form-inline my-0">
-                        @guest
-                            <a class="btn btn-outline-orange my-2 my-sm-0 mr-3 mr-md-2 px-4 rounded-0"
-                               href="{{ route('register') }}">註冊</a>
-                            <a class="btn btn-orange my-2 my-sm-0 px-4 rounded-0" href="{{ route('login') }}">登入</a>
+                <div class="form-inline my-0">
+                    @guest
+                        <a class="btn btn-outline-orange my-2 my-sm-0 mr-3 mr-md-2 px-4 rounded-0"
+                           href="{{ route('register') }}">註冊</a>
+                        <a class="btn btn-orange my-2 my-sm-0 px-4 rounded-0" href="{{ route('login') }}">登入</a>
 
-                        @else
-                        @endguest
-                    </div>
+                    @else
+                    @endguest
+                </div>
             </div>
         </nav>
     </div>

@@ -36,16 +36,12 @@ class TaskController extends Controller
         $date = $data['Date'];
         $time = $data['Time'];
         $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
-        $deaddate = $data['DeadDate'];
-        $deadtime = $data['DeadTime'];
-        $combinedDDT = date('Y-m-d H:i:s', strtotime("$deaddate $deadtime"));
 
         $validatedData = Validator::make($data, [
             'Classification' => ['required', 'string', 'max:255'],
             'Student_id' => ['required', 'string', 'max:255'],
             'Title' => ['required', 'string', 'max:255'],
             'DateTime' => ['required', 'date', 'max:255', ' after:yesterday '],
-            'DeadDateTime' => ['required', 'date', 'max:255'],
             'BuyAddress' => ['required', 'string', 'max:255'],
             'MeetAddress' => ['required', 'string', 'max:255'],
             'Pay' => ['required', 'int', 'max:255', 'confirmed'],
@@ -57,7 +53,6 @@ class TaskController extends Controller
             'Student_id' => $data['student_id'],
             'Title' => $data['Title'],
             'DateTime' => $combinedDT,
-            'DeadDateTime' => $combinedDDT,
             'BuyAddress' => $data['BuyAddress'],
             'MeetAddress' => $data['MeetAddress'],
             'Pay' => $data['Pay'],
@@ -88,7 +83,7 @@ class TaskController extends Controller
                 ->where('Status', '=', 'Selectable')
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->orderBy('tasks.created_at', 'desc')
-                ->paginate(2);
+                ->paginate(12);
         }
         elseif($request->input('order')=="exp"){
             $tasks = DB::table('tasks')
@@ -96,7 +91,7 @@ class TaskController extends Controller
                 ->where('Status', '=', 'Selectable')
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->orderBy('users.task_count', 'desc')
-                ->paginate(2);
+                ->paginate(12);
         }
         elseif($request->input('order')=="eva"){
             $tasks = DB::table('tasks')
@@ -104,7 +99,7 @@ class TaskController extends Controller
                 ->where('Status', '=', 'Selectable')
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->orderBy('users.host_rate_avg', 'desc')
-                ->paginate(2);
+                ->paginate(12);
         }
         elseif($request->input('order')=="price"){
             $tasks = DB::table('tasks')
@@ -112,10 +107,10 @@ class TaskController extends Controller
                 ->where('Status', '=', 'Selectable')
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->orderBy('tasks.Pay', 'desc')
-                ->paginate(2);
+                ->paginate(12);
         }
         foreach ($tasks as $i) {
-            if ($i->DeadDateTime < Carbon::now()) {
+            if ($i->DateTime < Carbon::now()) {
                 $taskexpire = Tasks::find($i->Tasks_id);
                 $taskexpire->Status = 'Expired';
                 $taskexpire->save();
@@ -154,14 +149,17 @@ class TaskController extends Controller
         $tasks_id = $request->tasks_id;
         $tasks = Tasks::find($tasks_id);
         $target = $toolman;
-        if ($tasks) {
-            $tasks->get_by_toolman($toolman);
+        if ($tasks->Status == "Expired"){
+            return redirect('list')->with('error','此委託已過期!');
         }
-        Evaluation::create([
-            'Tasks_id' => $request->tasks_id
-        ]);
-        event(new givetask($user, $target,$tasks));
-        return redirect('list_push');
+        else if ($tasks) {
+            $tasks->get_by_toolman($toolman);
+            Evaluation::create([
+                'Tasks_id' => $request->tasks_id
+            ]);
+            event(new givetask($user, $target,$tasks));
+            return redirect('list_push');
+        }
     }
 
     protected function showListpush(Request $request)
@@ -493,7 +491,13 @@ class TaskController extends Controller
         $user = Auth::user();
         $tasks = Tasks::find($request['tasks_id']);
         $target = $tasks->Student_id;
-        if(DB::table('volunteer')
+        $check=DB::table('tasks')
+                ->where('Tasks_id', '=', $request['tasks_id'])
+                ->pluck('Status');
+        if($check=='["Expired"]'){
+            return redirect()->route('list')->with('error','此委託已過期!');
+        }
+        else if(DB::table('volunteer')
             ->where('Tasks_id', '=', $request['tasks_id'])
             ->where('Student_id', '=', $user->student_id)
             ->count()>0){

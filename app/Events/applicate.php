@@ -31,7 +31,7 @@ class applicate implements ShouldBroadcast
     public function __construct($from, $target,$task)
     {
         $username = $from->name;
-        $this->message = $username." 想成為您的工具人!前往委託細項查看!";
+        $this->message = $username." 想成為您的工具人!";
         $this->target = $target;
         $this->time=Carbon::now()->toDateTimeString();
         $this->title=$task->Title;

@@ -20,6 +20,10 @@ class CreateDepartmentsTable extends Migration
 
         DB::table('departments')->insert([
             [
+                "De_Value" => "0",
+                "De_Name" => "教師"
+            ],
+            [
                 "De_Value" => "1",
                 "De_Name" => "國際貿易與經營科"
             ],

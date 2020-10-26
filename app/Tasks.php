@@ -17,9 +17,14 @@ class Tasks extends Model
         $Toolman_id = $toolman;
 
         if ($this->Toolman_id == null && $this->student_id != $Toolman_id) {
-            $this->Toolman_id = $Toolman_id;
-            $this->Status = "Processing";
-            $this->save();
+            if($this->Status=="Expired"){
+                return "Expired";
+            }
+            else{
+                $this->Toolman_id = $Toolman_id;
+                $this->Status = "Processing";
+                $this->save();
+            }
         }
     }
 }

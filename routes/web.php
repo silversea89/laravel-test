@@ -94,3 +94,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/read','NotificationController@read')->name("read");
+Route::get('/chatroom','ChatController@showchatroom')->name("showchat");

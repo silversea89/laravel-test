@@ -301,9 +301,6 @@
                         <a href="{{ route('profile.id', $tasks->Student_id) }}">{{$tasks->hostname}}</a>
                     </p>
                     <p class="m-0 font-white">發佈於:{{$tasks->created_at}}</p>
-                    @if($tasks->Toolman_id==null)
-                        <p class="font-white" class="m-0">接單截止期限：{{$tasks->DeadDateTime}}</p>
-                    @endif
                     @if($tasks->Toolman_id==null||$tasks->Progress!="complete")
 
                     @else

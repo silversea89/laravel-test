@@ -225,9 +225,6 @@
                         <h6 class="px-3 pl-lg-0 mb-3 font-grey">
                             發佈於 {{$i->created_at}}
                         </h6>
-                        <h6 class="px-3 pl-lg-0 mb-3 font-grey">
-                            截止期限：{{$i->DeadDateTime}}
-                        </h6>
 
                         <div class="px-3 px-lg-0">
 

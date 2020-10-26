@@ -178,11 +178,12 @@
 {{--                                                    aria-hidden="true">&raquo;</span></a></li>--}}
 {{--                                    </ul>--}}
 {{--                                </nav>--}}
-                                {{ $tasks->links()}}
+
                             </center>
                         </div>
                     </div>
                 </div>
+                {{ $tasks->links()}}
             </div>
         </div>
     </div>
@@ -298,9 +299,7 @@
                             <h6 class="px-3 pl-lg-0 mb-3 font-grey">
                                 發佈於 {{$i->created_at}}
                             </h6>
-                            <h6 class="px-3 pl-lg-0 mb-3 font-grey">
-                                截止期限：{{$i->DeadDateTime}}
-                            </h6>
+
                             <div class="px-3 px-lg-0">
                                 @if($i->Student_id!=$id)
                                     <form method="POST" action="{{ route('task.volunteer') }}">
@@ -318,207 +317,6 @@
             </div>
         </div>
     @endforeach
-
-
-    {{--    <div class="container pt-3 pb-0 pl-0 pr-0" style="background-color:#EFEFEF;height:100%">--}}
-    {{--        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:#EFEFEF;">--}}
-
-    {{--            <div class="d-flex justify-content-between">--}}
-    {{--                <h2 class="m-0">委託列表 (分類:{{$TitleClass}}/--}}
-    {{--                    排序:@if($orderBy=="created_at")發布時間@elseif($orderBy=="Pay")酬勞金額@elseif($orderBy=="DateTime")--}}
-    {{--                        面交金額@endif/--}}
-    {{--                    關鍵字:{{$keyword}})</h2>--}}
-    {{--                <button class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button"--}}
-    {{--                        aria-expanded="false" aria-controls="collapseExample">--}}
-    {{--                    <i class="fas fa-filter"></i>--}}
-    {{--                </button>--}}
-    {{--            </div>--}}
-
-
-    {{--            <div class="collapse" id="collapseExample">--}}
-
-
-    {{--                <form class="card p-2" action="{{ route('list.search')}}" method="get">--}}
-
-    {{--                    <div class="row">--}}
-
-    {{--                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 m-0">--}}
-    {{--                            <label class="m-0">分類選擇</label>--}}
-    {{--                            <select class="form-control" name="Classification">--}}
-    {{--                                @foreach($classifications as $classification)--}}
-    {{--                                    <option--}}
-    {{--                                        value="{{$classification->ClassValue}}">{{$classification->ClassName}}</option>--}}
-    {{--                                @endforeach--}}
-    {{--                            </select>--}}
-    {{--                        </div>--}}
-    {{--                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 m-0">--}}
-    {{--                            <div class="float-left">排序</div>--}}
-    {{--                            <br>--}}
-    {{--                            <select class="form-control" name="sort_by">--}}
-    {{--                                <option value="created_at">發布時間</option>--}}
-    {{--                                <option value="Pay">酬勞金額</option>--}}
-    {{--                                <option value="DateTime">面交時間</option>--}}
-    {{--                            </select>--}}
-
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-
-    {{--                    <div class="row">--}}
-    {{--                        <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9 form-group pb-2 m-0">--}}
-    {{--                            <div class="float-left">查詢</div>--}}
-    {{--                            <br>--}}
-    {{--                            <input type="text" class="form-control" name="keyword" laceholder="在此輸入關鍵字">--}}
-    {{--                        </div>--}}
-    {{--                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 form-group pb-2 m-0">--}}
-    {{--                            <div class="float-left"></div>--}}
-    {{--                            <br>--}}
-    {{--                            <button type="submit" class="btn btn-primary btn-block">送出查詢</button>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-
-
-    {{--                </form>--}}
-
-    {{--            </div>--}}
-
-
-    {{--        </div>--}}
-
-    {{--        @foreach($tasks as $i)--}}
-    {{--            <div class="modal fade content{{$i->Tasks_id}}" tabindex="-1" role="dialog" aria-hidden="true">--}}
-    {{--                <div class="modal-dialog modal-lg">--}}
-    {{--                    <div class="modal-content container">--}}
-    {{--                        <h3 class="fas fa-times" style="color:#999999;position: absolute; top: 7px;right: 15px;"--}}
-    {{--                            data-toggle="modal" data-target=".content{{$i->Tasks_id}}"></h3>--}}
-    {{--                        <br>--}}
-    {{--                        <hr class="mb-3" size="8px" align="center" width="100%" style="color:#999999;">--}}
-    {{--                        <div class="row p-2 ">--}}
-    {{--                            <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 pr-0 pl-0">--}}
-    {{--                                @if($i->Classification == 'Food')--}}
-    {{--                                    <img src="{{asset('img/food.jpg')}}" class="img-fluid pr-0">--}}
-    {{--                                @elseif($i->Classification == 'Stationery')--}}
-    {{--                                    <img src="{{asset('img/pen.jpg')}}" class="img-fluid pr-0">--}}
-    {{--                                @endif--}}
-    {{--                            </div>--}}
-    {{--                            <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-1">--}}
-
-    {{--                                @if($i->Student_id!=$id)--}}
-    {{--                                    <button type="button" class="btn btn-danger" data-toggle="modal"--}}
-    {{--                                            data-target=".contentReport{{$i->Tasks_id}}"--}}
-    {{--                                            style="position: absolute; top: 5px;right: 5px;">檢舉--}}
-    {{--                                    </button>--}}
-    {{--                                    <div class="modal fade contentReport{{$i->Tasks_id}}" tabindex="-1" role="dialog"--}}
-    {{--                                         aria-hidden="true">--}}
-    {{--                                        <div class="modal-dialog modal-md px-2"--}}
-    {{--                                             style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">--}}
-    {{--                                            <div class="modal-content container">--}}
-    {{--                                                <h3 class="fas fa-times"--}}
-    {{--                                                    style="color:#999999;position: absolute; top: 7px;right: 15px;"--}}
-    {{--                                                    data-toggle="modal"--}}
-    {{--                                                    data-target=".contentReport{{$i->Tasks_id}}"></h3>--}}
-    {{--                                                <br>--}}
-    {{--                                                <hr class="mb-3" size="8px" align="center" width="100%"--}}
-    {{--                                                    style="color:#999999;">--}}
-    {{--                                                <form method="post" action="{{ route('report.add')}}">--}}
-    {{--                                                    @csrf--}}
-    {{--                                                    <input type="hidden" name="tasks_id" value={{$i->Tasks_id}}>--}}
-    {{--                                                    <input type="hidden" name="Title" value={{$i->Title}}>--}}
-    {{--                                                    <center>--}}
-    {{--                                                        <div class="form-group">--}}
-    {{--                                                            <textarea class="form-control" id="" rows="5" name="reason"--}}
-    {{--                                                                      placeholder="檢舉原因..." required></textarea>--}}
-    {{--                                                        </div>--}}
-    {{--                                                        <button type="submit" class="btn btn-danger my-0 mb-3">確認檢舉--}}
-    {{--                                                        </button>--}}
-    {{--                                                    </center>--}}
-    {{--                                                </form>--}}
-    {{--                                            </div>--}}
-    {{--                                        </div>--}}
-    {{--                                    </div>--}}
-    {{--                                @endif--}}
-    {{--                                <h3>{{$i->Title}}</h3>--}}
-    {{--                                <span class="badge badge-primary">代購物品</span>--}}
-    {{--                                <h5>購買物品和需求：<p>{{$i->Content}}</p>--}}
-    {{--                                    <h5>購買地點：<p>{{$i->BuyAddress}}</p>--}}
-    {{--                                    </h5>--}}
-    {{--                                    <h5>面交地點：<p>{{$i->MeetAddress}}</p>--}}
-    {{--                                    </h5>--}}
-    {{--                                    <h5>面交時間：<p>{{$i->DateTime}}</p>--}}
-    {{--                                    </h5>--}}
-    {{--                                    <h5>酬勞金額：<p>{{$i->Pay}}$</p>--}}
-    {{--                                    </h5>--}}
-
-    {{--                                </h5>--}}
-    {{--                                <p class="m-0">老闆:<a href="{{ route('profile.id',$i->Student_id) }}">{{$i->name}}</a>--}}
-    {{--                                </p>--}}
-    {{--                                <p class="m-0">發佈於:{{$i->created_at}}</p>--}}
-    {{--                                <p class="m-0">接單截止期限：{{$i->DeadDateTime}}</p>--}}
-    {{--                                @if($i->Student_id!=$id)--}}
-    {{--                                    <form method="POST" action="{{ route('task.get') }}">--}}
-    {{--                                        @csrf--}}
-    {{--                                        <input type="hidden" name="tasks_id" value="{{$i->Tasks_id}}">--}}
-    {{--                                        <button type="submit" class="btn btn-primary my-3">接受委託</button>--}}
-    {{--                                    </form>--}}
-    {{--                                @endif--}}
-    {{--                            </div>--}}
-    {{--                        </div>--}}
-
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        @endforeach--}}
-    {{--        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 " style="background-color:#EFEFEF;">--}}
-    {{--            <div class="row mr-0">--}}
-    {{--                @foreach($tasks as $i)--}}
-    {{--                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-3 pr-0">--}}
-
-    {{--                        <div style="background-color:white;border:1px #DFDFDF solid;" data-toggle="modal"--}}
-    {{--                             data-target=".content{{$i->Tasks_id}}">--}}
-
-    {{--                            <div class="row pl-3">--}}
-
-    {{--                                <div class="col-5 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0">--}}
-    {{--                                    @if($i->Classification == 'Food')--}}
-    {{--                                        <img src="{{asset('img/food.jpg')}}" class="img-fluid">--}}
-    {{--                                    @elseif($i->Classification == 'Stationery')--}}
-    {{--                                        <img src="{{asset('img/pen.jpg')}}" class="img-fluid">--}}
-    {{--                                    @endif--}}
-    {{--                                </div>--}}
-
-    {{--                                <div class="col-7 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 ">--}}
-
-    {{--                                    <div class="pl-1">--}}
-
-    {{--                                        <p class="m-0">{{$i->Title}}</p>--}}
-    {{--                                        <p class="m-0">--}}
-    {{--                                            @foreach($host_AVGrate[$i->Student_id] as $k)--}}
-    {{--                                                @if($k=="0")--}}
-    {{--                                                    <i class="far fa-star" style="color:#FF9529"></i>--}}
-    {{--                                                @elseif($k=="0.5")--}}
-    {{--                                                    <i class="fas fa-star-half-alt" style="color:#FF9529"--}}
-    {{--                                                       aria-hidden="true"></i>--}}
-    {{--                                                @elseif($k=="1")--}}
-    {{--                                                    <i class="fas fa-star" style="color:#FF9529"></i>--}}
-    {{--                                                @else--}}
-    {{--                                                    <i class="fas fa-star" style="color:#FF9529"></i>--}}
-    {{--                                                    {{$k}}--}}
-    {{--                                                    @break;--}}
-    {{--                                                @endif--}}
-
-    {{--                                            @endforeach--}}
-    {{--                                        </p>--}}
-    {{--                                        <p class="m-0">{{$i->Pay}}$</p>--}}
-    {{--                                    </div>--}}
-    {{--                                </div>--}}
-    {{--                            </div>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                @endforeach--}}
-    {{--            </div>--}}
-    {{--            <br>--}}
-    {{--        </div>--}}
-
-    {{--    </div>--}}
 
 
     <button class="btn btn-orange px-3 py-2" data-toggle="modal" data-target="#newMission" id="newMissionBtn">
