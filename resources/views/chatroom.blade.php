@@ -2,7 +2,7 @@
 @section('content')
     <body class="height100vh antiFlow bg-darker">
     <div class="col-12">
-        <div class="card m-0">
+        <div class="card2 m-0">
             <div class="row no-gutters">
                 <div id="users-list" class="col-xl-4 col-lg-4 col-md-4 col-12">
                     <div class="users-container">
