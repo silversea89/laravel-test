@@ -57,58 +57,60 @@
                     <div class="col-12 px-sm-2 px-0 px-md-2">
                         @include('flash-message')
                         <h3 class="mb-0 mt-2 pl-2 pl-md-0 font-white">所有委託</h3>
-                            <ul class="nav mb-2 mt-1" id="evaluate">
-                                <li class="nav-item col-3 p-0 m-0">
-                                    <form action="{{ route('list')}}" method="get">
-                                        @csrf
-                                        <input type="hidden" name="order" value="newest">
-                                        <input type="hidden" name="keyword" value={{$keyword}}>
-                                        @if($order=="newest" or $order==null)
-                                            <button class="nav-link btn-block tab active px-0 m-0" type="submit">最新</button>
-                                        @else
-                                            <button class="nav-link btn-block tab px-0 m-0" type="submit">最新</button>
-                                        @endif
-                                    </form>
-                                </li>
-                                <li class="nav-item col-3 p-0 m-0">
-                                    <form action="{{ route('list')}}" method="get">
-                                        @csrf
-                                        <input type="hidden" name="order" value="exp">
-                                        <input type="hidden" name="keyword" value={{$keyword}}>
-                                        @if($order=="exp")
-                                            <button class="nav-link btn-block tab active px-0 m-0" type="submit">最有經驗</button>
-                                        @else
-                                            <button class="nav-link btn-block tab px-0 m-0" type="submit">最有經驗</button>
-                                        @endif
-                                    </form>
-                                </li>
-                                <li class="nav-item col-3 p-0 m-0">
-                                    <form action="{{ route('list')}}" method="get">
-                                        @csrf
-                                        <input type="hidden" name="order" value="eva">
-                                        <input type="hidden" name="keyword" value={{$keyword}}>
-                                        @if($order=="eva")
-                                            <button class="nav-link btn-block tab active px-0 m-0" type="submit">最有信譽</button>
-                                        @else
-                                            <button class="nav-link btn-block tab px-0 m-0" type="submit">最有信譽</button>
-                                        @endif
-                                    </form>
-                                </li>
-                                <li class="nav-item col-3 p-0 m-0">
-                                    <form action="{{ route('list')}}" method="get">
-                                        @csrf
-                                        <input type="hidden" name="order" value="price">
-                                        <input type="hidden" name="keyword" value={{$keyword}}>
-                                        @if($order=="price")
-                                            <button class="nav-link btn-block tab px-0 m-0 active" type="submit">價格<i
-                                                    class="fas fa-sort-amount-up"></i></button>
-                                        @else
-                                            <button class="nav-link btn-block tab px-0 m-0" type="submit">價格<i
-                                                    class="fas fa-sort-amount-up"></i></button>
-                                        @endif
-                                    </form>
-                                </li>
-                            </ul>
+                        <ul class="nav mb-2 mt-1" id="evaluate">
+                            <li class="nav-item col-3 p-0 m-0">
+                                <form action="{{ route('list')}}" method="get">
+                                    @csrf
+                                    <input type="hidden" name="order" value="newest">
+                                    <input type="hidden" name="keyword" value={{$keyword}}>
+                                    @if($order=="newest" or $order==null)
+                                        <button class="nav-link btn-block tab active px-0 m-0" type="submit">最新</button>
+                                    @else
+                                        <button class="nav-link btn-block tab px-0 m-0" type="submit">最新</button>
+                                    @endif
+                                </form>
+                            </li>
+                            <li class="nav-item col-3 p-0 m-0">
+                                <form action="{{ route('list')}}" method="get">
+                                    @csrf
+                                    <input type="hidden" name="order" value="exp">
+                                    <input type="hidden" name="keyword" value={{$keyword}}>
+                                    @if($order=="exp")
+                                        <button class="nav-link btn-block tab active px-0 m-0" type="submit">最有經驗
+                                        </button>
+                                    @else
+                                        <button class="nav-link btn-block tab px-0 m-0" type="submit">最有經驗</button>
+                                    @endif
+                                </form>
+                            </li>
+                            <li class="nav-item col-3 p-0 m-0">
+                                <form action="{{ route('list')}}" method="get">
+                                    @csrf
+                                    <input type="hidden" name="order" value="eva">
+                                    <input type="hidden" name="keyword" value={{$keyword}}>
+                                    @if($order=="eva")
+                                        <button class="nav-link btn-block tab active px-0 m-0" type="submit">最有信譽
+                                        </button>
+                                    @else
+                                        <button class="nav-link btn-block tab px-0 m-0" type="submit">最有信譽</button>
+                                    @endif
+                                </form>
+                            </li>
+                            <li class="nav-item col-3 p-0 m-0">
+                                <form action="{{ route('list')}}" method="get">
+                                    @csrf
+                                    <input type="hidden" name="order" value="price">
+                                    <input type="hidden" name="keyword" value={{$keyword}}>
+                                    @if($order=="price")
+                                        <button class="nav-link btn-block tab px-0 m-0 active" type="submit">價格<i
+                                                class="fas fa-sort-amount-up"></i></button>
+                                    @else
+                                        <button class="nav-link btn-block tab px-0 m-0" type="submit">價格<i
+                                                class="fas fa-sort-amount-up"></i></button>
+                                    @endif
+                                </form>
+                            </li>
+                        </ul>
                     </div>
 
                     <div class="col-12">
@@ -119,12 +121,18 @@
                                     <div class="height100p p-0 bg-dark">
                                         <div data-toggle="modal" data-target="#missionCard{{$i->Tasks_id}}">
                                             <div class="div-square">
-                                                @if($i->Classification == 'Food')
+                                                @if($i->Classification == 'Buy')
                                                     <img class="div-square-content img-fluid hwAuto pt-1 px-1"
                                                          src="{{asset('img/food.jpg')}}">
-                                                @elseif($i->Classification == 'Stationery')
+                                                @elseif($i->Classification == 'Service')
                                                     <img class="div-square-content img-fluid hwAuto pt-1 px-1"
-                                                         src="{{asset('img/pen.jpg')}}">
+                                                         src="{{asset('img/Service.jpg')}}">
+                                                @elseif($i->Classification == 'Book')
+                                                    <img class="div-square-content img-fluid hwAuto pt-1 px-1"
+                                                         src="{{asset('img/Book.jpg')}}">
+                                                @elseif($i->Classification == 'Teach')
+                                                    <img class="div-square-content img-fluid hwAuto pt-1 px-1"
+                                                         src="{{asset('img/tutor.jpg')}}">
                                                 @endif
                                             </div>
                                             <div class="px-2 pt-2">
@@ -167,17 +175,17 @@
                         @endforeach
                         <!-- ~這個才是完整版 -->
                             <center class="width100p mt-3">
-{{--                                <nav>--}}
-{{--                                    <ul class="pagination justify-content-center">--}}
-{{--                                        <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span--}}
-{{--                                                    aria-hidden="true">&laquo;</span></a></li>--}}
-{{--                                        <li class="page-item"><a class="page-link active" href="#">1</a></li>--}}
-{{--                                        <li class="page-item"><a class="page-link" href="#">2</a></li>--}}
-{{--                                        <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
-{{--                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span--}}
-{{--                                                    aria-hidden="true">&raquo;</span></a></li>--}}
-{{--                                    </ul>--}}
-{{--                                </nav>--}}
+                                {{--                                <nav>--}}
+                                {{--                                    <ul class="pagination justify-content-center">--}}
+                                {{--                                        <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span--}}
+                                {{--                                                    aria-hidden="true">&laquo;</span></a></li>--}}
+                                {{--                                        <li class="page-item"><a class="page-link active" href="#">1</a></li>--}}
+                                {{--                                        <li class="page-item"><a class="page-link" href="#">2</a></li>--}}
+                                {{--                                        <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
+                                {{--                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span--}}
+                                {{--                                                    aria-hidden="true">&raquo;</span></a></li>--}}
+                                {{--                                    </ul>--}}
+                                {{--                                </nav>--}}
 
                             </center>
                         </div>
@@ -211,13 +219,19 @@
                             </div>
                             <!-- ~phone -->
                             <div class="div-square">
-                                @if($i->Classification == 'Food')
-                                    <img class="div-square-content img-fluid hwAuto"
-                                         src="{{asset('img/food.jpg')}}">
-                                @elseif($i->Classification == 'Stationery')
-                                    <img class="div-square-content img-fluid hwAuto"
-                                         src="{{asset('img/pen.jpg')}}">
-                                @endif
+                                    @if($i->Classification == 'Buy')
+                                        <img class="div-square-content img-fluid hwAuto"
+                                             src="{{asset('img/food.jpg')}}">
+                                    @elseif($i->Classification == 'Service')
+                                        <img class="div-square-content img-fluid hwAuto"
+                                             src="{{asset('img/Service.jpg')}}">
+                                    @elseif($i->Classification == 'Book')
+                                        <img class="div-square-content img-fluid hwAuto"
+                                             src="{{asset('img/Book.jpg')}}">
+                                    @elseif($i->Classification == 'Teach')
+                                        <img class="div-square-content img-fluid hwAuto"
+                                             src="{{asset('img/tutor.jpg')}}">
+                                    @endif
                             </div>
                         </div>
 
@@ -250,10 +264,10 @@
                                 </div>
                                 <div class="col-auto d-flex align-items-center">
                                     @if($i->Student_id!=$id)
-                                    <button class="btn btn-outline-orange">
-                                        檢舉委託
-                                    </button>
-                                        @endif
+                                        <button class="btn btn-outline-orange">
+                                            檢舉委託
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
 
@@ -341,8 +355,9 @@
                             @csrf
                             <div class="row">
                                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
-                                    <label class="m-0 font-white">分類選擇</label>
-                                    <select class="form-control font-white bg-grey" name="Classification">
+                                    <label id="classLabel" class="m-0 font-white">分類選擇</label>
+                                    <select id="classification" class="form-control font-white bg-grey"
+                                            name="Classification">
                                         @foreach($classifications as $classification)
                                             @if($classification->ClassValue!="All")
                                                 <option
@@ -353,8 +368,8 @@
                                 </div>
 
                                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
-                                    <label class="m-0 font-white">委託標題</label>
-                                    <input type="text" class="form-control font-white bg-grey" name="Title"
+                                    <label id="productLabel" class="m-0 font-white">購買物品</label>
+                                    <input id="product" type="text" class="form-control font-white bg-grey" name="Title"
                                            placeholder="請在此輸入需要購買的物品" required>
                                 </div>
 
@@ -363,21 +378,22 @@
                             <div class="row">
 
                                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
-                                    <label class="font-white m-0">預計日期</label>
-                                    <input class="bg-grey font-white" id="datepicker" readonly="true" width="100%"
+                                    <label id="datepickerLabel" class="font-white m-0">預計日期</label>
+                                    <input id="datepicker" class="bg-grey font-white" id="datepicker" readonly="true"
+                                           width="100%"
                                            name="Date" type="text" required/>
                                     <script>
-                                        var today= new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+                                        var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
                                         $('#datepicker').datepicker({
                                             uiLibrary: 'bootstrap4',
                                             format: 'yyyy-mm-dd',
                                             minDate: today,
-                                            change: function (e){
-                                                var datepicker=e.target.value;
-                                                var datepicker2=$('#datepicker2').val();
-                                                if(datepicker !=="" && datepicker2 !==""){
-                                                    if(datepicker2>datepicker){
-                                                        $("#error").modal({show:true});
+                                            change: function (e) {
+                                                var datepicker = e.target.value;
+                                                var datepicker2 = $('#datepicker2').val();
+                                                if (datepicker !== "" && datepicker2 !== "") {
+                                                    if (datepicker2 > datepicker) {
+                                                        $("#error").modal({show: true});
                                                         $('#datepicker').val("");
                                                         $('#datepicker2').val("");
                                                     }
@@ -388,8 +404,9 @@
                                 </div>
 
                                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
-                                    <label class="font-white m-0">預計時間</label>
-                                    <input class="bg-grey font-white" id="timepicker" readonly="true" width="100%"
+                                    <label id="timepickerLabel" class="font-white m-0">預計時間</label>
+                                    <input id="timepicker" class="bg-grey font-white" id="timepicker" readonly="true"
+                                           width="100%"
                                            name="Time" type="text" required/>
                                     <script>
                                         $('#timepicker').timepicker({
@@ -413,68 +430,19 @@
 
                             </div>
 
-{{--                            <div class="row">--}}
-
-{{--                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">--}}
-{{--                                    <label class="font-white m-0">截止日期(請選預計日期之前)</label>--}}
-{{--                                    <input class="bg-grey font-white" id="datepicker2" readonly="true" width="100%"--}}
-{{--                                           name="DeadDate" required/>--}}
-{{--                                    <script>--}}
-{{--                                        var today= new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());--}}
-{{--                                        $('#datepicker2').datepicker({--}}
-{{--                                            uiLibrary: 'bootstrap4',--}}
-{{--                                            format: 'yyyy-mm-dd',--}}
-{{--                                            minDate: today,--}}
-{{--                                            change: function (e){--}}
-{{--                                                var datepicker=$('#datepicker').val();--}}
-{{--                                                var datepicker2=e.target.value;--}}
-{{--                                                if(datepicker !=="" && datepicker2 !==""){--}}
-{{--                                                    if(datepicker2>datepicker){--}}
-{{--                                                        $("#error").modal({show:true});--}}
-{{--                                                        $('#datepicker').val("");--}}
-{{--                                                        $('#datepicker2').val("");--}}
-{{--                                                    }--}}
-{{--                                                }--}}
-{{--                                            }--}}
-{{--                                        });--}}
-{{--                                    </script>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">--}}
-{{--                                    <label class="font-white m-0">截止時間</label>--}}
-{{--                                    <input class="bg-grey font-white" id="timepicker2" readonly="true" width="100%"--}}
-{{--                                           name="DeadTime" required/>--}}
-{{--                                    <script>--}}
-{{--                                        $('#timepicker2').timepicker({--}}
-{{--                                            uiLibrary: 'bootstrap4', change: function (e) {--}}
-{{--                                                var timepicker = $('#timepicker').val();--}}
-{{--                                                var timepicker2 = e.target.value;--}}
-{{--                                                var datepicker = $('#datepicker').val();--}}
-{{--                                                var datepicker2 = $('#datepicker2').val();--}}
-{{--                                                if (datepicker == datepicker2) {--}}
-{{--                                                    if (timepicker2 > timepicker) {--}}
-{{--                                                        $("#error").modal({show: true});--}}
-{{--                                                        $('#timepicker').val("");--}}
-{{--                                                        $('#timepicker2').val("");--}}
-{{--                                                    }--}}
-{{--                                                }--}}
-{{--                                            }--}}
-{{--                                        });--}}
-{{--                                    </script>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                             <div class="row">
                                 <div
                                     class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group pb-2 pl-1 pr-1 m-0">
-                                    <label class="m-0 font-white">購買地點</label>
-                                    <input type="text" class="form-control font-white bg-grey"
+                                    <label id="placeLabel" class="m-0 font-white">購買地點</label>
+                                    <input id="place" type="text" class="form-control font-white bg-grey"
                                            placeholder="請輸入購買地點(店名、地址)" name="BuyAddress" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div
                                     class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group pb-2 pl-1 pr-1 m-0">
-                                    <label class="m-0 font-white">面交地點</label>
-                                    <input type="text" class="form-control font-white bg-grey"
+                                    <label id="tradePlaceLabel" class="m-0 font-white">面交地點</label>
+                                    <input id="tradePlace" type="text" class="form-control font-white bg-grey"
                                            placeholder="請輸入面交地點(EX:資訊樓4樓、正門校門口)" name="MeetAddress" required>
                                 </div>
                             </div>
@@ -482,8 +450,9 @@
                             <div class="row">
                                 <div
                                     class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group pb-2 pl-1 pr-1 m-0">
-                                    <label class="m-0 font-white">酬勞金額</label>
-                                    <input type="number" onkeyup="value=value.replace(/[^\d]/g,'') "
+                                    <label id="rewardLabel" class="m-0 font-white">酬勞金額</label>
+                                    <input type="number"
+                                           onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="reward"
                                            class="form-control font-white bg-grey"
                                            placeholder="請輸入酬勞金額(新台幣)" name="Pay" required>
                                 </div>
@@ -492,9 +461,10 @@
                             <div class="row">
                                 <div
                                     class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form-group pb-2 pl-1 pr-1 m-0">
-                                    <label class="m-0 font-white">委託內容細節與補充</label>
-                                    <textarea rows="4" cols="50" class="form-control font-white bg-grey"
-                                              placeholder="請輸入委託細節或注意事項(Ex:是否要袋子、餐具..)" name="Content" required></textarea>
+                                    <label id="detailLabel" class="m-0 font-white">委託內容細節與補充</label>
+                                    <textarea id="detail" rows="4" cols="50" class="form-control font-white bg-grey"
+                                              placeholder="請輸入委託細節或注意事項(Ex:是否要袋子、餐具..)" name="Content"
+                                              required></textarea>
                                 </div>
                             </div>
 

@@ -26,7 +26,7 @@
                             <input type="radio" id="star2" @if($id==$tasks->Student_id) name="toolman_rate"
                                    @elseif($id==$tasks->Toolman_id) @endif name="host_rate" value="2"/>
                             <label class="mr-2" for="star2" title="text"><i class="fas fa-star"></i></label>
-                            <input type="radio" id="star1" @if($id==$tasks->Student_id) name="toolman_rate"
+                            <input required type="radio" id="star1" @if($id==$tasks->Student_id) name="toolman_rate"
                                    @elseif($id==$tasks->Toolman_id) @endif name="host_rate" value="1"/>
                             <label class="mr-2" for="star1" title="text"><i class="fas fa-star"></i></label>
                         </div>
@@ -283,11 +283,19 @@
         <div class="row ">
             <div class="row ">
                 <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 pr-0 pl-0">
-                    @if($tasks->Classification == 'Food')
-                        <img src="{{asset('img/food.jpg')}}" class="img-fluid pr-0">
-                    @elseif($tasks->Classification == 'Stationery')
-                        <img src="{{asset('img/pen.jpg')}}" class="img-fluid pr-0">
-                    @endif
+                        @if($tasks->Classification == 'Buy')
+                            <img class="img-fluid pr-0"
+                                 src="{{asset('img/food.jpg')}}">
+                        @elseif($tasks->Classification == 'Service')
+                            <img class="img-fluid pr-0"
+                                 src="{{asset('img/Service.jpg')}}">
+                        @elseif($tasks->Classification == 'Book')
+                            <img class="img-fluid pr-0"
+                                 src="{{asset('img/Book.jpg')}}">
+                        @elseif($tasks->Classification == 'Teach')
+                            <img class="img-fluid pr-0"
+                                 src="{{asset('img/tutor.jpg')}}">
+                        @endif
                 </div>
                 <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pt-3 pt-md-0 pl-5 pr-3 pl-md-5">
                     <h3 class="font-white">{{$tasks->Title}}</h3>

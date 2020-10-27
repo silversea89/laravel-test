@@ -62,6 +62,7 @@
     @else
         <script src="{{ asset('js/main.js')}}"></script>
     @endif
+    <script src="{{ asset('js/addtask.js')}}"></script>
     <script src="{{ asset('js/chatroomjs.js')}}"></script>
     <link href="{{ asset('css/chatcss.css') }}" rel="stylesheet" type="text/css"/>
 
@@ -138,7 +139,7 @@
                                 <span class="far fa-user"></span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right bg-dark border py-0" id="profileDropdown">
-                                <a class="dropdown-item navbar-light font-white border-bottom btn-orange"
+                                <a class="dropdown-item navbar-light font-white border-bottom"
                                    href="{{route('profile.id', Auth::user()->student_id)}}">個人資料</a>
                                 <a class="dropdown-item navbar-light font-white border-bottom"
                                    href="{{route('list.push')}}">已提出的委託</a>

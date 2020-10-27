@@ -14,7 +14,7 @@ return [
     */
 
 //    'Login' => 'Welcome to Login Page',
-    'failed' => 'These credentials do not match our records.',
+    'failed' => '此學號尚未註冊，請註冊帳號.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];

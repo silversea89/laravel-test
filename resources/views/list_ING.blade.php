@@ -58,7 +58,7 @@
                         <h3 class="mb-0 mt-2 pl-2 pl-md-0 font-white">已接受的委託</h3>
                         <form action="#">
                             <ul class="nav mb-2 mt-1" id="evaluate">
-                                <li class="nav-item col-3 p-0 m-0">
+                                <li class="nav-item col-4 p-0 m-0">
                                     <form action="{{ route('list.ING')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="ING">
@@ -70,7 +70,7 @@
                                         @endif
                                     </form>
                                 </li>
-                                <li class="nav-item col-3 p-0 m-0">
+                                <li class="nav-item col-4 p-0 m-0">
                                     <form action="{{ route('list.ING')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="Complete">
@@ -82,7 +82,7 @@
                                         @endif
                                     </form>
                                 </li>
-                                <li class="nav-item col-3 p-0 m-0">
+                                <li class="nav-item col-4 p-0 m-0">
                                     <form action="{{ route('list.ING')}}" method="get">
                                         @csrf
                                         <input type="hidden" name="order" value="Expired">
@@ -91,18 +91,6 @@
                                             <button class="nav-link btn-block tab active px-0 m-0" type="submit">已過期</button>
                                         @else
                                             <button class="nav-link btn-block tab px-0 m-0" type="submit">已過期</button>
-                                        @endif
-                                    </form>
-                                </li>
-                                <li class="nav-item col-3 p-0 m-0">
-                                    <form action="{{ route('list.ING')}}" method="get">
-                                        @csrf
-                                        <input type="hidden" name="order" value="ING">
-                                        <input type="hidden" name="keyword" value={{$keyword}}>
-                                        @if($order=="ING" or $order==null)
-                                            <button class="nav-link btn-block tab active px-0 m-0" type="submit">執行中</button>
-                                        @else
-                                            <button class="nav-link btn-block tab px-0 m-0" type="submit">執行中</button>
                                         @endif
                                     </form>
                                 </li>
@@ -123,12 +111,18 @@
                                         <div data-toggle="modal" data-target="#missionCard{{$i->Tasks_id}}">
                                             <a href="{{ route('task.detail', $i->Tasks_id)}}">
                                             <div class="div-square">
-                                                @if($i->Classification == 'Food')
+                                                @if($i->Classification == 'Buy')
                                                     <img class="div-square-content img-fluid hwAuto pt-1 px-1"
                                                          src="{{asset('img/food.jpg')}}">
-                                                @elseif($i->Classification == 'Stationery')
+                                                @elseif($i->Classification == 'Service')
                                                     <img class="div-square-content img-fluid hwAuto pt-1 px-1"
-                                                         src="{{asset('img/pen.jpg')}}">
+                                                         src="{{asset('img/Service.jpg')}}">
+                                                @elseif($i->Classification == 'Book')
+                                                    <img class="div-square-content img-fluid hwAuto pt-1 px-1"
+                                                         src="{{asset('img/Book.jpg')}}">
+                                                @elseif($i->Classification == 'Teach')
+                                                    <img class="div-square-content img-fluid hwAuto pt-1 px-1"
+                                                         src="{{asset('img/tutor.jpg')}}">
                                                 @endif
                                             </div>
                                             </a>

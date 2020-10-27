@@ -21,28 +21,24 @@ class Classification extends Migration
 
         DB::table('classification')->insert([
             [
-                "ClassValue" => "Food",
-                "ClassName" => "食物飲料"
+                "ClassValue" => "All",
+                "ClassName" => "全部"
             ],
             [
-                "ClassValue" => "Stationery",
-                "ClassName" => "文具用品"
+                "ClassValue" => "Buy",
+                "ClassName" => "代購"
             ],
             [
-                "ClassValue" => "Work",
-                "ClassName" => "代勞跑腿"
+                "ClassValue" => "Service",
+                "ClassName" => "代勞"
             ],
             [
                 "ClassValue" => "Teach",
                 "ClassName" => "教學"
             ],
             [
-                "ClassValue" => "Secondhand",
-                "ClassName" => "二手物品交易"
-            ],
-            [
-                "ClassValue" => "All",
-                "ClassName" => "全部"
+                "ClassValue" => "Book",
+                "ClassName" => "二手書交易"
             ],
         ]);
     }

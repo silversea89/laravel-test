@@ -8,10 +8,10 @@
             <div class="col-12 col-md-9 col-xl-8">
 
                 <h3 class="mt-3 mb-2 pl-2 font-white">所有通知</h3>
-
+                @isset($notification_all)
+                    @foreach($notification_all as $i)
                 <div class="bg-dark width100p mb-3">
-                    @isset($notification)
-                        @foreach($notification as $i)
+
                             <a class="dropdown-item navbar-dark border-bottom p-2"
                                href="{{ route('task.detail', $i->href)}}">
                                 <div class="row">
@@ -33,14 +33,13 @@
                                     </div>
                                 </div>
                             </a>
-                        @endforeach
-                    @endisset
                 </div>
+                    @endforeach
+                @endisset
 
 
-                <nav>
-                    {{ $notification->links()}}
-                </nav>
+                    {{ $notification_all->links() }}
+
             </div>
             <div class="col"></div>
         </div>

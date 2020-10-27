@@ -25,10 +25,9 @@ class NotificationController extends Controller
     protected function shownotificationsform(Request $request)
     {
         $user = Auth::user();
-        $notification = DB::table('notifications')
+        $notification_all = DB::table('notifications')
             ->where('to', '=', $user->student_id)
-            ->where('read','=','0')
-            ->paginate(12);
-        return view('notifications')->with(["notification" => $notification]);
+            ->paginate(10);
+        return view('notifications')->with(["notification_all" => $notification_all]);
     }
 }

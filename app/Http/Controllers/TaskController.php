@@ -220,7 +220,7 @@ class TaskController extends Controller
                 ->get();
         }
         foreach ($tasks as $i) {
-            if ($i->DeadDateTime < Carbon::now()) {
+            if ($i->DateTime < Carbon::now()) {
                 $taskexpire = Tasks::find($i->Tasks_id);
                 $taskexpire->Status = 'Expired';
                 $taskexpire->save();
@@ -298,7 +298,7 @@ class TaskController extends Controller
                 ->get();
         }
         foreach ($tasks as $i) {
-            if ($i->DeadDateTime < Carbon::now()) {
+            if ($i->DateTime < Carbon::now()) {
                 $taskexpire = Tasks::find($i->Tasks_id);
                 $taskexpire->Status = 'Expired';
                 $taskexpire->save();

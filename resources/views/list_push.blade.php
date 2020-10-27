@@ -119,12 +119,18 @@
                                         <div data-toggle="modal" data-target="#missionCard{{$i->Tasks_id}}">
                                             <a href="{{ route('task.detail', $i->Tasks_id)}}">
                                                 <div class="div-square">
-                                                    @if($i->Classification == 'Food')
+                                                    @if($i->Classification == 'Buy')
                                                         <img class="div-square-content img-fluid hwAuto pt-1 px-1"
                                                              src="{{asset('img/food.jpg')}}">
-                                                    @elseif($i->Classification == 'Stationery')
+                                                    @elseif($i->Classification == 'Service')
                                                         <img class="div-square-content img-fluid hwAuto pt-1 px-1"
-                                                             src="{{asset('img/pen.jpg')}}">
+                                                             src="{{asset('img/Service.jpg')}}">
+                                                    @elseif($i->Classification == 'Book')
+                                                        <img class="div-square-content img-fluid hwAuto pt-1 px-1"
+                                                             src="{{asset('img/Book.jpg')}}">
+                                                    @elseif($i->Classification == 'Teach')
+                                                        <img class="div-square-content img-fluid hwAuto pt-1 px-1"
+                                                             src="{{asset('img/tutor.jpg')}}">
                                                     @endif
                                                 </div>
                                             </a>

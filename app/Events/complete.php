@@ -31,7 +31,7 @@ class complete implements ShouldBroadcast
     public function __construct($from, $target,$task)
     {
         $username = $from->name;
-        $this->message = $username." 完成您的委託囉!給予對方評價吧!";
+        $this->message = $username." 完成您的委託囉!給予評價吧!";
         $this->target = $target;
         $this->time=Carbon::now()->toDateTimeString();
         $this->title=$task->Title;
