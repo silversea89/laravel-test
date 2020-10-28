@@ -23,8 +23,8 @@ class CreateTask extends Migration
             $table->foreign('Classification')->references('ClassValue')->on('classification');
             $table->string('Title');
             $table->dateTime('DateTime');
-            $table->string('BuyAddress');
-            $table->string('MeetAddress');
+            $table->string('BuyAddress')->nullable();
+            $table->string('MeetAddress')->nullable();
             $table->integer('Pay');
             $table->string('Content');
             //Selectable,processing,complete
