@@ -62,6 +62,9 @@
     @else
         <script src="{{ asset('js/main.js')}}"></script>
     @endif
+    @if(Request::is('register'))
+        <link href="{{ asset('css/register.css') }}" rel="stylesheet" type="text/css"/>
+    @endif
     <script src="{{ asset('js/addtask.js')}}"></script>
     <script src="{{ asset('js/chatroomjs.js')}}"></script>
     <link href="{{ asset('css/chatcss.css') }}" rel="stylesheet" type="text/css"/>
