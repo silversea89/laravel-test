@@ -1,0 +1,11 @@
+#profileImg{
+    height: 168px;
+    width: 168px;
+    top: -10px;
+    left: 0px;
+}
+#profileImgDiv{
+    height: 168px;
+    width: 168px;
+    position: relative;
+}

@@ -14,7 +14,7 @@
             <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group">
+                    <div class="col-6 form-group pr-1">
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror border-top-0 border-right-0 border-left-0 font-white bg-grey" placeholder="姓名" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                         @error('name')
                         <span class="invalid-feedback" role="alert">
@@ -22,7 +22,7 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 form-group pl-1">
+                    <div class="col-6 form-group pl-1">
                         <select class="form-control bg-grey" name="gender">
                             <option value="1">男</option>
                             <option value="2">女</option>
@@ -72,7 +72,7 @@
 
                 <div class="form-group textLeft" style="position:relative">
                     <label class="btn btn-outline-orange m-0">
-                        <input name="image" id="upload_img" style="display:none;" type="file" accept="image/png, image/jpeg, image/jpg">
+                        <input name="image" id="upload_img" style="display:none;" type="file" accept="image/png, image/jpeg, image/jpg" onchange="readURL(this);">
                         <i class="fa fa-photo"></i>&nbsp;上傳大頭貼
                     </label>
                     @error('image')
@@ -82,6 +82,16 @@
                     @enderror
                     <i class="fas fa-question-circle" style="color:#666;position:absolute;top:11px;right:0px" data-toggle="tooltip" data-placement="left" title="照片大小2MB以下，若無上傳照片即使用預設圖片"></i>
                 </div>
+
+                <center>
+                    <div id="profileImgDiv">
+                        <div class="height100p rounded-circle">
+                            <div class="div-square ">
+                                <img class="rounded-circle border div-square-content img-fluid hwAuto" src="profileimages/Man.png" id="profileImg">
+                            </div>
+                        </div>
+                    </div>
+                </center>
 
                 <div class="float-left form-group">
                     <a class="m-0" href="/login">已有帳號？點擊登入</a>
