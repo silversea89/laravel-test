@@ -310,6 +310,12 @@ p{
 }
 /* ~p */
 
+/* p~ */
+h5{
+    word-break: break-all!important;
+}
+/* ~p */
+
 
 /* gold btn */
 .golden-btn + .golden-btn { margin-top: 1em; }

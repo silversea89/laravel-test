@@ -22,7 +22,7 @@
 
             <h2 class="font-white font-weight-bold mt-2 mb-1">{{$i->name}}</h2>
             @if($profile[0]->student_id==$id)
-                <a class="font-orange" href="/changePassword">修改密碼</a>
+                <a class="font-orange" href="{{ route('Password.ShowReset') }}">修改密碼</a>
             @endif
         @endforeach
     </center>
