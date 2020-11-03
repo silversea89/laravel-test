@@ -12,7 +12,7 @@
                             <input type="text" class="form-control font-white bg-grey " name="keyword"
                                    placeholder="在此輸入關鍵字" value={{$keyword}}>
                             <button type="submit" class="btn btn-orange fas fa-search"></button>
-                            <button type="submit" class="btn btn-orange d-block d-md-none fas fa-filter ml-1"
+                            <button type="button" class="btn btn-orange d-block d-md-none fas fa-filter ml-1"
                                     data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false"
                                     aria-controls="collapseFilter"></button>
                         </div>
@@ -118,7 +118,7 @@
                             <!-- 這個才是完整版~ -->
                             @foreach($tasks as $i)
                                 <div class="col-6 col-lg-4 col-xl-3 p-1">
-                                    <div class="height100p p-0 bg-dark">
+                                    <div class="height100p p-0 bg-derk">
                                         <div data-toggle="modal" data-target="#missionCard{{$i->Tasks_id}}">
                                             <div class="div-square">
                                                 @if($i->Classification == 'Buy')
@@ -198,7 +198,7 @@
     @foreach($tasks as $i)
         <div class="modal fade" id="missionCard{{$i->Tasks_id}}" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-lg modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content border-0 bg-dark">
+                <div class="modal-content border-0 bg-derk">
                     <div class="row">
                         <div class="col-12 col-lg-6">
                             <!-- phone~ -->
@@ -340,7 +340,7 @@
     <div class="modal fade" id="newMission" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-lg modal-dialog modal-dialog-centered" role="document">
 
-            <div class="modal-content border-0 bg-dark">
+            <div class="modal-content border-0 bg-derk">
 
                 <div class="modal-header border-0">
                     <h5 class="modal-title font-white">&nbsp;</h5>

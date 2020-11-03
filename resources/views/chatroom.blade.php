@@ -102,7 +102,7 @@
                         <div class="form-group mt-3 mb-0 row px-md-3">
                             <input type="text" class="form-control col-md-11 col-9 font-white bg-grey" placeholder="Enter...">
 
-                            <button type="button" class="btn btn-grey col-md-1 col-3">
+                            <button type="button" class="btn btn-orange col-md-1 col-3">
                                 <i class="fa fa-send"></i>
                             </button>
                         </div>

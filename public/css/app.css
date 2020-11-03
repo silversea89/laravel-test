@@ -7031,14 +7031,14 @@ button.bg-light:focus {
   background-color: #dae0e5 !important;
 }
 
-.bg-dark {
+.bg-derk {
   background-color: #343a40 !important;
 }
 
-a.bg-dark:hover,
-a.bg-dark:focus,
-button.bg-dark:hover,
-button.bg-dark:focus {
+a.bg-derk:hover,
+a.bg-derk:focus,
+button.bg-derk:hover,
+button.bg-derk:focus {
   background-color: #1d2124 !important;
 }
 

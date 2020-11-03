@@ -3,7 +3,7 @@
 
     <body class="minHeight100vh bg-darker">
 
-    <center class="width100p bg-dark pt-4 pb-2 mb-3">
+    <center class="width100p bg-derk pt-4 pb-2 mb-3">
         @foreach($profile as $i)
             <div id="profileImgDiv">
                 <image class="rounded-circle border-0 img-fluid hwAuto" src="{{asset('profileimages/'.$i->photo)}}"
@@ -22,7 +22,7 @@
 
             <h2 class="font-white font-weight-bold mt-2 mb-1">{{$i->name}}</h2>
             @if($profile[0]->student_id==$id)
-                <a href="/changePassword">修改密碼</a>
+                <a class="font-orange" href="/changePassword">修改密碼</a>
             @endif
         @endforeach
     </center>
@@ -34,7 +34,7 @@
 
             <div class="col-12 col-md-6 col-lg-5 col-xl-4 px-3 px-md-0">
 
-                <div class="bg-dark width100p p-3">
+                <div class="bg-derk width100p p-3">
 
                     <h5 class="font-white font-weight-bold">介紹</h5>
                     <div class="d-flex align-items-center mb-1">
@@ -73,7 +73,7 @@
 
                 </div>
 
-                <div class="bg-dark width100p p-3 mt-3">
+                <div class="bg-derk width100p p-3 mt-3">
 
                     <h5 class="font-white font-weight-bold">表現</h5>
                     <div class="d-flex align-items-center mb-1">
@@ -160,7 +160,7 @@
                 <div class="tab-content" id="evaluateContent">
                     <div class="tab-pane fade show active" id="employer" role="tabpanel">
                         @foreach($host_evaluation as $i)
-                            <div class="bg-dark width100p p-3 mb-3">
+                            <div class="bg-derk width100p p-3 mb-3">
                                 <div class="row">
                                     <div class="col-auto pr-2">
                                     </div>
@@ -203,7 +203,7 @@
                     </div>
                     <div class="tab-pane fade" id="toolman" role="tabpanel" >
                         @foreach($toolman_evaluation as $i)
-                            <div class="bg-dark width100p p-3 mb-3">
+                            <div class="bg-derk width100p p-3 mb-3">
                                 <div class="row">
                                     <div class="col-auto pr-2">
                                     </div>

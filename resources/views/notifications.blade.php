@@ -9,9 +9,9 @@
 
                 <h3 class="mt-3 mb-2 pl-2 font-white">所有通知</h3>
 
-                <div class="bg-dark width100p mb-3">
-                    @isset($notification)
-                        @foreach($notification as $i)
+                <div class="bg-derk width100p mb-3">
+                    @isset($notification_all)
+                        @foreach($notification_all as $i)
                             <a class="dropdown-item navbar-dark border-bottom p-2"
                                href="{{ route('task.detail', $i->href)}}">
                                 <div class="row">
@@ -39,7 +39,7 @@
 
 
                 <nav>
-                    {{ $notification->links()}}
+                    {{ $notification_all->links()}}
                 </nav>
             </div>
             <div class="col"></div>

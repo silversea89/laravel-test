@@ -104,7 +104,7 @@
                                   style="position:absolute;top:10px;left:3px">{{$count}}</span>
                             <span class="far fa-bell"></span>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-right bg-dark border py-0" id="profileDropdown">
+                        <div class="dropdown-menu dropdown-menu-right bg-derk border py-0" id="profileDropdown">
                             <div id="dp-item">
                                 @isset($notification)
                                     @foreach($notification as $i)
@@ -141,7 +141,7 @@
                                     aria-expanded="false" id="profile">
                                 <span class="far fa-user"></span>
                             </button>
-                            <div class="dropdown-menu dropdown-menu-right bg-dark border py-0" id="profileDropdown">
+                            <div class="dropdown-menu dropdown-menu-right bg-derk border py-0" id="profileDropdown">
                                 <a class="dropdown-item navbar-light font-white border-bottom"
                                    href="{{route('profile.id', Auth::user()->student_id)}}">個人資料</a>
                                 <a class="dropdown-item navbar-light font-white border-bottom"
@@ -175,7 +175,7 @@
             {{--                                  style="position:absolute;top:10px;left:3px">6</span>--}}
             {{--                            <span class="far fa-bell"></span>--}}
             {{--                        </button>--}}
-            {{--                        <div class="dropdown-menu dropdown-menu-right bg-dark border py-0" id="profileDropdown">--}}
+            {{--                        <div class="dropdown-menu dropdown-menu-right bg-derk border py-0" id="profileDropdown">--}}
             {{--                            <a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">--}}
             {{--                                <div class="row">--}}
             {{--                                    <div class="col-auto pr-2">--}}

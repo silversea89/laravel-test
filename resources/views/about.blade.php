@@ -23,7 +23,7 @@
                 不管是想請人跑腿、找人教學，<br>
                 或是遇到突發狀況，需要找人求救，<br>
                 都沒問題！<br>
-                <h5>
+                </h5>
         </div>
     </div>
 
@@ -92,7 +92,7 @@
 </div>
 </div>
 
-<div class="bg-dark cpy-right text-center p-0 m-0" style="position: relative;bottom: 0;width:100%;color:white">
+<div class="bg-derk cpy-right text-center p-0 m-0" style="position: relative;bottom: 0;width:100%;color:white">
     <p class="m-0">© 2020 Toolman. All rights reserved</p>
 </div>
 

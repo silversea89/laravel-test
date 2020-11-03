@@ -330,7 +330,7 @@
     <div class="modal fade volunteer" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-md"
              style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
-            <div class="modal-content container bg-dark">
+            <div class="modal-content container bg-derk">
                 <h3 class="fas fa-times" style="color:#999999;position: absolute; top: 7px;right: 15px;"
                     data-toggle="modal" data-target=".volunteer"></h3>
                 <br>

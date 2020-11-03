@@ -26,7 +26,7 @@
             <h2 class="textCenter font-white">訂閱以收到最新消息</h2>
             <div class="row">
                 <div class="col-9 col-md-9 col-sm-12 pl-md-0 pr-md-2">
-                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0 font-white bg-dark " placeholder="輸入您的信箱">
+                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0 font-white bg-derk " placeholder="輸入您的信箱">
                 </div>
 
                 <div class="col-3 col-md-3 col-sm-12  mt-sm-3 mt-md-0 pr-md-0 pl-md-2">
@@ -143,7 +143,7 @@
 {{--</div>--}}
 
 
-{{--<div class="bg-dark cpy-right text-center p-0 m-0" style="position: relative;bottom: 0;width:100%;color:white">--}}
+{{--<div class="bg-derk cpy-right text-center p-0 m-0" style="position: relative;bottom: 0;width:100%;color:white">--}}
 {{--    <p class="m-0">© 2020 Toolman. All rights reserved</p>--}}
 {{--</div>--}}
 

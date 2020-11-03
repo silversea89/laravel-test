@@ -55,7 +55,7 @@
         </div>
     </div>
 
-    <div class="bg-dark">
+    <div class="bg-derk">
         <div class="container pb-4">
             <h2 class="pt-3 font-white">最新委託</h2>
 
@@ -129,7 +129,7 @@
     @foreach($newesttasks as $i)
     <div class="modal fade" id="missionCard{{$i->Tasks_id}}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-lg modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content border-0 bg-dark">
+            <div class="modal-content border-0 bg-derk">
                 <div class="row">
                     <div class="col-12 col-lg-6">
                         <!-- phone~ -->
@@ -337,7 +337,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-dark font-white">
+    <footer class="bg-derk font-white">
         <div class="container py-4">
             <div class="row py-4">
                 <div class="col-12 col-md-4">

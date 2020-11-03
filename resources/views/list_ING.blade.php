@@ -107,7 +107,7 @@
                             @foreach($tasks as $i)
                                 <div class="col-6 col-lg-4 col-xl-3 p-1">
 
-                                    <div class="height100p p-0 bg-dark">
+                                    <div class="height100p p-0 bg-derk">
                                         <div data-toggle="modal" data-target="#missionCard{{$i->Tasks_id}}">
                                             <a href="{{ route('task.detail', $i->Tasks_id)}}">
                                             <div class="div-square">

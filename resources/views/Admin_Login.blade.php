@@ -26,7 +26,7 @@
 <!-- #F9F9F9 -->
 <script src="/script.js"></script>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark "
+<nav class="navbar navbar-expand-lg navbar-dark bg-derk "
      style="width:100%;position: fixed; top: 0px;left: 0px;z-index: 1">
 
     <div class="container pr-0">
@@ -42,8 +42,8 @@
 
     </div>
 </nav>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-    <div class="container bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-derk ">
+    <div class="container bg-derk">
         <a class="navbar-brand" href="/index.html">ToolMan</a>
     </div>
 </nav>
