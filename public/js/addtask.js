@@ -27,10 +27,11 @@ $(document).ready(function () {
         $("#reward").attr('required', true);
         $("#detail").attr('required', true);
 
-        if (selected == "Buy") {
+        if (selected === "Buy") {
             $("#productLabel").text("購買物品");
             $("#placeLabel").text("購買地點");
-        } else if (selected == "Book") {
+            $("#rewardLabel").text("酬勞");
+        } else if (selected === "Book") {
             $("#productLabel").text("書名");
             $("#rewardLabel").text("希望價錢");
             $("#placeLabel").hide();
@@ -42,17 +43,20 @@ $(document).ready(function () {
         } else if (selected == "Teach") {
             $("#productLabel").text("科目");
             $("#placeLabel").text("教學地點");
+            $("#rewardLabel").text("學費");
             $("#tradePlaceLabel").hide();
             $("#tradePlace").hide();
             $("#tradePlace").attr('required', false);
         } else if (selected == "Service") {
             $("#productLabel").text("名稱");
             $("#placeLabel").text("工作地點");
+            $("#rewardLabel").text("酬勞");
         } else {
             $("#productLabel").text("標題");
             $("#placeLabel").text("地點");
         }
     });
+    $("#classification").trigger("change");
 
     $("#reward").keyup(function () {
         this.value = this.value.replace(/^(0+)|[^\d]/g, "");

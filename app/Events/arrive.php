@@ -19,6 +19,7 @@ class arrive implements ShouldBroadcast
     public $from;
     public $username;
     public $message;
+    public $photo;
     public $target;
     public $time;
     public $href;
@@ -32,6 +33,7 @@ class arrive implements ShouldBroadcast
     {
         $username = $from->name;
         $this->message = $username." 已抵達面交地點";
+        $this->photo=$from->photo;
         $this->target = $target;
         $this->time=Carbon::now()->toDateTimeString();
         $this->title=$task->Title;
@@ -43,7 +45,9 @@ class arrive implements ShouldBroadcast
             'read' => false,
             'created_at' => $this->time,
             'href'=>$task->Tasks_id,
+            'photo'=>$from->photo,
             'title'=>$task->Title
+
         ]);
     }
 

@@ -113,8 +113,8 @@
                                             <div class="row">
                                                 <div class="col-auto pr-2">
                                                     <img
-                                                        class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
-                                                        src="/src/img/profile.jpg">
+                                                        id="NotiNavImgDiv" class="rounded-circle border-0 img-fluid hwAuto"
+                                                        src="{{asset('profileimages/'.$i->photo)}}">
                                                 </div>
                                                 <div class="col pl-0">
                                                     <h5 class="guestProfileName font-white font-weight-bold m-0">
@@ -162,45 +162,6 @@
                 </div>
             </div>
 
-            {{--                <div class="dropdown order-md-last">--}}
-            {{--                    @guest--}}
-            {{--                        <button class="border-0 p-3 fakeBtn" type="button" data-toggle="dropdown" aria-haspopup="true"--}}
-            {{--                                aria-expanded="false">--}}
-            {{--                            <span class="far fa-user"></span>--}}
-            {{--                        </button>--}}
-            {{--                    @else--}}
-            {{--                        <button class="border-0 p-3" type="button" data-toggle="dropdown" aria-haspopup="true"--}}
-            {{--                                aria-expanded="false" id="profile">--}}
-            {{--                            <span class="badge badge-pill badge-danger"--}}
-            {{--                                  style="position:absolute;top:10px;left:3px">6</span>--}}
-            {{--                            <span class="far fa-bell"></span>--}}
-            {{--                        </button>--}}
-            {{--                        <div class="dropdown-menu dropdown-menu-right bg-derk border py-0" id="profileDropdown">--}}
-            {{--                            <a class="dropdown-item navbar-dark border-bottom p-2" href="/list_id_push">--}}
-            {{--                                <div class="row">--}}
-            {{--                                    <div class="col-auto pr-2">--}}
-            {{--                                        <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"--}}
-            {{--                                             src="/src/img/profile.jpg">--}}
-            {{--                                    </div>--}}
-            {{--                                    <div class="col pl-0">--}}
-            {{--                                        <h5 class="guestProfileName font-white font-weight-bold m-0">--}}
-            {{--                                            //通知內容--}}
-            {{--                                        </h5>--}}
-            {{--                                        <p class="font-grey m-0">--}}
-            {{--                                            //通知時間--}}
-            {{--                                        </p>--}}
-            {{--                                        <p class="font-grey m-0">--}}
-            {{--                                            //委託標題(如果有)--}}
-            {{--                                        </p>--}}
-            {{--                                    </div>--}}
-            {{--                                </div>--}}
-            {{--                            </a>--}}
-            {{--                            <a class="dropdown-item navbar-dark font-orange border-bottom px-3 py-2"--}}
-            {{--                               href="/nofitications">查看所有通知</a>--}}
-            {{--                        </div>--}}
-            {{--                        <!-- ~未登入這塊消失 -->--}}
-            {{--                    @endguest--}}
-            {{--                </div>--}}
 
 
             <div class="collapse navbar-collapse px-3" id="navbarToggler">
@@ -274,11 +235,12 @@
         channel2.bind('App\\Events\\taskstart', function (data) {
             $("#noti-count").text(parseInt($("#noti-count").text()) + 1);
             let task_href = `{{route('task.detail', '')}}/${data.href}`;
+            let photo=`profileimages/${data.photo}`;
             $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="${task_href}">
                             <div class="row">
                                 <div class="col-auto pr-2">
-                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
-                                         src="/src/img/profile.jpg">
+                                    <img id="NotiNavImgDiv" class="rounded-circle border-0 img-fluid hwAuto"
+                                         src="${photo}">
                                 </div>
                                 <div class="col pl-0">
                                     <h5 class="guestProfileName font-white font-weight-bold m-0">
@@ -301,11 +263,12 @@
         channel3.bind('App\\Events\\back', function (data) {
             $("#noti-count").text(parseInt($("#noti-count").text()) + 1);
             let task_href = `{{route('task.detail', '')}}/${data.href}`;
+            let photo=`profileimages/${data.photo}`;
             $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="${task_href}">
                             <div class="row">
                                 <div class="col-auto pr-2">
-                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
-                                         src="/src/img/profile.jpg">
+                                    <img id="NotiNavImgDiv" class="rounded-circle border-0 img-fluid hwAuto"
+                                         src="${photo}">
                                 </div>
                                 <div class="col pl-0">
                                     <h5 class="guestProfileName font-white font-weight-bold m-0">
@@ -328,11 +291,12 @@
         channel4.bind('App\\Events\\arrive', function (data) {
             $("#noti-count").text(parseInt($("#noti-count").text()) + 1);
             let task_href = `{{route('task.detail', '')}}/${data.href}`;
+            let photo=`profileimages/${data.photo}`;
             $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="${task_href}">
                             <div class="row">
                                 <div class="col-auto pr-2">
-                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
-                                         src="/src/img/profile.jpg">
+                                    <img id="NotiNavImgDiv" class=" rounded-circle border-0 img-fluid hwAuto"
+                                         src="${photo}">
                                 </div>
                                 <div class="col pl-0">
                                     <h5 class="guestProfileName font-white font-weight-bold m-0">
@@ -355,11 +319,12 @@
         channel5.bind('App\\Events\\complete', function (data) {
             $("#noti-count").text(parseInt($("#noti-count").text()) + 1);
             let task_href = `{{route('task.detail', '')}}/${data.href}`;
+            let photo=`profileimages/${data.photo}`;
             $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="${task_href}">
                             <div class="row">
                                 <div class="col-auto pr-2">
-                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
-                                         src="/src/img/profile.jpg">
+                                    <img id="NotiNavImgDiv" class=" rounded-circle border-0 img-fluid hwAuto"
+                                         src="${photo}">
                                 </div>
                                 <div class="col pl-0">
                                     <h5 class="guestProfileName font-white font-weight-bold m-0">
@@ -382,11 +347,12 @@
         channel6.bind('App\\Events\\givetask', function (data) {
             $("#noti-count").text(parseInt($("#noti-count").text()) + 1);
             let task_href = `{{route('task.detail', '')}}/${data.href}`;
+            let photo=`profileimages/${data.photo}`;
             $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="${task_href}">
                             <div class="row">
                                 <div class="col-auto pr-2">
-                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
-                                         src="/src/img/profile.jpg">
+                                    <img id="NotiNavImgDiv" class="rounded-circle border-0 img-fluid hwAuto"
+                                         src="${photo}">
                                 </div>
                                 <div class="col pl-0">
                                     <h5 class="guestProfileName font-white font-weight-bold m-0">
@@ -409,11 +375,12 @@
         channel7.bind('App\\Events\\applicate', function (data) {
             $("#noti-count").text(parseInt($("#noti-count").text()) + 1);
             let task_href = `{{route('task.detail', '')}}/${data.href}`;
+            let photo=`profileimages/${data.photo}`;
             $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="${task_href}">
                             <div class="row">
                                 <div class="col-auto pr-2">
-                                    <img class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
-                                         src="/src/img/profile.jpg">
+                                    <img id="NotiNavImgDiv  " class=" rounded-circle border-0 img-fluid hwAuto"
+                                         src="${photo}">
                                 </div>
                                 <div class="col pl-0">
                                     <h5 class="guestProfileName font-white font-weight-bold m-0">

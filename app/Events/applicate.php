@@ -22,6 +22,7 @@ class applicate implements ShouldBroadcast
     public $target;
     public $time;
     public $title;
+    public $photo;
     public $href;
     /**
      * Create a new event instance.
@@ -33,6 +34,8 @@ class applicate implements ShouldBroadcast
         $username = $from->name;
         $this->message = $username." 想成為您的工具人!";
         $this->target = $target;
+        $this->photo=$from->photo;
+
         $this->time=Carbon::now()->toDateTimeString();
         $this->title=$task->Title;
         $this->href=$task->Tasks_id;
@@ -43,6 +46,7 @@ class applicate implements ShouldBroadcast
             'href'=>$task->Tasks_id,
             'title'=>$task->Title,
             'read' => false,
+            'photo'=>$from->photo,
             'created_at' => $this->time
         ]);
     }

@@ -17,8 +17,8 @@
                                 <div class="row">
                                     <div class="col-auto pr-2">
                                         <img
-                                            class="guestProfileImg rounded-circle border-0 img-fluid hwAuto"
-                                            src="/src/img/profile.jpg">
+                                            class="rounded-circle border-0 img-fluid hwAuto" id="NotiImgDiv"
+                                            src="{{asset('profileimages/'.$i->photo)}}">
                                     </div>
                                     <div class="col pl-0">
                                         <h5 class="guestProfileName font-white font-weight-bold m-0">

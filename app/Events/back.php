@@ -20,6 +20,7 @@ class back implements ShouldBroadcast
     public $username;
     public $message;
     public $target;
+    public $photo;
     public $time;
     public $href;
     public $title;
@@ -32,6 +33,7 @@ class back implements ShouldBroadcast
     {
         $username = $from->name;
         $this->message = $username." 正在前往面交地點";
+        $this->photo=$from->photo;
         $this->target = $target;
         $this->time= Carbon::today()->toDateTimeString();
         $this->title=$task->Title;
@@ -42,6 +44,7 @@ class back implements ShouldBroadcast
             'message' => $this->message,
             'read' => false,
             'created_at' => $this->time,
+            'photo'=>$from->photo,
             'href'=>$task->Tasks_id,
             'title'=>$task->Title
         ]);

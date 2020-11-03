@@ -21,6 +21,7 @@ class CreateNotificationsTable extends Migration
             $table->string('href');
             $table->boolean('read')->default(false);
             $table->string('title');
+            $table->String('photo')->nullable();
             $table->dateTime('created_at');
         });
     }

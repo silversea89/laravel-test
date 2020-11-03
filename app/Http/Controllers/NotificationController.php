@@ -27,7 +27,10 @@ class NotificationController extends Controller
         $user = Auth::user();
         $notification_all = DB::table('notifications')
             ->where('to', '=', $user->student_id)
+            ->orderBy('created_at','desc')
             ->paginate(10);
-        return view('notifications')->with(["notification_all" => $notification_all]);
+
+        return view('notifications')->with(["notification_all" => $notification_all,
+            ]);
     }
 }

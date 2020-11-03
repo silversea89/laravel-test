@@ -22,6 +22,7 @@ class complete implements ShouldBroadcast
     public $target;
     public $time;
     public $href;
+    public $photo;
     public $title;
     /**
      * Create a new event instance.
@@ -31,6 +32,7 @@ class complete implements ShouldBroadcast
     public function __construct($from, $target,$task)
     {
         $username = $from->name;
+        $this->photo=$from->photo;
         $this->message = $username." 完成您的委託囉!給予評價吧!";
         $this->target = $target;
         $this->time=Carbon::now()->toDateTimeString();
@@ -42,6 +44,7 @@ class complete implements ShouldBroadcast
             'message' => $this->message,
             'read' => false,
             'created_at' => $this->time,
+            'photo'=>$from->photo,
             'href'=>$task->Tasks_id,
             'title'=>$task->Title
         ]);

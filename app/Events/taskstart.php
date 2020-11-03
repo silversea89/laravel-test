@@ -23,6 +23,7 @@ class taskstart implements ShouldBroadcast
     public $time;
     public $href;
     public $title;
+    public $photo;
 
     /**
      * Create a new event instance.
@@ -33,6 +34,7 @@ class taskstart implements ShouldBroadcast
     {
         $username = $from->name;
         $this->message = $username." 開始執行您的委託了";
+        $this->photo=$from->photo;
         $this->target = $target;
         $this->time=Carbon::now()->toDateTimeString();
         $this->title=$task->Title;
@@ -43,6 +45,7 @@ class taskstart implements ShouldBroadcast
             'message' => $this->message,
             'read' => false,
             'created_at' => $this->time,
+            'photo'=>$from->photo,
             'href'=>$task->Tasks_id,
             'title'=>$task->Title
         ]);

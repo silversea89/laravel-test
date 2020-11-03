@@ -20,6 +20,7 @@ class givetask implements ShouldBroadcast
     public $time;
     public $href;
     public $title;
+    public $photo;
 
     /**
      * Create a new event instance.
@@ -31,6 +32,7 @@ class givetask implements ShouldBroadcast
         $username = $from->name;
         $this->message  = "{$username} 同意您擔任工具人了!";
         $this->target = $target;
+        $this->photo=$from->photo;
         $this->time=Carbon::now()->toDateTimeString();
         $this->title=$task->Title;
         $this->href=$task->Tasks_id;
@@ -41,6 +43,7 @@ class givetask implements ShouldBroadcast
             'read' => false,
             'created_at' => $this->time,
             'href'=>$task->Tasks_id,
+            'photo'=>$from->photo,
             'title'=>$task->Title
         ]);
     }
