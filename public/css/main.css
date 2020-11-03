@@ -652,3 +652,28 @@ select{
     color: #FF9529;
 }
 /* star */
+
+#profileImg{
+    height: 168px;
+    width: 168px;
+}
+#profileImgDiv{
+    height: 168px;
+    width: 168px;
+    position: relative;
+}
+#changePhoto{
+    position: absolute;
+    right:0px;
+    bottom: 0px;
+    cursor: pointer;
+}
+#evaluate{
+    border-width:1px;
+    border-bottom-style:solid;
+    border-color:#414141;
+}
+
+#toolman-star{
+    transform: translate(-6px,-1px);
+}
