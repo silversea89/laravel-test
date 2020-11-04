@@ -19,98 +19,101 @@ class DashboardController extends Controller
     protected function dashboard(Request $request)
     {
         $user = Auth::user();
-        if ($user->is_admin) {
-            $Today = Carbon::today();
-            $Today_Count = DB::table('browse')
-                ->where("Date", '=', $Today)
-                ->select("Count")
-                ->first();
-            $All_Count = DB::table('browse')
-                ->sum("Count");
-            $Members_Amount = DB::table('users')
-                ->count();
-            $Month_Tasks_Amount = DB::table('tasks')
-                ->where('created_at', 'LIKE', date("Y-m-%"))
-                ->count();
-            $Month_Members_Amount = DB::table('users')
-                ->where('created_at', 'LIKE', date("Y-m-%"))
-                ->count();
-            $Reported_Tasks_Amount = DB::table('report')
-                ->distinct('Tasks_id')
-                ->count();
-            $All_Tasks_Amount = DB::table('tasks')
-                ->count();
-            $Man_Amount = DB::table('users')
-                ->where("gender", "=", "1")
-                ->count();
-            $Woman_Amount = DB::table('users')
-                ->where("gender", "=", "2")
-                ->count();
-            $Else_Amount = DB::table('users')
-                ->where("gender", "=", "3")
-                ->count();
-            $Selectable_Amount = DB::table('tasks')
-                ->where("Status", "=", "Selectable")
-                ->count();
-            $Processing_Amount = DB::table('tasks')
-                ->where("Status", "=", "Processing")
-                ->count();
-            $Complete_Amount = DB::table('tasks')
-                ->where("Status", "=", "Complete")
-                ->count();
-            $Blocked_Amount = DB::table('tasks')
-                ->where("Status", "=", "Block")
-                ->count();
-            $Department_List = DB::table('users')
-                ->select("department")
-                ->distinct('department')
-                ->get();
-            $Department_Man_Amount = array();
-            foreach ($Department_List as $i) {
-                $Department_Man = DB::table('users')
-                    ->where("department", "=", $i->department)
-                    ->where("Gender", "=", "1")
+        if($user!=null){
+            if ($user->is_admin) {
+                $Today = Carbon::today();
+                $Today_Count = DB::table('browse')
+                    ->where("Date", '=', $Today)
+                    ->select("Count")
+                    ->first();
+                $All_Count = DB::table('browse')
+                    ->sum("Count");
+                $Members_Amount = DB::table('users')
                     ->count();
-                array_push($Department_Man_Amount, $Department_Man);
-            }
-            $Department_Woman_Amount = array();
-            foreach ($Department_List as $i) {
-                $Department_Woman = DB::table('users')
-                    ->where("department", "=", $i->department)
-                    ->where("Gender", "=", "2")
+                $Month_Tasks_Amount = DB::table('tasks')
+                    ->where('created_at', 'LIKE', date("Y-m-%"))
                     ->count();
-                array_push($Department_Woman_Amount, $Department_Woman);
-            }
-            $Department_Else_Amount = array();
-            foreach ($Department_List as $i) {
-                $Department_Else = DB::table('users')
-                    ->where("department", "=", $i->department)
-                    ->where("Gender", "=", "3")
+                $Month_Members_Amount = DB::table('users')
+                    ->where('created_at', 'LIKE', date("Y-m-%"))
                     ->count();
-                array_push($Department_Else_Amount, $Department_Else);
+                $Reported_Tasks_Amount = DB::table('report')
+                    ->distinct('Tasks_id')
+                    ->count();
+                $All_Tasks_Amount = DB::table('tasks')
+                    ->count();
+                $Man_Amount = DB::table('users')
+                    ->where("gender", "=", "1")
+                    ->count();
+                $Woman_Amount = DB::table('users')
+                    ->where("gender", "=", "2")
+                    ->count();
+                $Else_Amount = DB::table('users')
+                    ->where("gender", "=", "3")
+                    ->count();
+                $Selectable_Amount = DB::table('tasks')
+                    ->where("Status", "=", "Selectable")
+                    ->count();
+                $Processing_Amount = DB::table('tasks')
+                    ->where("Status", "=", "Processing")
+                    ->count();
+                $Complete_Amount = DB::table('tasks')
+                    ->where("Status", "=", "Complete")
+                    ->count();
+                $Blocked_Amount = DB::table('tasks')
+                    ->where("Status", "=", "Block")
+                    ->count();
+                $Department_List = DB::table('users')
+                    ->select("department")
+                    ->distinct('department')
+                    ->get();
+                $Department_Man_Amount = array();
+                foreach ($Department_List as $i) {
+                    $Department_Man = DB::table('users')
+                        ->where("department", "=", $i->department)
+                        ->where("Gender", "=", "1")
+                        ->count();
+                    array_push($Department_Man_Amount, $Department_Man);
+                }
+                $Department_Woman_Amount = array();
+                foreach ($Department_List as $i) {
+                    $Department_Woman = DB::table('users')
+                        ->where("department", "=", $i->department)
+                        ->where("Gender", "=", "2")
+                        ->count();
+                    array_push($Department_Woman_Amount, $Department_Woman);
+                }
+                $Department_Else_Amount = array();
+                foreach ($Department_List as $i) {
+                    $Department_Else = DB::table('users')
+                        ->where("department", "=", $i->department)
+                        ->where("Gender", "=", "3")
+                        ->count();
+                    array_push($Department_Else_Amount, $Department_Else);
+                }
+                return view('Admin_Dashboard')->with(["today_count" => $Today_Count,
+                    "all_count" => $All_Count,
+                    "members_amount" => $Members_Amount,
+                    "month_tasks_amount" => $Month_Tasks_Amount,
+                    "month_members_amount" => $Month_Members_Amount,
+                    "all_tasks_amount" => $All_Tasks_Amount,
+                    "reported_tasks_amount" => $Reported_Tasks_Amount,
+                    "man_amount" => $Man_Amount,
+                    "woman_amount" => $Woman_Amount,
+                    "else_amount" => $Else_Amount,
+                    "selectable_amount" => $Selectable_Amount,
+                    "processing_amount" => $Processing_Amount,
+                    "complete_amount" => $Complete_Amount,
+                    "department_list" => $Department_List,
+                    "department_man_amount" => $Department_Man_Amount,
+                    "department_woman_amount" => $Department_Woman_Amount,
+                    "department_else_amount" => $Department_Else_Amount,
+                    "blocked_amount"=>$Blocked_Amount]);
+            } else {
+                return redirect('list');
             }
-            return view('Admin_Dashboard')->with(["today_count" => $Today_Count,
-                "all_count" => $All_Count,
-                "members_amount" => $Members_Amount,
-                "month_tasks_amount" => $Month_Tasks_Amount,
-                "month_members_amount" => $Month_Members_Amount,
-                "all_tasks_amount" => $All_Tasks_Amount,
-                "reported_tasks_amount" => $Reported_Tasks_Amount,
-                "man_amount" => $Man_Amount,
-                "woman_amount" => $Woman_Amount,
-                "else_amount" => $Else_Amount,
-                "selectable_amount" => $Selectable_Amount,
-                "processing_amount" => $Processing_Amount,
-                "complete_amount" => $Complete_Amount,
-                "department_list" => $Department_List,
-                "department_man_amount" => $Department_Man_Amount,
-                "department_woman_amount" => $Department_Woman_Amount,
-                "department_else_amount" => $Department_Else_Amount,
-                "blocked_amount"=>$Blocked_Amount]);
         } else {
             return redirect('list');
         }
-
     }
 
     protected function tasks(Request $request)
