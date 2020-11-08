@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use App\Tasks;
 use App\Classification;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
@@ -28,7 +29,7 @@ class TaskController extends Controller
     {
         $user = Auth::user();
         $this->create(array_merge($request->all(), ['student_id' => $user->student_id]));
-        return Redirect('/list')->with('success','委託新增成功!請至「已提出的委託」查看');;
+        return Redirect('/list')->with('success', '委託新增成功!請至「已提出的委託」查看');;
     }
 
     protected function create(array $data)
@@ -77,31 +78,28 @@ class TaskController extends Controller
         else
             $search_keyword = "";
 
-        if($request->input('order')==null or $request->input('order')=="newest"){
+        if ($request->input('order') == null or $request->input('order') == "newest") {
             $tasks = DB::table('tasks')
                 ->Join('users', 'tasks.student_id', '=', 'users.student_id')
                 ->where('Status', '=', 'Selectable')
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->orderBy('tasks.created_at', 'desc')
                 ->paginate(12);
-        }
-        elseif($request->input('order')=="exp"){
+        } elseif ($request->input('order') == "exp") {
             $tasks = DB::table('tasks')
                 ->Join('users', 'tasks.student_id', '=', 'users.student_id')
                 ->where('Status', '=', 'Selectable')
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->orderBy('users.task_count', 'desc')
                 ->paginate(12);
-        }
-        elseif($request->input('order')=="eva"){
+        } elseif ($request->input('order') == "eva") {
             $tasks = DB::table('tasks')
                 ->Join('users', 'tasks.student_id', '=', 'users.student_id')
                 ->where('Status', '=', 'Selectable')
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->orderBy('users.host_rate_avg', 'desc')
                 ->paginate(12);
-        }
-        elseif($request->input('order')=="price"){
+        } elseif ($request->input('order') == "price") {
             $tasks = DB::table('tasks')
                 ->Join('users', 'tasks.student_id', '=', 'users.student_id')
                 ->where('Status', '=', 'Selectable')
@@ -138,7 +136,7 @@ class TaskController extends Controller
             "host_AVGrate" => $host_AVG_array_tasks,
             "id" => $id,
             "keyword" => $search_keyword,
-            "order"=>$request->input('order')]);
+            "order" => $request->input('order')]);
     }
 
 
@@ -149,15 +147,14 @@ class TaskController extends Controller
         $tasks_id = $request->tasks_id;
         $tasks = Tasks::find($tasks_id);
         $target = $toolman;
-        if ($tasks->Status == "Expired"){
-            return redirect('list')->with('error','此委託已過期!');
-        }
-        else if ($tasks) {
+        if ($tasks->Status == "Expired") {
+            return redirect('list')->with('error', '此委託已過期!');
+        } else if ($tasks) {
             $tasks->get_by_toolman($toolman);
             Evaluation::create([
                 'Tasks_id' => $request->tasks_id
             ]);
-            event(new givetask($user, $target,$tasks));
+            event(new givetask($user, $target, $tasks));
             return redirect('list_push');
         }
     }
@@ -175,7 +172,7 @@ class TaskController extends Controller
         else
             $search_keyword = "";
 
-        if($request->input('order')==null or $request->input('order')=="ING"){
+        if ($request->input('order') == null or $request->input('order') == "ING") {
             $tasks = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
                 ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
@@ -185,8 +182,7 @@ class TaskController extends Controller
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
                 ->get();
-        }
-        elseif($request->input('order')=="Waiting"){
+        } elseif ($request->input('order') == "Waiting") {
             $tasks = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
                 ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
@@ -196,8 +192,7 @@ class TaskController extends Controller
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
                 ->get();
-        }
-        elseif($request->input('order')=="Complete"){
+        } elseif ($request->input('order') == "Complete") {
             $tasks = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
                 ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
@@ -207,8 +202,7 @@ class TaskController extends Controller
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
                 ->get();
-        }
-        elseif($request->input('order')=="Expired"){
+        } elseif ($request->input('order') == "Expired") {
             $tasks = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
                 ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
@@ -246,7 +240,7 @@ class TaskController extends Controller
         return view('list_push')->with(["classifications" => $classifications,
             "tasks" => $tasks,
             "host_AVGrate" => $host_AVG_array_tasks,
-            "order"=>$request->input('order'),
+            "order" => $request->input('order'),
             "keyword" => $search_keyword,]);
     }
 
@@ -263,7 +257,7 @@ class TaskController extends Controller
         else
             $search_keyword = "";
 
-        if($request->input('order')==null or $request->input('order')=="ING"){
+        if ($request->input('order') == null or $request->input('order') == "ING") {
             $tasks = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
                 ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
@@ -273,8 +267,7 @@ class TaskController extends Controller
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
                 ->get();
-        }
-        elseif($request->input('order')=="Complete"){
+        } elseif ($request->input('order') == "Complete") {
             $tasks = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
                 ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
@@ -284,8 +277,7 @@ class TaskController extends Controller
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
                 ->get();
-        }
-        elseif($request->input('order')=="Expired"){
+        } elseif ($request->input('order') == "Expired") {
             $tasks = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
                 ->leftJoin('users as toolman', 'tasks.Toolman_id', '=', 'toolman.student_id')
@@ -324,7 +316,7 @@ class TaskController extends Controller
         return view('list_ING')->with(["classifications" => $classifications,
             "tasks" => $tasks,
             "host_AVGrate" => $host_AVG_array_tasks,
-            "order"=>$request->input('order'),
+            "order" => $request->input('order'),
             "keyword" => $search_keyword]);
     }
 
@@ -341,17 +333,17 @@ class TaskController extends Controller
             ->where('Tasks_id', '=', $Tasks_id)
             ->select('tasks.*', 'host.name as hostname', 'toolman.name as toolmanname')
             ->first();
-        $volunteer=DB::table('volunteer')
-            ->where('Tasks_id',"=",$Tasks_id)
+        $volunteer = DB::table('volunteer')
+            ->where('Tasks_id', "=", $Tasks_id)
             ->get();
-        $vol_count=DB::table('volunteer')
-            ->where('Tasks_id',"=",$Tasks_id)
+        $vol_count = DB::table('volunteer')
+            ->where('Tasks_id', "=", $Tasks_id)
             ->count();
         return view('list_id')->with(["tasks" => $tasks,
             "id" => $id,
             "evaluation" => $evaluation,
-        "volunteer"=>$volunteer,
-            "vol_count"=>$vol_count]);
+            "volunteer" => $volunteer,
+            "vol_count" => $vol_count]);
     }
 
     protected function taskprogress(Request $request, $tasks_id)
@@ -365,29 +357,29 @@ class TaskController extends Controller
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "go";
             $progress_change->save();
-            event(new taskstart($user, $target,$tasks));
+            event(new taskstart($user, $target, $tasks));
         } elseif ($progress_get == "go") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "back";
             $progress_change->save();
-            event(new back($user, $target,$tasks));
+            event(new back($user, $target, $tasks));
         } elseif ($progress_get == "back") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "arrive";
             $progress_change->save();
-            event(new arrive($user, $target,$tasks));
+            event(new arrive($user, $target, $tasks));
         } elseif ($progress_get == "arrive") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "complete";
             $progress_change->Status = "Complete";
             $progress_change->save();
-            event(new complete($user, $target,$tasks));
+            event(new complete($user, $target, $tasks));
         }
-        $volunteer=DB::table('volunteer')
-            ->where('Tasks_id',"=",$tasks_id)
+        $volunteer = DB::table('volunteer')
+            ->where('Tasks_id', "=", $tasks_id)
             ->get();
-        $vol_count=DB::table('volunteer')
-            ->where('Tasks_id',"=",$tasks_id)
+        $vol_count = DB::table('volunteer')
+            ->where('Tasks_id', "=", $tasks_id)
             ->count();
         $tasks = DB::table('tasks')
             ->Join('users as host', 'tasks.Student_id', '=', 'host.student_id')
@@ -399,8 +391,8 @@ class TaskController extends Controller
         $evaluation = DB::table('evaluation')
             ->where('Tasks_id', '=', $tasks_id)
             ->first();
-        return view('list_id')->with(["tasks" => $tasks, "id" => $id, "evaluation" => $evaluation,"volunteer"=>$volunteer,
-            "vol_count"=>$vol_count]);
+        return view('list_id')->with(["tasks" => $tasks, "id" => $id, "evaluation" => $evaluation, "volunteer" => $volunteer,
+            "vol_count" => $vol_count]);
     }
 
     protected function taskcomplete(Request $request)
@@ -486,31 +478,42 @@ class TaskController extends Controller
         ]);
         return redirect()->route('list');
     }
+
     protected function volunteer(Request $request)
     {
         $user = Auth::user();
         $tasks = Tasks::find($request['tasks_id']);
         $target = $tasks->Student_id;
-        $check=DB::table('tasks')
-                ->where('Tasks_id', '=', $request['tasks_id'])
-                ->pluck('Status');
-        if($check=='["Expired"]'){
-            return redirect()->route('list')->with('error','此委託已過期!');
-        }
-        else if(DB::table('volunteer')
+        $email = DB::table('users')
+            ->where('Student_id', '=', $target)
+            ->pluck('email');
+        $check = DB::table('tasks')
             ->where('Tasks_id', '=', $request['tasks_id'])
-            ->where('Student_id', '=', $user->student_id)
-            ->count()>0){
-            return redirect()->route('list')->with('error','您已經對此委託提出過申請囉!');
-        }
-        else{
+            ->pluck('Status');
+        if ($check == '["Expired"]') {
+            return redirect()->route('list')->with('error', '此委託已過期!');
+        } else if (DB::table('volunteer')
+                ->where('Tasks_id', '=', $request['tasks_id'])
+                ->where('Student_id', '=', $user->student_id)
+                ->count() > 0) {
+            return redirect()->route('list')->with('error', '您已經對此委託提出過申請囉!');
+        } else {
             Volunteer::create([
                 'Tasks_id' => $request['tasks_id'],
                 'Name' => $user->name,
                 'Student_id' => $user->student_id,
             ]);
-            event(new applicate($user, $target,$tasks));
-            return redirect()->route('list')->with('success','已成功提出申請!');
+//            $to = collect([
+//                ['name' => $user->name, 'email' => $email[0]]
+//            ]);
+//            $params = [
+//                'say' => "有人想要當您的工具人!",
+//                'link' => $tasks->Tasks_id
+//            ];
+//            Mail::to($to)->send(new \App\Mail\applicate_mail($params));
+
+            event(new applicate($user, $target, $tasks));
+            return redirect()->route('list')->with('success', '已成功提出申請!');
         }
     }
 }
