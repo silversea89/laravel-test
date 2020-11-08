@@ -379,7 +379,7 @@
             $("#dp-item").append(`<a class="dropdown-item navbar-dark border-bottom p-2" href="${task_href}">
                             <div class="row">
                                 <div class="col-auto pr-2">
-                                    <img id="NotiNavImgDiv  " class=" rounded-circle border-0 img-fluid hwAuto"
+                                    <img id="NotiNavImgDiv" class=" rounded-circle border-0 img-fluid hwAuto"
                                          src="${photo}">
                                 </div>
                                 <div class="col pl-0">
