@@ -94,7 +94,7 @@ class RegisterController extends Controller
             $extension = $file->getClientOriginalExtension();
             $file_name = $imageName. "." .$extension;
             //TODO
-            $file->move(getcwd()."\profileimages", $file_name);
+            $file->move(getcwd()."/profileimages", $file_name);
         }
         else{
             if($data['gender']==1){
