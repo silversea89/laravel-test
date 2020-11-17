@@ -28,7 +28,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="filterFood">
                                 <label class="form-check-label" for="filterFood">
-                                    食物
+                                    二手書交易
                                 </label>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="filterDrink">
                                 <label class="form-check-label" for="filterDrink">
-                                    飲料
+                                    代購
                                 </label>
                             </div>
                         </div>
@@ -44,7 +44,15 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="filterStationary">
                                 <label class="form-check-label" for="filterStationary">
-                                    文具用品
+                                    代勞
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-auto col-md-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="filterStationary">
+                                <label class="form-check-label" for="filterStationary">
+                                    教學
                                 </label>
                             </div>
                         </div>
@@ -258,13 +266,13 @@
                             <!-- ~computer -->
                             <div class="row pr-3">
                                 <div class="col d-flex align-items-center">
-                                    <h5 class="px-3 pl-lg-0 mb-3 mt-3 mt-lg-2 font-white">
-                                        $30 NTD<br>
-                                    </h5>
+{{--                                    <h5 class="px-3 pl-lg-0 mb-3 mt-3 mt-lg-2 font-white">--}}
+{{--                                        $30 NTD<br>--}}
+{{--                                    </h5>--}}
                                 </div>
                                 <div class="col-auto d-flex align-items-center">
                                     @if($i->Student_id!=$id)
-                                        <button class="btn btn-outline-orange" data-toggle="modal" data-target=".contentReport">
+                                        <button class="btn btn-outline-orange" data-toggle="modal" data-target=".contentReport{{$i->Tasks_id}}">
                                             檢舉委託
                                         </button>
                                     @endif
@@ -330,29 +338,30 @@
                 </div>
             </div>
         </div>
-    @endforeach
-
-{{--    report--}}
-    <div class="modal fade contentReport" tabindex="-1" role="dialog" aria-hidden="true" style="background-color:rgba(0, 0, 0, 0.5);">
-        <div class="modal-dialog modal-md px-2" style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
-            <div class="modal-content container bg-dark">
-                <button class="close pb-3 px-3 pt-2" data-toggle="modal" data-target=".contentReport" style="color:#999999;position: absolute; top: 0px;right: 0px;">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <br>
-                <hr class="mb-3" size="8px" align="center" width="100%" style="color:#999999;" >
-                <form action="{{ route('report.add') }}" method="POST">
-{{--                    <input type="hidden" name="order" value="exp">--}}
-                    <center>
-                        <div class="form-group">
-                            <textarea class="form-control bg-darker" id="" rows="5" placeholder="檢舉原因..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-danger my-0 mb-3">確認檢舉</button>
-                    </center>
-                </form>
+        {{--    report--}}
+        <div class="modal fade contentReport{{$i->Tasks_id}}" tabindex="-1" role="dialog" aria-hidden="true" style="background-color:rgba(0, 0, 0, 0.5);">
+            <div class="modal-dialog modal-md px-2" style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
+                <div class="modal-content container bg-dark">
+                    <button class="close pb-3 px-3 pt-2" data-toggle="modal" data-target=".contentReport{{$i->Tasks_id}}" style="color:#999999;position: absolute; top: 0px;right: 0px;">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <br>
+                    <hr class="mb-3" size="8px" align="center" width="100%" style="color:#999999;" >
+                    <form action="{{ route('report.add') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="tasks_id" value="{{$i->Tasks_id}}">
+                        <input type="hidden" name="Title" value="{{$i->Title}}">
+                        <center>
+                            <div class="form-group">
+                                <textarea class="form-control bg-darker" style="color:white;" name="reason" id="" rows="5" placeholder="檢舉原因..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-danger my-0 mb-3">確認檢舉</button>
+                        </center>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    @endforeach
 
 
     <button class="btn btn-orange px-3 py-2" data-toggle="modal" data-target="#newMission" id="newMissionBtn">

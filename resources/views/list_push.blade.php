@@ -27,7 +27,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="filterFood">
                                 <label class="form-check-label" for="filterFood">
-                                    食物
+                                    二手書交易
                                 </label>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="filterDrink">
                                 <label class="form-check-label" for="filterDrink">
-                                    飲料
+                                    代購
                                 </label>
                             </div>
                         </div>
@@ -43,7 +43,15 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="filterStationary">
                                 <label class="form-check-label" for="filterStationary">
-                                    文具用品
+                                    代勞
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-auto col-md-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="filterStationary">
+                                <label class="form-check-label" for="filterStationary">
+                                    教學
                                 </label>
                             </div>
                         </div>
@@ -176,15 +184,7 @@
                         <!-- ~這個才是完整版 -->
                             <center class="width100p mt-3">
                                 <nav>
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span
-                                                    aria-hidden="true">&laquo;</span></a></li>
-                                        <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span
-                                                    aria-hidden="true">&raquo;</span></a></li>
-                                    </ul>
+                                    {{ $tasks->links()}}
                                 </nav>
                             </center>
                         </div>

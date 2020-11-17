@@ -195,7 +195,7 @@ class TaskController extends Controller
                 ->where("tasks.Status", "=", "Processing")
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
-                ->get();
+                ->paginate(12);
         } elseif ($request->input('order') == "Waiting") {
             $tasks = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
@@ -205,7 +205,7 @@ class TaskController extends Controller
                 ->where("tasks.Status", "=", "Selectable")
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
-                ->get();
+                ->paginate(12);
         } elseif ($request->input('order') == "Complete") {
             $tasks = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
@@ -215,7 +215,7 @@ class TaskController extends Controller
                 ->where("tasks.Status", "=", "Complete")
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
-                ->get();
+                ->paginate(12);
         } elseif ($request->input('order') == "Expired") {
             $tasks = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
@@ -225,7 +225,7 @@ class TaskController extends Controller
                 ->where("tasks.Status", "=", "Expired")
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
-                ->get();
+                ->paginate(12);
         }
         foreach ($tasks as $i) {
             if ($i->DateTime < Carbon::now()) {
@@ -280,7 +280,7 @@ class TaskController extends Controller
                 ->where("tasks.Status", "=", "Processing")
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
-                ->get();
+                ->paginate(12);
         } elseif ($request->input('order') == "Complete") {
             $tasks = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
@@ -290,7 +290,7 @@ class TaskController extends Controller
                 ->where("tasks.Progress", "=", "Complete")
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
-                ->get();
+                ->paginate(12);
         } elseif ($request->input('order') == "Expired") {
             $tasks = DB::table('tasks')
                 ->leftJoin('users as host', 'tasks.Student_id', '=', 'host.student_id')
@@ -301,7 +301,7 @@ class TaskController extends Controller
                 ->where("tasks.Progress", "!=", "Complete")
                 ->where('Title', 'LIKE', "%$search_keyword%")
                 ->select('tasks.*', 'host.name as hostname', 'host.task_count as task_count', 'host.host_rate_avg as host_rate_avg', 'toolman.name as toolmanname', 'status.StatusName')
-                ->get();
+                ->paginate(12);
         }
         foreach ($tasks as $i) {
             if ($i->DateTime < Carbon::now()) {
@@ -528,7 +528,7 @@ class TaskController extends Controller
             'Reason' => $request['reason'],
             'Status' => "Waiting"
         ]);
-        return redirect()->route('list');
+        return redirect()->route('list')->with('success', '檢舉成功!');;
     }
 
     protected function volunteer(Request $request)
