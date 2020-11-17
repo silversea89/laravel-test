@@ -70,11 +70,9 @@ class DashboardController extends Controller
                 foreach ($Department_List as $i) {
                     $Name = DB::table('departments')
                         ->where("De_Value", "=", $i->department)
-                        ->select("De_Name")
-                        ->get();
-                    array_push($Department_Name, $Name);
+                        ->pluck("De_Name");
+                    array_push($Department_Name, $Name[0]);
                 }
-                print_r($Department_Name);
                 $Department_Man_Amount = array();
                 foreach ($Department_List as $i) {
                     $Department_Man = DB::table('users')

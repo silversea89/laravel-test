@@ -264,7 +264,7 @@
                                 </div>
                                 <div class="col-auto d-flex align-items-center">
                                     @if($i->Student_id!=$id)
-                                        <button class="btn btn-outline-orange">
+                                        <button class="btn btn-outline-orange" data-toggle="modal" data-target=".contentReport">
                                             檢舉委託
                                         </button>
                                     @endif
@@ -331,6 +331,28 @@
             </div>
         </div>
     @endforeach
+
+{{--    report--}}
+    <div class="modal fade contentReport" tabindex="-1" role="dialog" aria-hidden="true" style="background-color:rgba(0, 0, 0, 0.5);">
+        <div class="modal-dialog modal-md px-2" style="height:100%;display: flex; flex-direction: column;justify-content: center;text-align: center;">
+            <div class="modal-content container bg-dark">
+                <button class="close pb-3 px-3 pt-2" data-toggle="modal" data-target=".contentReport" style="color:#999999;position: absolute; top: 0px;right: 0px;">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <br>
+                <hr class="mb-3" size="8px" align="center" width="100%" style="color:#999999;" >
+                <form action="{{ route('report.add') }}" method="POST">
+{{--                    <input type="hidden" name="order" value="exp">--}}
+                    <center>
+                        <div class="form-group">
+                            <textarea class="form-control bg-darker" id="" rows="5" placeholder="檢舉原因..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-danger my-0 mb-3">確認檢舉</button>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
     <button class="btn btn-orange px-3 py-2" data-toggle="modal" data-target="#newMission" id="newMissionBtn">
