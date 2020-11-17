@@ -147,6 +147,12 @@ class TaskController extends Controller
         $tasks_id = $request->tasks_id;
         $tasks = Tasks::find($tasks_id);
         $target = $toolman;
+        $name = DB::table('users')
+            ->where('Student_id', '=', $target)
+            ->pluck('name');
+        $email = DB::table('users')
+            ->where('Student_id', '=', $target)
+            ->pluck('email');
         if ($tasks->Status == "Expired") {
             return redirect('list')->with('error', '此委託已過期!');
         } else if ($tasks) {
@@ -154,6 +160,14 @@ class TaskController extends Controller
             Evaluation::create([
                 'Tasks_id' => $request->tasks_id
             ]);
+            $to = collect([
+                ['name' => $name[0], 'email' => $email[0]]
+            ]);
+            $params = [
+                'say' => "雇主同意您的申請了! 點擊連結確認委託!",
+                'link' => $tasks->Tasks_id
+            ];
+            Mail::to($to)->send(new \App\Mail\givetask_mail($params));
             event(new givetask($user, $target, $tasks));
             return redirect('list_push');
         }
@@ -352,27 +366,65 @@ class TaskController extends Controller
         $id = $user->student_id;
         $tasks = Tasks::find($tasks_id);
         $target = $tasks->Student_id;
+        $name = DB::table('users')
+            ->where('Student_id', '=', $target)
+            ->pluck('name');
+        $email = DB::table('users')
+            ->where('Student_id', '=', $target)
+            ->pluck('email');
         $progress_get = $request->input("Progress");
         if ($progress_get == null) {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "go";
             $progress_change->save();
+            $to = collect([
+                ['name' => $name[0], 'email' => $email[0]]
+            ]);
+            $params = [
+                'say' => "工具人開始執行您的委託了! 點擊連結進行確認!",
+                'link' => $tasks->Tasks_id
+            ];
+            Mail::to($to)->send(new \App\Mail\taskstart_mail($params));
             event(new taskstart($user, $target, $tasks));
         } elseif ($progress_get == "go") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "back";
             $progress_change->save();
+            $to = collect([
+                ['name' => $name[0], 'email' => $email[0]]
+            ]);
+            $params = [
+                'say' => "工具人正在回程的路上! 點擊連結進行確認!",
+                'link' => $tasks->Tasks_id
+            ];
+            Mail::to($to)->send(new \App\Mail\back_mail($params));
             event(new back($user, $target, $tasks));
         } elseif ($progress_get == "back") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "arrive";
             $progress_change->save();
+            $to = collect([
+                ['name' => $name[0], 'email' => $email[0]]
+            ]);
+            $params = [
+                'say' => "工具人已到達面交地點! 點擊連結進行確認!",
+                'link' => $tasks->Tasks_id
+            ];
+            Mail::to($to)->send(new \App\Mail\arrive_mail($params));
             event(new arrive($user, $target, $tasks));
         } elseif ($progress_get == "arrive") {
             $progress_change = Tasks::find($tasks_id);
             $progress_change->Progress = "complete";
             $progress_change->Status = "Complete";
             $progress_change->save();
+            $to = collect([
+                ['name' => $name[0], 'email' => $email[0]]
+            ]);
+            $params = [
+                'say' => "您的委託已完成! 點擊連結進行確認!",
+                'link' => $tasks->Tasks_id
+            ];
+            Mail::to($to)->send(new \App\Mail\complete_mail($params));
             event(new complete($user, $target, $tasks));
         }
         $volunteer = DB::table('volunteer')
@@ -487,6 +539,9 @@ class TaskController extends Controller
         $email = DB::table('users')
             ->where('Student_id', '=', $target)
             ->pluck('email');
+        $name = DB::table('users')
+            ->where('Student_id', '=', $target)
+            ->pluck('name');
         $check = DB::table('tasks')
             ->where('Tasks_id', '=', $request['tasks_id'])
             ->pluck('Status');
@@ -503,14 +558,14 @@ class TaskController extends Controller
                 'Name' => $user->name,
                 'Student_id' => $user->student_id,
             ]);
-//            $to = collect([
-//                ['name' => $user->name, 'email' => $email[0]]
-//            ]);
-//            $params = [
-//                'say' => "有人想要當您的工具人!",
-//                'link' => $tasks->Tasks_id
-//            ];
-//            Mail::to($to)->send(new \App\Mail\applicate_mail($params));
+            $to = collect([
+                ['name' => $name[0], 'email' => $email[0]]
+            ]);
+            $params = [
+                'say' => "有人想要當您的工具人!",
+                'link' => $tasks->Tasks_id
+            ];
+            Mail::to($to)->send(new \App\Mail\applicate_mail($params));
 
             event(new applicate($user, $target, $tasks));
             return redirect()->route('list')->with('success', '已成功提出申請!');

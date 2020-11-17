@@ -174,7 +174,7 @@
                         type: 'bar',
                         data: {
                             labels: [@foreach($department_list as $i)
-                            "{{$i->department}}",
+                            "{{$i}}",
                                 @endforeach],
                             datasets: [{
                                 label: '男',

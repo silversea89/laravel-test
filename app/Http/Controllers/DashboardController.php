@@ -66,6 +66,15 @@ class DashboardController extends Controller
                     ->select("department")
                     ->distinct('department')
                     ->get();
+                $Department_Name = array();
+                foreach ($Department_List as $i) {
+                    $Name = DB::table('departments')
+                        ->where("De_Value", "=", $i->department)
+                        ->select("De_Name")
+                        ->get();
+                    array_push($Department_Name, $Name);
+                }
+                print_r($Department_Name);
                 $Department_Man_Amount = array();
                 foreach ($Department_List as $i) {
                     $Department_Man = DB::table('users')
@@ -103,11 +112,12 @@ class DashboardController extends Controller
                     "selectable_amount" => $Selectable_Amount,
                     "processing_amount" => $Processing_Amount,
                     "complete_amount" => $Complete_Amount,
-                    "department_list" => $Department_List,
+                    "department_list" => $Department_Name,
                     "department_man_amount" => $Department_Man_Amount,
                     "department_woman_amount" => $Department_Woman_Amount,
                     "department_else_amount" => $Department_Else_Amount,
-                    "blocked_amount"=>$Blocked_Amount]);
+                    "blocked_amount"=>$Blocked_Amount,]
+                    );
             } else {
                 return redirect('list');
             }
