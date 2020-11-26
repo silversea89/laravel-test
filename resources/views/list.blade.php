@@ -399,7 +399,7 @@
                                 </div>
 
                                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 form-group pb-2 pl-1 pr-1 m-0">
-                                    <label id="productLabel" class="m-0 font-white">購買物品</label>
+                                    <label id="productLabel" class="m-0 font-white">委託標題</label>
                                     <input id="product" type="text" class="form-control font-white bg-grey" name="Title"
                                            placeholder="請在此輸入需要購買的物品" required>
                                 </div>
